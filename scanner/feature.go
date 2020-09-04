@@ -2,6 +2,8 @@ package scanner
 
 import (
 	"fmt"
+	"log"
+	"reflect"
 	"regexp"
 )
 
@@ -58,65 +60,39 @@ func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, string) {
 func (rule *FeatureRule) MatchResponse(response *Response) (bool, []string) {
 	var matched = false
 	var versions []string
-	for _, ruleItem := range rule.Title {
-		currentMatched, version := ruleItem.MatchContent(response.Title)
-		matched = matched || currentMatched
-		if len(version) > 0 {
-			versions = append(versions, version)
-		}
-	}
+	responseType := reflect.TypeOf(*response)
+	responseValue := reflect.ValueOf(*response)
+	ruleValue := reflect.ValueOf(*rule)
+	stringType := reflect.TypeOf("")
 
-	for _, ruleItem := range rule.Header {
-		currentMatched, version := ruleItem.MatchContent(response.Header)
-		matched = matched || currentMatched
-		if len(version) > 0 {
-			versions = append(versions, version)
-		}
-	}
+	for i := 0; i < responseType.NumField(); i++ {
+		responseField := responseType.Field(i)
+		responseValue := responseValue.Field(i)
+		responseValueType := responseValue.Type()
+		ruleValue := ruleValue.FieldByName(responseField.Name).Interface()
 
-	for _, ruleItem := range rule.Cookie {
-		currentMatched, version := ruleItem.MatchContent(response.Cookie)
-		matched = matched || currentMatched
-		if len(version) > 0 {
-			versions = append(versions, version)
-		}
-	}
-
-	for _, ruleItem := range rule.Body {
-		currentMatched, version := ruleItem.MatchContent(response.Body)
-		matched = matched || currentMatched
-		if len(version) > 0 {
-			versions = append(versions, version)
-		}
-	}
-
-	for key, ruleItems := range rule.MetaTag {
-		for _, ruleItem := range ruleItems {
-			currentMatched, version := ruleItem.MatchContent(response.MetaTag[key])
-			matched = matched || currentMatched
-			if len(version) > 0 {
-				versions = append(versions, version)
+		if responseValueType == stringType {
+			// handle values(Title, Header, Cookie, Body) in response which type is string
+			for _, ruleItem := range ruleValue.([]*FeatureRuleItem) {
+				currentMatched, version := ruleItem.MatchContent(responseValue.Interface().(string))
+				matched = matched || currentMatched
+				if len(version) > 0 {
+					versions = append(versions, version)
+				}
 			}
-		}
-	}
-
-	for key, ruleItems := range rule.CookieField {
-		for _, ruleItem := range ruleItems {
-			currentMatched, version := ruleItem.MatchContent(response.CookieField[key])
-			matched = matched || currentMatched
-			if len(version) > 0 {
-				versions = append(versions, version)
+		} else if responseValueType == reflect.MapOf(stringType, stringType) {
+			// handle values(MetaTag, HeaderField, CookieField) in response which type is map[string]string
+			for key, ruleItems := range ruleValue.(map[string][]*FeatureRuleItem) {
+				for _, ruleItem := range ruleItems {
+					currentMatched, version := ruleItem.MatchContent(responseValue.Interface().(map[string]string)[key])
+					matched = matched || currentMatched
+					if len(version) > 0 {
+						versions = append(versions, version)
+					}
+				}
 			}
-		}
-	}
-
-	for key, ruleItems := range rule.HeaderField {
-		for _, ruleItem := range ruleItems {
-			currentMatched, version := ruleItem.MatchContent(response.HeaderField[key])
-			matched = matched || currentMatched
-			if len(version) > 0 {
-				versions = append(versions, version)
-			}
+		} else {
+			log.Println("not recognized type:", responseValueType.String())
 		}
 	}
 
