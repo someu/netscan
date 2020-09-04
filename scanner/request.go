@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"math/rand"
 	"net/http"
 	"regexp"
@@ -111,6 +112,7 @@ func NewRequestClient() *RequestClient {
 }
 
 func (rc *RequestClient) Request(method string, url string) (*Response, error) {
+	log.Println("start request", url)
 	if !URL_RE.MatchString(url) {
 		url = fmt.Sprintf("http://%s", url)
 	}
@@ -191,30 +193,6 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 
 	return response, nil
 }
-
-//func (rc *RequestClient) Request(method string, url string) (*Response, error) {
-//	// limit concurreny
-//	rc.concurrenyChan <- true
-//	defer func() { <-rc.concurrenyChan }()
-//
-//	var finish = make(chan bool)
-//	var resp *Response
-//	var err error
-//	go func() {
-//		defer func() {
-//			finish <- true
-//		}()
-//		resp, err = rc.request(method, url)
-//	}()
-//
-//	// timeout limit
-//	select {
-//	case <-finish:
-//		return resp, err
-//	case <-time.After(time.Second * time.Duration(TIMEOUT)):
-//		return nil, fmt.Errorf("timeout")
-//	}
-//}
 
 func (rc *RequestClient) Get(url string) (*Response, error) {
 	return rc.Request("GET", url)

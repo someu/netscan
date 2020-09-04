@@ -12,6 +12,11 @@ type Scanner struct {
 	Level             int
 }
 
+type MatchedApp struct {
+	Name     string
+	Versions []string
+}
+
 func NewScanner() *Scanner {
 	scanner := &Scanner{
 		Level: 1,
@@ -32,8 +37,8 @@ func (scanner *Scanner) LoadFeatures() {
 	}
 }
 
-func (scanner *Scanner) Scan(url string) ([]string, error) {
-	var apps []string
+func (scanner *Scanner) Scan(url string) ([]*MatchedApp, error) {
+	var apps []*MatchedApp
 	for _, feature := range scanner.FeatureCollection[:scanner.Level] {
 		var (
 			target   = url + feature.Path
@@ -45,9 +50,9 @@ func (scanner *Scanner) Scan(url string) ([]string, error) {
 		}
 
 		for _, rule := range feature.Rules {
-			matched, _ := rule.MatchResponse(response)
-			if matched {
-				apps = append(apps, rule.Name)
+			app := rule.MatchResponse(response)
+			if app != nil {
+				apps = append(apps, app)
 			}
 		}
 	}

@@ -5,13 +5,11 @@ import (
 	"log"
 	"reflect"
 	"regexp"
+	"strings"
 )
 
 type FeatureVersion struct {
 	Value string `json:"value"`
-	If    string `json:"if"`
-	Then  string `json:"then"`
-	Else  string `json:"else"`
 	Match string `json:"match"`
 }
 
@@ -37,27 +35,43 @@ type Feature struct {
 	Rules []*FeatureRule `json:"rules"`
 }
 
-func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, string) {
+func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, []string) {
 	if len(content) == 0 {
-		return false, ""
+		return false, nil
 	}
 	var matched bool
-	var version string
-	if len(ruleItem.Regexp) > 0 {
-		re, err := regexp.Compile(fmt.Sprintf("(?i)%s", ruleItem.Regexp))
-		if err != nil {
-			fmt.Println(err, ruleItem.Regexp)
-		} else {
-			matched = re.MatchString(content)
-			//if matched {
-			//	fmt.Println("proof", ruleItem.Regexp, strings.Join(re.FindAllString(content, -1), ""))
-			//}
+	var versions []string
+	if len(ruleItem.Regexp) == 0 {
+		return false, nil
+	}
+	re, err := regexp.Compile(fmt.Sprintf("(?i)%s", ruleItem.Regexp))
+	if err != nil {
+		return false, nil
+	}
+	matched = re.MatchString(content)
+	//if matched {
+	//	fmt.Println("proof", ruleItem.Regexp, strings.Join(re.FindAllString(content, -1), ""))
+	//}
+	if matched && ruleItem.Version != nil {
+		if len(ruleItem.Version.Match) >= 0 {
+			versionRe, err := regexp.Compile(ruleItem.Version.Match)
+			if err == nil {
+				versions = versionRe.FindAllString(content, -1)
+			}
+		} else if len(ruleItem.Version.Value) > 0 {
+			sss := re.FindAllStringSubmatch(content, -1)
+			for _, ss := range sss {
+				if len(ss) >= 2 && len(ss[1]) > 0 {
+					versions = append(versions, strings.Replace(ruleItem.Version.Value, "\\1", ss[1], -1))
+				}
+			}
 		}
 	}
-	return matched, version
+
+	return matched, versions
 }
 
-func (rule *FeatureRule) MatchResponse(response *Response) (bool, []string) {
+func (rule *FeatureRule) MatchResponse(response *Response) *MatchedApp {
 	var matched = false
 	var versions []string
 	responseType := reflect.TypeOf(*response)
@@ -74,20 +88,20 @@ func (rule *FeatureRule) MatchResponse(response *Response) (bool, []string) {
 		if responseValueType == stringType {
 			// handle values(Title, Header, Cookie, Body) in response which type is string
 			for _, ruleItem := range ruleValue.([]*FeatureRuleItem) {
-				currentMatched, version := ruleItem.MatchContent(responseValue.Interface().(string))
+				currentMatched, currentVersions := ruleItem.MatchContent(responseValue.Interface().(string))
 				matched = matched || currentMatched
-				if len(version) > 0 {
-					versions = append(versions, version)
+				if len(currentVersions) > 0 {
+					versions = append(versions, currentVersions...)
 				}
 			}
 		} else if responseValueType == reflect.MapOf(stringType, stringType) {
 			// handle values(MetaTag, HeaderField, CookieField) in response which type is map[string]string
 			for key, ruleItems := range ruleValue.(map[string][]*FeatureRuleItem) {
 				for _, ruleItem := range ruleItems {
-					currentMatched, version := ruleItem.MatchContent(responseValue.Interface().(map[string]string)[key])
+					currentMatched, currentVersions := ruleItem.MatchContent(responseValue.Interface().(map[string]string)[key])
 					matched = matched || currentMatched
-					if len(version) > 0 {
-						versions = append(versions, version)
+					if len(currentVersions) > 0 {
+						versions = append(versions, currentVersions...)
 					}
 				}
 			}
@@ -96,5 +110,9 @@ func (rule *FeatureRule) MatchResponse(response *Response) (bool, []string) {
 		}
 	}
 
-	return matched, versions
+	if matched {
+		return &MatchedApp{Name: rule.Name, Versions: versions}
+	} else {
+		return nil
+	}
 }
