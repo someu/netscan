@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-const TIMEOUT = 5
+const TIMEOUT = 10
 const CONCURRENCY = 1000
 
 var TitleRe = regexp.MustCompile("<title.*>([^\"]*)</title>")
@@ -91,11 +91,10 @@ func NewRequestClient() *RequestClient {
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
 		},
-		TLSHandshakeTimeout:   time.Second * time.Duration(TIMEOUT),
-		ResponseHeaderTimeout: time.Second * time.Duration(TIMEOUT),
 	}
 	hc := &http.Client{
 		Transport: tr,
+		Timeout:   time.Second * time.Duration(TIMEOUT),
 	}
 	rc := &RequestClient{
 		HttpClient: hc,
