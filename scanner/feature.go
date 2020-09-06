@@ -1,7 +1,6 @@
 package scanner
 
 import (
-	"fmt"
 	"log"
 	"reflect"
 	"regexp"
@@ -15,6 +14,7 @@ type FeatureVersion struct {
 
 type FeatureRuleItem struct {
 	Regexp  string          `json:"regexp"`
+	regexp  *regexp.Regexp  `json:"-"`
 	Md5     string          `json:"md5"`
 	Version *FeatureVersion `json:"version"`
 }
@@ -27,7 +27,7 @@ type FeatureRule struct {
 	MetaTag     map[string][]*FeatureRuleItem `json:"metaTag"`
 	HeaderField map[string][]*FeatureRuleItem `json:"headerField"`
 	CookieField map[string][]*FeatureRuleItem `json:"cookieField"`
-	Body        []*FeatureRuleItem
+	Body        []*FeatureRuleItem            `json:"body"`
 }
 
 type Feature struct {
@@ -41,22 +41,25 @@ func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, []string) {
 	}
 	var matched bool
 	var versions []string
-	if len(ruleItem.Regexp) == 0 {
-		return false, nil
-	}
-	re, err := regexp.Compile(fmt.Sprintf("(?i)%s", ruleItem.Regexp))
-	if err != nil {
+
+	var re = ruleItem.regexp
+	if re == nil {
 		return false, nil
 	}
 	matched = re.MatchString(content)
-	//if matched {
-	//	fmt.Println("proof", ruleItem.Regexp, strings.Join(re.FindAllString(content, -1), ""))
-	//}
+
 	if matched && ruleItem.Version != nil {
-		if len(ruleItem.Version.Match) >= 0 {
+		if len(ruleItem.Version.Match) > 0 {
 			versionRe, err := regexp.Compile(ruleItem.Version.Match)
 			if err == nil {
-				versions = versionRe.FindAllString(content, -1)
+				for _, versionSlice := range versionRe.FindAllStringSubmatch(content, -1) {
+					if len(versionSlice) > 1 {
+						versions = append(versions, versionSlice[0])
+					} else {
+						versions = append(versions, strings.Join(versionSlice[1:], "."))
+					}
+				}
+
 			}
 		} else if len(ruleItem.Version.Value) > 0 {
 			sss := re.FindAllStringSubmatch(content, -1)

@@ -28817,7 +28817,7 @@
             }
           },
           {
-            "regexp": "jquery.*\\.js(?:\\?ver(?:sion)?=([\\d.]+))?",
+            "regexp": "jquery\\.*\\.js(?:\\?ver(?:sion)?=([\\d.]+))?",
             "version": {
               "value": "\\1"
             }
@@ -67834,7 +67834,7 @@
         "name": "able_g2s",
         "body": [
           {
-            "regexp": "LoginForm.aspx?&KeepThis=true&TB_iframe=true&height=150&width=300', false);"
+            "regexp": "LoginForm.aspx?&KeepThis=true&TB_iframe=true&height=150&width=300"
           }
         ]
       }
@@ -67925,7 +67925,7 @@
         "name": "apabi_tasi",
         "body": [
           {
-            "regexp": "expression(onmouseover=function(){this.style.backgroundColor="
+            "regexp": "expression\\(onmouseover=function\\(\\){this.style.backgroundColor="
           }
         ]
       }
@@ -68523,7 +68523,7 @@
         "name": "dfe_scada",
         "body": [
           {
-            "regexp": "\"dfnewweb_ifsavepwd\",ifsavepwd,getExpDate(365,0,0));"
+            "regexp": "\"dfnewweb_ifsavepwd\",ifsavepwd,getExpDate\\(365,0,0\\)\\);"
           }
         ]
       }
@@ -68783,7 +68783,7 @@
         "name": "empire_cms",
         "body": [
           {
-            "regexp": ".ico_nav_info').bind('click',function()"
+            "regexp": ".ico_nav_info'\\).bind\\('click',function\\(\\)"
           }
         ]
       }
@@ -68874,7 +68874,7 @@
         "name": "esccms",
         "body": [
           {
-            "regexp": "openWindow(\"OperationManage/SelectUnitMemberForLogin.aspx?name=\" + account + \"&unId=\" + userNameId + \"&upId=\" + pwdId + \"&param=\" + param + \"&divId=\" + dataDivId"
+            "regexp": "openWindow\\(\"OperationManage/SelectUnitMemberForLogin.aspx?name=\" + account + \"&unId=\" + userNameId + \"&upId=\" + pwdId + \"&param=\" + param + \"&divId=\" + dataDivId"
           }
         ]
       }
@@ -70161,7 +70161,7 @@
         "name": "mainone_b2b",
         "body": [
           {
-            "regexp": "TreeView_ClickNode(node,children"
+            "regexp": "TreeView_ClickNode\\(node,children"
           }
         ]
       }
@@ -71006,7 +71006,7 @@
         "name": "shopnc商城系统",
         "body": [
           {
-            "regexp": "(function(a,b){function G(a){var b=F[a]={}"
+            "regexp": "\\(function\\(a,b\\){function G\\(a\\){var b=F\\[a\\]={}"
           }
         ]
       }
@@ -71981,7 +71981,7 @@
         "name": "vicworl",
         "body": [
           {
-            "regexp": "deconcept == \"undefined\") var"
+            "regexp": "deconcept == \"undefined\"\\) var"
           }
         ]
       }

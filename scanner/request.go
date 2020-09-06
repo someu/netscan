@@ -1,12 +1,10 @@
 package scanner
 
 import (
-	"bytes"
 	"crypto/tls"
-	"encoding/json"
+	"fakescan/util"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"math/rand"
 	"net/http"
 	"regexp"
@@ -17,14 +15,14 @@ import (
 const TIMEOUT = 5
 const CONCURRENCY = 1000
 
-var TITLE_RE = regexp.MustCompile("<title.*>([^\"]*)</title>")
+var TitleRe = regexp.MustCompile("<title.*>([^\"]*)</title>")
 
-var META_RES = []*regexp.Regexp{
+var MetaRes = []*regexp.Regexp{
 	regexp.MustCompile("<meta.*name=\"([^\"]*)\".*content=\"([^\"]*)\".*>"),
 	regexp.MustCompile("<meta.*http-equiv=\"([^\"]*)\".*content=\"([^\"]*)\".*>"),
 	regexp.MustCompile("<meta.*scheme=\"([^\"]*)\".*content=\"([^\"]*)\".*>"),
 }
-var URL_RE = regexp.MustCompile("http(s)?://.*")
+var UrlRe = regexp.MustCompile("http(s)?://.*")
 
 type Response struct {
 	Title       string
@@ -37,12 +35,7 @@ type Response struct {
 }
 
 func (resp *Response) String() string {
-	outputBuffer := bytes.NewBuffer([]byte{})
-	encoder := json.NewEncoder(outputBuffer)
-	encoder.SetEscapeHTML(false)
-	encoder.SetIndent("", "  ")
-	encoder.Encode(resp)
-	return outputBuffer.String()
+	return util.Stringify(resp)
 }
 
 var userAgents = []string{
@@ -90,8 +83,7 @@ var userAgents = []string{
 }
 
 type RequestClient struct {
-	HttpClient     *http.Client
-	concurrenyChan chan bool
+	HttpClient *http.Client
 }
 
 func NewRequestClient() *RequestClient {
@@ -112,8 +104,7 @@ func NewRequestClient() *RequestClient {
 }
 
 func (rc *RequestClient) Request(method string, url string) (*Response, error) {
-	log.Println("start request", url)
-	if !URL_RE.MatchString(url) {
+	if !UrlRe.MatchString(url) {
 		url = fmt.Sprintf("http://%s", url)
 	}
 	// create request
@@ -150,13 +141,13 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 
 	body := string(bodyBytes)
 	// title sub matches
-	if tsms := TITLE_RE.FindAllStringSubmatch(body, -1); tsms != nil {
+	if tsms := TitleRe.FindAllStringSubmatch(body, -1); tsms != nil {
 		for _, tsm := range tsms {
 			title += tsm[1]
 		}
 	}
 	// meta sub matches
-	for _, re := range META_RES {
+	for _, re := range MetaRes {
 		if msms := re.FindAllStringSubmatch(body, -1); msms != nil {
 			for _, msm := range msms {
 				metaTag[strings.ToLower(msm[1])] += msm[2]

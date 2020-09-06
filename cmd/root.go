@@ -9,7 +9,7 @@ import (
 var globalScanner = scanner.NewScanner()
 
 var rootCmd = &cobra.Command{
-	Use:   "FakScan",
+	Use:   "fakescan",
 	Short: "FakeScan is a web scanner",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
