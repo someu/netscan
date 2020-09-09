@@ -1,0 +1,3 @@
+ListenPort: "8899"
+MongoUrl: "mongodb://localhost:27017"
+MongoDatabase: "fakescan"

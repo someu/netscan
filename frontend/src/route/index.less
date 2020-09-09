@@ -1,0 +1,56 @@
+@sider-bg-color: #1e1f23;
+
+#app-layout {
+  width: 100%;
+  height: 100%;
+}
+#app-sider {
+  background-color: @sider-bg-color;
+  .menu {
+    background-color: @sider-bg-color;
+    border: none;
+    li {
+      height: 48px;
+      line-height: 48px;
+      margin: 0;
+      padding: 0;
+      background-color: @sider-bg-color !important;
+    }
+    a {
+      display: block;
+      padding: 0 16px;
+      width: 100%;
+      height: 100%;
+      color: rgba(255, 255, 255, 0.65);
+      background-color: @sider-bg-color !important;
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 4px;
+        height: 0px;
+        top: 0;
+        right: 0;
+        background-color: #0b6fd6;
+        transition: all ease-in-out 0.3s;
+      }
+      &.active {
+        color: rgba(255, 255, 255, 1);
+        &::after {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+#app-content {
+  padding: 24px;
+  overflow: auto;
+  background-color: #f7f9fc;
+  .inner {
+    height: 100%;
+    padding: 24px;
+    background-color: #ffffff;
+    box-shadow: 3px 3px 6px #cccccc;
+  }
+}

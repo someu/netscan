@@ -1,21 +1,18 @@
 package main
 
 import (
-	"fakescan/scanner"
-	"log"
-	"regexp"
+	"encoding/json"
+	"fmt"
 )
 
-type Rule struct {
-	Reg    string         `json:"reg"`
-	regexp *regexp.Regexp `json:"regexp"`
+type S struct {
+	A string
 }
 
 func main() {
-	url := "118.68.0.183"
-	globalScanner := scanner.NewScanner()
-	log.Println("start scan", url)
-	apps := globalScanner.ScanUrl(url)
-	log.Println("start scan", apps)
-
+	s := S{
+		A: "123",
+	}
+	bytes, _ := json.Marshal(s)
+	fmt.Println(string(bytes))
 }
