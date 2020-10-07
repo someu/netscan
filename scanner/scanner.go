@@ -8,9 +8,12 @@ import (
 	"log"
 	"reflect"
 	"regexp"
+	"strings"
 	"sync"
 	"time"
 )
+
+const Version = "0.0.1"
 
 type Scanner struct {
 	FeatureCollection []*Feature
@@ -109,30 +112,60 @@ func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
 }
 
 // async scan a list of url, return a waitgroup
-func (scanner *Scanner) ScanUrls(urls []string, callback func(*MatchedResult)) func() {
-	wg := sync.WaitGroup{}
+func (scanner *Scanner) scanUrls(urls []string, callback func(*MatchedResult)) *sync.WaitGroup {
+	var lock sync.Mutex
+	var wg sync.WaitGroup
 	for _, url := range urls {
 		wg.Add(1)
 		go func(url string) {
 			defer wg.Done()
 			result := scanner.ScanUrl(url)
+			lock.Lock()
+			defer lock.Unlock()
 			callback(result)
 		}(url)
 	}
-	return func() {
-		wg.Wait()
-	}
+	return &wg
 }
 
-// sync scan a list of url
-func (scanner *Scanner) ScanUrlsSync(urls []string) []*MatchedResult {
+func (scanner *Scanner) masscan(targets string, ports string) []string {
+	var urls []string
+	if len(targets) == 0 || len(ports) == 0 {
+		return urls
+	}
+
+	log.Printf("Start masscan %s %s", targets, ports)
+	masscan := NewMasscan(targets, ports)
+	var err error
+	if urls, err = masscan.Run(); err != nil {
+		log.Printf("Masscan failed: %s", err.Error())
+	} else {
+		log.Printf("Masscan finished, find %d urls", len(urls))
+	}
+	return urls
+}
+
+func (scanner *Scanner) Scan(targets []string, ports []string, callback func(*MatchedResult)) *sync.WaitGroup {
+	var urls []string
+	var cidrs []string
+	for _, target := range targets {
+		if util.IsIP(target) || util.IsCIDR(target) {
+			cidrs = append(cidrs, target)
+		} else {
+			urls = append(urls, target)
+		}
+	}
+	u := scanner.masscan(strings.Join(cidrs, ","), strings.Join(ports, ","))
+	urls = append(u, urls...)
+	return scanner.scanUrls(urls, callback)
+}
+
+func (scanner *Scanner) ScanSync(targets []string, ports []string) []*MatchedResult {
 	var results []*MatchedResult
-	var lock sync.Mutex
-	scanner.ScanUrls(urls, func(result *MatchedResult) {
-		defer lock.Unlock()
-		lock.Lock()
+	wg := scanner.Scan(targets, ports, func(result *MatchedResult) {
 		results = append(results, result)
 	})
+	wg.Wait()
 	return results
 }
 

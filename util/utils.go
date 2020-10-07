@@ -12,10 +12,12 @@ import (
 	"strings"
 )
 
-var cidrSplice = "([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])"
+var ipSplice = "([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])"
 var cidrMask = "([1-9]|[1-2]\\d|3[0-2])"
-var cidrReString = fmt.Sprintf("^(%s\\.){3}%s\\/%s$", cidrSplice, cidrSplice, cidrMask)
+var cidrReString = fmt.Sprintf("^(%s\\.){3}%s\\/%s$", ipSplice, ipSplice, cidrMask)
 var CidrRe = regexp.MustCompile(cidrReString)
+var ipReString = fmt.Sprintf("^(%s\\.){3}%s$", ipSplice, ipSplice)
+var IPRe = regexp.MustCompile(ipReString)
 
 func ReadFileLines(filepath string) ([]string, error) {
 	file, err := os.OpenFile(filepath, os.O_CREATE|os.O_RDONLY, 0666)
@@ -43,6 +45,10 @@ func Stringify(v interface{}) string {
 	encoder.SetIndent("", "  ")
 	encoder.Encode(v)
 	return outputBuffer.String()
+}
+
+func IsIP(ip string) bool {
+	return IPRe.MatchString(ip)
 }
 
 func IsCIDR(cidr string) bool {
