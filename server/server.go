@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
 func init() {
@@ -17,5 +16,5 @@ func main() {
 	r.POST("/api/scan", createScan)
 	r.GET("/api/scan", getScanList)
 
-	r.Run(fmt.Sprintf(":%s", viper.GetString("ListenPort")))
+	r.Run(fmt.Sprintf("%s:%s", config.Addr, config.Port))
 }

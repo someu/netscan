@@ -8,8 +8,15 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	"strconv"
+	"strings"
 	"time"
 )
+
+type CreateScanRequestData struct {
+	Name string `form:"name"`
+	IP   string `form:"ip"`
+	Port string `form:"port"`
+}
 
 func getAssetList(c *gin.Context) {
 	result := struct {
@@ -96,21 +103,28 @@ func getScanList(c *gin.Context) {
 }
 
 func createScan(c *gin.Context) {
-	target := c.PostFormArray("target")
+	var reqData CreateScanRequestData
+	if err := c.ShouldBind(&reqData); err != nil {
+		c.JSON(400, "请求错误"+err.Error())
+		return
+	}
 
-	if target == nil || len(target) == 0 {
-		c.JSON(500, nil)
+	if len(reqData.Name) == 0 || len(reqData.IP) == 0 || len(reqData.Port) == 0 {
+		c.JSON(500, "请求数据错误")
 		return
 	}
 
 	scan := Scan{
-		Target:  target,
-		StartAt: time.Now(),
+		Name:     reqData.Name,
+		Ip:       strings.Split(reqData.IP, "\n"),
+		Port:     strings.Split(reqData.Port, ","),
+		StartAt:  time.Now(),
+		FinishAt: time.Time{},
 	}
 	s, err := scanCollection.InsertOne(context.TODO(), scan)
 
 	if err != nil {
-		c.JSON(500, nil)
+		c.JSON(500, "生成任务错误"+err.Error())
 		return
 	}
 

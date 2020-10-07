@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
@@ -16,8 +15,9 @@ var assetCollection *mongo.Collection
 var scanCollection *mongo.Collection
 
 func connectMongo() {
-	uri := viper.GetString("MongoUrl")
-	database := viper.GetString("MongoDatabase")
+	uri := config.MongoUri
+	database := config.MongoDatabase
+
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	var err error
@@ -33,5 +33,5 @@ func connectMongo() {
 	mongoDB = mongoClient.Database(database)
 	assetCollection = mongoDB.Collection("asset")
 	scanCollection = mongoDB.Collection("scan")
-	log.Println(fmt.Sprintf("success connect to %s %s", uri, database))
+	log.Println(fmt.Sprintf("success connect to %s/%s", uri, database))
 }

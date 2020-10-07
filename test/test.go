@@ -1,18 +1,34 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"github.com/spf13/viper"
 )
 
-type S struct {
-	A string
+//定义config结构体
+var C struct {
+	Addr          string
+	Port          string
+	MongoUri      string
+	MongoUser     string
+	MongoPass     string
+	MongoDatabase string
 }
 
 func main() {
-	s := S{
-		A: "123",
+	config := viper.New()
+	config.AddConfigPath(".")
+	config.SetConfigName("config")
+	config.SetConfigType("json")
+	if err := config.ReadInConfig(); err != nil {
+		panic(err)
 	}
-	bytes, _ := json.Marshal(s)
-	fmt.Println(string(bytes))
+
+	//直接反序列化为Struct
+	//var configjson Config
+	if err := config.Unmarshal(&C); err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(C)
 }

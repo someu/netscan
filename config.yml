@@ -1,3 +1,4 @@
-ListenPort: "8899"
-MongoUrl: "mongodb://localhost:27017"
-MongoDatabase: "fakescan"
+addr: "127.0.0.1"
+port: "10000"
+mongoUri: "mongodb://localhost:27017"
+mongoDatabase: "fakescan"

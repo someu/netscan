@@ -12,7 +12,19 @@ type Asset struct {
 }
 
 type Scan struct {
-	Target   []string
+	Name     string
+	Ip       []string
+	Port     []string
 	StartAt  time.Time
 	FinishAt time.Time
+}
+
+type Finger struct {
+	Addr      string
+	Port      string
+	TaskID    string
+	AssetID   string
+	Apps      []string
+	Detail    []scanner.MatchedApp
+	CreatedAt time.Time
 }
