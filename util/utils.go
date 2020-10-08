@@ -42,7 +42,7 @@ func Stringify(v interface{}) string {
 	outputBuffer := bytes.NewBuffer([]byte{})
 	encoder := json.NewEncoder(outputBuffer)
 	encoder.SetEscapeHTML(false)
-	encoder.SetIndent("", "  ")
+	//encoder.SetIndent("", "  ")
 	encoder.Encode(v)
 	return outputBuffer.String()
 }

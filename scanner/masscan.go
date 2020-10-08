@@ -63,7 +63,7 @@ func (scan *MasScan) Scan() ([]string, error) {
 
 	if error == nil {
 		result := string(stdout.Bytes())
-		return parseMassScanResult(result), nil
+		return ParseMassScanResult(result), nil
 	} else {
 		log.Printf("Run masscan failed: %s", error.Error())
 		return nil, error
@@ -79,7 +79,7 @@ func NewMasscan(ranges string, ports string) *MasScan {
 	}
 }
 
-func parseMassScanResult(result string) []string {
+func ParseMassScanResult(result string) []string {
 	lines := strings.Split(result, "\n")
 	var targets []string
 	for _, line := range lines {

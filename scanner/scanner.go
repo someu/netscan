@@ -5,6 +5,7 @@ import (
 	"fakescan/util"
 	"fmt"
 	"github.com/gobuffalo/packr/v2"
+	"github.com/panjf2000/ants/v2"
 	"log"
 	"reflect"
 	"regexp"
@@ -21,6 +22,8 @@ type Scanner struct {
 	Level             int
 	MasscanPath       string
 	MasscanRate       int
+	Concurrent        int
+	pool              *ants.Pool
 }
 
 type MatchedApp struct {
@@ -37,12 +40,17 @@ type MatchedResult struct {
 
 func NewScanner() *Scanner {
 	scanner := &Scanner{
-		Level:       1,
-		MasscanPath: "masscan",
-		MasscanRate: 1000,
+		Level:         1,
+		MasscanPath:   "masscan",
+		MasscanRate:   1000,
+		Concurrent:    100,
+		RequestClient: NewRequestClient(),
+	}
+	var err error
+	if scanner.pool, err = ants.NewPool(scanner.Concurrent); err != nil {
+		log.Fatalf("Init goroutine pool failed, %s", err.Error())
 	}
 	scanner.LoadFeatures()
-	scanner.RequestClient = NewRequestClient()
 	return scanner
 }
 
@@ -96,6 +104,11 @@ func (scanner *Scanner) SetTimeout(timeout int) {
 	scanner.RequestClient.HttpClient.Timeout = time.Second * time.Duration(timeout)
 }
 
+func (scanner *Scanner) SetConcurrent(concurrent int) {
+	scanner.Concurrent = concurrent
+	scanner.pool.Tune(scanner.Concurrent)
+}
+
 func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
 	var result = &MatchedResult{Url: url, StartAt: time.Now()}
 	for _, feature := range scanner.FeatureCollection[:scanner.Level] {
@@ -105,7 +118,6 @@ func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
 			err      error
 		)
 		if response, err = scanner.RequestClient.Get(target); err != nil {
-			log.Printf("请求 %s 错误 %s", target, err.Error())
 			continue
 		}
 
@@ -126,12 +138,14 @@ func (scanner *Scanner) scanUrls(urls []string, callback func(*MatchedResult)) *
 	var wg sync.WaitGroup
 	for _, url := range urls {
 		wg.Add(1)
-		go func(url string) {
-			defer wg.Done()
-			result := scanner.ScanUrl(url)
-			lock.Lock()
-			defer lock.Unlock()
-			callback(result)
+		func(url string) {
+			scanner.pool.Submit(func() {
+				defer wg.Done()
+				result := scanner.ScanUrl(url)
+				lock.Lock()
+				defer lock.Unlock()
+				callback(result)
+			})
 		}(url)
 	}
 	return &wg
