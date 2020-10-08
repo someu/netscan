@@ -2,6 +2,7 @@ package scanner
 
 import (
 	"bytes"
+	"fmt"
 	"log"
 	"os/exec"
 	"strings"
@@ -12,7 +13,7 @@ type MasScan struct {
 	Args        []string
 	Ports       string
 	Ranges      string
-	Rate        string
+	Rate        int
 	Exclude     string
 }
 
@@ -28,7 +29,7 @@ func (scan *MasScan) SetRanges(ranges string) {
 	scan.Ranges = ranges
 }
 
-func (scan *MasScan) SetRate(rate string) {
+func (scan *MasScan) SetRate(rate int) {
 	scan.Rate = rate
 }
 
@@ -36,22 +37,20 @@ func (scan *MasScan) SetExclude(exclude string) {
 	scan.Exclude = exclude
 }
 
-func (scan *MasScan) Run() ([]string, error) {
+func (scan *MasScan) Scan() ([]string, error) {
 	if scan.Ranges != "" {
-		scan.Args = append(scan.Args, "--range")
-		scan.Args = append(scan.Args, scan.Ranges)
+		scan.Args = append(scan.Args, "--range", scan.Ranges)
 	}
 	if scan.Ports != "" {
-		scan.Args = append(scan.Args, "-p")
-		scan.Args = append(scan.Args, scan.Ports)
+		scan.Args = append(scan.Args, "-p", scan.Ports)
+
 	}
-	if scan.Rate != "" {
-		scan.Args = append(scan.Args, "--rate")
-		scan.Args = append(scan.Args, scan.Rate)
+	if scan.Rate > 0 {
+		scan.Args = append(scan.Args, "--rate", fmt.Sprint(scan.Rate))
+
 	}
 	if scan.Exclude != "" {
-		scan.Args = append(scan.Args, "--exclude")
-		scan.Args = append(scan.Args, scan.Exclude)
+		scan.Args = append(scan.Args, "--exclude", scan.Exclude)
 	}
 	scan.Args = append(scan.Args, "-oL", "-")
 
@@ -74,7 +73,7 @@ func (scan *MasScan) Run() ([]string, error) {
 func NewMasscan(ranges string, ports string) *MasScan {
 	return &MasScan{
 		ProgramPath: "masscan",
-		Rate:        "5000",
+		Rate:        1000,
 		Ranges:      ranges,
 		Ports:       ports,
 	}

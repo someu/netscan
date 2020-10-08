@@ -19,6 +19,8 @@ type Scanner struct {
 	FeatureCollection []*Feature
 	RequestClient     *RequestClient
 	Level             int
+	MasscanPath       string
+	MasscanRate       int
 }
 
 type MatchedApp struct {
@@ -35,7 +37,9 @@ type MatchedResult struct {
 
 func NewScanner() *Scanner {
 	scanner := &Scanner{
-		Level: 1,
+		Level:       1,
+		MasscanPath: "masscan",
+		MasscanRate: 1000,
 	}
 	scanner.LoadFeatures()
 	scanner.RequestClient = NewRequestClient()
@@ -101,7 +105,7 @@ func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
 		}
 
 		for _, rule := range feature.Rules {
-			app := rule.MatchResponse(response)
+			app := rule.MatchResponseData(response.Data)
 			if app != nil {
 				result.Apps = append(result.Apps, app)
 			}
@@ -136,8 +140,10 @@ func (scanner *Scanner) masscan(targets string, ports string) []string {
 
 	log.Printf("Start masscan %s %s", targets, ports)
 	masscan := NewMasscan(targets, ports)
+	masscan.SetRate(scanner.MasscanRate)
+	masscan.SetProgramPath(scanner.MasscanPath)
 	var err error
-	if urls, err = masscan.Run(); err != nil {
+	if urls, err = masscan.Scan(); err != nil {
 		log.Printf("Masscan failed: %s", err.Error())
 	} else {
 		log.Printf("Masscan finished, find %d urls", len(urls))

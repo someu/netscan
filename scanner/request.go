@@ -25,6 +25,11 @@ var MetaRes = []*regexp.Regexp{
 var UrlRe = regexp.MustCompile("http(s)?://.*")
 
 type Response struct {
+	Status string
+	Data   *ResponseData
+}
+
+type ResponseData struct {
 	Title       string
 	Header      string
 	Cookie      string
@@ -172,13 +177,17 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 	}
 
 	response := &Response{
-		Title:       title,
-		Header:      header,
-		Cookie:      cookie,
-		MetaTag:     metaTag,
-		HeaderField: headerField,
-		CookieField: cookieField,
-		Body:        body,
+		Status: resp.Status,
+
+		Data: &ResponseData{
+			Title:       title,
+			Header:      header,
+			Cookie:      cookie,
+			MetaTag:     metaTag,
+			HeaderField: headerField,
+			CookieField: cookieField,
+			Body:        body,
+		},
 	}
 
 	return response, nil

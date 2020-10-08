@@ -74,7 +74,7 @@ func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, []string) {
 	return matched, versions
 }
 
-func (rule *FeatureRule) MatchResponse(response *Response) *MatchedApp {
+func (rule *FeatureRule) MatchResponseData(response *ResponseData) *MatchedApp {
 	var matched = false
 	var versions []string
 	responseType := reflect.TypeOf(*response)
