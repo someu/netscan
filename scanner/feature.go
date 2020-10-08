@@ -20,7 +20,9 @@ type FeatureRuleItem struct {
 }
 
 type FeatureRule struct {
-	Name        string                        `json:"name"`
+	// 指纹名
+	Name string `json:"name"`
+	// 指纹规则
 	Title       []*FeatureRuleItem            `json:"title"`
 	Header      []*FeatureRuleItem            `json:"header"`
 	Cookie      []*FeatureRuleItem            `json:"cookie"`
@@ -79,14 +81,22 @@ func (rule *FeatureRule) MatchResponseData(response *ResponseData) *MatchedApp {
 	var versions []string
 	responseType := reflect.TypeOf(*response)
 	responseValue := reflect.ValueOf(*response)
+	ruleType := reflect.TypeOf(*rule)
 	ruleValue := reflect.ValueOf(*rule)
 	stringType := reflect.TypeOf("")
 
-	for i := 0; i < responseType.NumField(); i++ {
-		responseField := responseType.Field(i)
-		responseValue := responseValue.Field(i)
+	for i := 0; i < ruleType.NumField(); i++ {
+		ruleField := ruleType.Field(i)
+		ruleFieldName := ruleField.Name
+		if ruleFieldName == "Name" {
+			continue
+		}
+		if _, find := responseType.FieldByName(ruleFieldName); find == false {
+			continue
+		}
+		ruleValue := ruleValue.Field(i).Interface()
+		responseValue := responseValue.FieldByName(ruleFieldName)
 		responseValueType := responseValue.Type()
-		ruleValue := ruleValue.FieldByName(responseField.Name).Interface()
 
 		if responseValueType == stringType {
 			// handle values(Title, Header, Cookie, Body) in response which type is string
