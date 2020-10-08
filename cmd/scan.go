@@ -15,6 +15,7 @@ var (
 	masscanPath string
 	masscanRate int
 	level       int
+	timeout     int
 )
 
 var scanCmd = &cobra.Command{
@@ -40,6 +41,10 @@ var scanCmd = &cobra.Command{
 		} else if level == -1 {
 			globalScanner.Level = len(globalScanner.FeatureCollection)
 		}
+		if timeout >= 0 {
+			globalScanner.SetTimeout(timeout)
+		}
+
 		wg := globalScanner.Scan(ip, port, func(result *scanner.MatchedResult) {
 			spend := float64(result.EndAt.UnixNano()-result.StartAt.UnixNano()) / (1000 * 1000)
 			var appsStr string
@@ -59,5 +64,6 @@ func init() {
 	scanCmd.Flags().IntVarP(&masscanRate, "masscanRate", "r", 1000, "masscan rate")
 	scanCmd.Flags().StringVarP(&masscanPath, "masscanPath", "m", "masscan", "masscan path")
 	scanCmd.Flags().IntVarP(&level, "level", "l", 1, "web finger match level")
+	scanCmd.Flags().IntVarP(&timeout, "timeout", "t", 10, "request timeout")
 	rootCmd.AddCommand(scanCmd)
 }

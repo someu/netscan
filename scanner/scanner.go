@@ -92,6 +92,10 @@ func (scanner *Scanner) LoadFeatures() {
 	}
 }
 
+func (scanner *Scanner) SetTimeout(timeout int) {
+	scanner.RequestClient.HttpClient.Timeout = time.Second * time.Duration(timeout)
+}
+
 func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
 	var result = &MatchedResult{Url: url, StartAt: time.Now()}
 	for _, feature := range scanner.FeatureCollection[:scanner.Level] {
@@ -101,6 +105,7 @@ func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
 			err      error
 		)
 		if response, err = scanner.RequestClient.Get(target); err != nil {
+			log.Printf("请求 %s 错误 %s", target, err.Error())
 			continue
 		}
 

@@ -26,6 +26,7 @@ var UrlRe = regexp.MustCompile("http(s)?://.*")
 
 type Response struct {
 	Status string
+	Error  string
 	Data   *ResponseData
 }
 
@@ -134,8 +135,6 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 		return nil, err
 	}
 
-	//rawCookie := resp.Cookies()
-
 	var title string
 	var header string
 	var headerField = make(map[string]string)
@@ -178,7 +177,6 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 
 	response := &Response{
 		Status: resp.Status,
-
 		Data: &ResponseData{
 			Title:       title,
 			Header:      header,
