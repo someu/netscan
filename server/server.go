@@ -5,9 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var scheduler *Scheduler
+
 func init() {
 	readConfig()
 	connectMongo()
+	scheduler = NewScheduler()
 }
 
 func main() {

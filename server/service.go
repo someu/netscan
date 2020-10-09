@@ -128,5 +128,7 @@ func createScan(c *gin.Context) {
 		return
 	}
 
+	scheduler.CreateScan(scan)
+
 	c.JSON(200, s)
 }

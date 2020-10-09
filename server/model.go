@@ -25,6 +25,6 @@ type Finger struct {
 	TaskID    string
 	AssetID   string
 	Apps      []string
-	Detail    []scanner.MatchedApp
+	Detail    []*scanner.MatchedApp
 	CreatedAt time.Time
 }

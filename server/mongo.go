@@ -13,6 +13,7 @@ var mongoClient *mongo.Client
 var mongoDB *mongo.Database
 var assetCollection *mongo.Collection
 var scanCollection *mongo.Collection
+var fingerCollection *mongo.Collection
 
 func connectMongo() {
 	uri := config.MongoUri
@@ -33,5 +34,6 @@ func connectMongo() {
 	mongoDB = mongoClient.Database(database)
 	assetCollection = mongoDB.Collection("asset")
 	scanCollection = mongoDB.Collection("scan")
+	fingerCollection = mongoDB.Collection("finger")
 	log.Println(fmt.Sprintf("success connect to %s/%s", uri, database))
 }
