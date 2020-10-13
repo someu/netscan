@@ -1,289 +1,237 @@
-package portscan
+package main
 
 import (
-	"bytes"
-	"encoding/binary"
 	"errors"
-	"flag"
-	"fmt"
+	"github.com/google/gopacket"
+	"github.com/google/gopacket/layers"
+	"github.com/google/gopacket/pcap"
+	"github.com/google/gopacket/routing"
+	"github.com/mostlygeek/arp"
+	"github.com/phayes/freeport"
+	"io"
 	"log"
-	"math/rand"
 	"net"
-	"os"
-	"strconv"
-	"strings"
 	"time"
 )
 
-//TCPHeader test
-type TCPHeader struct {
-	SrcPort       uint16
-	DstPort       uint16
-	SeqNum        uint32
-	AckNum        uint32
-	Flags         uint16
-	Window        uint16
-	ChkSum        uint16
-	UrgentPointer uint16
+type PortScanner struct {
+	router           routing.Router
+	srcPort          int
+	serializeOptions gopacket.SerializeOptions
+	handleMap        map[string]*pcap.Handle
 }
 
-//TCPOption test
-type TCPOption struct {
-	Kind   uint8
-	Length uint8
-	Data   []byte
+// cache gateway's mac address
+var gatewayMacMap = map[string]string{}
+
+func NewPortScanner() (*PortScanner, error) {
+	var err error
+	var router routing.Router
+	if router, err = routing.New(); err != nil {
+		return nil, err
+	}
+	var sport int
+	if sport, err = freeport.GetFreePort(); err != nil {
+		return nil, err
+	}
+	return &PortScanner{
+		router:  router,
+		srcPort: sport,
+		serializeOptions: gopacket.SerializeOptions{
+			FixLengths:       true,
+			ComputeChecksums: true,
+		},
+	}, nil
 }
 
-type scanResult struct {
-	Port   uint16
-	Opened bool
+func (s *PortScanner) getHandle(device string) (*pcap.Handle, error) {
+	if s.handleMap[device] == nil {
+		var err error
+		s.handleMap[device], err = pcap.OpenLive(device, 65535, true, pcap.BlockForever)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return s.handleMap[device], nil
 }
 
-type scanJob struct {
-	Laddr string
-	Raddr string
-	SPort uint16
-	DPort uint16
-	Stop  uint8
+func (s *PortScanner) sendSynPacket(dstMac net.HardwareAddr, dstIp net.IP, dstPort layers.TCPPort) {
+
 }
 
-var stopFlag = make(chan uint8, 1)
+func sendArpPacket() {
+
+}
+
+func (s *PortScanner) Scan(ip net.IP, port int) error {
+	var err error
+	device, gateway, srcIp, err := s.router.Route(ip)
+	if err != nil {
+		return err
+	}
+
+	handle, err := pcap.OpenLive(device.Name, 65535, true, pcap.BlockForever)
+	if err != nil {
+		return nil
+	}
+	//defer handle.Close()
+
+	// get mac address
+	dstMac, err := s.getMac(ip, gateway, srcIp, device)
+	if err != nil {
+		return err
+	}
+
+	// send packet
+	ethernet := layers.Ethernet{
+		SrcMAC:       device.HardwareAddr,
+		DstMAC:       dstMac,
+		EthernetType: layers.EthernetTypeIPv4,
+	}
+	ipv4 := layers.IPv4{
+		SrcIP:    srcIp,
+		DstIP:    ip,
+		Version:  4,
+		TTL:      255,
+		Protocol: layers.IPProtocolTCP,
+	}
+	tcp := layers.TCP{
+		SrcPort: layers.TCPPort(s.srcPort),
+		DstPort: layers.TCPPort(port),
+		SYN:     true,
+	}
+	tcp.SetNetworkLayerForChecksum(&ipv4)
+
+	packet := gopacket.NewSerializeBuffer()
+	err = gopacket.SerializeLayers(packet, s.serializeOptions, &ethernet, &ipv4, &tcp)
+	if err != nil {
+		return err
+	}
+
+	go func() {
+		defer handle.Close()
+		ipv4 := &layers.IPv4{}
+		tcp := &layers.TCP{}
+		parser := gopacket.NewDecodingLayerParser(layers.LayerTypeEthernet, &layers.Ethernet{}, ipv4, tcp)
+		for {
+			data, _, err := handle.ReadPacketData()
+			if err == pcap.NextErrorTimeoutExpired || err == io.EOF {
+				break
+			} else if err != nil {
+				log.Println("Read packet error", err.Error())
+				continue
+			}
+			decodes := []gopacket.LayerType{}
+			if err := parser.DecodeLayers(data, &decodes); err != nil {
+				continue
+			}
+			for _, decode := range decodes {
+				if decode == layers.LayerTypeTCP && ipv4.SrcIP.Equal(ip) && tcp.SrcPort == layers.TCPPort(port) {
+					if tcp.SYN && tcp.ACK {
+						log.Printf("%s:%d is open", ip, port)
+					} else if tcp.RST {
+						log.Printf("%s:%d is close", ip, port)
+					}
+					return
+				}
+			}
+		}
+	}()
+
+	handle.WritePacketData(packet.Bytes())
+	return nil
+}
+
+func (s *PortScanner) getMac(ip net.IP, gateway net.IP, srcIp net.IP, device *net.Interface) (net.HardwareAddr, error) {
+	macStr := arp.Search(ip.String())
+	macStr = "00:00:00:00:00:00"
+	if macStr != "00:00:00:00:00:00" {
+		if mac, err := net.ParseMAC(macStr); err == nil {
+			return mac, nil
+		}
+	}
+
+	arpDst := ip
+	if gateway != nil {
+		arpDst = gateway
+	}
+
+	handle, err := pcap.OpenLive(device.Name, 65536, true, pcap.BlockForever)
+	if err != nil {
+		return nil, err
+	}
+	defer handle.Close()
+
+	start := time.Now()
+
+	// Prepare the layers to send for an ARP request.
+	eth := layers.Ethernet{
+		SrcMAC:       device.HardwareAddr,
+		DstMAC:       net.HardwareAddr{0xff, 0xff, 0xff, 0xff, 0xff, 0xff},
+		EthernetType: layers.EthernetTypeARP,
+	}
+	arp := layers.ARP{
+		AddrType:          layers.LinkTypeEthernet,
+		Protocol:          layers.EthernetTypeIPv4,
+		HwAddressSize:     6,
+		ProtAddressSize:   4,
+		Operation:         layers.ARPRequest,
+		SourceHwAddress:   []byte(device.HardwareAddr),
+		SourceProtAddress: []byte(srcIp),
+		DstHwAddress:      []byte{0, 0, 0, 0, 0, 0},
+		DstProtAddress:    []byte(arpDst),
+	}
+
+	packet := gopacket.NewSerializeBuffer()
+
+	if err := gopacket.SerializeLayers(packet, s.serializeOptions, &eth, &arp); err != nil {
+		return nil, err
+	}
+	if err := handle.WritePacketData(packet.Bytes()); err != nil {
+		return nil, err
+	}
+
+	// Wait 3 seconds for an ARP reply.
+	for {
+		if time.Since(start) > time.Second*3 {
+			return nil, errors.New("timeout getting ARP reply")
+		}
+		data, _, err := handle.ReadPacketData()
+		if err == pcap.NextErrorTimeoutExpired {
+			continue
+		} else if err != nil {
+			return nil, err
+		}
+		packet := gopacket.NewPacket(data, layers.LayerTypeEthernet, gopacket.NoCopy)
+		if arpLayer := packet.Layer(layers.LayerTypeARP); arpLayer != nil {
+			arp := arpLayer.(*layers.ARP)
+			if net.IP(arp.SourceProtAddress).Equal(arpDst) {
+				return arp.SourceHwAddress, nil
+			}
+		}
+	}
+}
 
 func main() {
-
-	rate := time.Second / 400
-	throttle := time.Tick(rate)
-	jobs := make(chan *scanJob, 65536)
-	results := make(chan *scanResult, 1000)
-	for w := 0; w < 10; w++ {
-		go worker(w, jobs, throttle, results)
-	}
-
-	// 获取命令行参数
-
-	ifaceName := flag.String("i", "eth0", "Specify network")
-	remote := flag.String("r", "", "remote address")
-	portRange := flag.String("p", "1-1024", "port range: -p 1-1024")
-	flag.Parse()
-
-	// ifaceName := &interfaceName_
-	// remote := &remote_
-	// portRange := &portRange_
-
-	s_time := time.Now().Unix()
-
-	laddr := interfaceAddress(*ifaceName) //
-	raddr := *remote
-	minPort, maxPort := portSplit(portRange)
-
-	// fmt.Println(laddr, raddr) // 输出源ip地址，目标ip地址
-
-	go func(num int) {
-		for i := 0; i < num; i++ {
-			recvSynAck(laddr, raddr, results)
-		}
-	}(10)
-
-	go func(jobLength int) {
-		for j := minPort; j < maxPort+1; j++ {
-			s := scanJob{
-				Laddr: laddr,
-				Raddr: raddr,
-				SPort: uint16(random(10000, 65535)),
-				DPort: uint16(j + 1),
-			}
-			jobs <- &s
-		}
-		jobs <- &scanJob{Stop: 1}
-	}(1024)
-
-	for {
-		select {
-		case res := <-results:
-			fmt.Println("扫描到开放的端口:", res.Port)
-		case <-stopFlag:
-			e_time := time.Now().Unix()
-			fmt.Println("总共用了多少时间(s):", e_time-s_time)
-			os.Exit(0)
-		}
-	}
-}
-
-func worker(id int, jobs <-chan *scanJob, th <-chan time.Time, results chan<- *scanResult) {
-	for j := range jobs {
-		if j.Stop != 1 {
-			sendSyn(j.Laddr, j.Raddr, j.SPort, j.DPort)
-		} else {
-			stopFlag <- j.Stop
-		}
-		<-th
-	}
-}
-
-func checkError(err error) {
-	// 错误check
+	scanner, err := NewPortScanner()
 	if err != nil {
-		log.Println(err)
+		log.Fatalln("Create scanner error", err.Error())
 	}
-}
-
-//CheckSum test
-func CheckSum(data []byte, src, dst [4]byte) uint16 {
-	pseudoHeader := []byte{
-		src[0], src[1], src[2], src[3],
-		dst[0], dst[1], dst[2], dst[3],
-		0,
-		6,
-		0,
-		byte(len(data)),
-	}
-
-	totalLength := len(pseudoHeader) + len(data)
-	if totalLength%2 != 0 {
-		totalLength++
-	}
-	d := make([]byte, 0, totalLength)
-	d = append(d, pseudoHeader...)
-	d = append(d, data...)
-
-	return ^mySum(d)
-}
-
-func mySum(data []byte) uint16 {
-	var sum uint32
-	for i := 0; i < len(data)-1; i += 2 {
-		sum += uint32(uint16(data[i])<<8 | uint16(data[i+1]))
-	}
-
-	sum = (sum >> 16) + (sum & 0xffff)
-	sum = sum + (sum >> 16)
-	return uint16(sum)
-}
-
-func sendSyn(laddr, raddr string, sport, dport uint16) {
-	conn, err := net.Dial("ip4:tcp", raddr)
-	checkError(err)
-	defer conn.Close()
-	op := []TCPOption{
-		TCPOption{
-			Kind:   2,
-			Length: 4,
-			Data:   []byte{0x05, 0xb4},
-		},
-		TCPOption{
-			Kind: 0,
-		},
-	}
-
-	tcpH := TCPHeader{
-		SrcPort:       sport,
-		DstPort:       dport,
-		SeqNum:        rand.Uint32(),
-		AckNum:        0,
-		Flags:         0x8002,
-		Window:        8192,
-		ChkSum:        0,
-		UrgentPointer: 0,
-	}
-
-	buff := new(bytes.Buffer)
-
-	err = binary.Write(buff, binary.BigEndian, tcpH)
-	checkError(err)
-	for i := range op {
-		binary.Write(buff, binary.BigEndian, op[i].Kind)
-		binary.Write(buff, binary.BigEndian, op[i].Length)
-		binary.Write(buff, binary.BigEndian, op[i].Data)
-	}
-
-	binary.Write(buff, binary.BigEndian, [6]byte{})
-
-	data := buff.Bytes()
-	checkSum := CheckSum(data, ipstr2Bytes(laddr), ipstr2Bytes(raddr))
-	//fmt.Printf("CheckSum 0x%X\n", checkSum)
-	tcpH.ChkSum = checkSum
-
-	buff = new(bytes.Buffer)
-	binary.Write(buff, binary.BigEndian, tcpH)
-	for i := range op {
-		binary.Write(buff, binary.BigEndian, op[i].Kind)
-		binary.Write(buff, binary.BigEndian, op[i].Length)
-		binary.Write(buff, binary.BigEndian, op[i].Data)
-	}
-	binary.Write(buff, binary.BigEndian, [6]byte{})
-	data = buff.Bytes()
-
-	//fmt.Printf("% X\n", data)
-	_, err = conn.Write(data)
-	checkError(err)
-}
-
-func recvSynAck(laddr, raddr string, res chan<- *scanResult) error {
-	listenAddr, err := net.ResolveIPAddr("ip4", laddr) // 解析域名为ip
-	checkError(err)
-	conn, err := net.ListenIP("ip4:tcp", listenAddr)
-	defer conn.Close()
-	checkError(err)
-	for {
-		buff := make([]byte, 1024)
-		_, addr, err := conn.ReadFrom(buff)
+	for i := 0; i < 5; i++ {
+		err = scanner.Scan(net.IP{10, 0, 8, 94}, 8080)
 		if err != nil {
-			continue
+			log.Fatalln("Scan error", err.Error())
+		} else {
+			log.Println("Success scan")
 		}
-
-		if addr.String() != raddr || buff[13] != 0x12 {
-			continue
+		err = scanner.Scan(net.IP{10, 0, 8, 91}, 80)
+		if err != nil {
+			log.Fatalln("Scan error", err.Error())
+		} else {
+			log.Println("Success scan")
 		}
-
-		var port uint16
-		binary.Read(bytes.NewReader(buff), binary.BigEndian, &port)
-		res <- &scanResult{
-			Port:   port,
-			Opened: true,
-		}
+		time.Sleep(time.Millisecond * 100)
 	}
-}
-
-func ipstr2Bytes(addr string) [4]byte {
-	s := strings.Split(addr, ".")
-	b0, _ := strconv.Atoi(s[0])
-	b1, _ := strconv.Atoi(s[1])
-	b2, _ := strconv.Atoi(s[2])
-	b3, _ := strconv.Atoi(s[3])
-	return [4]byte{byte(b0), byte(b1), byte(b2), byte(b3)}
-}
-
-func random(min, max int) int {
-	return rand.Intn(max-min) + min
-}
-
-func interfaceAddress(ifaceName string) string {
-	iface, err := net.InterfaceByName(ifaceName)
-	if err != nil {
-		panic(err)
-	}
-	addr, err := iface.Addrs()
-	if err != nil {
-		panic(err)
-	}
-	addrStr := strings.Split(addr[0].String(), "/")[0]
-	return addrStr
-}
-
-func portSplit(portRange *string) (uint16, uint16) {
-	ports := strings.Split(*portRange, "-")
-	minPort, err := strconv.ParseUint(ports[0], 10, 16)
-	if err != nil {
-		panic(err)
-	}
-	maxPort, err := strconv.ParseUint(ports[1], 10, 16)
-	if err != nil {
-		panic(err)
-	}
-
-	if minPort > maxPort {
-		panic(errors.New("minPort must greater than maxPort"))
-	}
-
-	return uint16(minPort), uint16(maxPort)
+	log.Println("Send all")
+	time.Sleep(time.Second * 100)
 }
