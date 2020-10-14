@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
@@ -95,54 +97,56 @@ func (h *Handle) writePacketLayers(iface *NetInterface, layers ...gopacket.Seria
 	return h.writePacketData(iface, packet.Bytes())
 }
 
-func (h *Handle) getMacAddr(dstIp net.IP, iface *NetInterface) net.HardwareAddr {
+func (h *Handle) getMacAddr(dstIp net.IP, iface *NetInterface) (net.HardwareAddr, error) {
 	dstIpStr := dstIp.String()
-	gatewayStr := iface.gateway.String()
-	if h.ipMacMap[dstIpStr] != nil {
-		return h.ipMacMap[dstIpStr]
-	}
-	if h.ipMacMap[gatewayStr] != nil {
-		return h.ipMacMap[gatewayStr]
-	}
-
 	macStr := arp.Search(dstIpStr)
 	if macStr != "00:00:00:00:00:00" {
 		mac, err := net.ParseMAC(macStr)
 		if err == nil {
-			return mac
+			return mac, nil
 		}
 	}
 
-	h.sendArpPacket(dstIp, iface)
+	if iface.gatewayMac != nil {
+		return iface.gatewayMac, nil
+	}
+
+	dstArpErr := h.sendArpPacket(dstIp, iface)
+	gatewayArpErr := h.sendArpPacket(iface.gateway, iface)
+	if dstArpErr != nil && gatewayArpErr != nil {
+		return nil, errors.New(fmt.Sprintf("%s, %s", dstArpErr, gatewayArpErr))
+	}
 
 	// Wait 3 seconds for an ARP reply.
 	start := time.Now()
 	for {
-		if time.Since(start) > time.Second*3 {
-			return net.HardwareAddr{0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
+		if time.Since(start) > time.Second*10 {
+			break
 		}
 		data, _, err := iface.handle.ReadPacketData()
 		if err == pcap.NextErrorTimeoutExpired {
 			continue
 		} else if err != nil {
-			return net.HardwareAddr{0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
+			return nil, err
 		}
 		packet := gopacket.NewPacket(data, layers.LayerTypeEthernet, gopacket.NoCopy)
 		if arpLayer := packet.Layer(layers.LayerTypeARP); arpLayer != nil {
 			arp := arpLayer.(*layers.ARP)
-			if net.IP(arp.SourceProtAddress).Equal(iface.gateway) {
-				return arp.SourceHwAddress
+			arpSrcIp := net.IP(arp.SourceProtAddress)
+			if arpSrcIp.Equal(iface.gateway) {
+				iface.gatewayMac = arp.SourceHwAddress
+				return arp.SourceHwAddress, nil
+			} else if arpSrcIp.Equal(dstIp) {
+				return arp.SourceHwAddress, nil
 			}
+
 		}
 	}
 
-	return net.HardwareAddr{0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
+	return nil, errors.New("arp mac address timeout")
 }
 
 func (h *Handle) sendArpPacket(dstIp net.IP, iface *NetInterface) error {
-	if iface.gateway != nil {
-		dstIp = iface.gateway
-	}
 	// broadcast arp packet
 	eth := layers.Ethernet{
 		SrcMAC:       iface.mac,
@@ -174,7 +178,7 @@ func (h *Handle) sendSynPacket(dstIp net.IP, dstPort uint16) error {
 		return err
 	}
 	// get mac address
-	dstMac := h.getMacAddr(dstIp, iface)
+	dstMac, err := h.getMacAddr(dstIp, iface)
 	if err != nil {
 		return err
 	}

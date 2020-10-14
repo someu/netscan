@@ -13,12 +13,13 @@ func init() {
 }
 
 type NetInterface struct {
-	name    string
-	iface   *net.Interface
-	ip      net.IP
-	mac     net.HardwareAddr
-	gateway net.IP
-	handle  *pcap.Handle
+	name       string
+	iface      *net.Interface
+	ip         net.IP
+	mac        net.HardwareAddr
+	gateway    net.IP
+	gatewayMac net.HardwareAddr
+	handle     *pcap.Handle
 }
 
 type Router struct {
