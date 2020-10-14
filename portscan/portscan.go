@@ -59,10 +59,6 @@ func (s *PortScanner) sendSynPacket(dstMac net.HardwareAddr, dstIp net.IP, dstPo
 
 }
 
-func sendArpPacket() {
-
-}
-
 func (s *PortScanner) Scan(ip net.IP, port int) error {
 	var err error
 	device, gateway, srcIp, err := s.router.Route(ip)
@@ -142,8 +138,8 @@ func (s *PortScanner) Scan(ip net.IP, port int) error {
 	return nil
 }
 
-func (s *PortScanner) getMac(ip net.IP, gateway net.IP, srcIp net.IP, device *net.Interface) (net.HardwareAddr, error) {
-	macStr := arp.Search(ip.String())
+func (s *PortScanner) getMac(dstIp net.IP, gateway net.IP, srcIp net.IP, device *net.Interface) (net.HardwareAddr, error) {
+	macStr := arp.Search(dstIp.String())
 	macStr = "00:00:00:00:00:00"
 	if macStr != "00:00:00:00:00:00" {
 		if mac, err := net.ParseMAC(macStr); err == nil {
@@ -151,7 +147,7 @@ func (s *PortScanner) getMac(ip net.IP, gateway net.IP, srcIp net.IP, device *ne
 		}
 	}
 
-	arpDst := ip
+	arpDst := dstIp
 	if gateway != nil {
 		arpDst = gateway
 	}
@@ -213,24 +209,16 @@ func (s *PortScanner) getMac(ip net.IP, gateway net.IP, srcIp net.IP, device *ne
 }
 
 func main() {
-	scanner, err := NewPortScanner()
+	handle, err := NewHandle()
 	if err != nil {
 		log.Fatalln("Create scanner error", err.Error())
 	}
-	for i := 0; i < 5; i++ {
-		err = scanner.Scan(net.IP{10, 0, 8, 94}, 8080)
+	for i := 0; i < 65535; i++ {
+		err = handle.sendSynPacket(net.IP{127, 0, 0, 1}, uint16(i))
 		if err != nil {
 			log.Fatalln("Scan error", err.Error())
-		} else {
-			log.Println("Success scan")
 		}
-		err = scanner.Scan(net.IP{10, 0, 8, 91}, 80)
-		if err != nil {
-			log.Fatalln("Scan error", err.Error())
-		} else {
-			log.Println("Success scan")
-		}
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Millisecond * 10)
 	}
 	log.Println("Send all")
 	time.Sleep(time.Second * 100)
