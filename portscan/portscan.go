@@ -8,10 +8,12 @@ import (
 )
 
 type PortScanner struct {
-	ctx      context.Context
-	cancel   context.CancelFunc
-	sender   *Sender
-	receiver *Receiver
+	ctx            context.Context
+	cancel         context.CancelFunc
+	sender         *Sender
+	receiver       *Receiver
+	arpTimeout     time.Duration
+	sessionTimeout time.Duration
 }
 
 func NewPortScanner() (*PortScanner, error) {
@@ -24,7 +26,7 @@ func NewPortScanner() (*PortScanner, error) {
 		ctx:      ctx,
 		cancel:   cancel,
 		sender:   sender,
-		receiver: NewReceiver(),
+		receiver: NewReceiver(ctx),
 	}, nil
 }
 
@@ -45,15 +47,16 @@ func main() {
 		log.Fatalln("Create scanner error", err.Error())
 	}
 	ip := net.IP{10, 0, 8, 92}
-	ports := []uint16{21, 22, 80, 8080, 443, 27017}
+	ports := []uint16{21, 22, 80, 8080, 443, 27017, 13443}
 	for _, port := range ports {
 		err = scanner.Scan(ip, port)
 		if err != nil {
 			log.Printf("Scan %s:%d error %s", ip.String(), port, err.Error())
 		}
-		time.Sleep(time.Millisecond * 10)
 	}
 	log.Println("Send all")
 	time.Sleep(time.Second * 10)
 	scanner.cancel()
+	log.Println("finished")
+	time.Sleep(time.Second * 1)
 }

@@ -48,6 +48,11 @@ func (r *Sender) send(dstIp net.IP, dstPort uint16) (*TargetRoute, error) {
 		return nil, err
 	}
 
+	// fix lo interface
+	if iface.HardwareAddr == nil {
+		iface.HardwareAddr = net.HardwareAddr{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+	}
+
 	route := &TargetRoute{
 		srcIp:   srcIp,
 		srcPort: uint16(srcPort),
@@ -84,10 +89,15 @@ type TargetRoute struct {
 }
 
 func (route *TargetRoute) arpMac() error {
+	// fix lo interface
+	if route.iface.HardwareAddr.String() == "00:00:00:00:00:00" {
+		route.dstMac = net.HardwareAddr{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
+		return nil
+	}
 	route.dstMac, _ = searchIPMacInArpTable(route.dstIp)
 	gatewayStr := route.gateway.String()
-	if arpCache[gatewayStr] != nil {
-		route.gatewayMac, _ = arpCache[route.gateway.String()]
+	if route.gateway != nil && arpCache[gatewayStr] != nil {
+		route.gatewayMac, _ = arpCache[gatewayStr]
 	} else {
 		route.gatewayMac, _ = searchIPMacInArpTable(route.gateway)
 	}
@@ -101,7 +111,7 @@ func (route *TargetRoute) arpMac() error {
 	arpGatewayErr := route.sendArpPacket(route.gateway)
 
 	if arpDstErr != nil && arpGatewayErr != nil {
-		return errors.New(fmt.Sprintf("%s, %s", arpDstErr, arpGatewayErr))
+		return errors.New(fmt.Sprintf("end arp packet error %s, %s", arpDstErr, arpGatewayErr))
 	}
 
 	// wait arp packet
@@ -135,14 +145,6 @@ func (route *TargetRoute) arpMac() error {
 }
 
 func (route *TargetRoute) sendArpPacket(dstIP net.IP) error {
-	route.dstMac, _ = searchIPMacInArpTable(route.dstIp)
-	route.gatewayMac, _ = searchIPMacInArpTable(route.gateway)
-
-	if route.dstMac != nil || route.gatewayMac != nil {
-		return nil
-	}
-
-	// send arp pacet when dst arp not in arp table
 	// broadcast arp packet
 	ethernet := layers.Ethernet{
 		SrcMAC:       route.srcMac,
@@ -166,6 +168,11 @@ func (route *TargetRoute) sendArpPacket(dstIP net.IP) error {
 func (route *TargetRoute) sendSynPacket() error {
 	// send packet
 	cookie := generateCookie(route.srcIp, route.srcPort, route.dstIp, route.dstPort)
+
+	if route.dstMac == nil {
+		route.dstMac = route.gatewayMac
+	}
+
 	ethernet := layers.Ethernet{
 		SrcMAC:       route.srcMac,
 		DstMAC:       route.dstMac,

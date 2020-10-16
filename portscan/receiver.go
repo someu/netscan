@@ -10,11 +10,13 @@ import (
 )
 
 type Receiver struct {
+	ctx       context.Context
 	handleMap map[string]*pcap.Handle
 }
 
-func NewReceiver() *Receiver {
+func NewReceiver(ctx context.Context) *Receiver {
 	return &Receiver{
+		ctx:       ctx,
 		handleMap: make(map[string]*pcap.Handle),
 	}
 }
@@ -35,8 +37,10 @@ func (receiver *Receiver) startReceive(name string, handle *pcap.Handle, ctx con
 		for {
 			select {
 			case <-ctx.Done():
-				log.Println("receive timeout")
+				log.Println("receive exit")
 				return
+			default:
+				break
 			}
 
 			data, _, err := handle.ReadPacketData()
