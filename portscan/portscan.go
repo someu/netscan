@@ -53,8 +53,8 @@ func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) 
 			nsPerPacket = 1
 		}
 
-		var i uint = 0
-		for {
+		var i uint = 1
+		for ; ; i++ {
 			if !target.hasNext() {
 				break
 			}
@@ -67,11 +67,11 @@ func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) 
 			if err != nil {
 				log.Printf("send packet to %s:%d error %s\n", ip, port, err)
 			}
-			log.Printf("send packet to %s:%d \n", ip, port)
+
 			scanner.receiver.startReceive(route.iface.Name, route.handle, ctx)
 			time.Sleep(time.Duration(nsPerPacket) * time.Nanosecond)
 		}
-		log.Println("send all packet")
+		log.Println("send all packet", i)
 		// time out
 		timeout, _ := context.WithTimeout(ctx, config.Timeout)
 		<-timeout.Done()
@@ -98,7 +98,7 @@ func main() {
 	//ip := net.IP{122, 51, 121, 205}
 	//ports := []uint16{21, 22, 80, 8080, 443, 27017, 13443}
 
-	ipSegment, _ := parseIpSegment("122.51.0.0/16")
+	ipSegment, _ := parseIpSegment("113.160.0.218/16")
 	portSegment, _ := parsePortSegment("80")
 	target := NewTargetRange(
 		Segments{ipSegment}, Segments{portSegment},

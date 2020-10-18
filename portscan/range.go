@@ -76,8 +76,8 @@ type TargetRange struct {
 	totalCount     uint
 	prime          uint
 	primeRoot      uint
-	currentIndex   uint
-	currentInverse uint
+	currentIndex   uint // range of index is [0, totalCount - 1]
+	currentInverse uint // range of inverse is [1, totalCount]
 }
 
 func NewTargetRange(ipSegments Segments, portSegments Segments) *TargetRange {
@@ -97,6 +97,7 @@ func NewTargetRange(ipSegments Segments, portSegments Segments) *TargetRange {
 		if pr[0] >= totalCount {
 			prime = pr[0]
 			primeRoot = pr[1]
+			break
 		}
 	}
 
@@ -110,31 +111,36 @@ func NewTargetRange(ipSegments Segments, portSegments Segments) *TargetRange {
 		primeRoot:    primeRoot,
 	}
 
-	targetRange.setCurrent(0)
+	_ = targetRange.setCurrent(0)
 
 	return targetRange
 }
 
-func (r *TargetRange) setCurrent(current uint) {
-	var i uint
+func (r *TargetRange) setCurrent(current uint) error {
+	if current >= r.totalCount {
+		return errors.New("CurrentIndex is out of range in target ranger\n")
+	}
+	var i uint = 1
 	var inverse uint = 1
-	for i = 1; i < current; i++ {
+	for ; i <= current; i++ {
 		inverse = (inverse * r.primeRoot) % r.prime
 	}
 	r.currentIndex = current
-	// ensure the range of inverse is match the range of index
-	r.currentInverse = inverse - 1
+	r.currentInverse = inverse
+	return nil
 }
 
 func (r TargetRange) hasNext() bool {
 	return r.currentIndex < r.totalCount
 }
 
-func (r TargetRange) nextTarget() (net.IP, uint16, error) {
-	if r.currentIndex+1 >= r.totalCount {
+func (r *TargetRange) nextTarget() (net.IP, uint16, error) {
+	if r.currentIndex >= r.totalCount {
 		return nil, 0, errors.New("Index is out of range in target range\n")
 	}
-	var inverse = r.currentInverse
+	// ensure the range of inverse is match the range of index
+	var inverse = r.currentInverse - 1
+
 	// calc next inverse in cyclic group
 	for {
 		r.currentInverse = (r.currentInverse * r.primeRoot) % r.prime
