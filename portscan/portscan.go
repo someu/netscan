@@ -3,9 +3,21 @@ package main
 import (
 	"context"
 	"log"
-	"net"
 	"time"
 )
+
+type ScanConfig struct {
+	Timeout         time.Duration
+	PacketPerSecond uint
+}
+
+type Scan struct {
+	scanner *PortScanner
+	target  *TargetRange
+	config  *ScanConfig
+	cancel  context.CancelFunc
+	wait    func()
+}
 
 type PortScanner struct {
 	ctx            context.Context
@@ -30,15 +42,52 @@ func NewPortScanner() (*PortScanner, error) {
 	}, nil
 }
 
-func (scanner *PortScanner) Scan(ip net.IP, port uint16) error {
-	route, err := scanner.sender.send(ip, port)
-	if err != nil {
-		return err
+func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) *Scan {
+	ctx, cancel := context.WithCancel(context.Background())
+
+	go func() {
+		defer cancel()
+		// send a packet spend time, Nanosecond
+		nsPerPacket := 1000000000 / config.PacketPerSecond
+		if nsPerPacket == 0 {
+			nsPerPacket = 1
+		}
+
+		var i uint = 0
+		for {
+			if !target.hasNext() {
+				break
+			}
+			ip, port, err := target.nextTarget()
+			if err != nil {
+				log.Printf("get %d ip port error %s\n", i, err)
+				continue
+			}
+			route, err := scanner.sender.send(ip, port)
+			if err != nil {
+				log.Printf("send packet to %s:%d error %s\n", ip, port, err)
+			}
+			log.Printf("send packet to %s:%d \n", ip, port)
+			scanner.receiver.startReceive(route.iface.Name, route.handle, ctx)
+			time.Sleep(time.Duration(nsPerPacket) * time.Nanosecond)
+		}
+		log.Println("send all packet")
+		// time out
+		timeout, _ := context.WithTimeout(ctx, config.Timeout)
+		<-timeout.Done()
+	}()
+
+	wait := func() {
+		<-ctx.Done()
 	}
 
-	scanner.receiver.startReceive(route.iface.Name, route.handle, scanner.ctx)
-
-	return nil
+	return &Scan{
+		scanner: scanner,
+		target:  target,
+		config:  config,
+		cancel:  cancel,
+		wait:    wait,
+	}
 }
 
 func main() {
@@ -46,17 +95,25 @@ func main() {
 	if err != nil {
 		log.Fatalln("Create scanner error", err.Error())
 	}
-	ip := net.IP{10, 0, 8, 92}
-	ports := []uint16{21, 22, 80, 8080, 443, 27017, 13443}
-	for _, port := range ports {
-		err = scanner.Scan(ip, port)
-		if err != nil {
-			log.Printf("Scan %s:%d error %s", ip.String(), port, err.Error())
-		}
+	//ip := net.IP{122, 51, 121, 205}
+	//ports := []uint16{21, 22, 80, 8080, 443, 27017, 13443}
+
+	ipSegment, _ := parseIpSegment("122.51.0.0/16")
+	portSegment, _ := parsePortSegment("80")
+	target := NewTargetRange(
+		Segments{ipSegment}, Segments{portSegment},
+	)
+	conf := &ScanConfig{
+		Timeout:         time.Second * 10,
+		PacketPerSecond: 200,
 	}
-	log.Println("Send all")
-	time.Sleep(time.Second * 10)
-	scanner.cancel()
+
+	scan := scanner.CreateScan(target, conf)
+
+	log.Println("created scan")
+
+	scan.wait()
+
 	log.Println("finished")
 	time.Sleep(time.Second * 1)
 }
