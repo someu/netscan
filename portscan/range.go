@@ -1,4 +1,4 @@
-package main
+package portscan
 
 import (
 	"encoding/binary"
@@ -17,7 +17,7 @@ var (
 	CidrRe       = regexp.MustCompile(cidrReString)
 	ipReString   = fmt.Sprintf("^(%s\\.){3}%s$", ipSplice, ipSplice)
 	IPRe         = regexp.MustCompile(ipReString)
-	portReString = "(\\d{1,4}|5\\d{4}|6[0-4]\\d{3}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])"
+	portReString = "(\\d{1,4}|[1-5]\\d{4}|6[0-4]\\d{3}|65[0-4]\\d{2}|655[0-2]\\d|6553[0-5])"
 	PortRe       = regexp.MustCompile(fmt.Sprintf("^%s(-%s)?$", portReString, portReString))
 )
 
@@ -48,7 +48,7 @@ var PrimeRootTable = [][2]uint{
 	{4294967311, 3}, // 2^32 + 15
 }
 
-// number segment, range is [start, end), length is "end + 1 - start"
+// number segment, range is [start, end], length is "end + 1 - start"
 type Segment struct {
 	start  uint
 	end    uint
@@ -120,13 +120,17 @@ func (r *TargetRange) setCurrent(current uint) error {
 	if current >= r.totalCount {
 		return errors.New("CurrentIndex is out of range in target ranger\n")
 	}
-	var i uint = 1
+	var index uint = 1
 	var inverse uint = 1
-	for ; i <= current; i++ {
+	for index <= current {
 		inverse = (inverse * r.primeRoot) % r.prime
+		if inverse <= r.totalCount {
+			index++
+		}
 	}
-	r.currentIndex = current
+	r.currentIndex = index
 	r.currentInverse = inverse
+
 	return nil
 }
 
@@ -144,8 +148,8 @@ func (r *TargetRange) nextTarget() (net.IP, uint16, error) {
 	// calc next inverse in cyclic group
 	for {
 		r.currentInverse = (r.currentInverse * r.primeRoot) % r.prime
-		r.currentIndex++
 		if r.currentInverse <= r.totalCount {
+			r.currentIndex++
 			break
 		}
 	}
@@ -162,7 +166,7 @@ func (r *TargetRange) nextTarget() (net.IP, uint16, error) {
 	return longToIP(uint32(ipLong)), uint16(portLong), nil
 }
 
-func parseIpSegment(ipStr string) (*Segment, error) {
+func ParseIpSegment(ipStr string) (*Segment, error) {
 	if IPRe.MatchString(ipStr) {
 		ipLong := ipToLong(net.ParseIP(ipStr))
 		return &Segment{
@@ -174,7 +178,7 @@ func parseIpSegment(ipStr string) (*Segment, error) {
 		_, cidr, _ := net.ParseCIDR(ipStr)
 
 		start := uint(ipToLong(cidr.IP))
-		length := uint(^uint32(0) & ^binary.BigEndian.Uint32(cidr.Mask))
+		length := uint(^uint32(0) & ^binary.BigEndian.Uint32(cidr.Mask)) + 1
 
 		return &Segment{
 			start:  start,
@@ -185,7 +189,7 @@ func parseIpSegment(ipStr string) (*Segment, error) {
 	return nil, errors.New("ipStr is not in ip or cidr format")
 }
 
-func parsePortSegment(portStr string) (*Segment, error) {
+func ParsePortSegment(portStr string) (*Segment, error) {
 	if !PortRe.MatchString(portStr) {
 		return nil, errors.New("portStr is not in port format")
 	}

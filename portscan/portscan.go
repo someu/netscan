@@ -1,4 +1,4 @@
-package main
+package portscan
 
 import (
 	"context"
@@ -12,11 +12,11 @@ type ScanConfig struct {
 }
 
 type Scan struct {
-	scanner *PortScanner
-	target  *TargetRange
-	config  *ScanConfig
-	cancel  context.CancelFunc
-	wait    func()
+	Scanner *PortScanner
+	Target  *TargetRange
+	Config  *ScanConfig
+	Cancel  context.CancelFunc
+	Wait    func()
 }
 
 type PortScanner struct {
@@ -82,38 +82,10 @@ func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) 
 	}
 
 	return &Scan{
-		scanner: scanner,
-		target:  target,
-		config:  config,
-		cancel:  cancel,
-		wait:    wait,
+		Scanner: scanner,
+		Target:  target,
+		Config:  config,
+		Cancel:  cancel,
+		Wait:    wait,
 	}
-}
-
-func main() {
-	scanner, err := NewPortScanner()
-	if err != nil {
-		log.Fatalln("Create scanner error", err.Error())
-	}
-	//ip := net.IP{122, 51, 121, 205}
-	//ports := []uint16{21, 22, 80, 8080, 443, 27017, 13443}
-
-	ipSegment, _ := parseIpSegment("113.160.0.218/16")
-	portSegment, _ := parsePortSegment("80")
-	target := NewTargetRange(
-		Segments{ipSegment}, Segments{portSegment},
-	)
-	conf := &ScanConfig{
-		Timeout:         time.Second * 10,
-		PacketPerSecond: 200,
-	}
-
-	scan := scanner.CreateScan(target, conf)
-
-	log.Println("created scan")
-
-	scan.wait()
-
-	log.Println("finished")
-	time.Sleep(time.Second * 1)
 }
