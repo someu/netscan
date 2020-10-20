@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#go run cmd/* scan -i 113.160.0.0/24 -p 80
+CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o build/portscan portscan/cli/cli.go
+CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -o build/portscan.exe portscan/cli/cli.go
 
-rm build/* -rf
-
-cp -r sources build
-go build -o build/fakescan cmd/*
-go build -o build/fakescan_server server/*
