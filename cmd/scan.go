@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fakescan/scanner"
 	"fmt"
 	"github.com/spf13/cobra"
 	"io/ioutil"
 	"log"
+	"netscan/appscan"
 	"os"
 	"strings"
 	"time"
@@ -69,7 +69,7 @@ var scanCmd = &cobra.Command{
 			if inputContent, err = ioutil.ReadAll(inputFile); err != nil {
 				log.Fatalf("Read input file failed, %s", err.Error())
 			}
-			ips = append(ips, scanner.ParseMassScanResult(string(inputContent))...)
+			ips = append(ips, appscan.ParseMassScanResult(string(inputContent))...)
 		}
 
 		ports := strings.Split(port, ",")
@@ -82,7 +82,7 @@ var scanCmd = &cobra.Command{
 		log.Println("Start scan", ip, port)
 
 		var i int
-		wg := globalScanner.Scan(ips, ports, func(result *scanner.MatchedResult) {
+		wg := globalScanner.Scan(ips, ports, func(result *appscan.MatchedResult) {
 			var appsStr string
 			for _, app := range result.Apps {
 				appsStr += strings.TrimSpace(fmt.Sprintf("%s %s, ", app.Name, strings.Join(app.Versions, ", ")))

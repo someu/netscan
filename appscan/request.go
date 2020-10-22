@@ -1,12 +1,12 @@
-package scanner
+package appscan
 
 import (
 	"crypto/tls"
-	"fakescan/util"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"netscan/util"
 	"regexp"
 	"strings"
 	"time"

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/fakescan.iml" filepath="$PROJECT_DIR$/.idea/fakescan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/netscan.iml" filepath="$PROJECT_DIR$/.idea/netscan.iml" />
     </modules>
   </component>
 </project>

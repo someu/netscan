@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fakescan/scanner"
 	"github.com/spf13/cobra"
 	"log"
+	"netscan/appscan"
 )
 
-var globalScanner = scanner.NewScanner()
+var globalScanner = appscan.NewScanner()
 
 var rootCmd = &cobra.Command{
-	Use:   "fakescan",
-	Short: "FakeScan is a web scanner",
+	Use:   "netscan",
+	Short: "netscan is a web scanner",
 	Run: func(cmd *cobra.Command, args []string) {
 		cmd.Help()
 	},

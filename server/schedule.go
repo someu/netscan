@@ -2,13 +2,12 @@ package main
 
 import (
 	"context"
-	"fakescan/scanner"
-	"log"
+	"netscan/appscan"
 	"time"
 )
 
 type Scheduler struct {
-	scanner *scanner.Scanner
+	scanner *appscan.Scanner
 }
 
 func (s *Scheduler) SetConcurrent(c int) int {
@@ -19,7 +18,7 @@ func (s *Scheduler) SetConcurrent(c int) int {
 }
 
 func (s *Scheduler) CreateScan(scan Scan) {
-	s.scanner.Scan(scan.Ip, scan.Port, func(result *scanner.MatchedResult) {
+	s.scanner.Scan(scan.Ip, scan.Port, func(result *appscan.MatchedResult) {
 		var apps []string
 		for _, app := range result.Apps {
 			apps = append(apps, app.Name)

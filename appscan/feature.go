@@ -1,4 +1,4 @@
-package scanner
+package appscan
 
 import (
 	"log"

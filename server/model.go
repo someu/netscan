@@ -1,13 +1,12 @@
 package main
 
 import (
-	"fakescan/scanner"
 	"time"
 )
 
 type Asset struct {
 	Address   string
-	Fingers   []*scanner.MatchedApp
+	Fingers   []*appscan.MatchedApp
 	CreatedAt time.Time
 }
 

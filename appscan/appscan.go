@@ -1,12 +1,12 @@
-package scanner
+package appscan
 
 import (
 	"encoding/json"
-	"fakescan/util"
 	"fmt"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/panjf2000/ants/v2"
 	"log"
+	"netscan/util"
 	"reflect"
 	"regexp"
 	"strings"

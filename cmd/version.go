@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fakescan/scanner"
 	"fmt"
 	"github.com/spf13/cobra"
+	"netscan/appscan"
 )
 
 var versionCmd = &cobra.Command{
@@ -11,7 +11,7 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version",
 	Long:  `Print the version`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(fmt.Sprintf("FakeScan %s", scanner.Version))
+		fmt.Println(fmt.Sprintf("FakeScan %s", appscan.Version))
 	},
 }
 
