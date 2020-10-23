@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func checkPrime(prime uint, root uint) {
 	var inverse uint = 1
@@ -17,7 +19,10 @@ func checkPrime(prime uint, root uint) {
 	}
 }
 
+
+
+
+
 func main() {
-	New()
 
 }

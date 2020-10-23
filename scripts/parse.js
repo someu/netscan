@@ -497,11 +497,10 @@ function main() {
     t.rules.forEach((rule) => {
       [rule.headerField, rule.metaTag, rule.cookieField].forEach((g) => {
         if (g) {
-          for(let k in g){
-            v = g[k]
-            delete g[k]
-            g[k.toLowerCase()] = v
-            
+          for (let k in g) {
+            v = g[k];
+            delete g[k];
+            g[k.toLowerCase()] = v;
           }
         }
       });
@@ -519,6 +518,94 @@ function main() {
       null,
       2
     )
+  );
+
+  function keyToUpperCase(target) {
+    if (target instanceof Object) {
+      if (Array.isArray(target)) {
+        return target.map(keyToUpperCase);
+      } else {
+        const newTarget = {};
+        for (let key in target) {
+          if (target[key] instanceof Rule) {
+            newTarget[key] = keyToUpperCase(target[key]);
+          } else {
+            newTarget[key[0].toUpperCase() + key.slice(1)] = keyToUpperCase(
+              target[key]
+            );
+          }
+        }
+        return newTarget;
+      }
+    } else {
+      return target;
+    }
+  }
+
+  function toString(target, parentKey, isFeatureRuleItem) {
+    let res;
+    let isFeatureRuleItems
+    if (target instanceof Object) {
+      if (Array.isArray(target)) {
+        res = `{\n${target.map(i=>(toString(i))).join(",\n")},\n}`;
+      } else {
+        res = `{\n${Object.keys(target)
+          .map((key) => {
+            let rkey = key;
+            if (["MetaTag", "HeaderField", "CookieField"].includes(parentKey)) {
+              rkey = `"${key}"`;
+              isFeatureRuleItems = true
+            }
+            return `${rkey}:${toString(target[key], key, isFeatureRuleItems)},`;
+          })
+          .join("\n")}\n}`;
+      }
+    } else {
+      res = `${JSON.stringify(target)}`;
+    }
+
+    const ArrKeys = [
+      "Title",
+      "Header",
+      "Cookie",
+       
+      "Body",
+    ];
+    const MapKeys = [
+      "MetaTag",
+      "HeaderField",
+      "CookieField",
+    ]
+
+    if (ArrKeys.includes(parentKey)) {
+      return `[]*FeatureRuleItem${res}`
+    }else if(MapKeys.includes(parentKey)){
+      return `map[string][]*FeatureRuleItem${res}`
+    }else if ("Rules" === parentKey){
+      return `[]*FeatureRule${res}`
+    }else if("Version" === parentKey){
+      return `&FeatureVersion${res}`
+    }else if (isFeatureRuleItems){
+      return `[]*FeatureRuleItem\n${res},\n`
+    }else if (isFeatureRuleItem){
+      return  `&FeatureRuleItem${res}`
+    }
+
+    return res;
+  }
+
+  const features = ta.map((i) => {
+    delete i.from;
+    return i;
+  });
+
+  const formatedFeatures = keyToUpperCase(features);
+
+  fs.writeFileSync(
+    "../appscan/source.go",
+    `package appscan
+  
+  var features = []*Feature${toString(formatedFeatures, "")}`
   );
 
   console.log(`app> ${ta.length}`);

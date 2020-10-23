@@ -2,32 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12abc5c1-8791-41d6-beec-3880ae763d45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/appscan/source.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/route.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/fakescan.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/scan.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/scan.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/version.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/version.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scanner/appscan.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scanner/feature.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scanner/masscan.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scanner/portscan.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scanner/request.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/model.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/model.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/schedule.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/schedule.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appscan/feature.go" beforeDir="false" afterPath="$PROJECT_DIR$/appscan/feature.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appscan/portscan.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/appscan/source.go" beforeDir="false" afterPath="$PROJECT_DIR$/appscan/source.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/parse.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/parse.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
   <component name="Git.Settings">
@@ -42,6 +34,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -50,6 +43,22 @@
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="go build netscan/test" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="netscan" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/test/test.go" />
+      <package value="netscan/test" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build netscan/test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
@@ -62,5 +71,21 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="478" y="233" width="400" height="327" key="#Go_Modules/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1603332824150" />
+    <state width="1312" height="171" key="GridCell.Tab.0.bottom" timestamp="1603337164187">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1312" height="171" key="GridCell.Tab.0.bottom/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1603337164187" />
+    <state width="1312" height="171" key="GridCell.Tab.0.center" timestamp="1603337164186">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1312" height="171" key="GridCell.Tab.0.center/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1603337164186" />
+    <state width="1312" height="171" key="GridCell.Tab.0.left" timestamp="1603337164186">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1312" height="171" key="GridCell.Tab.0.left/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1603337164186" />
+    <state width="1312" height="171" key="GridCell.Tab.0.right" timestamp="1603337164187">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1312" height="171" key="GridCell.Tab.0.right/0.27.1366.741/1366.0.1920.1080@0.27.1366.741" timestamp="1603337164187" />
   </component>
 </project>

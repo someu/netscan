@@ -44,7 +44,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"PHPWind [v]?([^\"^\\(]+)(\\([\\d]+\\))?\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"PHPWind [v]?([^\"^\\(]+)(\\([\\d]+\\))?\" \\/>",
 						},
 					},
@@ -53,7 +53,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.phpwind.net\\/\" target=\"_blank\"><b>PHPWind<\\/b><\\/a>[\\s]*<a href=\"http:\\/\\/www.phpwind.net\\/\" target=\"_blank\"><b style=\"color:#FF9900\">v([\\d\\.]+)<\\/b><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.phpwind.net\\/\" target=\"_blank\"><b>PHPWind<\\/b><\\/a>[\\s]*<a href=\"http:\\/\\/www.phpwind.net\\/\" target=\"_blank\"><b style=\"color:#FF9900\">v([\\d\\.]+)<\\/b><\\/a>",
 						},
 					},
@@ -70,9 +70,9 @@ var features = []*Feature{
 			{
 				Name: "WordPress",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^WordPress ?([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -164,9 +164,9 @@ var features = []*Feature{
 			{
 				Name: "Joomla",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Joomla!(?: ([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -180,9 +180,9 @@ var features = []*Feature{
 			{
 				Name: "Drupal",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Drupal(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -193,7 +193,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^SESS[a-z0-9]{32}=[a-z0-9]{32}",
 						},
@@ -204,7 +204,7 @@ var features = []*Feature{
 							Regexp: "mobileplugin_group=",
 						},
 					},
-					"X-drupal-cache": &FeatureRuleItem{
+					"X-drupal-cache": {
 						{
 							Regexp: "(HIT|MISS)",
 						},
@@ -251,9 +251,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^phpwind(?: v([0-9-]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -371,7 +371,7 @@ var features = []*Feature{
 			{
 				Name: "Zabbix",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "ZABBIX SIA",
 					},
 				},
@@ -582,7 +582,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "DotNetNukeAnonymous=",
 						},
@@ -750,10 +750,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Eudemon Server ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Eudemon Server ([^\\s]+)$",
 							},
 						},
@@ -768,25 +768,25 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Canon Http Server",
 						},
 						{
 							Regexp: "^Canon Http Server (Ver)?(.*)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Canon Http Server (Ver)?(.*)",
 							},
 						},
 						{
 							Regexp: "^KS_HTTP\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^KS_HTTP\\/([^\\s]+)",
 							},
 						},
 						{
 							Regexp: "^LPC Http Server\\/V([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^LPC Http Server\\/V([^\\s]+)",
 							},
 						},
@@ -801,15 +801,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CUPS\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CUPS\\/([^\\s]+)$",
 							},
 						},
 					},
-					"Upgrade": &FeatureRuleItem{
+					"Upgrade": {
 						{
 							Regexp: "^TLS\\/1\\.0,HTTP\\/1\\.1$",
 						},
@@ -848,7 +848,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "EPSON-HTTP",
 						},
@@ -930,26 +930,26 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CrushFTP ",
 						},
 						{
 							Regexp: "^CrushFTP (HTTP[\\d]? Server )?Version ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CrushFTP (HTTP[\\d]? Server )?Version ([\\d\\.]+)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^CrushAuth=",
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"CrushFTP Server Version ([\\d\\.]+)\"$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Basic realm=\"CrushFTP Server Version ([\\d\\.]+)\"$",
 							},
 						},
@@ -1108,10 +1108,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^HyNetOS\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^HyNetOS\\/([^\\s]+)$",
 							},
 						},
@@ -1425,10 +1425,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Ben-SSL\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Ben-SSL\\/([\\d\\.]+)",
 							},
 						},
@@ -1498,13 +1498,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^BlackJumboDog$",
 						},
 						{
 							Regexp: "^BlackJumboDog Version (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^BlackJumboDog Version (.+)$",
 							},
 						},
@@ -1524,7 +1524,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "CerberusPublicGUI=[a-f\\d]{32};",
 						},
@@ -1550,16 +1550,16 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Conexant-EmWeb\\/([^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Conexant-EmWeb\\/([^\\r^\\n]+)",
 							},
 						},
 						{
 							Regexp: "Virata-EmWeb\\/([^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Virata-EmWeb\\/([^\\r^\\n]+)",
 							},
 						},
@@ -1605,7 +1605,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Deluge: Web UI ([^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Deluge: Web UI ([^<]+)<\\/title>",
 						},
 					},
@@ -1667,15 +1667,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-wf-1-plugin-1": &FeatureRuleItem{
+					"X-wf-1-plugin-1": {
 						{
 							Regexp: "^http:\\/\\/meta\\.firephp\\.org\\/Wildfire\\/Plugin\\/FirePHP\\/Library-FirePHPCore\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^http:\\/\\/meta\\.firephp\\.org\\/Wildfire\\/Plugin\\/FirePHP\\/Library-FirePHPCore\\/([^\\s]+)$",
 							},
 						},
 					},
-					"X-wf-protocol-1": &FeatureRuleItem{
+					"X-wf-protocol-1": {
 						{
 							Regexp: "^http:\\/\\/meta\\.wildfirehq\\.org\\/Protocol\\/",
 						},
@@ -1698,10 +1698,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Geobytes-GeoSelect\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Geobytes-GeoSelect\\/([\\d\\.]+)",
 							},
 						},
@@ -1841,12 +1841,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Varnish$",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ENUnique",
 						},
@@ -1888,23 +1888,23 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "[^\\r^\\n]*PHP\\/([^\\s^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[^\\r^\\n]*PHP\\/([^\\s^\\r^\\n]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "[^\\r^\\n]*PHP\\/([^\\s^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[^\\r^\\n]*PHP\\/([^\\s^\\r^\\n]+)",
 							},
 						},
 					},
-					"Php": &FeatureRuleItem{
+					"Php": {
 						{
 							Regexp: "^Error parsing (.+) on line [\\d]+$",
 						},
@@ -2479,7 +2479,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Swiftlet",
 					},
 				},
@@ -2499,7 +2499,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<input[^>]+name=\"ci_csrf_token\"",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "2+",
 						},
 					},
@@ -2518,12 +2518,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Page-completion-status": &FeatureRuleItem{
+					"Page-completion-status": {
 						{
 							Regexp: "(Abnormal|Normal)",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "CFAUTHORIZATION_cfadmin=",
 						},
@@ -2546,12 +2546,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WSGIServer\\/[^\\s]+ Python\\/[^\\s]+$",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "csrftoken",
 						},
@@ -2599,10 +2599,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Play! Framework;(\\d[^\\s^;]+;[^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Play! Framework;(\\d[^\\s^;]+;[^\\s]+)$",
 							},
 						},
@@ -2617,10 +2617,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Restlet-Framework\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Restlet-Framework\\/([^\\s]+)$",
 							},
 						},
@@ -2683,10 +2683,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-cocoon-version": &FeatureRuleItem{
+					"X-cocoon-version": {
 						{
 							Regexp: "^(.*)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.*)$",
 							},
 						},
@@ -2709,22 +2709,22 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WebLogic( WebLogic)?( Server)? (.+)  [\\d]{2}\\/[\\d]{2}\\/[\\d]{4}",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebLogic( WebLogic)?( Server)? (.+)  [\\d]{2}\\/[\\d]{2}\\/[\\d]{4}",
 							},
 						},
 						{
 							Regexp: "^WebLogic WebLogic (Temporary .+) [\\d]{2}\\/[\\d]{2}\\/[\\d]{4}",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebLogic WebLogic (Temporary .+) [\\d]{2}\\/[\\d]{2}\\/[\\d]{4}",
 							},
 						},
 						{
 							Regexp: "^WebLogic Server (.+) [A-Z][a-z]{2} [A-Z][a-z]{2} [\\d]{1,2} [\\d]{2}:[\\d]{2}:[\\d]{2}",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebLogic Server (.+) [A-Z][a-z]{2} [A-Z][a-z]{2} [\\d]{1,2} [\\d]{2}:[\\d]{2}:[\\d]{2}",
 							},
 						},
@@ -2739,24 +2739,24 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "BlueDragon Server (JXAS|JX)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "BlueDragon Server (JXAS|JX)",
 							},
 						},
 						{
 							Regexp: "BlueDragon Server( JXAS| JX)?(\\/| )([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "BlueDragon Server( JXAS| JX)?(\\/| )([\\d\\.]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "BlueDragon Server\\/([^\\s^,]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "BlueDragon Server\\/([^\\s^,]+)",
 							},
 						},
@@ -2771,7 +2771,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ci_session",
 						},
@@ -2839,10 +2839,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "FrontPage\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "FrontPage\\/([^\\s]+)",
 							},
 						},
@@ -2905,19 +2905,19 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Karrigell",
 						},
 						{
 							Regexp: "^Karrigell\\/([^\\s]+) ",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Karrigell\\/([^\\s]+) ",
 							},
 						},
 						{
 							Regexp: "^Karrigell ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Karrigell ([^\\s]+)$",
 							},
 						},
@@ -3212,13 +3212,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "OpenSSL",
 						},
 						{
 							Regexp: "[^\\r^\\n]*OpenSSL\\/([^\\s^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[^\\r^\\n]*OpenSSL\\/([^\\s^\\r^\\n]+)",
 							},
 						},
@@ -3352,9 +3352,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Amaya(?: V?([\\d.]+[a-z]))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -4381,7 +4381,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"APC Management Card\"$",
 						},
@@ -4441,7 +4441,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"P3p": &FeatureRuleItem{
+					"P3p": {
 						{
 							Regexp: "CP=\"NOI CUR OUR IND UNI COM NAV INT\"",
 						},
@@ -4527,7 +4527,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Bentley.WebSession=",
 						},
@@ -4542,7 +4542,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "BNI__BARRACUDA_LB_COOKIE",
 						},
@@ -4560,7 +4560,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "BACKUP_LOCAL_LOCALE=",
 						},
@@ -4583,12 +4583,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"(Backup Admin|BackupPC admin|backuppc)\"",
 						},
 					},
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "\\/cgi-bin\\/BackupPC_Admin$",
 						},
@@ -4616,10 +4616,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SecureTransport\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SecureTransport\\/([^\\s]+)",
 							},
 						},
@@ -4679,10 +4679,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Avocent DSView [\\d]\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Avocent DSView [\\d]\\/([^\\s]+)$",
 							},
 						},
@@ -4702,10 +4702,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IPOffice\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IPOffice\\/([^\\s]+)$",
 							},
 						},
@@ -4717,7 +4717,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>About IP Office ([^\\s^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>About IP Office ([^\\s^<]+)<\\/title>",
 						},
 					},
@@ -4832,13 +4832,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>(BMC&nbsp;)?Remedy&nbsp;Mid&nbsp;Tier&nbsp;([^\\s]+) - (Error page|Login)<\\/title><!--;-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>(BMC&nbsp;)?Remedy&nbsp;Mid&nbsp;Tier&nbsp;([^\\s]+) - (Error page|Login)<\\/title><!--;-->",
 						},
 					},
 					{
 						Regexp: "<title>(BMC )?Remedy Mid Tier ([^\\s]+) - (Error page|Login)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>(BMC )?Remedy Mid Tier ([^\\s]+) - (Error page|Login)<\\/title>",
 						},
 					},
@@ -4852,7 +4852,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "https?:\\/\\/proxysg\\/\\?cfru=[^\\s]+$",
 						},
@@ -4867,10 +4867,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^bkhttp\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^bkhttp\\/([^\\s]+)$",
 							},
 						},
@@ -4898,18 +4898,18 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Via": &FeatureRuleItem{
+					"Via": {
 						{
 							Regexp: "NS\\-CACHE",
 						},
 						{
 							Regexp: "NS\\-CACHE\\-(\\d{1,4}\\.\\d{1,4}):",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "NS\\-CACHE\\-(\\d{1,4}\\.\\d{1,4}):",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^NSC_",
 						},
@@ -4932,10 +4932,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^confproxy\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^confproxy\\/([\\d\\.]+)",
 							},
 						},
@@ -5051,13 +5051,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CIMPLICITY-HttpSvr",
 						},
 						{
 							Regexp: "^CIMPLICITY-HttpSvr\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CIMPLICITY-HttpSvr\\/([\\d\\.]+)",
 							},
 						},
@@ -5085,10 +5085,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CarelDataServer\\/([\\d\\.]{1,10})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CarelDataServer\\/([\\d\\.]{1,10})",
 							},
 						},
@@ -5129,7 +5129,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Calypso ION8r Device",
 						},
@@ -5189,10 +5189,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[Dd]ebut\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[Dd]ebut\\/([\\d\\.]+)$",
 							},
 						},
@@ -5255,7 +5255,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www\\.atlassian\\.com\\/software\\/confluence\"[^>]*>Atlassian Confluence<\\/a> ([\\d\\._]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www\\.atlassian\\.com\\/software\\/confluence\"[^>]*>Atlassian Confluence<\\/a> ([\\d\\._]+)",
 						},
 					},
@@ -5269,10 +5269,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CommuniGatePro\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CommuniGatePro\\/([^\\s]+)$",
 							},
 						},
@@ -5287,7 +5287,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CoyotePoint",
 						},
@@ -5318,10 +5318,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Cybozu-WS\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Cybozu-WS\\/([^\\s]+)$",
 							},
 						},
@@ -5373,12 +5373,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RemObjects DXSock Web Server",
 						},
 					},
-					"User-agent": &FeatureRuleItem{
+					"User-agent": {
 						{
 							Regexp: "^RemObjects SDK$",
 						},
@@ -5427,7 +5427,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^EIG Embedded Web Server$",
 						},
@@ -5458,10 +5458,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Content Interface Corp - enVision ([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Content Interface Corp - enVision ([^\\s]+)",
 							},
 						},
@@ -5615,10 +5615,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Hybrid Cluster\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Hybrid Cluster\\/([^\\s]+)$",
 							},
 						},
@@ -5704,7 +5704,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "OrientDB",
 						},
@@ -5735,10 +5735,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IdeaWebServer\\/v([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IdeaWebServer\\/v([\\d\\.]+)$",
 							},
 						},
@@ -5753,10 +5753,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Intrinsyc deviceWEB v([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Intrinsyc deviceWEB v([\\d\\.]+)$",
 							},
 						},
@@ -5779,10 +5779,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Inktomi Search ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Inktomi Search ([^\\s]+)$",
 							},
 						},
@@ -5818,10 +5818,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-accelerated-by": &FeatureRuleItem{
+					"X-accelerated-by": {
 						{
 							Regexp: "^[\\s]*PHPA\\/([^\\r^\\n]*)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*PHPA\\/([^\\r^\\n]*)",
 							},
 						},
@@ -5841,7 +5841,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Couchbase",
 						},
@@ -6013,9 +6013,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Bugzilla ?([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -6065,46 +6065,46 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<span class=\"jenkins_ver\"><a href=\"https://jenkins\\.io/\">Jenkins ver\\. ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-hudson-theme": &FeatureRuleItem{
+					"X-hudson-theme": {
 						{
 							Regexp: "^.*$",
 						},
 					},
-					"X-instance-identity": &FeatureRuleItem{
+					"X-instance-identity": {
 						{
 							Regexp: "^.*$",
 						},
 					},
-					"X-hudson-cli-port": &FeatureRuleItem{
+					"X-hudson-cli-port": {
 						{
 							Regexp: "^.*$",
 						},
 					},
-					"X-jenkins": &FeatureRuleItem{
+					"X-jenkins": {
 						{
 							Regexp: "^(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.+)$",
 							},
 						},
 					},
-					"X-hudson": &FeatureRuleItem{
+					"X-hudson": {
 						{
 							Regexp: "^.*$",
 						},
 					},
-					"X-jenkins-cli-port": &FeatureRuleItem{
+					"X-jenkins-cli-port": {
 						{
 							Regexp: "^.*$",
 						},
 					},
-					"X-ssh-endpoint": &FeatureRuleItem{
+					"X-ssh-endpoint": {
 						{
 							Regexp: "^.*$",
 						},
@@ -6226,10 +6226,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Dart WebServer Tool\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Dart WebServer Tool\\/([\\d\\.]+)$",
 							},
 						},
@@ -6273,7 +6273,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_gitorious_sess=[^-]+--[^;]+; domain=",
 						},
@@ -6561,10 +6561,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Blazix Java Server ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Blazix Java Server ([^\\s]+)$",
 							},
 						},
@@ -6587,10 +6587,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^David-WebBox\\/([^\\s]+ \\([^\\)]+\\))$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^David-WebBox\\/([^\\s]+ \\([^\\)]+\\))$",
 							},
 						},
@@ -6605,10 +6605,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "DataflexViNE-Webserver\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "DataflexViNE-Webserver\\/([\\d\\.]+)",
 							},
 						},
@@ -6639,18 +6639,18 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-dellkace-version": &FeatureRuleItem{
+					"X-dellkace-version": {
 						{
 							Regexp: "^(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.+)$",
 							},
 						},
 					},
-					"X-kbox-version": &FeatureRuleItem{
+					"X-kbox-version": {
 						{
 							Regexp: "^(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.+)$",
 							},
 						},
@@ -6690,18 +6690,18 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Enhydra-MultiServer\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Enhydra-MultiServer\\/([^\\s]+)",
 							},
 						},
 					},
-					"Servlet-engine": &FeatureRuleItem{
+					"Servlet-engine": {
 						{
 							Regexp: "Enhydra Application Server\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Enhydra Application Server\\/([^\\s]+)",
 							},
 						},
@@ -6724,13 +6724,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^FileMakerPro",
 						},
 						{
 							Regexp: "^FileMakerPro\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^FileMakerPro\\/([^\\s]+)",
 							},
 						},
@@ -6803,15 +6803,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Compaq-HMMD=",
 						},
 					},
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "CompaqHTTPServer\\/[^\\s]+ HP System Management Homepage\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "CompaqHTTPServer\\/[^\\s]+ HP System Management Homepage\\/([\\d\\.]+)$",
 							},
 						},
@@ -6844,10 +6844,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IBM-PROXY-WTE\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IBM-PROXY-WTE\\/([^\\s]+)",
 							},
 						},
@@ -6862,10 +6862,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IBM Internet Connection Server\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IBM Internet Connection Server\\/([^\\s]+)$",
 							},
 						},
@@ -6901,13 +6901,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Internet Cluster Manager",
 						},
 						{
 							Regexp: "^Internet Cluster Manager Ver\\. ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Internet Cluster Manager Ver\\. ([^\\s]+)$",
 							},
 						},
@@ -6973,13 +6973,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Jigsaw",
 						},
 						{
 							Regexp: "^Jigsaw\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Jigsaw\\/([^\\s]+)$",
 							},
 						},
@@ -7348,13 +7348,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^FortiWeb$",
 						},
 						{
 							Regexp: "^FortiWeb-([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^FortiWeb-([\\d\\.]+)$",
 							},
 						},
@@ -7416,15 +7416,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ntop\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ntop\\/([^\\s]+)",
 							},
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"NTOP\"",
 						},
@@ -7489,7 +7489,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-app-name": &FeatureRuleItem{
+					"X-app-name": {
 						{
 							Regexp: "^kibana$",
 						},
@@ -7937,10 +7937,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^HASP LM\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^HASP LM\\/([^\\s]+)$",
 							},
 						},
@@ -7955,7 +7955,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "\\.\\/broadWeb\\/bwviewpg\\.asp\\?proj=",
 						},
@@ -8207,7 +8207,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "AvantFAX=[a-z\\d]{26}; path=\\/",
 						},
@@ -8256,20 +8256,20 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CAStor Cluster\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CAStor Cluster\\/([^\\s]+)$",
 							},
 						},
 					},
-					"Castor-system-totalgbavailable": &FeatureRuleItem{
+					"Castor-system-totalgbavailable": {
 						{
 							Regexp: "^[\\d]+$",
 						},
 					},
-					"Castor-system-totalgbcapacity": &FeatureRuleItem{
+					"Castor-system-totalgbcapacity": {
 						{
 							Regexp: "^[\\d]+$",
 						},
@@ -8313,7 +8313,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Adaptive Security Appliance HTTP\\/1\\.1$",
 						},
@@ -8341,7 +8341,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_chiliproject_session=",
 						},
@@ -8382,10 +8382,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[Dd]ebut\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[Dd]ebut\\/([\\d\\.]+)$",
 							},
 						},
@@ -8405,7 +8405,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "UPS_Server/1.0",
 						},
@@ -8425,7 +8425,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/cpassman.org[\\/]?\" target=\"_blank\">cPassMan<\\/a> ([^\\ ]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/cpassman.org[\\/]?\" target=\"_blank\">cPassMan<\\/a> ([^\\ ]+)",
 						},
 					},
@@ -8442,10 +8442,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^darkstat\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^darkstat\\/([^\\s]+)$",
 							},
 						},
@@ -8454,13 +8454,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<li class=\"label\">darkstat ([^\\s^<]+)<\\/li><li><a href=\"[^\"]+\">graphs<\\/a><\\/li>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<li class=\"label\">darkstat ([^\\s^<]+)<\\/li><li><a href=\"[^\"]+\">graphs<\\/a><\\/li>",
 						},
 					},
 					{
 						Regexp: "<title>darkstat ([^\\s]+) : graphs ([^\\s^\\)]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>darkstat ([^\\s]+) : graphs ([^\\s^\\)]+)<\\/title>",
 						},
 					},
@@ -8482,10 +8482,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Data ONTAP\\/\\/?([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Data ONTAP\\/\\/?([^\\s]+)$",
 							},
 						},
@@ -8495,7 +8495,7 @@ var features = []*Feature{
 			{
 				Name: "splunk",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Splunkd",
 						},
@@ -8520,7 +8520,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "DRWEB_PERSONAL_OFFICE=[^;]*;",
 						},
@@ -8557,12 +8557,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_diaspora_session=",
 						},
 					},
-					"X-git-revision": &FeatureRuleItem{
+					"X-git-revision": {
 						{
 							Regexp: "^[a-f\\d]{32}$",
 						},
@@ -8587,7 +8587,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RAC_ONE_HTTP ([\\d\\.]+)$",
 						},
@@ -8610,7 +8610,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^eSyndiCat ",
 					},
 				},
@@ -8657,7 +8657,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "https?:\\/\\/[^\\/]+\\/account\\/login\\/\\?next=\\/",
 						},
@@ -8677,7 +8677,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^fexsrv$",
 						},
@@ -8708,7 +8708,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ethProxy$",
 						},
@@ -8736,12 +8736,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^GSE$",
 						},
 					},
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "^\\/EnterpriseController",
 						},
@@ -8762,7 +8762,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<\\/font>[\\s]+<br><br>[\\s]+<font face=\"arial,sans-serif\">System Version:[\\s]+([^\\s]+)[\\s]+<\\/font>[\\s]+<br><br>[\\s]+<font face=\"arial,sans-serif\">Appliance ID:",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<\\/font>[\\s]+<br><br>[\\s]+<font face=\"arial,sans-serif\">System Version:[\\s]+([^\\s]+)[\\s]+<\\/font>[\\s]+<br><br>[\\s]+<font face=\"arial,sans-serif\">Appliance ID:",
 						},
 					},
@@ -8789,7 +8789,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "groupoffice=[^;]+;",
 						},
@@ -8817,19 +8817,19 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Grandstream",
 						},
 						{
 							Regexp: "^Grandstream [^\\s]+ ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Grandstream [^\\s]+ ([\\d\\.]+)$",
 							},
 						},
 						{
 							Regexp: "^Grandstream\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Grandstream\\/([\\d\\.]+)$",
 							},
 						},
@@ -8860,10 +8860,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IBM_CICS_Transaction_Server\\/([^\\(]+)\\(zOS\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IBM_CICS_Transaction_Server\\/([^\\(]+)\\(zOS\\)$",
 							},
 						},
@@ -8944,7 +8944,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "IPEER=[^;]+;",
 						},
@@ -8972,7 +8972,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "SWIFT_client",
 						},
@@ -9000,12 +9000,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-jsl": &FeatureRuleItem{
+					"X-jsl": {
 						{
 							Regexp: "^D=[\\d]+ t=[\\d]+$",
 						},
 					},
-					"X-jal": &FeatureRuleItem{
+					"X-jal": {
 						{
 							Regexp: "^[\\d]+$",
 						},
@@ -9106,7 +9106,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "=\"AkamaiGHost",
 						},
@@ -9327,10 +9327,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^EdgePrism\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^EdgePrism\\/([^\\s]+)$",
 							},
 						},
@@ -9396,13 +9396,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^nginx$",
 						},
 						{
 							Regexp: "^nginx\\/([^\\s]+).*$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^nginx\\/([^\\s]+).*$",
 							},
 						},
@@ -9449,13 +9449,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Microsoft-HTTPAPI",
 						},
 						{
 							Regexp: "Microsoft-HTTPAPI\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Microsoft-HTTPAPI\\/(.+)$",
 							},
 						},
@@ -9486,19 +9486,19 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Resin",
 						},
 						{
 							Regexp: "^Resin\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Resin\\/([^\\s]+)",
 							},
 						},
 						{
 							Regexp: "[\\s]+Resin\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]+Resin\\/([^\\s]+)",
 							},
 						},
@@ -9513,13 +9513,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Netscape-Enterprise",
 						},
 						{
 							Regexp: "^Netscape-Enterprise\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Netscape-Enterprise\\/(.+)$",
 							},
 						},
@@ -9550,10 +9550,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Jetty(\\/|\\()([^\\s^\\)]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Jetty(\\/|\\()([^\\s^\\)]+)",
 							},
 						},
@@ -9584,16 +9584,16 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Oracle-Application-Server-1[01]g\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Oracle-Application-Server-1[01]g\\/([^\\s]+)",
 							},
 						},
 						{
 							Regexp: "^Oracle Application Server\\/1[01]g \\(([^\\s^\\)]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Oracle Application Server\\/1[01]g \\(([^\\s^\\)]+)\\)",
 							},
 						},
@@ -9641,13 +9641,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^AOLserver$",
 						},
 						{
 							Regexp: "^AOLserver\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^AOLserver\\/([^\\s]+)",
 							},
 						},
@@ -9662,10 +9662,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Lotus-Domino\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Lotus-Domino\\/([^\\s]+)",
 							},
 						},
@@ -9747,13 +9747,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "lighttpd",
 						},
 						{
 							Regexp: "^[\\s]*lighttpd\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*lighttpd\\/([^\\s]+)",
 							},
 						},
@@ -9776,10 +9776,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Seminole\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Seminole\\/([^\\s]+)",
 							},
 						},
@@ -9831,18 +9831,18 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "ActiveHTML\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "ActiveHTML\\/([^\\s]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "seliSoft ActiveHTML\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "seliSoft ActiveHTML\\/([^\\s]+)",
 							},
 						},
@@ -9881,10 +9881,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^4D_v[\\d]{1,2}(_SQL)?\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^4D_v[\\d]{1,2}(_SQL)?\\/([\\d\\.]+)$",
 							},
 						},
@@ -10014,10 +10014,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "AMR_WinControl[_0-9]*\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "AMR_WinControl[_0-9]*\\/([\\d\\.]+)",
 							},
 						},
@@ -10043,15 +10043,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Alpha Five( Application Server)?\\/([\\d\\.]+ Build\\/[\\d\\-]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Alpha Five( Application Server)?\\/([\\d\\.]+ Build\\/[\\d\\-]+)",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "A5wSessionId=[a-f\\d]{32};",
 						},
@@ -10093,10 +10093,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^BadBlue\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^BadBlue\\/([\\d\\.]+)$",
 							},
 						},
@@ -10150,7 +10150,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^atvise$",
 						},
@@ -10160,7 +10160,7 @@ var features = []*Feature{
 			{
 				Name: "TwistedWeb",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "TwistedWeb",
 						},
@@ -10175,7 +10175,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "GoAhead-Webs",
 						},
@@ -10195,10 +10195,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[\\s]*Boa\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*Boa\\/([^\\s]+)",
 							},
 						},
@@ -10213,7 +10213,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Citrix Web PN Server$",
 						},
@@ -10228,10 +10228,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CL-HTTP\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CL-HTTP\\/([^\\s]+)",
 							},
 						},
@@ -10246,10 +10246,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CERN\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^CERN\\/([^\\s]+)",
 							},
 						},
@@ -10264,10 +10264,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Cdn Cache Server V([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Cdn Cache Server V([\\d\\.]+)",
 							},
 						},
@@ -10285,10 +10285,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Caudium\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Caudium\\/([\\d\\.]+)",
 							},
 						},
@@ -10306,10 +10306,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Cherokee\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Cherokee\\/([^\\s]+)",
 							},
 						},
@@ -10335,7 +10335,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "TornadoServer",
 						},
@@ -10345,7 +10345,7 @@ var features = []*Feature{
 			{
 				Name: "celery",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "TornadoServer\"&&Celery",
 						},
@@ -10360,10 +10360,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Comanche\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Comanche\\/([^\\s]+)",
 							},
 						},
@@ -10378,16 +10378,16 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "secured_by_Covalent\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "secured_by_Covalent\\/([^\\s]+)",
 							},
 						},
 						{
 							Regexp: "(CovalentSNMP\\/[^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "(CovalentSNMP\\/[^\\s]+)",
 							},
 						},
@@ -10402,10 +10402,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Easy File Sharing Web Server v(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Easy File Sharing Web Server v(.+)$",
 							},
 						},
@@ -10428,7 +10428,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server ": &FeatureRuleItem{
+					"Server ": {
 						{
 							Regexp: "^Ericsson Television Web server$",
 						},
@@ -10443,7 +10443,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Kerio MailServer",
 						},
@@ -10458,7 +10458,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "RAC_ONE_HTTP ",
 						},
@@ -10473,7 +10473,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Grandstream",
 						},
@@ -10488,13 +10488,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Fujitsu-InfoProvider-Pro",
 						},
 						{
 							Regexp: "Fujitsu-InfoProvider-Pro\\/[V]?([^ ]+) ",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Fujitsu-InfoProvider-Pro\\/[V]?([^ ]+) ",
 							},
 						},
@@ -10509,10 +10509,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^FPWS\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^FPWS\\/([^\\s]+)",
 							},
 						},
@@ -10538,16 +10538,16 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Fizmez\\/0\\.0\\.1",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "1.0",
 							},
 						},
 						{
 							Regexp: "^Fizmez\\/([1-9]+\\.[\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Fizmez\\/([1-9]+\\.[\\d\\.]+)",
 							},
 						},
@@ -10562,19 +10562,19 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^GoServe",
 						},
 						{
 							Regexp: "^GoServe\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^GoServe\\/([^\\s]+)$",
 							},
 						},
 						{
 							Regexp: "^GoServe for OS\\/2, version ([^\\s^;]+); SRE-http [\\d\\.]+$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^GoServe for OS\\/2, version ([^\\s^;]+); SRE-http [\\d\\.]+$",
 							},
 						},
@@ -10589,13 +10589,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^gSOAP",
 						},
 						{
 							Regexp: "^gSOAP\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^gSOAP\\/([^\\s]+)$",
 							},
 						},
@@ -10610,10 +10610,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Footprint ([\\d\\.]+)\\/FPMCP$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Footprint ([\\d\\.]+)\\/FPMCP$",
 							},
 						},
@@ -10631,10 +10631,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^fnord\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^fnord\\/([^\\s]+)$",
 							},
 						},
@@ -10652,19 +10652,19 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Hyperwave-",
 						},
 						{
 							Regexp: "^Hyperwave-IS\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Hyperwave-IS\\/([^\\s]+)$",
 							},
 						},
 						{
 							Regexp: "^Hyperwave-Information-Server\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Hyperwave-Information-Server\\/([^\\s]+)$",
 							},
 						},
@@ -10679,10 +10679,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Http explorer ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Http explorer ([^\\s]+)$",
 							},
 						},
@@ -10691,7 +10691,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p id=\"pgfooter_p_main\">\\s+<a href=\"http:\\/\\/http\\-explorer\\.sourceforge\\.net\\/\\?lang=[^\"]+\">Http explorer\\s+([^\\s^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p id=\"pgfooter_p_main\">\\s+<a href=\"http:\\/\\/http\\-explorer\\.sourceforge\\.net\\/\\?lang=[^\"]+\">Http explorer\\s+([^\\s^<]+)<\\/a>",
 						},
 					},
@@ -10705,13 +10705,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^hcb_web",
 						},
 						{
 							Regexp: "^hcb_web\\/v([^\\s]+) BoxTalk\\/[^\\s]+ SWILL\\/[^\\s]+ \\([^\\)]+\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^hcb_web\\/v([^\\s]+) BoxTalk\\/[^\\s]+ SWILL\\/[^\\s]+ \\([^\\)]+\\)$",
 							},
 						},
@@ -10731,10 +10731,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WebSEAL\\/([^\\s]+ \\(Build \\d+\\))",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebSEAL\\/([^\\s]+ \\(Build \\d+\\))",
 							},
 						},
@@ -10749,10 +10749,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^intrasrv ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^intrasrv ([\\d\\.]+)$",
 							},
 						},
@@ -10767,13 +10767,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^KFWebServer$",
 						},
 						{
 							Regexp: "^KFWebServer\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^KFWebServer\\/([\\d\\.]+)",
 							},
 						},
@@ -10794,31 +10794,31 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^(Kerio_|WebSTAR|4D_WebStar)",
 						},
 						{
 							Regexp: "^WebSTAR\\/([^\\s^\\(]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebSTAR\\/([^\\s^\\(]+)",
 							},
 						},
 						{
 							Regexp: "^Kerio_WebSTAR\\/([^\\s^\\(]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Kerio_WebSTAR\\/([^\\s^\\(]+)",
 							},
 						},
 						{
 							Regexp: "^WebSTAR ([\\d\\.]+ .+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebSTAR ([\\d\\.]+ .+)$",
 							},
 						},
 						{
 							Regexp: "^4D_WebStar_[A-Z]\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^4D_WebStar_[A-Z]\\/([\\d\\.]+)",
 							},
 						},
@@ -10833,7 +10833,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^The Knopflerfish HTTP Server$",
 						},
@@ -10848,10 +10848,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Keil-EWEB\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Keil-EWEB\\/([^\\s]+)$",
 							},
 						},
@@ -11005,13 +11005,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WebKnight",
 						},
 						{
 							Regexp: "^WebKnight\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebKnight\\/(.+)$",
 							},
 						},
@@ -11114,10 +11114,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "BinarySEC\\/(\\d{1,3}\\.\\d{1,4}\\.\\d{1,4})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "BinarySEC\\/(\\d{1,3}\\.\\d{1,4}\\.\\d{1,4})",
 							},
 						},
@@ -11158,12 +11158,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ezisneercsresu=",
 						},
 					},
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Cyms-SecS v[\\d\\.]+$",
 						},
@@ -11178,7 +11178,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Check Point SVN foundation$",
 						},
@@ -11193,7 +11193,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<form autocomplete=\"off\" method=\"post\" action=\"\\/platform\\.cgi\\?\" target=\"_top\">[\\s]+<input type=\"hidden\" name=\"thispage\" value=\"index\\.htm\">[\\s]+<div class=\"version_div\">([^<]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<form autocomplete=\"off\" method=\"post\" action=\"\\/platform\\.cgi\\?\" target=\"_top\">[\\s]+<input type=\"hidden\" name=\"thispage\" value=\"index\\.htm\">[\\s]+<div class=\"version_div\">([^<]+)<\\/div>",
 						},
 					},
@@ -11212,10 +11212,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^DATM\\/([\\d\\.]{1,3})$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^DATM\\/([\\d\\.]{1,3})$",
 							},
 						},
@@ -11230,18 +11230,18 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^DeleGate\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^DeleGate\\/([^\\s]+)",
 							},
 						},
 					},
-					"Delegate-ver": &FeatureRuleItem{
+					"Delegate-ver": {
 						{
 							Regexp: "^([^\\s]+) \\(delay=",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^([^\\s]+) \\(delay=",
 							},
 						},
@@ -11269,7 +11269,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Switch$",
 						},
@@ -11294,7 +11294,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Kerio WinRoute Firewall Embedded Web Server$",
 						},
@@ -11312,7 +11312,7 @@ var features = []*Feature{
 			{
 				Name: "sagemcom",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Sagemcom TR-069",
 						},
@@ -11345,7 +11345,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Airties ([^<]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Airties ([^<]+)<",
 						},
 					},
@@ -11362,7 +11362,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ADTRAN",
 						},
@@ -14165,13 +14165,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Asterisk\\/",
 						},
 						{
 							Regexp: "^Asterisk\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Asterisk\\/(.+)$",
 							},
 						},
@@ -14220,7 +14220,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "HOMEBASEID=",
 						},
@@ -14240,10 +14240,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Avaya Http Server v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Avaya Http Server v([^\\s]+)$",
 							},
 						},
@@ -15815,7 +15815,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^fec\\/[\\d\\.]+ \\(Funkwerk BOSS\\)$",
 						},
@@ -15835,10 +15835,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ExtremeWare\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ExtremeWare\\/([^\\s]+)$",
 							},
 						},
@@ -15871,7 +15871,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"HUGHES Terminal\"$",
 						},
@@ -15899,13 +15899,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^eHTTP",
 						},
 						{
 							Regexp: "^eHTTP v([\\d\\.]{1,3})$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^eHTTP v([\\d\\.]{1,3})$",
 							},
 						},
@@ -15925,10 +15925,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WANFlex HTTP Daemon v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WANFlex HTTP Daemon v([^\\s]+)$",
 							},
 						},
@@ -15951,10 +15951,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Intoto Http Server v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Intoto Http Server v([^\\s]+)$",
 							},
 						},
@@ -16178,15 +16178,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Liferay-portal": &FeatureRuleItem{
+					"Liferay-portal": {
 						{
 							Regexp: "^Liferay Portal (.+ Edition) (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Liferay Portal (.+ Edition) (.+)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "GUEST_LANGUAGE_ID=[a-z]{2,3}_[A-Z]{2,3};",
 						},
@@ -16274,10 +16274,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"A-powered-by": &FeatureRuleItem{
+					"A-powered-by": {
 						{
 							Regexp: "^ABO\\.CMS( E-commerce| Corporative)? ([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ABO\\.CMS( E-commerce| Corporative)? ([\\d\\.]+)",
 							},
 						},
@@ -16354,9 +16354,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^MediaWiki ?(.+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -16463,10 +16463,10 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Dc.title": &FeatureRuleItem{
+					"Dc.title": {
 						Regexp: "webEdition",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "webEdition",
 					},
 				},
@@ -16692,7 +16692,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "wb_[\\d]{4}_session_id=[^;]+;",
 						},
@@ -16704,7 +16704,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"WebsiteBaker ([\\d\\.]+) CMS; www\\.websitebaker2?\\.org\"[\\s]?\\/?>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"WebsiteBaker ([\\d\\.]+) CMS; www\\.websitebaker2?\\.org\"[\\s]?\\/?>",
 						},
 					},
@@ -17493,7 +17493,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ln=English",
 						},
@@ -17516,9 +17516,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "BIGACE ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -17559,10 +17559,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-mobilized-by": &FeatureRuleItem{
+					"X-mobilized-by": {
 						{
 							Regexp: "^BAAP Mobile Version ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^BAAP Mobile Version ([^\\s]+)$",
 							},
 						},
@@ -17612,13 +17612,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Zotonic",
 						},
 						{
 							Regexp: "Zotonic\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Zotonic\\/([^\\s]+)",
 							},
 						},
@@ -17670,7 +17670,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^CMSSESSID",
 						},
@@ -17701,9 +17701,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "CMSimple( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -17743,7 +17743,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "cm3session",
 						},
@@ -17787,18 +17787,18 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Chamilo ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "^Chamilo ([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Chamilo ([\\d\\.]+)",
 							},
 						},
@@ -17821,7 +17821,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^SilverStripe",
 					},
 				},
@@ -17858,9 +17858,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "BrowserCMS ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -17898,7 +17898,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Contao Open Source CMS$",
 					},
 				},
@@ -17919,10 +17919,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Commerce-Builder\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Commerce-Builder\\/([^\\s]+)",
 							},
 						},
@@ -17958,7 +17958,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Kill=kill=(Yes|No)",
 						},
@@ -17989,10 +17989,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-daisy-version": &FeatureRuleItem{
+					"X-daisy-version": {
 						{
 							Regexp: "^([^\\s]+) \\(build: [^\\s]+",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^([^\\s]+) \\(build: [^\\s]+",
 							},
 						},
@@ -18041,7 +18041,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "dle_hash=[^;]+;",
 						},
@@ -18118,7 +18118,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "dotcms",
 						},
@@ -18149,7 +18149,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Dokeos",
 					},
 				},
@@ -18188,7 +18188,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "EktGUID=[a-f\\d]{8}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{4}-[a-f\\d]{12}; expires=",
 						},
@@ -18225,7 +18225,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "EPiServer",
 					},
 				},
@@ -18296,10 +18296,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Host_service": &FeatureRuleItem{
+					"Host_service": {
 						{
 							Regexp: "^FutureTenseContentServer:([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^FutureTenseContentServer:([^\\s]+)$",
 							},
 						},
@@ -18349,7 +18349,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "^eZ [p|P]ublish",
 						},
@@ -18418,17 +18418,17 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-firenze-processing-time": &FeatureRuleItem{
+					"X-firenze-processing-time": {
 						{
 							Regexp: "^[\\d\\.]+$",
 						},
 					},
-					"X-firenze-processing-tims": &FeatureRuleItem{
+					"X-firenze-processing-tims": {
 						{
 							Regexp: "^detect-robot:",
 						},
 					},
-					"X-highwire-sessionid": &FeatureRuleItem{
+					"X-highwire-sessionid": {
 						{
 							Regexp: "^.+$",
 						},
@@ -18507,18 +18507,18 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: " \\(Using iHTML\\/([^\\)^\\s]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: " \\(Using iHTML\\/([^\\)^\\s]+)\\)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "^iHTML\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^iHTML\\/([^\\s]+)$",
 							},
 						},
@@ -18557,7 +18557,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "[\\d]+=HTMLTitle=[^\\s]*&OrgName=[^\\s]+&EmailThankYou=[^\\s]*&DefaultIdPage=[^\\s]+&State=",
 						},
@@ -18617,7 +18617,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "CMSCsrfCookie",
 						},
@@ -18902,7 +18902,7 @@ var features = []*Feature{
 			{
 				Name: "Panasonic Network Camera",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "U S Software Web Server",
 						},
@@ -18927,7 +18927,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "D-Link Internet Camera",
 						},
@@ -18974,7 +18974,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "webcamXP 5",
 						},
@@ -19002,7 +19002,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "pageredir=https?%3A%2F%2F",
 						},
@@ -19017,10 +19017,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Techno Vision Security System Ver. ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Techno Vision Security System Ver. ([\\d\\.]+)$",
 							},
 						},
@@ -19035,15 +19035,15 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ZoneMinder Video Server\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ZoneMinder Video Server\\/([^\\s]+)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ZMSESSID=[^;]+",
 						},
@@ -19058,10 +19058,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Cougar\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Cougar\\/([\\d\\.]+)$",
 							},
 						},
@@ -19089,7 +19089,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ADH-Web$",
 						},
@@ -19117,10 +19117,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^DPWebServer\\/([\\d\\.]{1,3})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^DPWebServer\\/([\\d\\.]{1,3})",
 							},
 						},
@@ -19164,13 +19164,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^HeiTel GmbH Web Server",
 						},
 						{
 							Regexp: "^HeiTel GmbH Web Server \\[V([\\d\\.]+)\\/V([\\d\\.]+)\\/V([\\d\\.]+)\\]$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^HeiTel GmbH Web Server \\[V([\\d\\.]+)\\/V([\\d\\.]+)\\/V([\\d\\.]+)\\]$",
 							},
 						},
@@ -19235,7 +19235,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^KEDACOM-Webs$",
 						},
@@ -19425,9 +19425,9 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^DokuWiki( Release [\\d-]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -19505,7 +19505,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered [B|b]?y[:]? <a href=\"http:\\/\\/www.hostforest.co.uk\\/[^\"]*\"[^>]+title=\"Forest Blog\"[^>]*>Forest Blog<\\/a> v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered [B|b]?y[:]? <a href=\"http:\\/\\/www.hostforest.co.uk\\/[^\"]*\"[^>]+title=\"Forest Blog\"[^>]*>Forest Blog<\\/a> v([\\d\\.]+)",
 						},
 					},
@@ -19676,7 +19676,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<script>(?:.|\\n)*\"refresh\":{\"version\":\"([\\w\\.]+)\\s",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -19782,7 +19782,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<small>SquirrelMail version ([.\\d]+)[^<]*<br ",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -19941,10 +19941,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WDaemon\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WDaemon\\/([\\d\\.]+)$",
 							},
 						},
@@ -19964,16 +19964,16 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "ArGoSoft Mail Server Pro for WinNT\\/2000, Version [\\d\\.]+ \\(([\\d\\.]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "ArGoSoft Mail Server Pro for WinNT\\/2000, Version [\\d\\.]+ \\(([\\d\\.]+)\\)",
 							},
 						},
 						{
 							Regexp: "ArGoSoft Mail Server Pro for WinNT\\/2000\\/XP, Version [\\d\\.]+ \\(([\\d\\.]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "ArGoSoft Mail Server Pro for WinNT\\/2000\\/XP, Version [\\d\\.]+ \\(([\\d\\.]+)\\)",
 							},
 						},
@@ -20007,7 +20007,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>AXIGEN Webmail - v([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>AXIGEN Webmail - v([\\d\\.]+)<\\/title>",
 						},
 					},
@@ -20034,10 +20034,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Eserv\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Eserv\\/([^\\s]+)",
 							},
 						},
@@ -20052,10 +20052,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Gordano (Messaging Suite )?Web Server v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Gordano (Messaging Suite )?Web Server v([^\\s]+)$",
 							},
 						},
@@ -20083,7 +20083,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "hivesession=",
 						},
@@ -20098,13 +20098,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Ipswitch-IMail",
 						},
 						{
 							Regexp: "^Ipswitch-IMail\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Ipswitch-IMail\\/([\\d\\.]+)$",
 							},
 						},
@@ -20122,13 +20122,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Kerio",
 						},
 						{
 							Regexp: "^Kerio (MailServer|Connect) (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Kerio (MailServer|Connect) (.+)$",
 							},
 						},
@@ -20180,7 +20180,7 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Zen Cart",
 					},
 				},
@@ -20285,12 +20285,12 @@ var features = []*Feature{
 					},
 				},
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "PrestaShop",
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "PrestaShop",
 						},
@@ -20478,7 +20478,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "3dvisit",
 						},
@@ -20536,12 +20536,12 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "Batavi e\\-commerce",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "frontsid=[^;]+;",
 						},
@@ -20566,7 +20566,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "axisid=[a-z\\d]{20,32};",
 						},
@@ -20658,7 +20658,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^exp_last_visit",
 						},
@@ -20706,19 +20706,19 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Jeus WebContainer",
 						},
 						{
 							Regexp: "^Jeus WebContainer\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Jeus WebContainer\\/([\\d\\.]+)$",
 							},
 						},
 						{
 							Regexp: "^Jeus WebContainer\\/JEUS (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Jeus WebContainer\\/JEUS (.+)$",
 							},
 						},
@@ -21031,7 +21031,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "/?([\\d.]+)?/aframe(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21073,9 +21073,9 @@ var features = []*Feature{
 			{
 				Name: "AWStats",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "AWStats ([\\d.]+(?: \\(build [\\d.]+\\))?)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21092,13 +21092,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"AWStats ([0-9\\.]+ \\(build [0-9\\.]+\\))",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"AWStats ([0-9\\.]+ \\(build [0-9\\.]+\\))",
 						},
 					},
 					{
 						Regexp: "<FONT COLOR=\"#000000\"><b>Advanced Web Statistics ([0-9\\.]+ \\(build [0-9\\.]+\\))",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<FONT COLOR=\"#000000\"><b>Advanced Web Statistics ([0-9\\.]+ \\(build [0-9\\.]+\\))",
 						},
 					},
@@ -21115,9 +21115,9 @@ var features = []*Feature{
 			{
 				Name: "AMP Plugin",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^AMP Plugin v(\\d+\\.\\d+.*)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21206,13 +21206,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Adminer</a> <span class=\"version\">([\\d.]+)</span>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "onclick=\"bodyClick\\(event\\);\" onload=\"verifyVersion\\('([\\d.]+)'\\);\">",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21266,9 +21266,9 @@ var features = []*Feature{
 			{
 				Name: "Adobe GoLive",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Adobe GoLive(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21277,9 +21277,9 @@ var features = []*Feature{
 			{
 				Name: "Adobe RoboHelp",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Adobe RoboHelp(?: ([\\d]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21295,7 +21295,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "https?://[^.]+\\.adplan7\\.com/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "7",
 						},
 					},
@@ -21385,7 +21385,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- All in One SEO Pack ([\\d.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21394,7 +21394,7 @@ var features = []*Feature{
 			{
 				Name: "Ametys",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "(?:Ametys|Anyware Technologies)",
 					},
 				},
@@ -21407,7 +21407,7 @@ var features = []*Feature{
 			{
 				Name: "Amiro.CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Amiro",
 					},
 				},
@@ -21425,7 +21425,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "AnalysysFangzhou_JS_SDK\\.min\\.js\\?v=([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21444,7 +21444,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<[^>]+ ng-version=\"([\\d.]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21455,7 +21455,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "/([\\d.rc-]+)?/angular-material(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21472,13 +21472,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "angular[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/([\\d.]+(?:-?rc[.\\d]*)*)/angular(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21566,7 +21566,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<span class=\"version\">Artifactory(?: Pro)?(?: Power Pack)?(?: ([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21578,9 +21578,9 @@ var features = []*Feature{
 			{
 				Name: "AsciiDoc",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^AsciiDoc ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21600,14 +21600,14 @@ var features = []*Feature{
 			{
 				Name: "Atlassian Bitbucket",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "Bitbucket",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<li>Atlassian Bitbucket <span title=\"[a-z0-9]+\" id=\"product-version\" data-commitid=\"[a-z0-9]+\" data-system-build-number=\"[a-z0-9]+\"> v([\\d.]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21618,7 +21618,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=[^>]+atlassian\\.com/software/confluence(?:[^>]+>Atlassian Confluence</a> ([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21629,7 +21629,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>(?:Log in to )?FishEye (?:and Crucible )?([\\d.]+)?</title>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21638,20 +21638,20 @@ var features = []*Feature{
 			{
 				Name: "Atlassian Jira",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Ajs-version-number": &FeatureRuleItem{
+					"Ajs-version-number": {
 						Regexp: "^(.+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "JIRA",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by\\s+<a href=[^>]+atlassian\\.com/(?:software/jira|jira-bug-tracking/)[^>]+>Atlassian\\s+JIRA(?:[^v]*v(?:ersion: )?(\\d+\\.\\d+(?:\\.\\d+)?))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21734,9 +21734,9 @@ var features = []*Feature{
 			{
 				Name: "Backdrop",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Backdrop CMS(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21745,14 +21745,14 @@ var features = []*Feature{
 			{
 				Name: "Banshee",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Banshee PHP",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Built upon the <a href=\"[^>]+banshee-php\\.org/\">[a-z]+</a>(?:v([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21799,7 +21799,7 @@ var features = []*Feature{
 			{
 				Name: "Blogger",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Blogger$",
 					},
 				},
@@ -21815,9 +21815,9 @@ var features = []*Feature{
 			{
 				Name: "Bluefish",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Bluefish(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21859,7 +21859,7 @@ var features = []*Feature{
 			{
 				Name: "Bolt",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Bolt",
 					},
 				},
@@ -21867,7 +21867,7 @@ var features = []*Feature{
 			{
 				Name: "BOOM",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^boom site builder$",
 					},
 				},
@@ -21877,7 +21877,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a[^>]+href=\"https?://(?:www\\.)?cibonfire\\.com[^>]*>Bonfire v([^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21888,7 +21888,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<style>/\\*!\\* Bootstrap v(\\d\\.\\d\\.\\d)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -21967,7 +21967,7 @@ var features = []*Feature{
 			{
 				Name: "CMS Made Simple",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "CMS Made Simple",
 					},
 				},
@@ -21975,7 +21975,7 @@ var features = []*Feature{
 			{
 				Name: "CPG Dragonfly",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "CPG Dragonfly",
 					},
 				},
@@ -21994,7 +21994,7 @@ var features = []*Feature{
 			{
 				Name: "CakePHP",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "CakePHP",
 					},
 				},
@@ -22045,19 +22045,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "chartjs\\.org/dist/([\\d.]+(?:-[^/]+)?|master|latest)/Chart.*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "cdnjs\\.cloudflare\\.com/ajax/libs/Chart\\.js/([\\d.]+(?:-[^/]+)?)/Chart.*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "cdn\\.jsdelivr\\.net/(?:npm|gh/chartjs)/chart\\.js@([\\d.]+(?:-[^/]+)?|latest)/dist/Chart.*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22074,9 +22074,9 @@ var features = []*Feature{
 			{
 				Name: "Chevereto",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Chevereto ?([0-9.]+)?$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22109,9 +22109,9 @@ var features = []*Feature{
 			{
 				Name: "Ckan",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^ckan ?([0-9.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22152,7 +22152,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "clipboard(?:-([\\d.]+))?(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22161,7 +22161,7 @@ var features = []*Feature{
 			{
 				Name: "CloudCart",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "^CloudCart LLC$",
 					},
 				},
@@ -22174,9 +22174,9 @@ var features = []*Feature{
 			{
 				Name: "Coaster CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Coaster CMS v([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22187,7 +22187,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "\\/(?:coinhive|(authedmine))(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							If:   "\\1",
 							Then: "opt-in",
 						},
@@ -22243,9 +22243,9 @@ var features = []*Feature{
 			{
 				Name: "Concrete5",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^concrete5 - ([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22256,7 +22256,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^CONCRETE5=",
 						},
@@ -22266,9 +22266,9 @@ var features = []*Feature{
 			{
 				Name: "Contenido",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Contenido ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22277,9 +22277,9 @@ var features = []*Feature{
 			{
 				Name: "Contensis",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Contensis CMS Version ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22288,7 +22288,7 @@ var features = []*Feature{
 			{
 				Name: "ContentBox",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "ContentBox powered by ColdBox",
 					},
 				},
@@ -22320,7 +22320,7 @@ var features = []*Feature{
 			{
 				Name: "Cotonti",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Cotonti",
 					},
 				},
@@ -22372,7 +22372,7 @@ var features = []*Feature{
 			{
 				Name: "CubeCart",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "cubecart",
 					},
 				},
@@ -22417,7 +22417,7 @@ var features = []*Feature{
 			{
 				Name: "DNN",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "DotNetNuke",
 					},
 				},
@@ -22447,9 +22447,9 @@ var features = []*Feature{
 			{
 				Name: "Danneo CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Danneo CMS ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22480,7 +22480,7 @@ var features = []*Feature{
 			{
 				Name: "DataLife Engine",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "DataLife Engine",
 					},
 				},
@@ -22506,19 +22506,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "decimal[.-]([\\d.]*\\d+)(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/([\\d.]*\\d+)/decimal(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "decimal(?:\\.min)?\\.js(?:\\?ver(?:sion)?=([\\d.]*\\d+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22540,10 +22540,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^DirectAdmin Daemon v([^\\s]+) Registered to ",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^DirectAdmin Daemon v([^\\s]+) Registered to ",
 							},
 						},
@@ -22553,9 +22553,9 @@ var features = []*Feature{
 			{
 				Name: "Discourse",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Discourse(?: ?/?([\\d.]+\\d))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22564,9 +22564,9 @@ var features = []*Feature{
 			{
 				Name: "Discuz! X",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Discuz! X([\\d\\.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22586,7 +22586,7 @@ var features = []*Feature{
 			{
 				Name: "Docusaurus",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Docusaurus$",
 					},
 				},
@@ -22604,7 +22604,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "([\\d.]+)/dojo/dojo(?:\\.xd)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22662,9 +22662,9 @@ var features = []*Feature{
 			{
 				Name: "Doxygen",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Doxygen ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22672,7 +22672,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(?:<!-- Generated by Doxygen ([\\d.]+)|<link[^>]+doxygen\\.css)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22683,7 +22683,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--[^>]*(?:InstanceBeginEditable|Dreamweaver([^>]+)target|DWLayoutDefaultTable)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22708,9 +22708,9 @@ var features = []*Feature{
 			{
 				Name: "Dynamicweb",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Dynamicweb ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22752,7 +22752,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "elementor/assets/js/[^/]+\\.js\\?ver=([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22769,9 +22769,9 @@ var features = []*Feature{
 			{
 				Name: "EPrints",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "EPrints ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22791,7 +22791,7 @@ var features = []*Feature{
 			{
 				Name: "Eleanor CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Eleanor",
 					},
 				},
@@ -22919,7 +22919,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "jquery\\.fancybox(?:\\.pack|\\.min)?\\.js(?:\\?v=([\\d.]+))?$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22928,7 +22928,7 @@ var features = []*Feature{
 			{
 				Name: "Fastcommerce",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Fastcommerce",
 					},
 				},
@@ -22949,7 +22949,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "fingerprint(\\d)?(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22960,7 +22960,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "/(?:([\\d.]+)/)?firebase(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -22985,14 +22985,14 @@ var features = []*Feature{
 			{
 				Name: "FlexCMP",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^FlexCMP",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--[^>]+FlexCMP[^>v]+v\\. ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23019,13 +23019,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link[^>]* href=[^>]+(?:([\\d.]+)/)?(?:css/)?font-awesome(?:\\.min)?\\.css",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "<link[^>]* href=\"https://use\\.fontawesome\\.com/releases/v([^>]+)/css/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23037,7 +23037,7 @@ var features = []*Feature{
 			{
 				Name: "Fork CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Fork CMS$",
 					},
 				},
@@ -23066,7 +23066,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "/<!--\\s*\\*\\s*FreeTextBox v\\d+ \\(([.\\d]+)(?:(?:.|\\n)+?<!--\\s*\\*\\s*License Type: (Distribution|Professional)License)?/i",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1 \\2",
 						},
 					},
@@ -23107,12 +23107,12 @@ var features = []*Feature{
 			{
 				Name: "FrontPage",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Progid": &FeatureRuleItem{
+					"Progid": {
 						Regexp: "^FrontPage\\.",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Microsoft FrontPage(?:\\s((?:Express )?[\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23123,7 +23123,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "[^\\/]*//[ac]dn\\.fusionads\\.net/(?:api/([\\d.]+)/)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23140,9 +23140,9 @@ var features = []*Feature{
 			{
 				Name: "GX WebManager",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "GX WebManager(?: ([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23167,9 +23167,9 @@ var features = []*Feature{
 			{
 				Name: "Gatsby",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Gatsby(?: ([0-9.]+))?$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23218,7 +23218,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: ">Gerrit Code Review</a>\\s*\"\\s*\\(([0-9.]+)\\)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23233,7 +23233,7 @@ var features = []*Feature{
 			{
 				Name: "GetSimple CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "GetSimple",
 					},
 				},
@@ -23241,9 +23241,9 @@ var features = []*Feature{
 			{
 				Name: "Ghost",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Ghost(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23252,9 +23252,9 @@ var features = []*Feature{
 			{
 				Name: "GitBook",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "GitBook(?:.([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23263,7 +23263,7 @@ var features = []*Feature{
 			{
 				Name: "GitLab",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Og:site_name": &FeatureRuleItem{
+					"Og:site_name": {
 						Regexp: "^GitLab$",
 					},
 				},
@@ -23279,7 +23279,7 @@ var features = []*Feature{
 			{
 				Name: "GitLab CI",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Description": &FeatureRuleItem{
+					"Description": {
 						Regexp: "GitLab Continuous Integration",
 					},
 				},
@@ -23287,14 +23287,14 @@ var features = []*Feature{
 			{
 				Name: "Gitea",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "^go,git,self-hosted,gitea$",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div class=\"ui left\">\\n\\s+© Gitea Version: ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23319,9 +23319,9 @@ var features = []*Feature{
 			{
 				Name: "GoDaddy Website Builder",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Go Daddy Website Builder (.+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23330,14 +23330,14 @@ var features = []*Feature{
 			{
 				Name: "Gogs",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "go, git, self-hosted, gogs",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div class=\"ui left\">\\n\\s+© \\d{4} Gogs Version: ([\\d.]+) Page:",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23401,7 +23401,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(?:maps\\.google\\.com/maps\\?file=api(?:&v=([\\d.]+))?|maps\\.google\\.com/maps/api/staticmap)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "API v\\1",
 						},
 					},
@@ -23443,9 +23443,9 @@ var features = []*Feature{
 			{
 				Name: "Graffiti CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Graffiti CMS ([^\"]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23459,9 +23459,9 @@ var features = []*Feature{
 			{
 				Name: "Grav",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "GravCMS(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23492,7 +23492,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "/wp-content/plugins/gravityforms/js/[^/]+\\.js\\?ver=([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23501,7 +23501,7 @@ var features = []*Feature{
 			{
 				Name: "Green Valley CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Dc.identifier": &FeatureRuleItem{
+					"Dc.identifier": {
 						Regexp: "/content\\.jsp\\?objectid=",
 					},
 				},
@@ -23514,9 +23514,9 @@ var features = []*Feature{
 			{
 				Name: "Gridsome",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Gridsome v([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23527,7 +23527,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "assets\\.growingio\\.com/([\\d.]+)/gio.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23538,7 +23538,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "https?://js\\.cit\\.api\\.here\\.com/se/([\\d.]+)\\/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23549,7 +23549,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p>Produced by <a href=\"http://www\\.haskell\\.org/haddock/\">Haddock</a> version ([0-9.]+)</p>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23574,7 +23574,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "handlebars(?:\\.runtime)?(?:-v([\\d.]+?))?(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23618,9 +23618,9 @@ var features = []*Feature{
 			{
 				Name: "Hexo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Hexo(?: v?([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23636,7 +23636,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<svg[^>]*><desc>Created with Highcharts ([\\d.]*)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23658,7 +23658,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "/(?:([\\d.])+/)?highlight(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23669,13 +23669,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<svg[^>]*><desc>Created with Highstock ([\\d.]*)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "highstock[.-]?([\\d\\.]*\\d).*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23684,7 +23684,7 @@ var features = []*Feature{
 			{
 				Name: "Hinza Advanced CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "hinzacms",
 					},
 				},
@@ -23702,13 +23702,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "hogan-[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "([\\d.]+)/hogan(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23717,7 +23717,7 @@ var features = []*Feature{
 			{
 				Name: "Hotaru CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Hotaru CMS",
 					},
 				},
@@ -23738,7 +23738,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "hsPagesViewedThisSession",
 						},
@@ -23748,9 +23748,9 @@ var features = []*Feature{
 			{
 				Name: "Hugo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Hugo ([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23823,7 +23823,7 @@ var features = []*Feature{
 			{
 				Name: "ImpressCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "ImpressCMS",
 					},
 				},
@@ -23836,9 +23836,9 @@ var features = []*Feature{
 			{
 				Name: "ImpressPages",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "ImpressPages(?: CMS)?( [\\d.]*)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23847,7 +23847,7 @@ var features = []*Feature{
 			{
 				Name: "Indexhibit",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Indexhibit",
 					},
 				},
@@ -23862,13 +23862,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<input [^>]*name=\"infusionsoft_version\" [^>]*value=\"([^>]*)\" [^>]*\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "<input [^>]*value=\"([^>]*)\" [^>]*name=\"infusionsoft_version\" [^>]*\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23896,7 +23896,7 @@ var features = []*Feature{
 			{
 				Name: "InstantCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "InstantCMS",
 					},
 				},
@@ -23933,7 +23933,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(?:Powered by|System)\\s+(?:CERN )?<a (?:class=\"footer\" )?href=\"http://(?:cdsware\\.cern\\.ch(?:/invenio)?|invenio-software\\.org|cern\\.ch/invenio)(?:/)?\">(?:CDS )?Invenio</a>\\s*v?([\\d\\.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23950,9 +23950,9 @@ var features = []*Feature{
 			{
 				Name: "JAlbum",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "JAlbum( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -23993,7 +23993,7 @@ var features = []*Feature{
 			{
 				Name: "Jalios",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Jalios",
 					},
 				},
@@ -24017,9 +24017,9 @@ var features = []*Feature{
 			{
 				Name: "Jekyll",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Jekyll (v[\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24055,7 +24055,7 @@ var features = []*Feature{
 			{
 				Name: "JobberBase",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Jobberbase",
 					},
 				},
@@ -24071,7 +24071,7 @@ var features = []*Feature{
 			{
 				Name: "Kamva",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "[CK]amva",
 					},
 				},
@@ -24092,9 +24092,9 @@ var features = []*Feature{
 			{
 				Name: "Kentico CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Kentico CMS ([\\d.R]+ \\(build [\\d.]+\\))",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24105,7 +24105,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "kinetic(?:-v?([\\d.]+))?(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24114,7 +24114,7 @@ var features = []*Feature{
 			{
 				Name: "Koala Framework",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Koala Web Framework CMS",
 					},
 				},
@@ -24127,9 +24127,9 @@ var features = []*Feature{
 			{
 				Name: "Koha",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Koha ([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24143,9 +24143,9 @@ var features = []*Feature{
 			{
 				Name: "Koken",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Koken ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24159,7 +24159,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "koken(?:\\.js\\?([\\d.]+)|/storage)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24168,7 +24168,7 @@ var features = []*Feature{
 			{
 				Name: "Kolibri CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Kolibri",
 					},
 				},
@@ -24176,7 +24176,7 @@ var features = []*Feature{
 			{
 				Name: "Komodo CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Komodo CMS",
 					},
 				},
@@ -24184,14 +24184,14 @@ var features = []*Feature{
 			{
 				Name: "Koobi",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Koobi",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--[^K>-]+Koobi ([a-z\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24224,7 +24224,7 @@ var features = []*Feature{
 			{
 				Name: "LEPTON",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "LEPTON",
 					},
 				},
@@ -24232,14 +24232,14 @@ var features = []*Feature{
 			{
 				Name: "Laterpay",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Laterpay:connector:callbacks:on_user_has_access": &FeatureRuleItem{
+					"Laterpay:connector:callbacks:on_user_has_access": {
 						Regexp: "deobfuscateText",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "https?://connectormwi\\.laterpay\\.net/([0-9.]+)[a-zA-z-]*/live/[\\w-]+\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24264,7 +24264,7 @@ var features = []*Feature{
 			{
 				Name: "LightMon Engine",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "LightMon Engine",
 					},
 				},
@@ -24298,7 +24298,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "https?://cdn\\.linksmart\\.com/linksmart_([\\d.]+?)(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24418,9 +24418,9 @@ var features = []*Feature{
 			{
 				Name: "MODX",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "MODX[^\\d.]*([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24453,13 +24453,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<script [^>]+data-requiremodule=\"mage/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "2",
 						},
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^magento=[0-9a-f]+",
 						},
@@ -24501,7 +24501,7 @@ var features = []*Feature{
 			{
 				Name: "Mambo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Mambo",
 					},
 				},
@@ -24562,7 +24562,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "(?:/([\\d.]+))?/material(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24584,7 +24584,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "([\\d.]+)?/mathjax\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24593,13 +24593,13 @@ var features = []*Feature{
 			{
 				Name: "Matomo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Apple-itunes-app": &FeatureRuleItem{
+					"Apple-itunes-app": {
 						Regexp: "app-id=737216887",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "(?:Matomo|Piwik) - Open Source Web Analytics",
 					},
-					"Google-play-app": &FeatureRuleItem{
+					"Google-play-app": {
 						Regexp: "app-id=org\\.piwik\\.mobile2",
 					},
 				},
@@ -24628,7 +24628,7 @@ var features = []*Feature{
 			{
 				Name: "MaxSite CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "MaxSite CMS",
 					},
 				},
@@ -24652,7 +24652,7 @@ var features = []*Feature{
 			{
 				Name: "Melis CMS V2",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Powered-by": &FeatureRuleItem{
+					"Powered-by": {
 						Regexp: "^Melis CMS",
 					},
 				},
@@ -24692,16 +24692,16 @@ var features = []*Feature{
 			{
 				Name: "Methode",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Eomportal-id": &FeatureRuleItem{
+					"Eomportal-id": {
 						Regexp: "\\d+",
 					},
-					"Eomportal-instanceid": &FeatureRuleItem{
+					"Eomportal-instanceid": {
 						Regexp: "\\d+",
 					},
-					"Eomportal-loid": &FeatureRuleItem{
+					"Eomportal-loid": {
 						Regexp: "[\\d.]+",
 					},
-					"Eomportal-uuid": &FeatureRuleItem{
+					"Eomportal-uuid": {
 						Regexp: "[a-f\\d]+",
 					},
 				},
@@ -24722,12 +24722,12 @@ var features = []*Feature{
 			{
 				Name: "Microsoft Excel",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Progid": &FeatureRuleItem{
+					"Progid": {
 						Regexp: "^Excel\\.",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Microsoft Excel( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24741,12 +24741,12 @@ var features = []*Feature{
 			{
 				Name: "Microsoft PowerPoint",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Progid": &FeatureRuleItem{
+					"Progid": {
 						Regexp: "^PowerPoint\\.",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Microsoft PowerPoint ( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24754,7 +24754,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(?:<html [^>]*xmlns:w=\"urn:schemas-microsoft-com:office:powerpoint\"|<link rel=\"?Presentation-XML\"? href=\"?[^\"]+\\.xml\"?>|<o:PresentationFormat>[^<]+</o:PresentationFormat>[^!]+<o:Slides>\\d+</o:Slides>(?:[^!]+<o:Version>([\\d.]+)</o:Version>)?)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24763,12 +24763,12 @@ var features = []*Feature{
 			{
 				Name: "Microsoft Publisher",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Progid": &FeatureRuleItem{
+					"Progid": {
 						Regexp: "^Publisher\\.",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Microsoft Publisher( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24782,7 +24782,7 @@ var features = []*Feature{
 			{
 				Name: "Microsoft SharePoint",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Microsoft SharePoint",
 					},
 				},
@@ -24790,12 +24790,12 @@ var features = []*Feature{
 			{
 				Name: "Microsoft Word",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Progid": &FeatureRuleItem{
+					"Progid": {
 						Regexp: "^Word\\.",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Microsoft Word( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24849,9 +24849,9 @@ var features = []*Feature{
 			{
 				Name: "MkDocs",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^mkdocs-([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24868,9 +24868,9 @@ var features = []*Feature{
 			{
 				Name: "Mobirise",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Mobirise v([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24878,7 +24878,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- Site made with Mobirise Website Builder v([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24889,7 +24889,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(?:/([\\d\\.]+))?/mobx(?:\\.[a-z]+){0,2}\\.js(?:$|\\?)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -24908,7 +24908,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "([\\d.]+)?/modernizr(?:.([\\d.]+))?.*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							If:   "\\1",
 							Then: "\\1",
 							Else: "\\2",
@@ -24919,7 +24919,7 @@ var features = []*Feature{
 			{
 				Name: "Modified",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "\\(c\\) by modified eCommerce Shopsoftware ------ http://www\\.modified-shop\\.org",
 					},
 				},
@@ -24940,7 +24940,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "moin(?:_static(\\d)(\\d)(\\d)|.+)/common/js/common\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1.\\2.\\3",
 						},
 					},
@@ -24976,7 +24976,7 @@ var features = []*Feature{
 			{
 				Name: "Mondo Media",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Mondo Shop",
 					},
 				},
@@ -25000,7 +25000,7 @@ var features = []*Feature{
 			{
 				Name: "Moodle",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "^moodle",
 					},
 				},
@@ -25010,7 +25010,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "MoodleSession=",
 						},
@@ -25050,7 +25050,7 @@ var features = []*Feature{
 			{
 				Name: "Movable Type",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Movable Type",
 					},
 				},
@@ -25058,7 +25058,7 @@ var features = []*Feature{
 			{
 				Name: "Mozard Suite",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "Mozard",
 					},
 				},
@@ -25066,9 +25066,9 @@ var features = []*Feature{
 			{
 				Name: "Mura CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Mura CMS ([\\d]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25101,7 +25101,7 @@ var features = []*Feature{
 			{
 				Name: "Mynetcap",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Mynetcap",
 					},
 				},
@@ -25109,9 +25109,9 @@ var features = []*Feature{
 			{
 				Name: "MyWebsite",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^.*MyWebsite.*$\\;confidence:100",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "8",
 						},
 					},
@@ -25119,7 +25119,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "\\/\\/integration.mywebsite-editor.com.*\\.js\\;confidence:100",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "9",
 						},
 					},
@@ -25171,7 +25171,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- <meta name=\"NextGEN\" version=\"([\\d.]+)\" /> -->",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25210,7 +25210,7 @@ var features = []*Feature{
 			{
 				Name: "Octopress",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Octopress",
 					},
 				},
@@ -25226,7 +25226,7 @@ var features = []*Feature{
 			{
 				Name: "Odoo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Odoo",
 					},
 				},
@@ -25247,12 +25247,12 @@ var features = []*Feature{
 			{
 				Name: "Open Classifieds",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "open-classifieds\\.com",
 					},
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "Open Classifieds ?([0-9.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25261,9 +25261,9 @@ var features = []*Feature{
 			{
 				Name: "Open Journal Systems",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Open Journal Systems(?: ([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25280,12 +25280,12 @@ var features = []*Feature{
 			{
 				Name: "Open eShop",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "open-eshop\\.com",
 					},
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "Open eShop ?([0-9.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25307,13 +25307,13 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^OpenCms",
 						},
 						{
 							Regexp: "^OpenCms\\/([a-z\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^OpenCms\\/([a-z\\d\\.]+)",
 							},
 						},
@@ -25323,9 +25323,9 @@ var features = []*Feature{
 			{
 				Name: "OpenGrok",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "OpenGrok(?: v?([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25342,7 +25342,7 @@ var features = []*Feature{
 			{
 				Name: "OpenNemas",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "OpenNemas",
 					},
 				},
@@ -25406,7 +25406,7 @@ var features = []*Feature{
 			{
 				Name: "Orchard CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Orchard",
 					},
 				},
@@ -25422,7 +25422,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "oro\\.min\\.js\\?version=([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25441,7 +25441,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link\\s[^>]*href=\"[^\"]*?([\\d.]+)/themes/resources/owafont\\.css",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25463,7 +25463,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "fusion_visited=",
 						},
@@ -25473,7 +25473,7 @@ var features = []*Feature{
 			{
 				Name: "PHP-Nuke",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "PHP-Nuke",
 					},
 				},
@@ -25494,9 +25494,9 @@ var features = []*Feature{
 			{
 				Name: "Cecil",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Cecil(?: ([0-9.]+))?$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25505,7 +25505,7 @@ var features = []*Feature{
 			{
 				Name: "Pagekit",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Pagekit",
 					},
 				},
@@ -25513,7 +25513,7 @@ var features = []*Feature{
 			{
 				Name: "Pars Elecom Portal",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "Pars Elecom Portal",
 					},
 				},
@@ -25551,7 +25551,7 @@ var features = []*Feature{
 			{
 				Name: "Percussion",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "(?:Percussion|Rhythmyx)",
 					},
 				},
@@ -25575,7 +25575,7 @@ var features = []*Feature{
 			{
 				Name: "Pingoteam",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Designer": &FeatureRuleItem{
+					"Designer": {
 						Regexp: "Pingoteam",
 					},
 				},
@@ -25591,9 +25591,9 @@ var features = []*Feature{
 			{
 				Name: "Planet",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Planet(?:/([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25602,7 +25602,7 @@ var features = []*Feature{
 			{
 				Name: "Plentymarkets",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "plentymarkets",
 					},
 				},
@@ -25615,7 +25615,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "sw-cp-server",
 						},
@@ -25625,7 +25625,7 @@ var features = []*Feature{
 			{
 				Name: "Pligg",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Pligg",
 					},
 				},
@@ -25638,17 +25638,17 @@ var features = []*Feature{
 			{
 				Name: "Plone",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Plone",
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-caching-rule-id": &FeatureRuleItem{
+					"X-caching-rule-id": {
 						{
 							Regexp: "plone-content-types",
 						},
 					},
-					"X-cache-rule": &FeatureRuleItem{
+					"X-cache-rule": {
 						{
 							Regexp: "plone-content-types",
 						},
@@ -25772,7 +25772,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(?:prototype|protoaculous)(?:-([\\d.]*[\\d]))?.*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25789,7 +25789,7 @@ var features = []*Feature{
 			{
 				Name: "Proximis Unified Commerce",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Proximis Unified Commerce",
 					},
 				},
@@ -25820,7 +25820,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link[^>]+(?:([\\d.])+/)?pure(?:-min)?\\.css",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25853,7 +25853,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\\./qa-content/qa-page\\.js\\?([0-9.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25862,9 +25862,9 @@ var features = []*Feature{
 			{
 				Name: "Quick.CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Quick\\.CMS(?: v([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25878,9 +25878,9 @@ var features = []*Feature{
 			{
 				Name: "Quick.Cart",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Quick\\.Cart(?: v([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25894,7 +25894,7 @@ var features = []*Feature{
 			{
 				Name: "RBS Change",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "RBS Change",
 					},
 				},
@@ -25907,7 +25907,7 @@ var features = []*Feature{
 			{
 				Name: "RCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^(?:RCMS|ReallyCMS)",
 					},
 				},
@@ -25928,13 +25928,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Generated by <a[^>]+href=\"https?://rdoc\\.rubyforge\\.org[^>]+>RDoc</a> ([\\d.]*\\d)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "<footer.*<p>\\s*Generated by <a href=\"https:\\/\\/ruby\\.github\\.io\\/rdoc\\/\">RDoc<\\/a> ([\\d.]*\\d)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25943,9 +25943,9 @@ var features = []*Feature{
 			{
 				Name: "RainLoop",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Rlappversion": &FeatureRuleItem{
+					"Rlappversion": {
 						Regexp: "^([0-9.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25953,13 +25953,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link[^>]href=\"rainloop/v/([0-9.]+)/static/apple-touch-icon\\.png/>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "rainloop/v/([0-9.]+)/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25978,7 +25978,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "raphael(?:-([\\d.]+))?(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -25995,7 +25995,7 @@ var features = []*Feature{
 			{
 				Name: "Rayo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Rayo",
 					},
 				},
@@ -26003,9 +26003,9 @@ var features = []*Feature{
 			{
 				Name: "Redaxscript",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Redaxscript ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26016,13 +26016,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"Redaxscript ([^\\s^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Redaxscript ([^\\s^\"]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/redaxscript\\.com\" title=\"Redaxscript\">Redaxscript<\\/a> ([^\\s^<]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/redaxscript\\.com\" title=\"Redaxscript\">Redaxscript<\\/a> ([^\\s^<]+)<",
 						},
 					},
@@ -26047,13 +26047,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "react(?:-with-addons)?[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/([\\d.]+)/react(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26073,7 +26073,7 @@ var features = []*Feature{
 			{
 				Name: "Redmine",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Description": &FeatureRuleItem{
+					"Description": {
 						Regexp: "Redmine",
 					},
 				},
@@ -26083,7 +26083,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_redmine_session=",
 						},
@@ -26111,7 +26111,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link[^>]* href=[\\'\"][^']+revslider[/\\w-]+\\.css\\?ver=([0-9.]+)[\\'\"]",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26158,9 +26158,9 @@ var features = []*Feature{
 			{
 				Name: "RiteCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^RiteCMS(?: (.+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26169,9 +26169,9 @@ var features = []*Feature{
 			{
 				Name: "Roadiz CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Roadiz ?(?:master|develop)? v?([0-9\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26180,9 +26180,9 @@ var features = []*Feature{
 			{
 				Name: "RockRMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Rock v([0-9.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26207,7 +26207,7 @@ var features = []*Feature{
 			{
 				Name: "Ruby on Rails",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Csrf-param": &FeatureRuleItem{
+					"Csrf-param": {
 						Regexp: "^authenticity_token$",
 					},
 				},
@@ -26236,7 +26236,7 @@ var features = []*Feature{
 			{
 				Name: "S.Builder",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "S\\.Builder",
 					},
 				},
@@ -26252,9 +26252,9 @@ var features = []*Feature{
 			{
 				Name: "Scenari",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Roadiz ?(?:master|develop)? v?[0-9\\.]+ - Scenari v?([0-9\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26281,7 +26281,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<script[^>]*>\\s*Raven\\.config\\('[^']*', {\\s+release: '([0-9\\.]+)'",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26300,7 +26300,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "credits/?\" title=\"Simple Machines Forum\" target=\"_blank\" class=\"new_win\">SMF ([0-9.]+)</a>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26317,18 +26317,18 @@ var features = []*Feature{
 			{
 				Name: "SPIP",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "(?:^|\\s)SPIP(?:\\s([\\d.]+(?:\\s\\[\\d+\\])?))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Composed-by": &FeatureRuleItem{
+					"Composed-by": {
 						{
 							Regexp: "SPIP ([^@]{1,10}) @ www\\.spip\\.net",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "SPIP ([^@]{1,10}) @ www\\.spip\\.net",
 							},
 						},
@@ -26336,7 +26336,7 @@ var features = []*Feature{
 							Regexp: "SPIP @ www\\.spip\\.net",
 						},
 					},
-					"X-spip-cache": &FeatureRuleItem{
+					"X-spip-cache": {
 						{
 							Regexp: "^.+$",
 						},
@@ -26348,7 +26348,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"SPIP ([^\\s]+) \\[[\\d]+\\]\"( \\/)?>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"SPIP ([^\\s]+) \\[[\\d]+\\]\"( \\/)?>",
 						},
 					},
@@ -26409,9 +26409,9 @@ var features = []*Feature{
 			{
 				Name: "Sarka-SPIP",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Sarka-SPIP(?:\\s([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26420,7 +26420,7 @@ var features = []*Feature{
 			{
 				Name: "Sazito",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Sazito",
 					},
 				},
@@ -26428,7 +26428,7 @@ var features = []*Feature{
 			{
 				Name: "Phoenix",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^phoenix",
 					},
 				},
@@ -26436,7 +26436,7 @@ var features = []*Feature{
 			{
 				Name: "SeamlessCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Seamless\\.?CMS",
 					},
 				},
@@ -26465,7 +26465,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "/semantic(?:-([\\d.]+))?(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26482,15 +26482,15 @@ var features = []*Feature{
 			{
 				Name: "Serendipity",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Powered-by": &FeatureRuleItem{
+					"Powered-by": {
 						Regexp: "Serendipity v\\.([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Serendipity(?: v\\.([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26498,13 +26498,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"Powered-By\" content=\"Serendipity v.([^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Powered-By\" content=\"Serendipity v.([^\"]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "My weblog is proudly powered by <a href=\"http:\\/\\/www.s9y.org\">Serendipity ([^<]+)<\\/a>.<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "My weblog is proudly powered by <a href=\"http:\\/\\/www.s9y.org\">Serendipity ([^<]+)<\\/a>.<br \\/>",
 						},
 					},
@@ -26536,13 +26536,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "shapecss[-.]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/([\\d.]+)/shapecss(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26584,7 +26584,7 @@ var features = []*Feature{
 			{
 				Name: "Shopatron",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "Shopatron",
 					},
 				},
@@ -26603,9 +26603,9 @@ var features = []*Feature{
 			{
 				Name: "Shopfa",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^ShopFA ([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26619,7 +26619,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_secure_session_id",
 						},
@@ -26641,7 +26641,7 @@ var features = []*Feature{
 			{
 				Name: "Shopline",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Og:image": &FeatureRuleItem{
+					"Og:image": {
 						Regexp: "https\\:\\/\\/img\\.shoplineapp\\.com",
 					},
 				},
@@ -26649,7 +26649,7 @@ var features = []*Feature{
 			{
 				Name: "Shoptet",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Web_author": &FeatureRuleItem{
+					"Web_author": {
 						Regexp: "^Shoptet",
 					},
 				},
@@ -26665,20 +26665,20 @@ var features = []*Feature{
 			{
 				Name: "Shopware",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "Shopware",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Shopware ([\\d\\.]+) [^<]+",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "(?:(shopware)|/web/cache/[0-9]{10}_.+)\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							If:   "\\1",
 							Then: "4",
 							Else: "5",
@@ -26730,7 +26730,7 @@ var features = []*Feature{
 			{
 				Name: "SiteEdit",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "SiteEdit",
 					},
 				},
@@ -26746,9 +26746,9 @@ var features = []*Feature{
 			{
 				Name: "Sitefinity",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Sitefinity (.+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26762,7 +26762,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"Generator\" content=\"Sitefinity ([\\d\\.:]{1,20}( [A-Z]+)?)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Generator\" content=\"Sitefinity ([\\d\\.:]{1,20}( [A-Z]+)?)\" \\/>",
 						},
 					},
@@ -26774,7 +26774,7 @@ var features = []*Feature{
 			{
 				Name: "Sivuviidakko",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Sivuviidakko",
 					},
 				},
@@ -26795,13 +26795,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link [^>]+(?:/([\\d.]+)/)?slick-theme\\.css",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "(?:/([\\d.]+))?/slick(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26840,7 +26840,7 @@ var features = []*Feature{
 			{
 				Name: "SmartSite",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "Redacteur SmartInstant",
 					},
 				},
@@ -26885,7 +26885,7 @@ var features = []*Feature{
 			{
 				Name: "SoftTr",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "SoftTr E-Ticaret Sitesi Yazılımı",
 					},
 				},
@@ -26901,7 +26901,7 @@ var features = []*Feature{
 			{
 				Name: "Solusquare OmniCommerce Cloud",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Solusquare$",
 					},
 				},
@@ -26917,14 +26917,14 @@ var features = []*Feature{
 			{
 				Name: "SonarQubes",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "^SonarQubes$",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link href=\"/css/sonar\\.css\\?v=([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26933,7 +26933,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "/js/bundles/sonar\\.js?v=([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26944,7 +26944,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Created using <a href=\"https?://sphinx-doc\\.org/\">Sphinx</a> ([0-9.]+)\\.",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -26953,20 +26953,20 @@ var features = []*Feature{
 			{
 				Name: "Splunk",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "Splunk Inc",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p class=\"footer\">&copy; [-\\d]+ Splunk Inc\\.(?: Splunk ([\\d\\.]+(?: build [\\d\\.]*\\d)?))?[^<]*</p>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "session_id_8000=[a-f\\d]{32};",
 						},
@@ -26992,7 +26992,7 @@ var features = []*Feature{
 			{
 				Name: "Squiz Matrix",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Squiz Matrix",
 					},
 				},
@@ -27029,7 +27029,7 @@ var features = []*Feature{
 			{
 				Name: "Storyblok",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "storyblok",
 					},
 				},
@@ -27080,7 +27080,7 @@ var features = []*Feature{
 			{
 				Name: "Subrion",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Subrion ",
 					},
 				},
@@ -27098,7 +27098,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "supersized(?:\\.([\\d.]*[\\d]))?.*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27107,7 +27107,7 @@ var features = []*Feature{
 			{
 				Name: "Svbtle",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Svbtle\\.com$",
 					},
 				},
@@ -27155,13 +27155,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "(<div class=\"sf-toolbar[^>]+?>.+<span class=\"sf-toolbar-value\">([\\d.])+|<div id=\"sfwdt[^\"]+\" class=\"[^\"]*sf-toolbar)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^symfony",
 						},
@@ -27171,7 +27171,7 @@ var features = []*Feature{
 			{
 				Name: "Sympa",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Sympa$",
 					},
 				},
@@ -27184,10 +27184,10 @@ var features = []*Feature{
 			{
 				Name: "Synology DiskStation",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "Synology DiskStation",
 					},
-					"Description": &FeatureRuleItem{
+					"Description": {
 						Regexp: "^DiskStation provides a full-featured network attached storage",
 					},
 				},
@@ -27227,7 +27227,7 @@ var features = []*Feature{
 			{
 				Name: "TYPO3 CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "TYPO3\\s+(?:CMS\\s+)?(?:[\\d.]+)?(?:\\s+CMS)?",
 					},
 				},
@@ -27276,14 +27276,14 @@ var features = []*Feature{
 			{
 				Name: "TeamCity",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "TeamCity",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<span class=\"versionTag\"><span class=\"vWord\">Version</span> ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27294,7 +27294,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--[^>]+Tessitura Version: (\\d*\\.\\d*\\.\\d*)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27303,7 +27303,7 @@ var features = []*Feature{
 			{
 				Name: "Textalk",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Textalk Webshop",
 					},
 				},
@@ -27311,7 +27311,7 @@ var features = []*Feature{
 			{
 				Name: "Textpattern CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Textpattern",
 					},
 				},
@@ -27343,18 +27343,18 @@ var features = []*Feature{
 			{
 				Name: "TiddlyWiki",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Application-name": &FeatureRuleItem{
+					"Application-name": {
 						Regexp: "^TiddlyWiki$",
 					},
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "^TiddlyWiki created by Jeremy Ruston",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^TiddlyWiki$",
 					},
-					"Tiddlywiki-version": &FeatureRuleItem{
+					"Tiddlywiki-version": {
 						Regexp: "^(.+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27368,7 +27368,7 @@ var features = []*Feature{
 			{
 				Name: "Tiki Wiki CMS Groupware",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Tiki",
 					},
 				},
@@ -27408,7 +27408,7 @@ var features = []*Feature{
 			{
 				Name: "TomatoCart",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "TomatoCart",
 					},
 				},
@@ -27488,7 +27488,7 @@ var features = []*Feature{
 			{
 				Name: "TypePad",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "typepad",
 					},
 				},
@@ -27501,9 +27501,9 @@ var features = []*Feature{
 			{
 				Name: "Typecho",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Typecho( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27550,7 +27550,7 @@ var features = []*Feature{
 			{
 				Name: "Umbraco",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "umbraco",
 					},
 				},
@@ -27573,7 +27573,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "underscore.*\\.js(?:\\?ver=([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27619,7 +27619,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "vaadinBootstrap\\.js(?:\\?v=([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27655,7 +27655,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "(?:https?:)?\\/\\/(?:[^\\/]+\\.)*cdnjs\\.cloudflare\\.com\\/ajax\\/libs\\/video\\.js\\/([\\d\\.]+)\\/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27707,10 +27707,10 @@ var features = []*Feature{
 			{
 				Name: "Virtuoso",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "^Copyright &copy; \\d{4} OpenLink Software",
 					},
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "^OpenLink Virtuoso Sparql",
 					},
 				},
@@ -27739,19 +27739,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link [^>]*href=\"[^\"]*/vspfiles/",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "1",
 						},
 					},
 					{
 						Regexp: "<body [^>]*data-vn-page-name",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "2",
 						},
 					},
 					{
 						Regexp: "/volusion\\.js(?:\\?([\\d.]*))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27765,13 +27765,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "vue[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "(?:/([\\d.]+))?/vue(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27826,7 +27826,7 @@ var features = []*Feature{
 			{
 				Name: "Web2py",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Web2py",
 					},
 				},
@@ -27839,7 +27839,7 @@ var features = []*Feature{
 			{
 				Name: "Webflow",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Webflow",
 					},
 				},
@@ -27852,9 +27852,9 @@ var features = []*Feature{
 			{
 				Name: "WebGUI",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^WebGUI ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27863,7 +27863,7 @@ var features = []*Feature{
 			{
 				Name: "WebPublisher",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "WEB\\|Publisher",
 					},
 				},
@@ -27871,9 +27871,9 @@ var features = []*Feature{
 			{
 				Name: "WebSite X5",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Incomedia WebSite X5 (\\w+ [\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27882,14 +27882,14 @@ var features = []*Feature{
 			{
 				Name: "Webdev",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^WEBDEV$",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- [a-zA-Z0-9_]+ [\\d/]+ [\\d:]+ WebDev \\d\\d ([\\d.]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -27925,7 +27925,7 @@ var features = []*Feature{
 			{
 				Name: "WebsPlanet",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "WebsPlanet",
 					},
 				},
@@ -27933,7 +27933,7 @@ var features = []*Feature{
 			{
 				Name: "Website Creator",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Website Creator by hosttech",
 					},
 				},
@@ -27941,7 +27941,7 @@ var features = []*Feature{
 			{
 				Name: "WebsiteBaker",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "WebsiteBaker",
 					},
 				},
@@ -27957,7 +27957,7 @@ var features = []*Feature{
 			{
 				Name: "NivCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^NivCMS",
 					},
 				},
@@ -27970,7 +27970,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^is_mobile",
 						},
@@ -27991,7 +27991,7 @@ var features = []*Feature{
 			{
 				Name: "Webzi",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Webzi",
 					},
 				},
@@ -28020,7 +28020,7 @@ var features = []*Feature{
 			{
 				Name: "WikkaWiki",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "WikkaWiki",
 					},
 				},
@@ -28041,7 +28041,7 @@ var features = []*Feature{
 			{
 				Name: "Wix",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Wix\\.com Website Builder",
 					},
 				},
@@ -28051,7 +28051,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_wixAB3",
 						},
@@ -28086,9 +28086,9 @@ var features = []*Feature{
 			{
 				Name: "WooCommerce",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "WooCommerce ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28099,13 +28099,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<link rel='[^']+' id='woocommerce-(?:layout|smallscreen|general)-css'  href='https?://[^/]+/wp-content/plugins/woocommerce/assets/css/woocommerce(?:-layout|-smallscreen)?\\.css?ver=([\\d.]+)'",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/woocommerce(?:\\.min)?\\.js(?:\\?ver=([0-9.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28132,7 +28132,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Wowza Media Server \\d+ ((?:\\w+ Edition )?\\d+\\.[\\d\\.]+(?: build\\d+)?)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28141,9 +28141,9 @@ var features = []*Feature{
 			{
 				Name: "X-Cart",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "X-Cart(?: (\\d+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28151,7 +28151,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by X-Cart(?: (\\d+))? <a[^>]+href=\"http://www\\.x-cart\\.com/\"[^>]*>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28166,14 +28166,14 @@ var features = []*Feature{
 			{
 				Name: "XAMPP",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "Kai Oswald Seidler",
 					},
 				},
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>XAMPP(?: Version ([\\d\\.]+))?</title>",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28190,7 +28190,7 @@ var features = []*Feature{
 			{
 				Name: "XOOPS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "XOOPS",
 					},
 				},
@@ -28209,7 +28209,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by XOOPS ([^\\s]+) [^\\s]+ 2001-20[\\d]{2} <a href=\"http:\\/\\/(xoops\\.sourceforge\\.net|www\\.xoops\\.org\\/)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by XOOPS ([^\\s]+) [^\\s]+ 2001-20[\\d]{2} <a href=\"http:\\/\\/(xoops\\.sourceforge\\.net|www\\.xoops\\.org\\/)\"",
 						},
 					},
@@ -28220,13 +28220,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "xregexp[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/([\\d.]+)/xregexp(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28238,7 +28238,7 @@ var features = []*Feature{
 			{
 				Name: "XWiki",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Wiki": &FeatureRuleItem{
+					"Wiki": {
 						Regexp: "xwiki",
 					},
 				},
@@ -28259,7 +28259,7 @@ var features = []*Feature{
 			{
 				Name: "Xanario",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "xanario shopsoftware",
 					},
 				},
@@ -28275,7 +28275,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^xf_session",
 						},
@@ -28296,7 +28296,7 @@ var features = []*Feature{
 			{
 				Name: "Xonic",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "xonic-solutions",
 					},
 				},
@@ -28312,7 +28312,7 @@ var features = []*Feature{
 			{
 				Name: "XpressEngine",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "XpressEngine",
 					},
 				},
@@ -28437,7 +28437,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- This site is optimized with the Yoast (?:WordPress )?SEO plugin v([\\d.]+) -",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28448,7 +28448,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- Analytics by WP-Statistics v([\\d.]+) -",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28462,7 +28462,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "data-reactid=\"[^\"]+\">youTrack ([0-9.]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28482,7 +28482,7 @@ var features = []*Feature{
 			{
 				Name: "iEXExchanger",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "iEXExchanger",
 					},
 				},
@@ -28539,7 +28539,7 @@ var features = []*Feature{
 			{
 				Name: "Zinnia",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Zinnia",
 					},
 				},
@@ -28547,7 +28547,7 @@ var features = []*Feature{
 			{
 				Name: "a-blog cms",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "a-blog cms",
 					},
 				},
@@ -28565,7 +28565,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<svg[^>]*><desc>JavaScript chart by amCharts ([\\d.]*)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28579,7 +28579,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link [^>]+(?:/([\\d.]+)/)?animate\\.(?:min\\.)?css",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28601,10 +28601,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^cpsrvd\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^cpsrvd\\/([\\d\\.]+)$",
 							},
 						},
@@ -28614,9 +28614,9 @@ var features = []*Feature{
 			{
 				Name: "cgit",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^cgit v([\\d.a-z-]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28657,7 +28657,7 @@ var features = []*Feature{
 			{
 				Name: "eZ Platform",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "eZ Platform",
 					},
 				},
@@ -28665,7 +28665,7 @@ var features = []*Feature{
 			{
 				Name: "eZ Publish",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "eZ Publish",
 					},
 				},
@@ -28681,9 +28681,9 @@ var features = []*Feature{
 			{
 				Name: "git",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "\\bgit/([\\d.]+\\d)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28694,7 +28694,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p>Powered by <a[^>]+>GitList ([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28703,9 +28703,9 @@ var features = []*Feature{
 			{
 				Name: "gitweb",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "gitweb(?:/([\\d.]+\\d))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28713,7 +28713,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- git web interface version ([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28725,9 +28725,9 @@ var features = []*Feature{
 			{
 				Name: "govCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Drupal ([\\d]+) \\(http:\\/\\/drupal\\.org\\) \\+ govCMS",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28736,7 +28736,7 @@ var features = []*Feature{
 			{
 				Name: "iPresta",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Designer": &FeatureRuleItem{
+					"Designer": {
 						Regexp: "iPresta",
 					},
 				},
@@ -28744,9 +28744,9 @@ var features = []*Feature{
 			{
 				Name: "iWeb",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^iWeb( [\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28766,9 +28766,9 @@ var features = []*Feature{
 			{
 				Name: "imperia CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^IMPERIA ([0-9.]{2,})+$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28782,7 +28782,7 @@ var features = []*Feature{
 			{
 				Name: "io4 CMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "GO[ |]+CMS Enterprise",
 					},
 				},
@@ -28808,19 +28808,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "jquery[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "/([\\d.]+)/jquery(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "jquery.*\\.js(?:\\?ver(?:sion)?=([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28831,7 +28831,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "jquery[.-]migrate(?:-([\\d.]+))?(?:\\.min)?\\.js(?:\\?ver=([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							If:   "\\1",
 							Then: "\\1",
 							Else: "\\2",
@@ -28844,7 +28844,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "jquery[.-]mobile(?:-([\\d.]))?(?:\\.min)?\\.js(?:\\?ver=([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							If:   "\\1",
 							Then: "\\1",
 							Else: "\\2",
@@ -28860,7 +28860,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "jquery[.-]pjax(?:-([\\d.]))?(?:\\.min)?\\.js(?:\\?ver=([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							If:   "\\1",
 							Then: "\\1",
 							Else: "\\2",
@@ -28881,13 +28881,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "jquery-ui[.-]([\\d.]*\\d)[^/]*\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
 					{
 						Regexp: "([\\d.]+)/jquery-ui(?:\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -28915,7 +28915,7 @@ var features = []*Feature{
 			{
 				Name: "nopCommerce",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^nopCommerce$",
 					},
 				},
@@ -28953,7 +28953,7 @@ var features = []*Feature{
 			{
 				Name: "ownCloud",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Apple-itunes-app": &FeatureRuleItem{
+					"Apple-itunes-app": {
 						Regexp: "app-id=543672169",
 					},
 				},
@@ -28998,7 +28998,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--phpalbum ([.\\d\\s]+)-->",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29007,7 +29007,7 @@ var features = []*Feature{
 			{
 				Name: "phpBB",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "phpBB Group",
 					},
 				},
@@ -29017,10 +29017,10 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "phpbb([\\d])mysql_(data=a%3A|sid=[a-f\\d]{32};)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "phpbb([\\d])mysql_(data=a%3A|sid=[a-f\\d]{32};)",
 							},
 						},
@@ -29032,7 +29032,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "!\\[CDATA\\[[^<]*PMA_VERSION:\\\"([\\d.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29046,7 +29046,7 @@ var features = []*Feature{
 					},
 				},
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^PPA_ID=[a-z0-9]+",
 						},
@@ -29056,9 +29056,9 @@ var features = []*Feature{
 			{
 				Name: "phpSQLiteCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^phpSQLiteCMS(?: (.+))?$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29121,7 +29121,7 @@ var features = []*Feature{
 			{
 				Name: "sNews",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "sNews",
 					},
 				},
@@ -29146,7 +29146,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"Generator\" content=\"sNews ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Generator\" content=\"sNews ([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -29187,7 +29187,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<style[^>]+data-styled-version=\"([0-9]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29207,9 +29207,9 @@ var features = []*Feature{
 			{
 				Name: "uKnowva",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "uKnowva (?: ([\\d.]+))?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29226,9 +29226,9 @@ var features = []*Feature{
 			{
 				Name: "vBulletin",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "vBulletin ?([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29242,10 +29242,10 @@ var features = []*Feature{
 			{
 				Name: "vibecommerce",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Designer": &FeatureRuleItem{
+					"Designer": {
 						Regexp: "vibecommerce",
 					},
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "vibecommerce",
 					},
 				},
@@ -29253,9 +29253,9 @@ var features = []*Feature{
 			{
 				Name: "wisyCMS",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^wisy CMS[ v]{0,3}([0-9.,]*)",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29264,10 +29264,10 @@ var features = []*Feature{
 			{
 				Name: "wpCache",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "wpCache",
 					},
-					"Keywords": &FeatureRuleItem{
+					"Keywords": {
 						Regexp: "wpCache",
 					},
 				},
@@ -29291,7 +29291,7 @@ var features = []*Feature{
 			{
 				Name: "xtCommerce",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "xt:Commerce",
 					},
 				},
@@ -29304,10 +29304,10 @@ var features = []*Feature{
 			{
 				Name: "Yepcomm",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Copyright": &FeatureRuleItem{
+					"Copyright": {
 						Regexp: "Yepcomm Tecnologia",
 					},
-					"Author": &FeatureRuleItem{
+					"Author": {
 						Regexp: "Yepcomm Tecnologia",
 					},
 				},
@@ -29315,9 +29315,9 @@ var features = []*Feature{
 			{
 				Name: "Halo",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Halo ([\\d.]+)?",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29334,9 +29334,9 @@ var features = []*Feature{
 			{
 				Name: "Saber",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^Saber v([\\d.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29350,9 +29350,9 @@ var features = []*Feature{
 			{
 				Name: "VuePress",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "^VuePress(?: ([0-9.]+))?$",
-						Version: &FeatureVersion{
+						Version: {
 							Value: "\\1",
 						},
 					},
@@ -29361,7 +29361,7 @@ var features = []*Feature{
 			{
 				Name: "Onshop",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Onshop Ecommerce",
 					},
 				},
@@ -29393,7 +29393,7 @@ var features = []*Feature{
 			{
 				Name: "Varbase",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "Varbase",
 					},
 				},
@@ -29401,7 +29401,7 @@ var features = []*Feature{
 			{
 				Name: "GrandNode",
 				MetaTag: map[string][]*FeatureRuleItem{
-					"Generator": &FeatureRuleItem{
+					"Generator": {
 						Regexp: "grandnode",
 					},
 				},
@@ -29425,7 +29425,7 @@ var features = []*Feature{
 			{
 				Name: "1&1 Hosting",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "DIY_SB",
 						},
@@ -29440,7 +29440,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div align=\"center\"><span class=\"copyr\">Powered by <a href=\"http:\\/\\/www.360webmanager.com\" target=\"_blank\" class=\"copyrlink\">360 Web Manager<\\/a> ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div align=\"center\"><span class=\"copyr\">Powered by <a href=\"http:\\/\\/www.360webmanager.com\" target=\"_blank\" class=\"copyrlink\">360 Web Manager<\\/a> ([\\d\\.]+)",
 						},
 					},
@@ -29463,7 +29463,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<META HTTP-EQUIV=\"sysObjectID\" CONTENT=\"([\\d\\.]{20,30})\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<META HTTP-EQUIV=\"sysObjectID\" CONTENT=\"([\\d\\.]{20,30})\">",
 						},
 					},
@@ -29480,7 +29480,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <b>4images<\\/b> ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <b>4images<\\/b> ([\\d\\.]+)",
 						},
 					},
@@ -29494,7 +29494,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"author\" content=\"68 Classifieds - v([^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"author\" content=\"68 Classifieds - v([^\"]+)\" \\/>",
 						},
 					},
@@ -29508,13 +29508,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.aardvarktopsitesphp.com\\/\"><b>Aardvark Topsites PHP<\\/b><\\/a> ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.aardvarktopsitesphp.com\\/\"><b>Aardvark Topsites PHP<\\/b><\\/a> ([\\d\\.]+)",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.aardvarkind.com\\/\">Aardvark Topsites PHP<\\/a> ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.aardvarkind.com\\/\">Aardvark Topsites PHP<\\/a> ([\\d\\.]+)",
 						},
 					},
@@ -29531,7 +29531,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "&nbsp;<a href=\"http:\\/\\/www.(ab-psi.com|aeline-informatique.com)\" class=\"bdp_z01_z02_l\">[^<]+ AB WEB v. ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "&nbsp;<a href=\"http:\\/\\/www.(ab-psi.com|aeline-informatique.com)\" class=\"bdp_z01_z02_l\">[^<]+ AB WEB v. ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -29540,10 +29540,10 @@ var features = []*Feature{
 			{
 				Name: "Abyss-Web-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Abyss\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Abyss\\/([^\\s]+)",
 							},
 						},
@@ -29553,10 +29553,10 @@ var features = []*Feature{
 			{
 				Name: "acarsd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^acarsd\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^acarsd\\/([^\\s]+)$",
 							},
 						},
@@ -29577,12 +29577,12 @@ var features = []*Feature{
 			{
 				Name: "Accellion-Secure-File-Transfer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "sfcurl=deleted;",
 						},
 					},
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "\\/courier\\/[\\d]+@\\/mail_user_login\\.html\\?$",
 						},
@@ -29651,7 +29651,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www.acidcat.com\">Powered by Acidcat CMS v ([\\d\\.a-z]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.acidcat.com\">Powered by Acidcat CMS v ([\\d\\.a-z]+)<\\/a>",
 						},
 					},
@@ -29660,10 +29660,10 @@ var features = []*Feature{
 			{
 				Name: "Acme_Serve",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Acme\\.Serve\\/v([\\d\\.]+) of [\\d]{2}[a-z]{3}[\\d]{2}$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Acme\\.Serve\\/v([\\d\\.]+) of [\\d]{2}[a-z]{3}[\\d]{2}$",
 							},
 						},
@@ -29694,7 +29694,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Web Configurator - Version ([^\\s]*\\s?v[^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Web Configurator - Version ([^\\s]*\\s?v[^<]+)<\\/title>",
 						},
 					},
@@ -29716,13 +29716,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td width=\"100%\" height=\"33\" bgcolor=\"#ED7900\" class=\"copyright\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"copyright\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td width=\"100%\" height=\"33\" bgcolor=\"#ED7900\" class=\"copyright\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"copyright\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/td>",
 						},
 					},
 					{
 						Regexp: "<td height=\"70%\" valign=\"bottom\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td height=\"70%\" valign=\"bottom\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
 						},
 					},
@@ -29733,7 +29733,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.adaptcms.com\">[<b>]*AdaptCMS([^<]*)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.adaptcms.com\">[<b>]*AdaptCMS([^<]*)<\\/a>",
 						},
 					},
@@ -29747,7 +29747,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<font face=\"Verdana,Arial,Helvetica,Geneva\" size=\"2\">Release ([^\\s^,]+), &copy;20[^\\s]{2} Adcon Telemetry GmbH; all other trademarks mentioned here are registered with their owners\\.<\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font face=\"Verdana,Arial,Helvetica,Geneva\" size=\"2\">Release ([^\\s^,]+), &copy;20[^\\s]{2} Adcon Telemetry GmbH; all other trademarks mentioned here are registered with their owners\\.<\\/font>",
 						},
 					},
@@ -29756,7 +29756,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<hr>[\\s]+<p>[\\s]+Release ([^\\s^,]+), &copy; 20[\\d]{2} Adcon Telemetry GmbH<br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<hr>[\\s]+<p>[\\s]+Release ([^\\s^,]+), &copy; 20[\\d]{2} Adcon Telemetry GmbH<br>",
 						},
 					},
@@ -29765,7 +29765,7 @@ var features = []*Feature{
 			{
 				Name: "Adobe-Connect",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Breezesession": &FeatureRuleItem{
+					"Breezesession": {
 						{
 							Regexp: "BREEZESESSION=breez[^;]+;",
 						},
@@ -29777,7 +29777,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a class=\"loginHelp\" title=\"([^\\s^\\\"]+)\" target=\"_blank\" href=\"\\/common\\/help\\/[^\\/]+\\/go\\/login_ts\\.html\"( target=\"_blank\")?>Help<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a class=\"loginHelp\" title=\"([^\\s^\\\"]+)\" target=\"_blank\" href=\"\\/common\\/help\\/[^\\/]+\\/go\\/login_ts\\.html\"( target=\"_blank\")?>Help<\\/a>",
 						},
 					},
@@ -29786,10 +29786,10 @@ var features = []*Feature{
 			{
 				Name: "AdSubtract",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^AdSubtract ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^AdSubtract ([\\d\\.]+)$",
 							},
 						},
@@ -29815,7 +29815,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www.proxy2.de\" target=\"_blank\"><font color=\"#CCCCCC\" size=\"1\">(Advanced Guestbook) ([^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.proxy2.de\" target=\"_blank\"><font color=\"#CCCCCC\" size=\"1\">(Advanced Guestbook) ([^<]+)",
 						},
 					},
@@ -29832,19 +29832,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by: <B><a href=\"http:\\/\\/yabsoft.com\">AIH v([\\d\\.]+)<\\/a><\\/B>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by: <B><a href=\"http:\\/\\/yabsoft.com\">AIH v([\\d\\.]+)<\\/a><\\/B>",
 						},
 					},
 					{
 						Regexp: "<center><b>Welcome to install AIHS Script ([\\d\\.]+)<\\/b><\\/center>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<center><b>Welcome to install AIHS Script ([\\d\\.]+)<\\/b><\\/center>",
 						},
 					},
 					{
 						Regexp: "<tr><td class=info width=100%>Welcome to install Advanced Image Hosting Script Pro ([\\d\\.]+) on your server<\\/td><\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><td class=info width=100%>Welcome to install Advanced Image Hosting Script Pro ([\\d\\.]+) on your server<\\/td><\\/tr>",
 						},
 					},
@@ -29853,7 +29853,7 @@ var features = []*Feature{
 			{
 				Name: "adxstudio-cms",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "anonprofile",
 						},
@@ -29874,7 +29874,7 @@ var features = []*Feature{
 			{
 				Name: "AEF",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "AEFCookies[\\d]*\\[aefsid\\]=",
 						},
@@ -29886,7 +29886,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.anelectron\\.com\">Powered By AEF ([^<]{1,256})<\\/a> &copy; [\\d]{4}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.anelectron\\.com\">Powered By AEF ([^<]{1,256})<\\/a> &copy; [\\d]{4}",
 						},
 					},
@@ -29895,7 +29895,7 @@ var features = []*Feature{
 			{
 				Name: "AfterLogic-WebMail-Pro",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^PHPWEBMAILSESSID=[^;]+;",
 						},
@@ -29910,13 +29910,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "AfterLogic Corporation<\\/a>\\s?<\\/div>\\s+<\\/body>\\s<\\/html>\\s<!--\\s?([\\d\\.]+)\\s?-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "AfterLogic Corporation<\\/a>\\s?<\\/div>\\s+<\\/body>\\s<\\/html>\\s<!--\\s?([\\d\\.]+)\\s?-->",
 						},
 					},
 					{
 						Regexp: "AfterLogic Corporation<\\/a>\\s?<\\/div>\\s+<!--\\s?([\\d\\.]+)\\s?-->\\s<\\/body>\\s<\\/html>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "AfterLogic Corporation<\\/a>\\s?<\\/div>\\s+<!--\\s?([\\d\\.]+)\\s?-->\\s<\\/body>\\s<\\/html>",
 						},
 					},
@@ -29925,10 +29925,10 @@ var features = []*Feature{
 			{
 				Name: "AIDeX-Webserver",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^aidex\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^aidex\\/([^\\s]+)",
 							},
 						},
@@ -29945,7 +29945,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td width=\"16%\" class=\"site_statistics\" align=\"left\"><a class=\"site_statistics\" href=\"http:\\/\\/www.ajauctionpro.com\">Powered By AJ Auction Pro OOPD V([\\d\\.]{1,5})<\\/a><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td width=\"16%\" class=\"site_statistics\" align=\"left\"><a class=\"site_statistics\" href=\"http:\\/\\/www.ajauctionpro.com\">Powered By AJ Auction Pro OOPD V([\\d\\.]{1,5})<\\/a><\\/td>",
 						},
 					},
@@ -29954,7 +29954,7 @@ var features = []*Feature{
 			{
 				Name: "Akamai-Global-Host",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^AkamaiGHost",
 						},
@@ -29980,7 +29980,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- All in One SEO Pack ([\\d\\.]+) by Michael Torbert of Semper Fi Web Design",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- All in One SEO Pack ([\\d\\.]+) by Michael Torbert of Semper Fi Web Design",
 						},
 					},
@@ -29989,16 +29989,16 @@ var features = []*Feature{
 			{
 				Name: "Allegro-RomPager",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[\\s]*RomPager\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*RomPager\\/([^\\s]+)",
 							},
 						},
 						{
 							Regexp: "^[\\s]*Allegro-Software-RomPager\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*Allegro-Software-RomPager\\/([^\\s]+)",
 							},
 						},
@@ -30008,10 +30008,10 @@ var features = []*Feature{
 			{
 				Name: "Allen-Bradley-PLC",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^A-B WWW\\/([\\d\\.]{3})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^A-B WWW\\/([\\d\\.]{3})",
 							},
 						},
@@ -30041,7 +30041,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- allintaCMS V([\\d\\.]+) - http:\\/\\/www.allinta.com\\/ -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- allintaCMS V([\\d\\.]+) - http:\\/\\/www.allinta.com\\/ -->",
 						},
 					},
@@ -30060,7 +30060,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"Allomani Store v([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Allomani Store v([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -30089,7 +30089,7 @@ var features = []*Feature{
 			{
 				Name: "AmazonElasticLoadBalancer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "AWSELB",
 						},
@@ -30131,7 +30131,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t\t\t\t\t\t\tanyInventory ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t\t\t\t\t\tanyInventory ([\\d\\.]+)",
 						},
 					},
@@ -30140,7 +30140,7 @@ var features = []*Feature{
 			{
 				Name: "Apache-Struts",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "org\\.apache\\.struts\\.action\\.LOCALE=[^\\s]+;",
 						},
@@ -30172,7 +30172,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Apache Tomcat\\/([0-9\\.]+)<\\/h3><\\/body><\\/html>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Apache Tomcat\\/([0-9\\.]+)<\\/h3><\\/body><\\/html>",
 						},
 					},
@@ -30181,13 +30181,13 @@ var features = []*Feature{
 			{
 				Name: "Apache",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Apache",
 						},
 						{
 							Regexp: "^Apache\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Apache\\/([\\d\\.]+)",
 							},
 						},
@@ -30195,7 +30195,7 @@ var features = []*Feature{
 							Regexp: "^NOYB$",
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"htaccess password prompt\"",
 						},
@@ -30239,13 +30239,13 @@ var features = []*Feature{
 			{
 				Name: "AppleIDiskServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^AppleIDiskServer",
 						},
 						{
 							Regexp: "^AppleIDiskServer[\\.|-][A-Z\\d]+$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^AppleIDiskServer[\\.|-][A-Z\\d]+$",
 							},
 						},
@@ -30255,7 +30255,7 @@ var features = []*Feature{
 			{
 				Name: "ARRIS-Touchstone-Router",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NET-DK\\/[\\d\\.]+$",
 						},
@@ -30290,7 +30290,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"powered\">Powered by <a href=\"http:\\/\\/www.ArticlePublisherPRO.com\" target=\"_blank\">Article Publisher PRO<\\/a>  v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"powered\">Powered by <a href=\"http:\\/\\/www.ArticlePublisherPRO.com\" target=\"_blank\">Article Publisher PRO<\\/a>  v([\\d\\.]+)",
 						},
 					},
@@ -30326,7 +30326,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td align=\"center\"><font face=Arial size=1>News powered by <a href=http:\\/\\/projects.ashwebstudio.com>ashnews v([\\d\\.]+)<\\/a><\\/font><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"center\"><font face=Arial size=1>News powered by <a href=http:\\/\\/projects.ashwebstudio.com>ashnews v([\\d\\.]+)<\\/a><\\/font><\\/td>",
 						},
 					},
@@ -30335,20 +30335,20 @@ var features = []*Feature{
 			{
 				Name: "ASP_NET",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "asp\\.net",
 						},
 					},
-					"X-aspnet-version": &FeatureRuleItem{
+					"X-aspnet-version": {
 						{
 							Regexp: "^(.*)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.*)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^anonymousID=[^;]+; expires=[^;]+; path=[^;]+; HttpOnly",
 						},
@@ -30389,7 +30389,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div[^>]+id=\"FORUMS_FORUM_GROUP_V([\\d_]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div[^>]+id=\"FORUMS_FORUM_GROUP_V([\\d_]+)",
 						},
 					},
@@ -30400,19 +30400,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered By aspWebLinks ([\\d\\.]+) from <A[^>]*HREF=[\"']http:\\/\\/www.fullrevolution.com[^>]*>Full Revolution, Inc.<\\/A>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered By aspWebLinks ([\\d\\.]+) from <A[^>]*HREF=[\"']http:\\/\\/www.fullrevolution.com[^>]*>Full Revolution, Inc.<\\/A>",
 						},
 					},
 					{
 						Regexp: "<A[^>]*HREF=[\"']http:\\/\\/www.fullrevolution.com[^>]*>Powered By aspWebLinks ([\\d\\.]+)<\\/A>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<A[^>]*HREF=[\"']http:\\/\\/www.fullrevolution.com[^>]*>Powered By aspWebLinks ([\\d\\.]+)<\\/A>",
 						},
 					},
 					{
 						Regexp: "<title>aspWebLinks ([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>aspWebLinks ([\\d\\.]+)<\\/title>",
 						},
 					},
@@ -30437,7 +30437,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span id=\"footer-build-information\"  style=\"color: #666666;\" >\\(([^\\)^\\s]+)\\)<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span id=\"footer-build-information\"  style=\"color: #666666;\" >\\(([^\\)^\\s]+)\\)<\\/span>",
 						},
 					},
@@ -30454,7 +30454,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by AtomicCms ([\\d\\.]{1,15}) <a href=\"http:\\/\\/atomiccms.com\\/\" target=\"_blank\">content management",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by AtomicCms ([\\d\\.]{1,15}) <a href=\"http:\\/\\/atomiccms.com\\/\" target=\"_blank\">content management",
 						},
 					},
@@ -30465,7 +30465,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/atomicpa.sourceforge.net\\/\" target=\"_blank\">Atomic Photo Album ([\\d\\.a-z]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/atomicpa.sourceforge.net\\/\" target=\"_blank\">Atomic Photo Album ([\\d\\.a-z]+)<\\/a>",
 						},
 					},
@@ -30502,7 +30502,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!--[\\r\\n]*Powered by AutoIndex PHP Script \\(version ([\\d\\.]+)\\)[\\r\\n]*Copyright \\(C\\) 2002-[\\d]{4} Justin Hagstrom[\\r\\n]*http:\\/\\/autoindex.sourceforge.net[\\/]?",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--[\\r\\n]*Powered by AutoIndex PHP Script \\(version ([\\d\\.]+)\\)[\\r\\n]*Copyright \\(C\\) 2002-[\\d]{4} Justin Hagstrom[\\r\\n]*http:\\/\\/autoindex.sourceforge.net[\\/]?",
 						},
 					},
@@ -30511,10 +30511,10 @@ var features = []*Feature{
 			{
 				Name: "axTLS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^axhttpd\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^axhttpd\\/([^\\s]+)$",
 							},
 						},
@@ -30524,7 +30524,7 @@ var features = []*Feature{
 			{
 				Name: "AzureCloud",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ARRAffinity",
 						},
@@ -30545,13 +30545,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by BAB.Stats :: <a href=\"index.php\\?action=about&bms=\" onmouseover=\"doTooltip\\(event, 'About BaB.Stats'\\)\" onmouseout=\"hideTip\\(\\)\">BabStats v([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by BAB.Stats :: <a href=\"index.php\\?action=about&bms=\" onmouseover=\"doTooltip\\(event, 'About BaB.Stats'\\)\" onmouseout=\"hideTip\\(\\)\">BabStats v([\\d\\.]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"index.php\\?action=about&bms=\">BAB.stats<\\/a> version ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"index.php\\?action=about&bms=\">BAB.stats<\\/a> version ([\\d\\.]+)",
 						},
 					},
@@ -30566,7 +30566,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by Bab.stats ::[\\r\\n\\s]*<a[^>]+href=\"(http:\\/\\/www.babstats.com\\/|\\/Neos_Chronos\\/index.php\\?action=about)\">Neos.Chronos<\\/a> ::[\\s\\r\\n]*Version ([^\\(]+) \\(Standalone\\)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by Bab.stats ::[\\r\\n\\s]*<a[^>]+href=\"(http:\\/\\/www.babstats.com\\/|\\/Neos_Chronos\\/index.php\\?action=about)\">Neos.Chronos<\\/a> ::[\\s\\r\\n]*Version ([^\\(]+) \\(Standalone\\)",
 						},
 					},
@@ -30575,7 +30575,7 @@ var features = []*Feature{
 			{
 				Name: "BadBehaviourAntiSpamPlugin",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "bb2_screener_",
 						},
@@ -30595,13 +30595,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a style=\"color:#ccc;\" href=\"http:\\/\\/trinityhome.org(\\/|\\/barts_cms\\/)\"  title=\"Bart's CMS \\[Business Edition\\] Version ([\\d\\.]{1,10}) \\[(Stable|Beta)\\]\" >Bart's CMS<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a style=\"color:#ccc;\" href=\"http:\\/\\/trinityhome.org(\\/|\\/barts_cms\\/)\"  title=\"Bart's CMS \\[Business Edition\\] Version ([\\d\\.]{1,10}) \\[(Stable|Beta)\\]\" >Bart's CMS<\\/a>",
 						},
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"Bart's CMS \\[Business Edition\\] ([\\d\\.]{1,10}) [Stable][^>]*\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Bart's CMS \\[Business Edition\\] ([\\d\\.]{1,10}) [Stable][^>]*\">",
 						},
 					},
@@ -30630,10 +30630,10 @@ var features = []*Feature{
 			{
 				Name: "BeEF",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^BeEF ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^BeEF ([^\\s]+)$",
 							},
 						},
@@ -30657,7 +30657,7 @@ var features = []*Feature{
 			{
 				Name: "BigCommerce",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^fornax_anonymousId",
 						},
@@ -30729,12 +30729,12 @@ var features = []*Feature{
 			{
 				Name: "Bitrix-Site-Manager",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"P3p": &FeatureRuleItem{
+					"P3p": {
 						{
 							Regexp: "^policyref=\"\\/bitrix\\/p3p\\.xml\", CP=\"NON DSP COR CUR ADM DEV PSA PSD OUR UNR BUS UNI COM NAV INT DEM STA\"$",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "BITRIX_SM_SALE_UID=[\\d]+;",
 						},
@@ -30748,18 +30748,18 @@ var features = []*Feature{
 							Regexp: "BITRIX_SM_BANNERS=",
 						},
 					},
-					"X-powered-cms": &FeatureRuleItem{
+					"X-powered-cms": {
 						{
 							Regexp: "^Bitrix Site Manager \\(",
 						},
 					},
-					"B-powered-by": &FeatureRuleItem{
+					"B-powered-by": {
 						{
 							Regexp: "^Bitrix SM \\(",
 						},
 						{
 							Regexp: "^Bitrix SM\\/([\\d\\.]+) \\(",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Bitrix SM\\/([\\d\\.]+) \\(",
 							},
 						},
@@ -30777,7 +30777,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by[\\r\\n\\s]*<a href=\"http:\\/\\/www.dotnetblogengine.net[\\/]?\"[^>]*>BlogEngine.NET<\\/a>[\\r\\n\\s]*([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by[\\r\\n\\s]*<a href=\"http:\\/\\/www.dotnetblogengine.net[\\/]?\"[^>]*>BlogEngine.NET<\\/a>[\\r\\n\\s]*([\\d\\.]+)",
 						},
 					},
@@ -30791,7 +30791,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\"[^>]*content=\"BlognPlus ([0-9\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\"[^>]*content=\"BlognPlus ([0-9\\.]+)",
 						},
 					},
@@ -30808,7 +30808,7 @@ var features = []*Feature{
 			{
 				Name: "BLOX",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^TNNoMobile",
 						},
@@ -30828,7 +30828,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>BlueNet Video Viewer Version ([\\d\\.a-z]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>BlueNet Video Viewer Version ([\\d\\.a-z]+)<\\/title>",
 						},
 					},
@@ -30842,13 +30842,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- BOOKSolved v([^\\s]+)- Copyright by www\\.usolved\\.net -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- BOOKSolved v([^\\s]+)- Copyright by www\\.usolved\\.net -->",
 						},
 					},
 					{
 						Regexp: "<tr><td style=\"text-align: center;\">[\\s]*BOOKSolved ([^\\s]+) &copy; by <a href=\"http:\\/\\/www\\.usolved\\.net\" (target=\"_blank\" )?class=\"menu\">USOLVED<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><td style=\"text-align: center;\">[\\s]*BOOKSolved ([^\\s]+) &copy; by <a href=\"http:\\/\\/www\\.usolved\\.net\" (target=\"_blank\" )?class=\"menu\">USOLVED<\\/a>",
 						},
 					},
@@ -30870,7 +30870,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<br><div align=\"center\"><span class=\"tinytext\">Powered by <\\/span><a href=\"http:\\/\\/www.bspeak.com\" class=\"tinylink\" target=\"bspeak_window\">bSpeak ([\\d\\.]+)<\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br><div align=\"center\"><span class=\"tinytext\">Powered by <\\/span><a href=\"http:\\/\\/www.bspeak.com\" class=\"tinylink\" target=\"bspeak_window\">bSpeak ([\\d\\.]+)<\\/a><\\/div>",
 						},
 					},
@@ -30898,7 +30898,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"bxrlogo\">Powered by <a href=\"http:\\/\\/sourceforge.net\\/projects\\/bxr\\/\">BXR<\\/a> ([\\d\\.]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"bxrlogo\">Powered by <a href=\"http:\\/\\/sourceforge.net\\/projects\\/bxr\\/\">BXR<\\/a> ([\\d\\.]+)<\\/div>",
 						},
 					},
@@ -30935,7 +30935,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<img src=\"images\\/calendarix.gif\" Alt=\"About Calendarix ([\\d\\.a-z]+)\" border=0 width=88 height=31  \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"images\\/calendarix.gif\" Alt=\"About Calendarix ([\\d\\.a-z]+)\" border=0 width=88 height=31  \\/>",
 						},
 					},
@@ -30949,7 +30949,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Change for 1.2.2 : the logon form MUST use the post method for security reasons!!!",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "1.2.2",
 						},
 					},
@@ -30958,7 +30958,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<font size=\"-1\">CaLogic Calendars V([\\d\\.]+)<\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font size=\"-1\">CaLogic Calendars V([\\d\\.]+)<\\/font>",
 						},
 					},
@@ -30969,31 +30969,31 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TITLE>Network Camera VB-C50i/VB-C50iR</TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "VB-C50i",
 						},
 					},
 					{
 						Regexp: "function L(n,g) {var i=document.images[n]; if (i)I[n]=new H(i,i.src,\"/v/\"+g+\".gif\")}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "VB-C50i",
 						},
 					},
 					{
 						Regexp: "function L(n,g) {var i=document.images[n];if (i)I[n]=new H(i,i.src,\"/v/\"+g+\".gif\")}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "VB-C50i",
 						},
 					},
 					{
 						Regexp: "<param name=cabbase\tvalue=\"LiveApplet.cab\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "WebView",
 						},
 					},
 					{
 						Regexp: "<title>LiveApplet</title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "WebView",
 						},
 					},
@@ -31002,10 +31002,10 @@ var features = []*Feature{
 			{
 				Name: "Canon-Print-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PRINT_SERVER WEB ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PRINT_SERVER WEB ([\\d\\.]+)$",
 							},
 						},
@@ -31056,12 +31056,12 @@ var features = []*Feature{
 			{
 				Name: "CDK Connected Website",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-nitra-side": &FeatureRuleItem{
+					"X-nitra-side": {
 						{
 							Regexp: ".",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^nitraside",
 						},
@@ -31092,7 +31092,7 @@ var features = []*Feature{
 			{
 				Name: "Check-Point-Firewall",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "\\/fwauthredirect[\\d]{1,3}\\.[\\d]{1,3}\\.[\\d]{1,3}\\.[\\d]{1,3}id[\\d]+$",
 						},
@@ -31102,7 +31102,7 @@ var features = []*Feature{
 			{
 				Name: "Cisco-ACE-XML-Gateway",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ACE XML Gateway$",
 						},
@@ -31117,7 +31117,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"cuesLoginVersionInfo\">Version ([^\\s]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"cuesLoginVersionInfo\">Version ([^\\s]+)<\\/div>",
 						},
 					},
@@ -31126,7 +31126,7 @@ var features = []*Feature{
 			{
 				Name: "Cisco-IOS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^cisco-IOS",
 						},
@@ -31155,7 +31155,7 @@ var features = []*Feature{
 			{
 				Name: "ClickMotive",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ddcaffinitygroup",
 						},
@@ -31168,12 +31168,12 @@ var features = []*Feature{
 			{
 				Name: "CloudFlare",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "cloudflare\\-nginx",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "__cfduid",
 						},
@@ -31194,12 +31194,12 @@ var features = []*Feature{
 			{
 				Name: "CloudFront",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^CloudFront",
 						},
 					},
-					"X-cache": &FeatureRuleItem{
+					"X-cache": {
 						{
 							Regexp: "^Error from cloudfront",
 						},
@@ -31239,7 +31239,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www\\.collegiatelink\\.net\">CollegiateLink<\\/a> Version ([\\d\\.]+)<\\/p><div id=\"links\">CollegiateLink uses ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www\\.collegiatelink\\.net\">CollegiateLink<\\/a> Version ([\\d\\.]+)<\\/p><div id=\"links\">CollegiateLink uses ",
 						},
 					},
@@ -31273,13 +31273,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td align=\"right\" nowrap><a href=\"http:\\/\\/www\\.conftool\\.net\\/\"><span class=\"[^\"]+\">Conference Software - <\\/span><span class=\"[^\"]+\">[\\s]+(VSIS )?ConfTool( Pro)? ([^<^\\s]+)<\\/span><\\/a><BR>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"right\" nowrap><a href=\"http:\\/\\/www\\.conftool\\.net\\/\"><span class=\"[^\"]+\">Conference Software - <\\/span><span class=\"[^\"]+\">[\\s]+(VSIS )?ConfTool( Pro)? ([^<^\\s]+)<\\/span><\\/a><BR>",
 						},
 					},
 					{
 						Regexp: "<td align=\"right\" nowrap><span class=\"normal8\"><a href='http:\\/\\/www\\.conftool\\.net'>(Conference |Web-based |Event |Abstract )?(Management|Conference) (Software|System) - VSIS <b>ConfTool<\\/b><\\/a> Standard ([^<^\\s]+)<\\/span><BR>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"right\" nowrap><span class=\"normal8\"><a href='http:\\/\\/www\\.conftool\\.net'>(Conference |Web-based |Event |Abstract )?(Management|Conference) (Software|System) - VSIS <b>ConfTool<\\/b><\\/a> Standard ([^<^\\s]+)<\\/span><BR>",
 						},
 					},
@@ -31288,7 +31288,7 @@ var features = []*Feature{
 			{
 				Name: "Connect2",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "for Connect2-SMTP",
 						},
@@ -31309,7 +31309,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.connectix-boards.org\"[^>]*>Connectix Boards<\\/a> ([^&]+) &copy; [0-9]{4}-[0-9]{4}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.connectix-boards.org\"[^>]*>Connectix Boards<\\/a> ([^&]+) &copy; [0-9]{4}-[0-9]{4}",
 						},
 					},
@@ -31342,7 +31342,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"\\/cron\\/force\\/\">Force check<\\/a> \\)[\\s]+<\\/div>[\\s]+<div id=\"version\">[\\s]+Version: <em>([^\\s^<]+)<\\/em>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"\\/cron\\/force\\/\">Force check<\\/a> \\)[\\s]+<\\/div>[\\s]+<div id=\"version\">[\\s]+Version: <em>([^\\s^<]+)<\\/em>",
 						},
 					},
@@ -31368,7 +31368,7 @@ var features = []*Feature{
 			{
 				Name: "CraftCMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "CraftSessionId",
 						},
@@ -31444,7 +31444,7 @@ var features = []*Feature{
 			{
 				Name: "CuteFlow",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^strMyLanguage=",
 						},
@@ -31453,7 +31453,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/cuteflow\\.org\" target=\"_blank\"><img src=\"images\\/cuteflow_logo_small\\.png\" border=\"0\"\\s?\\/><\\/a><br>\\s+<strong style=\"font-size:8pt;font-weight:normal\">Version ([^\\s^<]+)<\\/strong><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/cuteflow\\.org\" target=\"_blank\"><img src=\"images\\/cuteflow_logo_small\\.png\" border=\"0\"\\s?\\/><\\/a><br>\\s+<strong style=\"font-size:8pt;font-weight:normal\">Version ([^\\s^<]+)<\\/strong><br>",
 						},
 					},
@@ -31490,13 +31490,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<li>Powered By Cype MSCMS ([\\d\\.]+) &copy; 20[\\d]{2} <a href=\"http:\\/\\/www.imurad.net\" target=\"_blank\">CypeDEV\\/iMurad.net<\\/a><br \\/><\\/li>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<li>Powered By Cype MSCMS ([\\d\\.]+) &copy; 20[\\d]{2} <a href=\"http:\\/\\/www.imurad.net\" target=\"_blank\">CypeDEV\\/iMurad.net<\\/a><br \\/><\\/li>",
 						},
 					},
 					{
 						Regexp: "<li>Powered By Cype MSCMS ([\\d\\.]+) &copy; 20[\\d]{2} <a href=\"http:\\/\\/www.cypedev.com\" target=\"_blank\">Cype Developments<\\/a><br \\/><\\/li>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<li>Powered By Cype MSCMS ([\\d\\.]+) &copy; 20[\\d]{2} <a href=\"http:\\/\\/www.cypedev.com\" target=\"_blank\">Cype Developments<\\/a><br \\/><\\/li>",
 						},
 					},
@@ -31510,7 +31510,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/(mojo.skazat.com|dadamailproject.com)\" target=\"_blank\" style=\"font-size:10px;font-family:Verdana,Arial\">Dada Mail ([^\\s^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/(mojo.skazat.com|dadamailproject.com)\" target=\"_blank\" style=\"font-size:10px;font-family:Verdana,Arial\">Dada Mail ([^\\s^<]+)",
 						},
 					},
@@ -31521,7 +31521,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td><input class=\"txt\" onkeypress='return keyPress\\(this,event\\);' type='password'( maxlength='10')? id='password'><\\/td><\\/tr>[\\s]+<tr><td class=\"ver\">\\(Version ([^\\s^<]+)\\)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td><input class=\"txt\" onkeypress='return keyPress\\(this,event\\);' type='password'( maxlength='10')? id='password'><\\/td><\\/tr>[\\s]+<tr><td class=\"ver\">\\(Version ([^\\s^<]+)\\)<\\/td>",
 						},
 					},
@@ -31533,19 +31533,19 @@ var features = []*Feature{
 			{
 				Name: "Day-Communique",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Communique",
 						},
 						{
 							Regexp: "Communique\\/([^\\s]+ \\([^\\)]+\\))",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Communique\\/([^\\s]+ \\([^\\)]+\\))",
 							},
 						},
 						{
 							Regexp: "Communique\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Communique\\/([^\\s]+)",
 							},
 						},
@@ -31555,7 +31555,7 @@ var features = []*Feature{
 			{
 				Name: "DemandWare eCommerce System",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "cqcid",
 						},
@@ -31606,13 +31606,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>Powered by DigiOz Guestbook Version ([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Powered by DigiOz Guestbook Version ([\\d\\.]+)<\\/title>",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.digioz\\.com\"[^>]*>DigiOz (\\.NET )?Guestbook Version ([\\d\\.]+)<br( \\/)?>&copy; 20[\\d]{2} DigiOz Multimedia\\.",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.digioz\\.com\"[^>]*>DigiOz (\\.NET )?Guestbook Version ([\\d\\.]+)<br( \\/)?>&copy; 20[\\d]{2} DigiOz Multimedia\\.",
 						},
 					},
@@ -31629,7 +31629,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<BR><SPAN CLASS=legal>Copyright 2005-20[\\d]{2} . <A HREF=http:\\/\\/www\\.digital-scribe\\.org>Digital Scribe v\\.([^\\s^<]+)<\\/a> - All Rights Reserved<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<BR><SPAN CLASS=legal>Copyright 2005-20[\\d]{2} . <A HREF=http:\\/\\/www\\.digital-scribe\\.org>Digital Scribe v\\.([^\\s^<]+)<\\/a> - All Rights Reserved<\\/span>",
 						},
 					},
@@ -31649,7 +31649,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.dir2web\\.it\"><img style=\"border:0px\" src=\"default\\/d2w\\d\\.gif\" alt=\"dir2web ([^\\s]+) CMS\" title=\"dir2web ([^\\s]+) CMS\"\\/><\\/a><br\\/><br\\/><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.dir2web\\.it\"><img style=\"border:0px\" src=\"default\\/d2w\\d\\.gif\" alt=\"dir2web ([^\\s]+) CMS\" title=\"dir2web ([^\\s]+) CMS\"\\/><\\/a><br\\/><br\\/><\\/div>",
 						},
 					},
@@ -31675,13 +31675,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<META content=\"Powered by DiY-CMS ([\\d\\.]+) [0-9]{4} \" name=\"description\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<META content=\"Powered by DiY-CMS ([\\d\\.]+) [0-9]{4} \" name=\"description\">",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.pghost.eu[^>]+>DIY-CMS v ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.pghost.eu[^>]+>DIY-CMS v ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -31732,10 +31732,10 @@ var features = []*Feature{
 			{
 				Name: "Dreambox",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Enigma2 WebInterface Server ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Enigma2 WebInterface Server ([\\d\\.]+)$",
 							},
 						},
@@ -31744,7 +31744,7 @@ var features = []*Feature{
 						},
 						{
 							Regexp: "^TwistedWeb\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^TwistedWeb\\/([\\d\\.]+)",
 							},
 						},
@@ -31765,7 +31765,7 @@ var features = []*Feature{
 			{
 				Name: "DynamicWeb",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Dynamicweb",
 						},
@@ -31774,7 +31774,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"Dynamicweb ([^\\s]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Dynamicweb ([^\\s]+)\"",
 						},
 					},
@@ -31802,13 +31802,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td colspan=\"3\" style=\"font-size: 10px; text-align: left;\"><CENTER>Powered By:<br>EasyFeeds-([^<]+)<br \\/>Ktools.net LLC-<a href=\"http:\\/\\/www.ktools.net\" target=\"_blank\">http:\\/\\/www.ktools.net<\\/a><\\/CENTER><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td colspan=\"3\" style=\"font-size: 10px; text-align: left;\"><CENTER>Powered By:<br>EasyFeeds-([^<]+)<br \\/>Ktools.net LLC-<a href=\"http:\\/\\/www.ktools.net\" target=\"_blank\">http:\\/\\/www.ktools.net<\\/a><\\/CENTER><\\/td>",
 						},
 					},
 					{
 						Regexp: "<CENTER>Powered By:<br>EasyFeeds-([^<]+)<br \\/>Ktools.net LLC-<a href=\"http:\\/\\/www.ktools.net\" target=\"_blank\">http:\\/\\/www.ktools.net<\\/a><\\/CENTER><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<CENTER>Powered By:<br>EasyFeeds-([^<]+)<br \\/>Ktools.net LLC-<a href=\"http:\\/\\/www.ktools.net\" target=\"_blank\">http:\\/\\/www.ktools.net<\\/a><\\/CENTER><\\/div>",
 						},
 					},
@@ -31817,10 +31817,10 @@ var features = []*Feature{
 			{
 				Name: "Embedthis-AppWeb",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Mbedthis-Appweb\\/(.*)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Mbedthis-Appweb\\/(.*)",
 							},
 						},
@@ -31879,7 +31879,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<center><font size=\"3\" face=\"monospace\">\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\* Version ([^\\s]+) \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*<\\/font><\\/center>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<center><font size=\"3\" face=\"monospace\">\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\* Version ([^\\s]+) \\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*<\\/font><\\/center>",
 						},
 					},
@@ -31891,10 +31891,10 @@ var features = []*Feature{
 			{
 				Name: "Epson-Printer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^EPSON-HTTP\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^EPSON-HTTP\\/([^\\s]+)",
 							},
 						},
@@ -31904,10 +31904,10 @@ var features = []*Feature{
 			{
 				Name: "EulerianWS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[\\s]*EulerianWS\\/([^\\s^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*EulerianWS\\/([^\\s^\\r^\\n]+)",
 							},
 						},
@@ -31916,7 +31916,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td align=\"right\"><address>EulerianWS\\/([\\d\\.]+)<\\/address><\\/td><\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"right\"><address>EulerianWS\\/([\\d\\.]+)<\\/address><\\/td><\\/tr>",
 						},
 					},
@@ -31947,7 +31947,7 @@ var features = []*Feature{
 			{
 				Name: "F5-BigIP",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "BIGIP",
 						},
@@ -31980,19 +31980,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "HTTP_ORACLE_CACHE_VERSION=([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "HTTP_ORACLE_CACHE_VERSION=([\\d\\.]+)",
 						},
 					},
 					{
 						Regexp: "SERVER_SOFTWARE=([^\\n]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "SERVER_SOFTWARE=([^\\n]+)",
 						},
 					},
 					{
 						Regexp: "SERVER_SIGNATURE=<ADDRESS>([^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "SERVER_SIGNATURE=<ADDRESS>([^<]+)",
 						},
 					},
@@ -32049,7 +32049,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "[\\s]+Copyright [0-9]{4} &copy; Flax Article Manager v([\\d\\.]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "[\\s]+Copyright [0-9]{4} &copy; Flax Article Manager v([\\d\\.]+)<\\/div>",
 						},
 					},
@@ -32076,7 +32076,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--FreeRealty ([^\\s]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--FreeRealty ([^\\s]+) -->",
 						},
 					},
@@ -32115,13 +32115,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>fsaATLAS Enterprise v\\.([^\\s^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>fsaATLAS Enterprise v\\.([^\\s^<]+)<\\/title>",
 						},
 					},
 					{
 						Regexp: "<div style=\"position:absolute; width:100px; top:0px; right:0px\"><img src=\"images\\/fsaatlastext\\.png\" alt=\"fsaATLAS Enterprise v\\.([^\\s^\"]+)\"\\/><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div style=\"position:absolute; width:100px; top:0px; right:0px\"><img src=\"images\\/fsaatlastext\\.png\" alt=\"fsaATLAS Enterprise v\\.([^\\s^\"]+)\"\\/><\\/div>",
 						},
 					},
@@ -32138,7 +32138,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "FusionBB&trade; Version (\\d+\\.?\\d+?)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "FusionBB&trade; Version (\\d+\\.?\\d+?)",
 						},
 					},
@@ -32157,7 +32157,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/sourceforge\\.net\\/projects\\/gitstat\\/\"<font size=4>\\(Powered by gitstat v([^\\)^\\s]+)\\)<\\/font><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/sourceforge\\.net\\/projects\\/gitstat\\/\"<font size=4>\\(Powered by gitstat v([^\\)^\\s]+)\\)<\\/font><\\/a>",
 						},
 					},
@@ -32174,7 +32174,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Universal",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Universal",
 						},
 					},
@@ -32219,7 +32219,7 @@ var features = []*Feature{
 			{
 				Name: "HAProxy",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"HAProxy Statistics\"",
 						},
@@ -32237,7 +32237,7 @@ var features = []*Feature{
 			{
 				Name: "HikVision",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Hikvision-Webs$",
 						},
@@ -32247,13 +32247,13 @@ var features = []*Feature{
 			{
 				Name: "Hitbox-Gateway",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Hitbox Gateway",
 						},
 						{
 							Regexp: "^Hitbox Gateway ([^\\s]{1,10})$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Hitbox Gateway ([^\\s]{1,10})$",
 							},
 						},
@@ -32265,13 +32265,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "><title>Hopf ([^<^\\s]+) - (System Info|General|Peers|Server Configuration|Kernel Info)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "><title>Hopf ([^<^\\s]+) - (System Info|General|Peers|Server Configuration|Kernel Info)<\\/title>",
 						},
 					},
 					{
 						Regexp: "<head><title>HOPF ([^<^\\s]+) Configuration<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<head><title>HOPF ([^<^\\s]+) Configuration<\\/title>",
 						},
 					},
@@ -32313,10 +32313,10 @@ var features = []*Feature{
 			{
 				Name: "HttpFileServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^HFS (\\d\\.\\d.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^HFS (\\d\\.\\d.+)$",
 							},
 						},
@@ -32328,7 +32328,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=footer>[\\s]+<a href=\"http:\\/\\/www\\.rejetto\\.com\\/hfs\\/\">HttpFileServer ([^<]+)<\\/a>[\\s]+<br \\/>Servertime",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=footer>[\\s]+<a href=\"http:\\/\\/www\\.rejetto\\.com\\/hfs\\/\">HttpFileServer ([^<]+)<\\/a>[\\s]+<br \\/>Servertime",
 						},
 					},
@@ -32356,19 +32356,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "                        <!--<p>If ActiveX control can't be loaded, please download and install Webviewer ActiveX Control.<br>&gt;&gt; <a href=\"./WebviewerInstaller.exe\">Download Webviewer Installer v.1.0.2.4</a>-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "HVRM-T1600L",
 						},
 					},
 					{
 						Regexp: "                        <!--<p>If ActiveX control can't be loaded, please download and install Webviewer ActiveX Control.<br>&gt;&gt; <a href=\"./WebviewerInstaller.exe\">Download Webviewer Installer v.1.0.2.5</a>-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "HVRM-H1600L / HVRM-T1600M",
 						},
 					},
 					{
 						Regexp: "                        <!--<p>If ActiveX control can't be loaded, please download and install Webviewer ActiveX Control.<br>&gt;&gt; <a href=\"./WebviewerInstaller.exe\">Download Webviewer Installer v.1.0.3.0</a>-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "HNVS-04",
 						},
 					},
@@ -32377,7 +32377,7 @@ var features = []*Feature{
 			{
 				Name: "Hyperic-HQ",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "\\/app\\/login;jsessionid=",
 						},
@@ -32400,16 +32400,16 @@ var features = []*Feature{
 			{
 				Name: "IBM-HTTP-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "[\\s]*IBM-HTTP-Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]*IBM-HTTP-Server\\/([\\d\\.]+)",
 							},
 						},
 						{
 							Regexp: "[\\s]*IBM_HTTP_Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]*IBM_HTTP_Server\\/([\\d\\.]+)",
 							},
 						},
@@ -32422,7 +32422,7 @@ var features = []*Feature{
 			{
 				Name: "IBM-Remote-Supervisor-Adapter",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "https?:\\/\\/[^\\/]+\\/private\\/testcookie\\.ssi\\?SESSID=[a-f\\d]{32}",
 						},
@@ -32443,10 +32443,10 @@ var features = []*Feature{
 			{
 				Name: "IBM-WebSphere",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WebSphere Application Server\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebSphere Application Server\\/([^\\s]+)$",
 							},
 						},
@@ -32469,13 +32469,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<DIV align=\"center\" CLASS=\"copy\">Powered by[\\s]+<A HREF=\"http:\\/\\/www\\.icewarp\\.com\\/\" target=\"_blank\" CLASS=\"copylink\">IceWarp Software<\\/A> <A HREF=\"http:\\/\\/(www\\.)?icewarp\\.com\\/Products\\/Merak_Email_Server_Software\\/\" target=\"_blank\" CLASS=\"copylink\">Merak Email Server<\\/A><BR>IceWarp Web Mail ([\\d\\.]+) \\([^\\)]+\\)<\\/DIV>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<DIV align=\"center\" CLASS=\"copy\">Powered by[\\s]+<A HREF=\"http:\\/\\/www\\.icewarp\\.com\\/\" target=\"_blank\" CLASS=\"copylink\">IceWarp Software<\\/A> <A HREF=\"http:\\/\\/(www\\.)?icewarp\\.com\\/Products\\/Merak_Email_Server_Software\\/\" target=\"_blank\" CLASS=\"copylink\">Merak Email Server<\\/A><BR>IceWarp Web Mail ([\\d\\.]+) \\([^\\)]+\\)<\\/DIV>",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.icewarp.com\">IceWarp Software<\\/a> <a href=\"http:\\/\\/www\\.icewarp\\.com\\/Products\\/Merak_Email_Server_Software\\/\">IceWarp Server<\\/a> [^\\s]+ 1999-20[\\d]{2}<br \\/> Version: ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.icewarp.com\">IceWarp Software<\\/a> <a href=\"http:\\/\\/www\\.icewarp\\.com\\/Products\\/Merak_Email_Server_Software\\/\">IceWarp Server<\\/a> [^\\s]+ 1999-20[\\d]{2}<br \\/> Version: ([\\d\\.]+)",
 						},
 					},
@@ -32487,19 +32487,19 @@ var features = []*Feature{
 			{
 				Name: "IceWarp-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IceWarp",
 						},
 						{
 							Regexp: "^IceWarp\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IceWarp\\/(.+)$",
 							},
 						},
 						{
 							Regexp: "^IceWarp WebSrv\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^IceWarp WebSrv\\/(.+)$",
 							},
 						},
@@ -32542,7 +32542,7 @@ var features = []*Feature{
 			{
 				Name: "imperva-securesphere",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "SecureSphere\\/secsphLogin\\.jsp",
 						},
@@ -32569,7 +32569,7 @@ var features = []*Feature{
 			{
 				Name: "Incapsula-WAF",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "incap_ses_",
 						},
@@ -32613,7 +32613,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"credits\">[\\s]+<a href=\"http:\\/\\/antisleep\\.com\\/software\\/indices\">Indices<\\/a> ([^\\s]+)[\\s]+<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"credits\">[\\s]+<a href=\"http:\\/\\/antisleep\\.com\\/software\\/indices\">Indices<\\/a> ([^\\s]+)[\\s]+<\\/div>",
 						},
 					},
@@ -32683,7 +32683,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<table width=\"100%\" bgcolor=\"#FFAD4D\" border=\"0\"><tr><td><div class=\"infobar_01\">InverseFlow Help Desk ([^<]+)<\\/td><\\/tr><\\/table>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<table width=\"100%\" bgcolor=\"#FFAD4D\" border=\"0\"><tr><td><div class=\"infobar_01\">InverseFlow Help Desk ([^<]+)<\\/td><\\/tr><\\/table>",
 						},
 					},
@@ -32706,7 +32706,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"version\">([\\d\\.]+) - Ionize CMS - MIT licence<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"version\">([\\d\\.]+) - Ionize CMS - MIT licence<\\/div>",
 						},
 					},
@@ -32735,7 +32735,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<br \\/><br \\/>&nbsp;debilsoft IP-Logger PRO Version ([\\d\\.]{1,5}) is licensed to [^<]+<\\/div><\\/body><\\/html>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br \\/><br \\/>&nbsp;debilsoft IP-Logger PRO Version ([\\d\\.]{1,5}) is licensed to [^<]+<\\/div><\\/body><\\/html>",
 						},
 					},
@@ -32761,7 +32761,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t    <img src='\\/images\\/null.gif' width='1' height='29' alt='' \\/>([\\d\\.]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t    <img src='\\/images\\/null.gif' width='1' height='29' alt='' \\/>([\\d\\.]+)<\\/td>",
 						},
 					},
@@ -32770,7 +32770,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<small>IPCop v([^\\s]+) &copy; 2001-20[\\d]{2} The IPCop Team<\\/small><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<small>IPCop v([^\\s]+) &copy; 2001-20[\\d]{2} The IPCop Team<\\/small><\\/td>",
 						},
 					},
@@ -32833,7 +32833,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<HTML><HEAD><TITLE>[^>]+ V([\\d\\.]+)[\\s]+<\\/TITLE><STYLE type=text\\/css>TD \\{FONT-SIZE: 12px; LINE-HEIGHT: normal; TEXT-ALIGN: center\\}<\\/STYLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<HTML><HEAD><TITLE>[^>]+ V([\\d\\.]+)[\\s]+<\\/TITLE><STYLE type=text\\/css>TD \\{FONT-SIZE: 12px; LINE-HEIGHT: normal; TEXT-ALIGN: center\\}<\\/STYLE>",
 						},
 					},
@@ -32894,19 +32894,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "jquery(\\.min)?\\.js\\?ver=([0-9\\.]+)['\"]",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "jquery(\\.min)?\\.js\\?ver=([0-9\\.]+)['\"]",
 						},
 					},
 					{
 						Regexp: "jquery\\/([0-9\\.]+)\\/jquery(\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "jquery\\/([0-9\\.]+)\\/jquery(\\.min)?\\.js",
 						},
 					},
 					{
 						Regexp: "jquery-([0-9\\.]+)(\\.min)?\\.js",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "jquery-([0-9\\.]+)(\\.min)?\\.js",
 						},
 					},
@@ -32929,7 +32929,7 @@ var features = []*Feature{
 			{
 				Name: "JW-Player",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^SEOT",
 						},
@@ -32939,7 +32939,7 @@ var features = []*Feature{
 			{
 				Name: "Kinja",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-kinja": &FeatureRuleItem{
+					"X-kinja": {
 						{
 							Regexp: "^$",
 						},
@@ -32951,13 +32951,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"footer\">KMSoft Guestbook v ([\\d\\.]+) Powered by <a href=\"http:\\/\\/www.kmsoft.org[\\/]*\">KMSoft<\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"footer\">KMSoft Guestbook v ([\\d\\.]+) Powered by <a href=\"http:\\/\\/www.kmsoft.org[\\/]*\">KMSoft<\\/a><\\/div>",
 						},
 					},
 					{
 						Regexp: "<title>KMSoft Guestbook v([\\d\\.]+)[^<]+<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>KMSoft Guestbook v([\\d\\.]+)[^<]+<\\/title>",
 						},
 					},
@@ -32980,13 +32980,13 @@ var features = []*Feature{
 			{
 				Name: "Koala-Web-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Koala Web Server",
 						},
 						{
 							Regexp: "^Koala Web Server\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Koala Web Server\\/([^\\s]+)",
 							},
 						},
@@ -33021,10 +33021,10 @@ var features = []*Feature{
 			{
 				Name: "Konica-Minolta-Printer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^LPC Http Server\\/V([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^LPC Http Server\\/V([^\\s]+)",
 							},
 						},
@@ -33056,7 +33056,7 @@ var features = []*Feature{
 			{
 				Name: "Kordil-EDMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "https?:\\/\\/[^\\/]+kordil_edms\\/documents\\.php$",
 						},
@@ -33068,7 +33068,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<center><font face=\"Arial\" size=\"2\">Kordil EDMS v([^<]+)<\\/font><\\/center>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<center><font face=\"Arial\" size=\"2\">Kordil EDMS v([^<]+)<\\/font><\\/center>",
 						},
 					},
@@ -33079,7 +33079,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by[\\s]+<a[^>]+href=\"http:\\/\\/www\\.kscripts\\.com\\/(scripts\\.html#ksearch)?\"[^>]*>KSearch[\\s]+([\\d\\.]+[a-z]?)[\\s]*<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by[\\s]+<a[^>]+href=\"http:\\/\\/www\\.kscripts\\.com\\/(scripts\\.html#ksearch)?\"[^>]*>KSearch[\\s]+([\\d\\.]+[a-z]?)[\\s]*<\\/a>",
 						},
 					},
@@ -33091,31 +33091,31 @@ var features = []*Feature{
 			{
 				Name: "Kyocera-Printer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^KM-MFP-http",
 						},
 						{
 							Regexp: "^KM-MFP-http\\/V([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^KM-MFP-http\\/V([\\d\\.]+)$",
 							},
 						},
 						{
 							Regexp: "^KM-httpd\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^KM-httpd\\/([\\d\\.]+)$",
 							},
 						},
 						{
 							Regexp: "^JC-HTTPD\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^JC-HTTPD\\/([\\d\\.]+)$",
 							},
 						},
 						{
 							Regexp: "^NetworkScanner WebServer Ver([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetworkScanner WebServer Ver([\\d\\.]+)$",
 							},
 						},
@@ -33125,10 +33125,10 @@ var features = []*Feature{
 			{
 				Name: "LabVIEW",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^LabVIEW\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^LabVIEW\\/([\\d\\.]+)$",
 							},
 						},
@@ -33138,13 +33138,13 @@ var features = []*Feature{
 			{
 				Name: "LANCOM-Device",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^LANCOM",
 						},
 						{
 							Regexp: "^LANCOM [^\\s]+ .+ ([\\d\\.]+) \\/ [\\d]{2}\\.[\\d]{2}\\.[\\d]{4}$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^LANCOM [^\\s]+ .+ ([\\d\\.]+) \\/ [\\d]{2}\\.[\\d]{2}\\.[\\d]{4}$",
 							},
 						},
@@ -33154,13 +33154,13 @@ var features = []*Feature{
 			{
 				Name: "LANCOM-VPN",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^LANCOM.*VPN",
 						},
 						{
 							Regexp: "^LANCOM ([\\d]{4}[\\+]?) VPN( \\([^\\)]+\\))? ([\\d\\.]+) \\/ ([\\d]{2}.[\\d]{2}.[\\d]{4})$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^LANCOM ([\\d]{4}[\\+]?) VPN( \\([^\\)]+\\))? ([\\d\\.]+) \\/ ([\\d]{2}.[\\d]{2}.[\\d]{4})$",
 							},
 						},
@@ -33184,10 +33184,10 @@ var features = []*Feature{
 			{
 				Name: "LanRTC",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^LanRTC\\/([\\d\\.]{1,5})$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^LanRTC\\/([\\d\\.]{1,5})$",
 							},
 						},
@@ -33208,10 +33208,10 @@ var features = []*Feature{
 			{
 				Name: "Lantronix-Device",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Gordian Embedded([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Gordian Embedded([\\d\\.]+)$",
 							},
 						},
@@ -33224,7 +33224,7 @@ var features = []*Feature{
 			{
 				Name: "Laravel",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^laravel_session",
 						},
@@ -33245,7 +33245,7 @@ var features = []*Feature{
 			{
 				Name: "LaserWash",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"PDQ Laserwash\"$",
 						},
@@ -33255,10 +33255,10 @@ var features = []*Feature{
 			{
 				Name: "Lasso-Web-Data-Engine",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Lasso\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Lasso\\/([^\\s]+)",
 							},
 						},
@@ -33270,13 +33270,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"Generator\" content=\"LEAP ([\\d\\.]+)\"( \\/)?>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Generator\" content=\"LEAP ([\\d\\.]+)\"( \\/)?>",
 						},
 					},
 					{
 						Regexp: "<meta name=\"Formatter\" content=\"LEAP ([\\d\\.]+)\"( \\/)?>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Formatter\" content=\"LEAP ([\\d\\.]+)\"( \\/)?>",
 						},
 					},
@@ -33285,7 +33285,7 @@ var features = []*Feature{
 			{
 				Name: "LetoDMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "out\\/out\\.ViewFolder\\.php",
 						},
@@ -33311,10 +33311,10 @@ var features = []*Feature{
 			{
 				Name: "libwww-perl-daemon",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^libwww-perl-daemon\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^libwww-perl-daemon\\/([^\\s]+)",
 							},
 						},
@@ -33324,7 +33324,7 @@ var features = []*Feature{
 			{
 				Name: "LifeSize-Control",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "^https?:\\/\\/[^\\/]+\\/LifeSizeControl\\/ASP\\/index\\.html$",
 						},
@@ -33342,7 +33342,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"lifetype-([\\w\\.]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"lifetype-([\\w\\.]+)\"",
 						},
 					},
@@ -33356,19 +33356,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name='generator' content='LightNEasy( Mini)? ([^'^>]+)' \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name='generator' content='LightNEasy( Mini)? ([^'^>]+)' \\/>",
 						},
 					},
 					{
 						Regexp: "<!-- \\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+[\\s]+\\| LightNEasy ([^\\s]+) Content Management System[\\s]+\\| ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- \\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+[\\s]+\\| LightNEasy ([^\\s]+) Content Management System[\\s]+\\| ",
 						},
 					},
 					{
 						Regexp: "<!-- \\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+[\\s]+\\| LightNEasy Content Management System[\\s]+\\| Copyright 2007-20[\\d]{2} Fernando Baptista[\\s]+\\| http:\\/\\/(www\\.)?lightneasy\\.org[\\s]+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+[\\s]+\\| [^\\|]+ version ([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- \\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+[\\s]+\\| LightNEasy Content Management System[\\s]+\\| Copyright 2007-20[\\d]{2} Fernando Baptista[\\s]+\\| http:\\/\\/(www\\.)?lightneasy\\.org[\\s]+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+[\\s]+\\| [^\\|]+ version ([^\\s]+)",
 						},
 					},
@@ -33377,19 +33377,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/lightneasy\\.org\">LightNEasy ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/lightneasy\\.org\">LightNEasy ([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<h1>LightNEasy ([^<^\\s]+) index page<\\/h1><p>If you are seeing this, that means <strong>LightNEasy<\\/strong> installation worked!<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1>LightNEasy ([^<^\\s]+) index page<\\/h1><p>If you are seeing this, that means <strong>LightNEasy<\\/strong> installation worked!<\\/p>",
 						},
 					},
 					{
 						Regexp: "<h2 class=\"LNE_title\">LightNEasy ([^<^\\s]+) index page<\\/h2><p>If you are seeing this, that means <strong>LightNEasy<\\/strong> installation worked!<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h2 class=\"LNE_title\">LightNEasy ([^<^\\s]+) index page<\\/h2><p>If you are seeing this, that means <strong>LightNEasy<\\/strong> installation worked!<\\/p>",
 						},
 					},
@@ -33474,10 +33474,10 @@ var features = []*Feature{
 			{
 				Name: "Linksys-Print-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PRINT_SERVER WEB ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PRINT_SERVER WEB ([\\d\\.]+)$",
 							},
 						},
@@ -33531,13 +33531,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>Welcome to LISTSERV ([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Welcome to LISTSERV ([\\d\\.]+)<\\/title>",
 						},
 					},
 					{
 						Regexp: "<a href=\"\\/scripts\\/wa.exe\\?[^\"]+\"><img src=\"\\/archives\\/images\\/b-[a-z]{0,2}version\\.jpg\" alt=\"LISTSERV ([\\d\\.]+)\" title=\"LISTSERV [\\d\\.]+\" border=\"0\"><\\/a><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"\\/scripts\\/wa.exe\\?[^\"]+\"><img src=\"\\/archives\\/images\\/b-[a-z]{0,2}version\\.jpg\" alt=\"LISTSERV ([\\d\\.]+)\" title=\"LISTSERV [\\d\\.]+\" border=\"0\"><\\/a><\\/td>",
 						},
 					},
@@ -33548,7 +33548,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td colspan=\"2\" width=\"400\" align=\"center\" (class|id)=\"lz_index_light_text\">LiveZilla is a registered trademark<br>of LiveZilla GmbH<br><br>Version ([\\d\\.]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td colspan=\"2\" width=\"400\" align=\"center\" (class|id)=\"lz_index_light_text\">LiveZilla is a registered trademark<br>of LiveZilla GmbH<br><br>Version ([\\d\\.]+)<\\/td>",
 						},
 					},
@@ -33591,13 +33591,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<br><br><br><br><font face='verdana' size='1'>Powered by LocazoList v([0-9a-z\\.]+)<br>Copyright [0-9]{4} <a href='http:\\/\\/www.locazo.com\\/applications'>Locazo.com<\\/a><\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br><br><br><br><font face='verdana' size='1'>Powered by LocazoList v([0-9a-z\\.]+)<br>Copyright [0-9]{4} <a href='http:\\/\\/www.locazo.com\\/applications'>Locazo.com<\\/a><\\/font>",
 						},
 					},
 					{
 						Regexp: "<title>LocazoList Classifieds v[0-9a-z\\.]+ - powered by LocazoList ([0-9a-z\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>LocazoList Classifieds v[0-9a-z\\.]+ - powered by LocazoList ([0-9a-z\\.]+)<\\/title>",
 						},
 					},
@@ -33614,7 +33614,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id=\"appliance-name\">lochDNS MyDNS Appliance<\\/div>\\s+<div id=\"appliance-version\">\\s+Version ([^\\s^<]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"appliance-name\">lochDNS MyDNS Appliance<\\/div>\\s+<div id=\"appliance-version\">\\s+Version ([^\\s^<]+)<\\/div>",
 						},
 					},
@@ -33651,7 +33651,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/loggix.gotdns.org\">Loggix<\\/a> ver.([\\d\\.]+)<\\/address>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/loggix.gotdns.org\">Loggix<\\/a> ver.([\\d\\.]+)<\\/address>",
 						},
 					},
@@ -33697,7 +33697,7 @@ var features = []*Feature{
 			{
 				Name: "LPSE",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "^(https?:\\/\\/[^\\/]+)?\\/eproc\\/app",
 						},
@@ -33723,13 +33723,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p class=\"luci\"><a href=\"\\/cgi-bin\\/luci\\/about\">Powered by LuCI [^<]+ \\(v([^\\)]+)\\)<\\/a><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p class=\"luci\"><a href=\"\\/cgi-bin\\/luci\\/about\">Powered by LuCI [^<]+ \\(v([^\\)]+)\\)<\\/a><\\/p>",
 						},
 					},
 					{
 						Regexp: "<p class=\"luci\"><a href=\"\\/cgi-bin\\/luci\\/about\">Powered by LuCI ([\\d\\.]+)<\\/a><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p class=\"luci\"><a href=\"\\/cgi-bin\\/luci\\/about\">Powered by LuCI ([\\d\\.]+)<\\/a><\\/p>",
 						},
 					},
@@ -33738,13 +33738,13 @@ var features = []*Feature{
 			{
 				Name: "Lusca-Web-Proxy-Cache",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Lusca$",
 						},
 						{
 							Regexp: "^Lusca\\/LUSCA_HEAD-([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Lusca\\/LUSCA_HEAD-([^\\s]+)$",
 							},
 						},
@@ -33754,16 +33754,16 @@ var features = []*Feature{
 			{
 				Name: "Lussumo-Vanilla",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "Lussumo Vanilla",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Lussumo Vanilla",
 							},
 						},
 						{
 							Regexp: "Lussumo Vanilla ([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Lussumo Vanilla ([^\\s]+)",
 							},
 						},
@@ -33787,7 +33787,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<b><i><font size='2' color='#0033FF'>Lux<\\/font><font size='2' color='#AA0066'>Cal<\\/font><\\/i><\\/b><font size='1'> version ([^<]+)<\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b><i><font size='2' color='#0033FF'>Lux<\\/font><font size='2' color='#AA0066'>Cal<\\/font><\\/i><\\/b><font size='1'> version ([^<]+)<\\/font>",
 						},
 					},
@@ -33810,7 +33810,7 @@ var features = []*Feature{
 			{
 				Name: "LynxGuide",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Access_Num=[^;]+;",
 						},
@@ -33830,13 +33830,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- page: [^,]+, version: (Lyris )?ListManager(SQL)? (LINUX|WIN32) [^>]*version ([^-]+) - [A-Z][a-z]{2} [\\d]{1,2} [\\d]{4}( [\\d]{2}:[\\d]{2}:[\\d]{2})?, interface:",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- page: [^,]+, version: (Lyris )?ListManager(SQL)? (LINUX|WIN32) [^>]*version ([^-]+) - [A-Z][a-z]{2} [\\d]{1,2} [\\d]{4}( [\\d]{2}:[\\d]{2}:[\\d]{2})?, interface:",
 						},
 					},
 					{
 						Regexp: "<!-- (Lyris )?List[\\s]*Manager (WIN32|LINUX) version ([^\\/]+) (- [A-Z][a-z]{2} [\\d]{1,2} [\\d]{4})?( [\\d]{2}:[\\d]{2}:[\\d]{2})?\\/ lyrispg.pl version [^>]+ -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- (Lyris )?List[\\s]*Manager (WIN32|LINUX) version ([^\\/]+) (- [A-Z][a-z]{2} [\\d]{1,2} [\\d]{4})?( [\\d]{2}:[\\d]{2}:[\\d]{2})?\\/ lyrispg.pl version [^>]+ -->",
 						},
 					},
@@ -33854,15 +33854,15 @@ var features = []*Feature{
 			{
 				Name: "M2Soft-RDServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Writereportlog": &FeatureRuleItem{
+					"Writereportlog": {
 						{
 							Regexp: "^FALSE$",
 						},
 					},
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RDServer\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^RDServer\\/([^\\s]+)$",
 							},
 						},
@@ -33882,7 +33882,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"page_footer_appversion\">Mac OS X Server Web Services Server ([\\d\\.]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"page_footer_appversion\">Mac OS X Server Web Services Server ([\\d\\.]+)<\\/div>",
 						},
 					},
@@ -33897,10 +33897,10 @@ var features = []*Feature{
 			{
 				Name: "MacHTTP",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^MacHTTP\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^MacHTTP\\/([^\\s]+)$",
 							},
 						},
@@ -33974,13 +33974,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/www.h-fj.com\\/blog\\/mtplgdoc\\/mailformv[\\d\\.\\_]+.php\"[^>]*>Powered by Mailform plugin[s]? V([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.h-fj.com\\/blog\\/mtplgdoc\\/mailformv[\\d\\.\\_]+.php\"[^>]*>Powered by Mailform plugin[s]? V([\\d\\.]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www.h-fj.com\\/blog\\/mtplgdoc\\/mailformv[\\d\\.\\_]+.php\"[^>]*>Powered by Mailform V([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.h-fj.com\\/blog\\/mtplgdoc\\/mailformv[\\d\\.\\_]+.php\"[^>]*>Powered by Mailform V([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -33994,13 +33994,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td><img src=\"[^\"]+\\/mailman.jpg\" alt=\"Delivered by Mailman\"[^>]+><br>version (\\d.\\d.[0-9a-z]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td><img src=\"[^\"]+\\/mailman.jpg\" alt=\"Delivered by Mailman\"[^>]+><br>version (\\d.\\d.[0-9a-z]+)",
 						},
 					},
 					{
 						Regexp: "<td><a href=\"http:\\/\\/www.gnu.org\\/software\\/mailman\\/index.html\">Delivered by Mailman<br>version (\\d.\\d.[0-9a-z]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td><a href=\"http:\\/\\/www.gnu.org\\/software\\/mailman\\/index.html\">Delivered by Mailman<br>version (\\d.\\d.[0-9a-z]+)<\\/a>",
 						},
 					},
@@ -34029,15 +34029,15 @@ var features = []*Feature{
 			{
 				Name: "Managed-Fusion-Url-Rewriter",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-rewritten-by": &FeatureRuleItem{
+					"X-rewritten-by": {
 						{
 							Regexp: "^ManagedFusion \\(rewriter; reverse-proxy; +http:\\/\\/managedfusion\\.com\\/\\)$",
 						},
 					},
-					"X-managedfusion-rewriter-version": &FeatureRuleItem{
+					"X-managedfusion-rewriter-version": {
 						{
 							Regexp: "^(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.+)$",
 							},
 						},
@@ -34058,7 +34058,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td>Applications Manager \\((Build No:[\\d]+)\\) &nbsp;&nbsp;&nbsp;&nbsp;Number of Monitor\\(s\\) : ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td>Applications Manager \\((Build No:[\\d]+)\\) &nbsp;&nbsp;&nbsp;&nbsp;Number of Monitor\\(s\\) : ",
 						},
 					},
@@ -34086,7 +34086,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<h1>MS4W - MapServer 4 Windows - version ([^<]+)<\\/h1>\\s+<h2>Introduction<\\/h2>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1>MS4W - MapServer 4 Windows - version ([^<]+)<\\/h1>\\s+<h2>Introduction<\\/h2>",
 						},
 					},
@@ -34095,7 +34095,7 @@ var features = []*Feature{
 			{
 				Name: "Mason",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "HTML::Mason",
 						},
@@ -34105,10 +34105,10 @@ var features = []*Feature{
 			{
 				Name: "Mathopd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Mathopd\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Mathopd\\/([^\\s]+)",
 							},
 						},
@@ -34129,7 +34129,7 @@ var features = []*Feature{
 			{
 				Name: "McAfee-ePolicy-Orchestrator",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Undefined$",
 						},
@@ -34138,7 +34138,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>\\s+ePolicy Orchestrator ([^\\s]+ \\(Build: \\d+\\))\\s+<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>\\s+ePolicy Orchestrator ([^\\s]+ \\(Build: \\d+\\))\\s+<\\/title>",
 						},
 					},
@@ -34175,7 +34175,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"MAXdev ([\\d\\.]+) - http:\\/\\/www.maxdev.(com|it)\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"MAXdev ([\\d\\.]+) - http:\\/\\/www.maxdev.(com|it)\">",
 						},
 					},
@@ -34184,10 +34184,10 @@ var features = []*Feature{
 			{
 				Name: "MeetingPlaza",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^InterSpace HTTP Tunneling\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^InterSpace HTTP Tunneling\\/([^\\s]+)$",
 							},
 						},
@@ -34249,27 +34249,27 @@ var features = []*Feature{
 			{
 				Name: "MHttpd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "[\\s]*mhttpd",
 						},
 						{
 							Regexp: "[\\s]*mhttpd v([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]*mhttpd v([\\d\\.]+)",
 							},
 						},
 						{
 							Regexp: "[\\s]*MHttpd\\/([\\d\\.]+) \\([^\\;]+; [^\\;]+; Meta-HTML\\/[\\d\\.]+\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]*MHttpd\\/([\\d\\.]+) \\([^\\;]+; [^\\;]+; Meta-HTML\\/[\\d\\.]+\\)",
 							},
 						},
 					},
-					"Meta-html-engine": &FeatureRuleItem{
+					"Meta-html-engine": {
 						{
 							Regexp: "[\\s]*MHttpd\\/([\\d\\.]+) \\([^\\;]+; [^\\;]+; Meta-HTML\\/[\\d\\.]+\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]*MHttpd\\/([\\d\\.]+) \\([^\\;]+; [^\\;]+; Meta-HTML\\/[\\d\\.]+\\)",
 							},
 						},
@@ -34281,7 +34281,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p id=\"legal\"><a href=\"http:\\/\\/mibew\\.org\\/\" class=\"flink\">Mibew Messenger<\\/a> ([^\\s]+) \\| \\(c\\) 20[\\d]{2} mibew\\.org<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p id=\"legal\"><a href=\"http:\\/\\/mibew\\.org\\/\" class=\"flink\">Mibew Messenger<\\/a> ([^\\s]+) \\| \\(c\\) 20[\\d]{2} mibew\\.org<\\/p>",
 						},
 					},
@@ -34307,7 +34307,7 @@ var features = []*Feature{
 			{
 				Name: "micro_httpd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "micro_httpd",
 						},
@@ -34317,10 +34317,10 @@ var features = []*Feature{
 			{
 				Name: "Micronet-Router",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RCTTools \\(SecureSOHO Web configuration Tools\\) v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^RCTTools \\(SecureSOHO Web configuration Tools\\) v([^\\s]+)$",
 							},
 						},
@@ -34330,10 +34330,10 @@ var features = []*Feature{
 			{
 				Name: "Microsoft-IIS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Microsoft-IIS\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Microsoft-IIS\\/([\\d\\.]+)",
 							},
 						},
@@ -34360,7 +34360,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.microsoft\\.com\\/ContentRedirect\\.asp\\?prd=iis&sbp=&pver=([\\d\\.]+)&pid=&ID=404&cat=web&os=&over=&hrd=&Opt1=&Opt2=&Opt3=\" target=\"_blank\">Microsoft Support<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.microsoft\\.com\\/ContentRedirect\\.asp\\?prd=iis&sbp=&pver=([\\d\\.]+)&pid=&ID=404&cat=web&os=&over=&hrd=&Opt1=&Opt2=&Opt3=\" target=\"_blank\">Microsoft Support<\\/a>",
 						},
 					},
@@ -34418,7 +34418,7 @@ var features = []*Feature{
 			{
 				Name: "Microsoft-SQL-Server-Report-Manager",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "\\/Reports\\/Pages\\/Folder\\.aspx",
 						},
@@ -34427,7 +34427,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<META Name=\"Generator\" CONTENT=\"Microsoft SQL Server Report Manager ([^\"]+)\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<META Name=\"Generator\" CONTENT=\"Microsoft SQL Server Report Manager ([^\"]+)\">",
 						},
 					},
@@ -34451,13 +34451,13 @@ var features = []*Feature{
 			{
 				Name: "Microsoft-WinCE",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Microsoft-WinCE",
 						},
 						{
 							Regexp: "^Microsoft-WinCE\\/([\\S]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Microsoft-WinCE\\/([\\S]+)",
 							},
 						},
@@ -34499,7 +34499,7 @@ var features = []*Feature{
 			{
 				Name: "Microsys-PROMOTIC",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Promotic$",
 						},
@@ -34537,7 +34537,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "    <meta name=\"version\" content=\"Mihalism Multi Host v([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "    <meta name=\"version\" content=\"Mihalism Multi Host v([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -34551,7 +34551,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"top\">mikrotik routeros ([^ ]+) configuration page<",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"top\">mikrotik routeros ([^ ]+) configuration page<",
 						},
 					},
@@ -34574,19 +34574,19 @@ var features = []*Feature{
 			{
 				Name: "Miniature-JWS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^(D\\. )?Rogatkin",
 						},
 						{
 							Regexp: "^Rogatkin's JWS based on Acme\\.Serve\\/\\$Revision: ([\\d\\.]+) \\$$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Rogatkin's JWS based on Acme\\.Serve\\/\\$Revision: ([\\d\\.]+) \\$$",
 							},
 						},
 						{
 							Regexp: "^D\\. Rogatkin's TJWS based on Acme\\.Serve\\/Version [^,]+, \\$Revision: ([\\d\\.]+) \\$$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^D\\. Rogatkin's TJWS based on Acme\\.Serve\\/Version [^,]+, \\$Revision: ([\\d\\.]+) \\$$",
 							},
 						},
@@ -34641,7 +34641,7 @@ var features = []*Feature{
 			{
 				Name: "Mission-Control-Application-Shield",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Mission Control Application Shield$",
 						},
@@ -34667,7 +34667,7 @@ var features = []*Feature{
 			{
 				Name: "MivaMerchant",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "htscallerid=",
 						},
@@ -34682,15 +34682,15 @@ var features = []*Feature{
 			{
 				Name: "MJNioHttpDaemon",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^MJNioHttpDaemon\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^MJNioHttpDaemon\\/([^\\s]+)",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "MJNIOHTTPDSESSIONID=",
 						},
@@ -34711,7 +34711,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a style=\"text-decoration: none;\" href=\"http:\\/\\/www.mkportal.it\\/\" target=\"_blank\">MKPortal<\\/a> ([^&^<]+)(<\\/b>)? &copy;2003-20[\\d]{2}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a style=\"text-decoration: none;\" href=\"http:\\/\\/www.mkportal.it\\/\" target=\"_blank\">MKPortal<\\/a> ([^&^<]+)(<\\/b>)? &copy;2003-20[\\d]{2}",
 						},
 					},
@@ -34731,7 +34731,7 @@ var features = []*Feature{
 			{
 				Name: "Mobile-Joomla",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "mjmarkup=deleted;",
 						},
@@ -34758,13 +34758,13 @@ var features = []*Feature{
 			{
 				Name: "MochiWeb",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^MochiWeb",
 						},
 						{
 							Regexp: "^MochiWeb\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^MochiWeb\\/([^\\s]+)",
 							},
 						},
@@ -34782,7 +34782,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Output generated by <a href=\"http:\\/\\/www\\.(modlogan\\.org|kneschke\\.de\\/projekte\\/modlogan\\/)\">modlogan ([^\\s^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Output generated by <a href=\"http:\\/\\/www\\.(modlogan\\.org|kneschke\\.de\\/projekte\\/modlogan\\/)\">modlogan ([^\\s^<]+)<\\/a>",
 						},
 					},
@@ -34830,7 +34830,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<pre>db version v[\\d\\.]+, pdfile version [\\d\\.]+\\ngit hash:",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<pre>db version v([\\d\\.]+){1}",
 						},
 					},
@@ -34839,10 +34839,10 @@ var features = []*Feature{
 			{
 				Name: "Mongrel",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Mongrel ([\\d][^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Mongrel ([\\d][^\\s]+)",
 							},
 						},
@@ -34852,13 +34852,13 @@ var features = []*Feature{
 			{
 				Name: "Monkey",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Monkey",
 						},
 						{
 							Regexp: "^Monkey\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Monkey\\/([\\d\\.]+)",
 							},
 						},
@@ -34868,7 +34868,7 @@ var features = []*Feature{
 			{
 				Name: "MoonFruit",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "markc",
 						},
@@ -34906,7 +34906,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<li><strong>Movable Type version:<\\/strong> <code>([^<]+)<\\/code><\\/li>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<li><strong>Movable Type version:<\\/strong> <code>([^<]+)<\\/code><\\/li>",
 						},
 					},
@@ -34918,7 +34918,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"Movable Type ([^\"]*)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Movable Type ([^\"]*)",
 						},
 					},
@@ -34944,13 +34944,13 @@ var features = []*Feature{
 			{
 				Name: "MoxaHttp",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^MoxaHttp",
 						},
 						{
 							Regexp: "^MoxaHttp\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^MoxaHttp\\/([^\\s]+)$",
 							},
 						},
@@ -34960,13 +34960,13 @@ var features = []*Feature{
 			{
 				Name: "MS-SDK-HttpServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^MS-SDK-HttpServer",
 						},
 						{
 							Regexp: "^MS-SDK-HttpServer\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^MS-SDK-HttpServer\\/([\\d\\.]+)$",
 							},
 						},
@@ -34978,13 +34978,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Metasploit Framework Web Console [v]?([\\d\\.]{1,6})-(dev|release)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Metasploit Framework Web Console [v]?([\\d\\.]{1,6})-(dev|release)<\\/title>",
 						},
 					},
 					{
 						Regexp: "<title>Metasploit Framework Web Console [v]?([\\d\\.]{1,6})-(dev|release)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Metasploit Framework Web Console [v]?([\\d\\.]{1,6})-(dev|release)<\\/title>",
 						},
 					},
@@ -35004,7 +35004,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title> Mercury Satellite Ground Station: Version ([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title> Mercury Satellite Ground Station: Version ([\\d\\.]+)<\\/title>",
 						},
 					},
@@ -35035,13 +35035,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t<title>Element-It MultiPowUpload ([\\d\\.]+) Examples<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t<title>Element-It MultiPowUpload ([\\d\\.]+) Examples<\\/title>",
 						},
 					},
 					{
 						Regexp: "\t\t<h2>Element-<font color=\"#de0000\">It<\\/font> MultiPowUpload ([\\d\\.]+) Examples<\\/h2>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t<h2>Element-<font color=\"#de0000\">It<\\/font> MultiPowUpload ([\\d\\.]+) Examples<\\/h2>",
 						},
 					},
@@ -35059,7 +35059,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<embed bgcolor=[^>]+src=\"ElementITMultiPowUpload([\\d\\.]{1,5}).swf\" quality=\"high\" pluginspage=\"http:\\/\\/www.macromedia.com\\/shockwave\\/download\\/index.cgi\\?P1_Prod_Version=ShockwaveFlash\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<embed bgcolor=[^>]+src=\"ElementITMultiPowUpload([\\d\\.]{1,5}).swf\" quality=\"high\" pluginspage=\"http:\\/\\/www.macromedia.com\\/shockwave\\/download\\/index.cgi\\?P1_Prod_Version=ShockwaveFlash\"",
 						},
 					},
@@ -35070,7 +35070,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"(Mura|Sava) CMS ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"(Mura|Sava) CMS ([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -35096,7 +35096,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<tr><td align=\"center\"> <a href=\"http:\\/\\/www\\.musicboxv2\\.com\" target=\"_blank\">Musicbox<\\/a> Version ([^\\s]+)&copy; 20[\\d]{2}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><td align=\"center\"> <a href=\"http:\\/\\/www\\.musicboxv2\\.com\" target=\"_blank\">Musicbox<\\/a> Version ([^\\s]+)&copy; 20[\\d]{2}",
 						},
 					},
@@ -35105,13 +35105,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id='logomain'><div id='logotopmain'><div style='font-weight:bold;font-size:12px;color:#000;padding-top:14px;padding-left:4px'>Welcome to Musicbox Version ([^\\s]+) Administration Control Panel<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id='logomain'><div id='logotopmain'><div style='font-weight:bold;font-size:12px;color:#000;padding-top:14px;padding-left:4px'>Welcome to Musicbox Version ([^\\s]+) Administration Control Panel<\\/div>",
 						},
 					},
 					{
 						Regexp: "<div id='tdrow5' align=center><br>Musicbox Version ([^\\s]+) @ 20[\\d]{2} - <a href=\"http:\\/\\/www\\.MusicboxV2\\.com\">MusicboxV2\\.com<\\/a> - Shalwan Entperises<\\/div><br><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id='tdrow5' align=center><br>Musicbox Version ([^\\s]+) @ 20[\\d]{2} - <a href=\"http:\\/\\/www\\.MusicboxV2\\.com\">MusicboxV2\\.com<\\/a> - Shalwan Entperises<\\/div><br><br>",
 						},
 					},
@@ -35120,10 +35120,10 @@ var features = []*Feature{
 			{
 				Name: "Muster-Render-Farm",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^cias-muster([\\d])$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^cias-muster([\\d])$",
 							},
 						},
@@ -35143,7 +35143,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--Copyright--><a target=\"_blank\" class=\"l\" href=\"http:\\/\\/www.mafiatic.com\">Powered by My PHP Indexer ([\\d\\.]+) \\| Copyright &copy; [0-9]{4}\\-[0-9]{4} Mafiatic Inc.<\\/a><!--Copyright-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--Copyright--><a target=\"_blank\" class=\"l\" href=\"http:\\/\\/www.mafiatic.com\">Powered by My PHP Indexer ([\\d\\.]+) \\| Copyright &copy; [0-9]{4}\\-[0-9]{4} Mafiatic Inc.<\\/a><!--Copyright-->",
 						},
 					},
@@ -35169,37 +35169,37 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"webcamXP [^\"]{0,15}v([\\d\\.]+)\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"webcamXP [^\"]{0,15}v([\\d\\.]+)\">",
 						},
 					},
 					{
 						Regexp: "mXP.com\" target=\"_blank\">webcamXP 5<\\/a> v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "mXP.com\" target=\"_blank\">webcamXP 5<\\/a> v([\\d\\.]+)",
 						},
 					},
 					{
 						Regexp: "powered by <a href=\"http:\\/\\/www.webcamXP.com\" target=\"_blank\">webcamXP<\\/a>[\\ \\d]* v([\\d\\.a-z\\ ]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "powered by <a href=\"http:\\/\\/www.webcamXP.com\" target=\"_blank\">webcamXP<\\/a>[\\ \\d]* v([\\d\\.a-z\\ ]+)<\\/div>",
 						},
 					},
 					{
 						Regexp: "<\\/td><\\/tr><\\/table><br>powered by webcamXP PRO[\\ \\d]* v([\\d\\.]+)<br><br><br><\\/font><\\/center><\\/body><\\/html>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<\\/td><\\/tr><\\/table><br>powered by webcamXP PRO[\\ \\d]* v([\\d\\.]+)<br><br><br><\\/font><\\/center><\\/body><\\/html>",
 						},
 					},
 					{
 						Regexp: "\t\t\tpowered by <a href=\"http:\\/\\/www.webcamxp.com\" title=\"www.webcamxp.com\">webcamxp 5<\\/a> v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\tpowered by <a href=\"http:\\/\\/www.webcamxp.com\" title=\"www.webcamxp.com\">webcamxp 5<\\/a> v([\\d\\.]+)",
 						},
 					},
 					{
 						Regexp: "powered by <a href=\"http:\\/\\/www.webcamXP.com\" target=\"_blank\">webcamXP 5<\\/a> v([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "powered by <a href=\"http:\\/\\/www.webcamXP.com\" target=\"_blank\">webcamXP 5<\\/a> v([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -35219,7 +35219,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.myhobbysite.net\" target=\"_blank\">MyHobbySite<\\/a> ([\\d\\.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.myhobbysite.net\" target=\"_blank\">MyHobbySite<\\/a> ([\\d\\.]+) ",
 						},
 					},
@@ -35230,7 +35230,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "      <td align=\"right\"  style=\"padding:5px; background-color: #EDF2FB;\" nowrap> Powered by <a href=\"http:\\/\\/myiosoft.com\\/\\?[\\d\\.]+\">Ajax Portal ([\\d\\.]+)<\\/a><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "      <td align=\"right\"  style=\"padding:5px; background-color: #EDF2FB;\" nowrap> Powered by <a href=\"http:\\/\\/myiosoft.com\\/\\?[\\d\\.]+\">Ajax Portal ([\\d\\.]+)<\\/a><\\/td>",
 						},
 					},
@@ -35241,13 +35241,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "    <td width=\"50%\" class=\"copy\" height=\"24\">Powered by: MyPHP Forum v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "    <td width=\"50%\" class=\"copy\" height=\"24\">Powered by: MyPHP Forum v([\\d\\.]+)",
 						},
 					},
 					{
 						Regexp: "    <td width=\"50%\" class=\"copy\" height=\"24\">Powered by: <a href=\"http:\\/\\/www.myphp.ws\">MyPHP Forum v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "    <td width=\"50%\" class=\"copy\" height=\"24\">Powered by: <a href=\"http:\\/\\/www.myphp.ws\">MyPHP Forum v([\\d\\.]+)",
 						},
 					},
@@ -35272,7 +35272,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>MyShell ([\\d\\.]+ build [\\d]{8})<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>MyShell ([\\d\\.]+ build [\\d]{8})<\\/title>",
 						},
 					},
@@ -35300,13 +35300,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "------------------------------------------------------[\\r]?\\n-- Server version[\\s]+([^\\r^\\n]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "------------------------------------------------------[\\r]?\\n-- Server version[\\s]+([^\\r^\\n]+)",
 						},
 					},
 					{
 						Regexp: "^# phpMyAdmin MySQL-Dump[\\s]+# version [^\\s]+[\\s]+# http:\\/\\/www.phpmyadmin.net\\/ \\(download page\\)[\\s#]+# Host: [^\\s]+[\\s]+# Generation Time: [^\\n]+[\\s]+# Server version: ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^# phpMyAdmin MySQL-Dump[\\s]+# version [^\\s]+[\\s]+# http:\\/\\/www.phpmyadmin.net\\/ \\(download page\\)[\\s#]+# Host: [^\\s]+[\\s]+# Generation Time: [^\\n]+[\\s]+# Server version: ([\\d\\.]+)",
 						},
 					},
@@ -35354,7 +35354,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p align=\"right\"><a href=\"http:\\/\\/www\\.gossamer-threads\\.com\\/scripts\\/\"><font face=\"Verdana, Arial, Helvetica\" size=\"1\">MySQLMan[\\s]+v\\. ([^\\s^<]+)<br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align=\"right\"><a href=\"http:\\/\\/www\\.gossamer-threads\\.com\\/scripts\\/\"><font face=\"Verdana, Arial, Helvetica\" size=\"1\">MySQLMan[\\s]+v\\. ([^\\s^<]+)<br>",
 						},
 					},
@@ -35371,7 +35371,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "^<P><B>MyWebFTP (Hoster|Free)<\\/B> Version ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^<P><B>MyWebFTP (Hoster|Free)<\\/B> Version ([\\d\\.]+)",
 						},
 					},
@@ -35419,13 +35419,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<strong><a href=\"http:\\/\\/www\\.namazu\\.org\\/\">Namazu<\\/a> <!-- VERSION --> v([\\d\\.]+) <!-- VERSION --><\\/strong>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<strong><a href=\"http:\\/\\/www\\.namazu\\.org\\/\">Namazu<\\/a> <!-- VERSION --> v([\\d\\.]+) <!-- VERSION --><\\/strong>",
 						},
 					},
 					{
 						Regexp: "This search system is powered by <a href=\"http:\\/\\/www\\.namazu\\.org\\/\">Namazu<\\/a> <!-- VERSION --> v([\\d\\.]+) <!-- VERSION --><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "This search system is powered by <a href=\"http:\\/\\/www\\.namazu\\.org\\/\">Namazu<\\/a> <!-- VERSION --> v([\\d\\.]+) <!-- VERSION --><\\/p>",
 						},
 					},
@@ -35434,18 +35434,18 @@ var features = []*Feature{
 			{
 				Name: "NaviCOPA",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^InterVations NaviCOPA",
 						},
 						{
 							Regexp: "^InterVations NaviCOPA Version ([\\d\\.]+) [\\d]{1,2}[a-z]{2} [A-Z][a-z]+ [\\d]{4}$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^InterVations NaviCOPA Version ([\\d\\.]+) [\\d]{1,2}[a-z]{2} [A-Z][a-z]+ [\\d]{4}$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^NaviCopaSession",
 						},
@@ -35457,13 +35457,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<html><title>Infinity Site Configuration<\\/title>\\s+<body bgcolor=white link=blue text=black vlink=maroon>\\s+<center>\\s+<p align=right>Version: ([^\\s^<]+)<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<html><title>Infinity Site Configuration<\\/title>\\s+<body bgcolor=white link=blue text=black vlink=maroon>\\s+<center>\\s+<p align=right>Version: ([^\\s^<]+)<\\/p>",
 						},
 					},
 					{
 						Regexp: "<html>\\s+<title>Main Menu<\\/title>\\s+<body bgcolor=white link=blue text=black vlink=maroon>\\s+<p align=right>Version: ([^\\s^<]+)<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<html>\\s+<title>Main Menu<\\/title>\\s+<body bgcolor=white link=blue text=black vlink=maroon>\\s+<p align=right>Version: ([^\\s^<]+)<\\/p>",
 						},
 					},
@@ -35472,13 +35472,13 @@ var features = []*Feature{
 			{
 				Name: "NCSA-HTTPd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NCSA",
 						},
 						{
 							Regexp: "^NCSA\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NCSA\\/([\\d\\.]+)$",
 							},
 						},
@@ -35488,7 +35488,7 @@ var features = []*Feature{
 			{
 				Name: "Nera-SatLink",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"SatLink Terminal\"$",
 						},
@@ -35503,7 +35503,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- net2ftp version ([^\\s]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- net2ftp version ([^\\s]+) -->",
 						},
 					},
@@ -35523,10 +35523,10 @@ var features = []*Feature{
 			{
 				Name: "NetApp-NAS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetApp\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetApp\\/(.+)$",
 							},
 						},
@@ -35567,13 +35567,13 @@ var features = []*Feature{
 			{
 				Name: "NetBox",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetBox",
 						},
 						{
 							Regexp: "^NetBox Version (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetBox Version (.+)$",
 							},
 						},
@@ -35583,10 +35583,10 @@ var features = []*Feature{
 			{
 				Name: "NetCache-Appliance",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetCache appliance \\(NetApp\\/([^\\)]+)\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetCache appliance \\(NetApp\\/([^\\)]+)\\)$",
 							},
 						},
@@ -35607,7 +35607,7 @@ var features = []*Feature{
 			{
 				Name: "NetGear-Firewall",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NETGEAR Firewall$",
 						},
@@ -35617,10 +35617,10 @@ var features = []*Feature{
 			{
 				Name: "NetGear-Print-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PRINT_SERVER WEB ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PRINT_SERVER WEB ([\\d\\.]+)$",
 							},
 						},
@@ -35638,7 +35638,7 @@ var features = []*Feature{
 			{
 				Name: "Netgear-Router",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"?[\\s]*Netgear",
 						},
@@ -35682,18 +35682,18 @@ var features = []*Feature{
 			{
 				Name: "NetPort",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetPort Software",
 						},
 						{
 							Regexp: "^NetPort Software ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetPort Software ([^\\s]+)$",
 							},
 						},
 					},
-					"Netport": &FeatureRuleItem{
+					"Netport": {
 						{
 							Regexp: "^Power by NetPort$",
 						},
@@ -35703,13 +35703,13 @@ var features = []*Feature{
 			{
 				Name: "NetPresenz",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetPresenz",
 						},
 						{
 							Regexp: "^NetPresenz\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetPresenz\\/([^\\s]+)$",
 							},
 						},
@@ -35747,7 +35747,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=['|\"]?http:\\/\\/www.netref.(fr|net)['|\"]? class=['|\"]?lienp['|\"]?[^>]*>Powered by Netref ([\\d\\.]+) &copy; [0-9]{4}<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=['|\"]?http:\\/\\/www.netref.(fr|net)['|\"]? class=['|\"]?lienp['|\"]?[^>]*>Powered by Netref ([\\d\\.]+) &copy; [0-9]{4}<\\/a>",
 						},
 					},
@@ -35756,13 +35756,13 @@ var features = []*Feature{
 			{
 				Name: "Netscape-FastTrack",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Netscape-FastTrack",
 						},
 						{
 							Regexp: "^Netscape-FastTrack\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Netscape-FastTrack\\/(.+)$",
 							},
 						},
@@ -35772,7 +35772,7 @@ var features = []*Feature{
 			{
 				Name: "NetShelter-VPN",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetShelter\\/VPN$",
 						},
@@ -35804,7 +35804,7 @@ var features = []*Feature{
 			{
 				Name: "NetSuite",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^NLSD3",
 						},
@@ -35855,13 +35855,13 @@ var features = []*Feature{
 			{
 				Name: "NetTalk-WebServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetTalk-WebServer",
 						},
 						{
 							Regexp: "^NetTalk-WebServer\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NetTalk-WebServer\\/([\\d\\.]+)$",
 							},
 						},
@@ -35871,7 +35871,7 @@ var features = []*Feature{
 			{
 				Name: "NetVehicle",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NetVehicle",
 						},
@@ -35888,13 +35888,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^DBabble ([^Server]+)Server Version ([^\\ ]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^DBabble ([^Server]+)Server Version ([^\\ ]+) ",
 						},
 					},
 					{
 						Regexp: "^DBabble ([^Server]+)Server Version ([^\\(]+)\\(",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^DBabble ([^Server]+)Server Version ([^\\(]+)\\(",
 						},
 					},
@@ -35971,7 +35971,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a target=\"_top\" href=\"http:\\/\\/netwinsite.com\\/ref.htm\"> WebMail v([^\\ ]+) Copyright &copy; <i>NetWin Ltd<\\/i>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a target=\"_top\" href=\"http:\\/\\/netwinsite.com\\/ref.htm\"> WebMail v([^\\ ]+) Copyright &copy; <i>NetWin Ltd<\\/i>",
 						},
 					},
@@ -36006,7 +36006,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/newscoop\\.sourcefabric\\.org\\/\" target=\"_blank\">\\s+Newscoop<\\/a>&nbsp;([\\d\\.]+)[^,]*,\\s+the open content management system for professional journalists\\.",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/newscoop\\.sourcefabric\\.org\\/\" target=\"_blank\">\\s+Newscoop<\\/a>&nbsp;([\\d\\.]+)[^,]*,\\s+the open content management system for professional journalists\\.",
 						},
 					},
@@ -36078,7 +36078,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name='NextGEN' content='([\\d\\.]+)' \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name='NextGEN' content='([\\d\\.]+)' \\/>",
 						},
 					},
@@ -36101,21 +36101,21 @@ var features = []*Feature{
 			{
 				Name: "Niagara-Web-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Niagara Web Server",
 						},
 						{
 							Regexp: "Niagara Web Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Niagara Web Server\\/([\\d\\.]+)",
 							},
 						},
 					},
-					"Niagara-release": &FeatureRuleItem{
+					"Niagara-release": {
 						{
 							Regexp: "^(.*)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.*)$",
 							},
 						},
@@ -36133,7 +36133,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/ninkobb.com\\/\">NinkoBB<\\/a> v. ([\\d\\.]{1,5}) t.",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/ninkobb.com\\/\">NinkoBB<\\/a> v. ([\\d\\.]{1,5}) t.",
 						},
 					},
@@ -36142,10 +36142,10 @@ var features = []*Feature{
 			{
 				Name: "Nortel-Router",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Nortel Http Server v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Nortel Http Server v([^\\s]+)$",
 							},
 						},
@@ -36168,7 +36168,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td align=\"center\" colspan=\"4\" height=\"38\" width=\"572\" bgcolor=\"#f5f5dc\"><p class=\"copy\">Version ([\\d\\.]+) -",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"center\" colspan=\"4\" height=\"38\" width=\"572\" bgcolor=\"#f5f5dc\"><p class=\"copy\">Version ([\\d\\.]+) -",
 						},
 					},
@@ -36200,7 +36200,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "^&copy; Copyright 1993-20[\\d]{2} Novell, Inc. All rights reserved.[\\s]+<BR>Version ([\\d\\.]+)$",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^&copy; Copyright 1993-20[\\d]{2} Novell, Inc. All rights reserved.[\\s]+<BR>Version ([\\d\\.]+)$",
 						},
 					},
@@ -36209,7 +36209,7 @@ var features = []*Feature{
 			{
 				Name: "Novell-iChain",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-error-info": &FeatureRuleItem{
+					"X-error-info": {
 						{
 							Regexp: "Host name received is not for this web site",
 						},
@@ -36241,7 +36241,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<br>&nbsp;&nbsp;<font color=teal size=-1><B>Novell (NetWare|Small Business Suite) ([^<]+)<\\/B><\\/font><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br>&nbsp;&nbsp;<font color=teal size=-1><B>Novell (NetWare|Small Business Suite) ([^<]+)<\\/B><\\/font><br>",
 						},
 					},
@@ -36261,7 +36261,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<h1>Novell Open Enterprise Server ([^<]+)<\\/h1>\\s+<p class=\"link\"><a href=\"http:\\/\\/www\\.novell\\.com\\/products\\/openenterpriseserver\\/\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1>Novell Open Enterprise Server ([^<]+)<\\/h1>\\s+<p class=\"link\"><a href=\"http:\\/\\/www\\.novell\\.com\\/products\\/openenterpriseserver\\/\">",
 						},
 					},
@@ -36272,7 +36272,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<h1 id=\"site-logo\" class=\"logo\" title=\"Novell Sentinel Log Manager\"><span class=\"accessible\">Novell Identity Audit<\\/span><\\/h1>\\s+<p class=\"publisher\">Novell<\\/p>\\s+<p class=\"version\">Version ([^>]+)<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1 id=\"site-logo\" class=\"logo\" title=\"Novell Sentinel Log Manager\"><span class=\"accessible\">Novell Identity Audit<\\/span><\\/h1>\\s+<p class=\"publisher\">Novell<\\/p>\\s+<p class=\"version\">Version ([^>]+)<\\/p>",
 						},
 					},
@@ -36295,13 +36295,13 @@ var features = []*Feature{
 			{
 				Name: "NSFocus",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^NSFocus",
 						},
 						{
 							Regexp: "^NSFocus\\/([^\\s]+) \\( NSFOCUS \\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^NSFocus\\/([^\\s]+) \\( NSFOCUS \\)",
 							},
 						},
@@ -36318,7 +36318,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"Nucleus CMS v([^\"^>]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Nucleus CMS v([^\"^>]+)\" \\/>",
 						},
 					},
@@ -36327,7 +36327,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<small>Copyright \\| <a href=\"http:\\/\\/nucleuscms\\.org\">Nucleus CMS v([^\\s^>]+)<\\/a> \\|",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<small>Copyright \\| <a href=\"http:\\/\\/nucleuscms\\.org\">Nucleus CMS v([^\\s^>]+)<\\/a> \\|",
 						},
 					},
@@ -36350,13 +36350,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t\t\tPowered by <a href=\"http:\\/\\/www.nukedit.com\" target=\"_blank\" title=\"Fast web portal, friendly with search engines\">Nukedit<\\/a> ([\\d\\.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t\tPowered by <a href=\"http:\\/\\/www.nukedit.com\" target=\"_blank\" title=\"Fast web portal, friendly with search engines\">Nukedit<\\/a> ([\\d\\.]+) ",
 						},
 					},
 					{
 						Regexp: "\t\t\t\t\t<span class=footer><center>Powered by Nukedit ([\\d\\.]+)<\\/a> -",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t\t\t<span class=footer><center>Powered by Nukedit ([\\d\\.]+)<\\/a> -",
 						},
 					},
@@ -36367,7 +36367,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"Nuke[vV]iet v([^\\s^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Nuke[vV]iet v([^\\s^\"]+)\" \\/>",
 						},
 					},
@@ -36382,13 +36382,13 @@ var features = []*Feature{
 			{
 				Name: "O2Micro-Firewall",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^O2micro",
 						},
 						{
 							Regexp: "^(O2micro|Firewall)\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(O2micro|Firewall)\\/([\\d\\.]+)",
 							},
 						},
@@ -36406,7 +36406,7 @@ var features = []*Feature{
 			{
 				Name: "OBM",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "OBM_Session=[\\s]+;",
 						},
@@ -36415,7 +36415,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Login - OBM ([^\\s^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Login - OBM ([^\\s^<]+)<\\/title>",
 						},
 					},
@@ -36446,15 +36446,15 @@ var features = []*Feature{
 			{
 				Name: "ocPortal",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "^ocPortal ([^\\(]+) \\(PHP",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ocPortal ([^\\(]+) \\(PHP",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ocp_session=[\\d]+;",
 						},
@@ -36469,7 +36469,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!--\\nPowered by ocPortal\\n([^\\n]+) version\\nCopyright ocProducts Limited\\nhttp:\\/\\/ocportal\\.com\\n-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--\\nPowered by ocPortal\\n([^\\n]+) version\\nCopyright ocProducts Limited\\nhttp:\\/\\/ocportal\\.com\\n-->",
 						},
 					},
@@ -36483,7 +36483,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<img src=image\\/banner-ocs\\.png><\\/a><\\/td><td width='33%' align='right'>[\\s]+<b>Ver\\. ([^&]+)&nbsp&nbsp&nbsp;<\\/b>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=image\\/banner-ocs\\.png><\\/a><\\/td><td width='33%' align='right'>[\\s]+<b>Ver\\. ([^&]+)&nbsp&nbsp&nbsp;<\\/b>",
 						},
 					},
@@ -36497,7 +36497,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td class=\"box\" align=\"center\" >Octopussy ([^\\s^<]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td class=\"box\" align=\"center\" >Octopussy ([^\\s^<]+)<\\/td>",
 						},
 					},
@@ -36529,13 +36529,13 @@ var features = []*Feature{
 			{
 				Name: "OKI-Printer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^OKIDATA-HTTPD",
 						},
 						{
 							Regexp: "^OKIDATA-HTTPD\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^OKIDATA-HTTPD\\/([^\\s]+)$",
 							},
 						},
@@ -36547,13 +36547,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"b_footer_version\">[\\s]+<a href=\"http:\\/\\/www\\.olat\\.org\"  title=\"Homepage of Open Source LMS OLAT\" target=\"_blank\">OLAT ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"b_footer_version\">[\\s]+<a href=\"http:\\/\\/www\\.olat\\.org\"  title=\"Homepage of Open Source LMS OLAT\" target=\"_blank\">OLAT ([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<div id=\"o_footer_version\">[\\s]+<a href=\"http:\\/\\/www\\.olat\\.org\"  title=\"Homepage of Open Source LMS OLAT\" target=\"_blank\">[\\s]+OLAT ([^<^\\n]+)[\\s]+<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"o_footer_version\">[\\s]+<a href=\"http:\\/\\/www\\.olat\\.org\"  title=\"Homepage of Open Source LMS OLAT\" target=\"_blank\">[\\s]+OLAT ([^<^\\n]+)[\\s]+<\\/a>",
 						},
 					},
@@ -36605,13 +36605,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"keywords\" content=\"Online Grades Version ([^\\s^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"keywords\" content=\"Online Grades Version ([^\\s^\"]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "      <div class=\"center\">[\\r\\n]      Online Grades Version:[\\r\\n]      ([^\\s]+)      <\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "      <div class=\"center\">[\\r\\n]      Online Grades Version:[\\r\\n]      ([^\\s]+)      <\\/div>",
 						},
 					},
@@ -36637,7 +36637,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<tr><td align=center valign=bottom>Version[\\s]+([^\\s^<]+)<br>[\\s]+Copyright",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><td align=center valign=bottom>Version[\\s]+([^\\s^<]+)<br>[\\s]+Copyright",
 						},
 					},
@@ -36676,13 +36676,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<html><head>[\\s]+<title>Open Admin for Schools ([^\\s]+) - [^<]+<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<html><head>[\\s]+<title>Open Admin for Schools ([^\\s]+) - [^<]+<\\/title>",
 						},
 					},
 					{
 						Regexp: "<tr><th style=\"padding:0.3em;\"><span style=\"font-size: 120%;\">[\\s]+Open Admin for Schools ([^\\s]+)<\\/span> [^<]+ Les Richardson<\\/th><\\/tr>[\\s]+<\\/table>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><th style=\"padding:0.3em;\"><span style=\"font-size: 120%;\">[\\s]+Open Admin for Schools ([^\\s]+)<\\/span> [^<]+ Les Richardson<\\/th><\\/tr>[\\s]+<\\/table>",
 						},
 					},
@@ -36705,13 +36705,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t\t<p>Powered by <a href=\"http:\\/\\/www.openautoclassifieds.com[^\"]*\">Open Auto Classifieds v([\\d\\.a-z]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t<p>Powered by <a href=\"http:\\/\\/www.openautoclassifieds.com[^\"]*\">Open Auto Classifieds v([\\d\\.a-z]+)",
 						},
 					},
 					{
 						Regexp: "\t\t\t<p>Powered by Open Auto Classifieds v([\\d\\.a-z]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t<p>Powered by Open Auto Classifieds v([\\d\\.a-z]+)",
 						},
 					},
@@ -36731,7 +36731,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t\t<a href=\"install.php\">Install Open Blog<\\/a> - choose this option, if you would like to install Open Blog ([\\d\\.]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t<a href=\"install.php\">Install Open Blog<\\/a> - choose this option, if you would like to install Open Blog ([\\d\\.]+)<br \\/>",
 						},
 					},
@@ -36753,7 +36753,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta[^>]+property=\"og:type\"[^>]+content=\"([^\"^>]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta[^>]+property=\"og:type\"[^>]+content=\"([^\"^>]+)\"",
 						},
 					},
@@ -36764,7 +36764,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Open-Realty ([\\d\\.]+) - [^<]+<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Open-Realty ([\\d\\.]+) - [^<]+<\\/title>",
 						},
 					},
@@ -36785,10 +36785,10 @@ var features = []*Feature{
 			{
 				Name: "Open-Xchange",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "^https?:\\/\\/[^\\/]+\\/ox6\\/ox\\.html$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "6.x",
 							},
 						},
@@ -36803,7 +36803,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"login-bottomline\">\\W+<span id=\"[a-z]\\d+[a-z]\\d+\">Version<\\/span>\\s+:\\W+([^\\s]+\\W+[^\\W]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"login-bottomline\">\\W+<span id=\"[a-z]\\d+[a-z]\\d+\">Version<\\/span>\\s+:\\W+([^\\s]+\\W+[^\\W]+)",
 						},
 					},
@@ -36820,7 +36820,7 @@ var features = []*Feature{
 			{
 				Name: "OpenConf",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "OPENCONF=[^;]+;",
 						},
@@ -36832,13 +36832,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"powered\">Powered by <a href=\"http:\\/\\/www\\.OpenConf\\.com\" target=\"_blank\">OpenConf<\\/a>(<sup>&reg;<\\/sup>)?<!--([^\\s]+)-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"powered\">Powered by <a href=\"http:\\/\\/www\\.OpenConf\\.com\" target=\"_blank\">OpenConf<\\/a>(<sup>&reg;<\\/sup>)?<!--([^\\s]+)-->",
 						},
 					},
 					{
 						Regexp: "<script type=\"text\\/javascript\" src=\"openconf\\.js\\?v=([^\\s^\"]+)\"><\\/script>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<script type=\"text\\/javascript\" src=\"openconf\\.js\\?v=([^\\s^\"]+)\"><\\/script>",
 						},
 					},
@@ -36849,7 +36849,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.opendocman\\.com\\/\" target=\"_new\">OpenDocMan v([^\"^\\s]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.opendocman\\.com\\/\" target=\"_new\">OpenDocMan v([^\"^\\s]+)<\\/a>",
 						},
 					},
@@ -36864,7 +36864,7 @@ var features = []*Feature{
 			{
 				Name: "OpenEMR",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "OpenEMR=[^\\s]+;",
 						},
@@ -36876,7 +36876,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "type=\"text\\/css\">[\\s]+<\\/head>[\\s]+<body class=\"body_title\">[\\s]+<span class=\"title_bar\">[^<]+ v([^\\s^<]+)<\\/span><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "type=\"text\\/css\">[\\s]+<\\/head>[\\s]+<body class=\"body_title\">[\\s]+<span class=\"title_bar\">[^<]+ v([^\\s^<]+)<\\/span><br>",
 						},
 					},
@@ -36896,7 +36896,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p class=\"adminText\" style=\"font-size:9px;\">[\\s]+openEngine ([^\\s]+)( - [\\d]+)? - Open Source Web Content Management System<br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p class=\"adminText\" style=\"font-size:9px;\">[\\s]+openEngine ([^\\s]+)( - [\\d]+)? - Open Source Web Content Management System<br>",
 						},
 					},
@@ -36910,7 +36910,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div><p style=\"font-size: 90%; color: #aaa; line-height: 14px;\"><strong>Distro Release:&nbsp;<\\/strong>Openfiler [EN]SA ([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div><p style=\"font-size: 90%; color: #aaa; line-height: 14px;\"><strong>Distro Release:&nbsp;<\\/strong>Openfiler [EN]SA ([^\\s]+)",
 						},
 					},
@@ -36921,7 +36921,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<span class=\"big-title\">Openi ([^\\s^<]+)<\\/span><br",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"big-title\">Openi ([^\\s^<]+)<\\/span><br",
 						},
 					},
@@ -36962,7 +36962,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p><a href=\"http:\\/\\/openlookup\\.googlecode\\.com\\/\">Source code and\\n\tfurther information<\\/a> are available\\.  This is OpenLookup V([^<]+)\\.<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p><a href=\"http:\\/\\/openlookup\\.googlecode\\.com\\/\">Source code and\\n\tfurther information<\\/a> are available\\.  This is OpenLookup V([^<]+)\\.<\\/p>",
 						},
 					},
@@ -37010,12 +37010,12 @@ var features = []*Feature{
 			{
 				Name: "Oracle-Access-Manager",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ObSSOCookie=[^;]+;",
 						},
 					},
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "obrareq\\.cgi",
 						},
@@ -37024,7 +37024,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p id=\"footerVersion\">Oracle Access Manager Version: ([^\\s]+)<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p id=\"footerVersion\">Oracle Access Manager Version: ([^\\s]+)<\\/p>",
 						},
 					},
@@ -37035,13 +37035,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- Created by Oracle ADF Faces \\((Version mismatch: )?ADF Faces API - ([\\d_]+)\\/ADF Faces Implementation - ([\\d_]+)\\), skin:([^-]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Created by Oracle ADF Faces \\((Version mismatch: )?ADF Faces API - ([\\d_]+)\\/ADF Faces Implementation - ([\\d_]+)\\), skin:([^-]+) -->",
 						},
 					},
 					{
 						Regexp: "<!-- Created by Oracle ADF Faces \\((Version mismatch: )?ADF Faces API - ([\\d_]+)\\/ADF Faces Implementation - ([\\d_]+)\\), skin:([^-]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Created by Oracle ADF Faces \\((Version mismatch: )?ADF Faces API - ([\\d_]+)\\/ADF Faces Implementation - ([\\d_]+)\\), skin:([^-]+) -->",
 						},
 					},
@@ -37056,7 +37056,7 @@ var features = []*Feature{
 			{
 				Name: "Oracle-Database",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Oracle XML DB\\/Oracle Database$",
 						},
@@ -37066,13 +37066,13 @@ var features = []*Feature{
 			{
 				Name: "Oracle-Fusion-Middleware",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Oracle-Fusion-Middleware",
 						},
 						{
 							Regexp: "^Oracle-Fusion-Middleware\\/([^\\s]+ \\([^\\)]+\\))",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Oracle-Fusion-Middleware\\/([^\\s]+ \\([^\\)]+\\))",
 							},
 						},
@@ -37087,7 +37087,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id=\"welcome_text\">TO ORACLE<strong> FUSION MIDDLEWARE ([^\\s^<]+)<\\/strong> <\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"welcome_text\">TO ORACLE<strong> FUSION MIDDLEWARE ([^\\s^<]+)<\\/strong> <\\/div>",
 						},
 					},
@@ -37096,19 +37096,19 @@ var features = []*Feature{
 			{
 				Name: "Oracle-HTTP-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Oracle[ -]HTTP[ -]Server",
 						},
 						{
 							Regexp: "Oracle_Web_[Ll]istener(_NT_)?([\\d\\.]+\\/[^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Oracle_Web_[Ll]istener(_NT_)?([\\d\\.]+\\/[^\\s]+)",
 							},
 						},
 						{
 							Regexp: "Oracle_Web_[Ll]istener(_NT_)?\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Oracle_Web_[Ll]istener(_NT_)?\\/([^\\s]+)",
 							},
 						},
@@ -37118,16 +37118,16 @@ var features = []*Feature{
 			{
 				Name: "Oracle-Internet-Application-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Oracle9iAS\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Oracle9iAS\\/([^\\s]+)",
 							},
 						},
 						{
 							Regexp: "^Oracle9iAS \\(([^\\s^\\)]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Oracle9iAS \\(([^\\s^\\)]+)\\)",
 							},
 						},
@@ -37137,24 +37137,24 @@ var features = []*Feature{
 			{
 				Name: "Oracle-iPlanet",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Proxy-agent": &FeatureRuleItem{
+					"Proxy-agent": {
 						{
 							Regexp: "iPlanet-Web-Proxy-Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "iPlanet-Web-Proxy-Server\\/([\\d\\.]+)",
 							},
 						},
 					},
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "iPlanet-WebServer-Enterprise\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "iPlanet-WebServer-Enterprise\\/([\\d\\.]+)",
 							},
 						},
 						{
 							Regexp: "Oracle-iPlanet-Web-Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Oracle-iPlanet-Web-Server\\/([\\d\\.]+)",
 							},
 						},
@@ -37169,13 +37169,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"IntroAreaBuildId\" id=\"BuildId\">Version ([^,^\\s]+, Build \\d+)(&nbsp;)*<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"IntroAreaBuildId\" id=\"BuildId\">Version ([^,^\\s]+, Build \\d+)(&nbsp;)*<\\/div>",
 						},
 					},
 					{
 						Regexp: "<div align=\"right\" id=\"BuildId\">Version ([^,^\\s]+, Build \\d+)(&nbsp;)*<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div align=\"right\" id=\"BuildId\">Version ([^,^\\s]+, Build \\d+)(&nbsp;)*<\\/div>",
 						},
 					},
@@ -37189,13 +37189,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Oracle Real User Experience Insight \\-\\[ ([\\d\\.a-z]+) \\]\\-<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Oracle Real User Experience Insight \\-\\[ ([\\d\\.a-z]+) \\]\\-<\\/title>",
 						},
 					},
 					{
 						Regexp: "<div class=\"windowWatermark\">Version: ([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"windowWatermark\">Version: ([^\\s]+)",
 						},
 					},
@@ -37233,15 +37233,15 @@ var features = []*Feature{
 			{
 				Name: "Oracle-WebDB",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Oracle_WebDb_Listener\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Oracle_WebDb_Listener\\/([^\\s]+)",
 							},
 						},
 					},
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "^(https?:\\/\\/[^\\/]+)?\\/WebDB\\/WEBDB\\.home$",
 						},
@@ -37253,7 +37253,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"content\">\\s+<h2>Welcome to the OrangeHRM ver ([^\\s]+) Setup Wizard<\\/h2>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"content\">\\s+<h2>Welcome to the OrangeHRM ver ([^\\s]+) Setup Wizard<\\/h2>",
 						},
 					},
@@ -37262,13 +37262,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id=\"divFooter\" >\\s+<span id=\"spanCopyright\">\\s+<a href=\"http:\\/\\/www\\.orangehrm\\.com\" target=\"_blank\">OrangeHRM<\\/a>\\s+ver ([^&]+) &copy; OrangeHRM Inc",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"divFooter\" >\\s+<span id=\"spanCopyright\">\\s+<a href=\"http:\\/\\/www\\.orangehrm\\.com\" target=\"_blank\">OrangeHRM<\\/a>\\s+ver ([^&]+) &copy; OrangeHRM Inc",
 						},
 					},
 					{
 						Regexp: "<td align=\"center\"><a href=\"http:\\/\\/www\\.orangehrm\\.com\" target=\"_blank\">OrangeHRM<\\/a> ver ([^\\s]+) &copy; OrangeHRM Inc",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"center\"><a href=\"http:\\/\\/www\\.orangehrm\\.com\" target=\"_blank\">OrangeHRM<\\/a> ver ([^\\s]+) &copy; OrangeHRM Inc",
 						},
 					},
@@ -37314,16 +37314,16 @@ var features = []*Feature{
 			{
 				Name: "Orenosv",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^orenosv",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^orenosv",
 							},
 						},
 						{
 							Regexp: "^orenosv\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^orenosv\\/([^\\s]+)$",
 							},
 						},
@@ -37347,7 +37347,7 @@ var features = []*Feature{
 			{
 				Name: "OSCommerce",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "cookie_test=please_accept_for_session;",
 						},
@@ -37390,7 +37390,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"nav\">[\\s]+<ul id=\"sub_nav\">[\\s]+<li>osTicket version ([^\\-^<]+) - Basic installation<\\/li>[\\s]+<\\/ul>[\\s]+<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"nav\">[\\s]+<ul id=\"sub_nav\">[\\s]+<li>osTicket version ([^\\-^<]+) - Basic installation<\\/li>[\\s]+<\\/ul>[\\s]+<\\/div>",
 						},
 					},
@@ -37410,7 +37410,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/otrs.org[\\/]*\" class=\"small\">OTRS ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/otrs.org[\\/]*\" class=\"small\">OTRS ([^<]+)<\\/a>",
 						},
 					},
@@ -37421,13 +37421,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a[^>]+href[\\s]*=[\\s]*\"http:\\/\\/ourdisclaimer.com\\/\\?i=([^\\\"]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a[^>]+href[\\s]*=[\\s]*\"http:\\/\\/ourdisclaimer.com\\/\\?i=([^\\\"]+)",
 						},
 					},
 					{
 						Regexp: "<iframe[^>]+src[\\s]*=[\\s]*\"http:\\/\\/ourdisclaimer.com\\/\\?i=([^\\\"]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<iframe[^>]+src[\\s]*=[\\s]*\"http:\\/\\/ourdisclaimer.com\\/\\?i=([^\\\"]+)",
 						},
 					},
@@ -37441,19 +37441,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<link type=\"text\\/css\" rel=\"stylesheet\" href=\"\\/owa\\/([^\\s^\\/]+)\\/themes\\/base\\/logon\\.css\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<link type=\"text\\/css\" rel=\"stylesheet\" href=\"\\/owa\\/([^\\s^\\/]+)\\/themes\\/base\\/logon\\.css\">",
 						},
 					},
 					{
 						Regexp: "<td><img src=\"\\/owa\\/([^\\s^\\/]+)\\/themes\\/base\\/warn\\.png\"><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td><img src=\"\\/owa\\/([^\\s^\\/]+)\\/themes\\/base\\/warn\\.png\"><\\/td>",
 						},
 					},
 					{
 						Regexp: "<link rel=\"shortcut icon\" href=\"\\/owa\\/([^\\s^\\/]+)\\/themes\\/base\\/favicon\\.ico\" type=\"image\\/x-icon\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<link rel=\"shortcut icon\" href=\"\\/owa\\/([^\\s^\\/]+)\\/themes\\/base\\/favicon\\.ico\" type=\"image\\/x-icon\">",
 						},
 					},
@@ -37485,7 +37485,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a style=\"color: #EEEEFF;\" href=\"http:\\/\\/www.ovbb.org\">Powered by OvBB V([\\d\\.a-z]+)<\\/a><br \\/><br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a style=\"color: #EEEEFF;\" href=\"http:\\/\\/www.ovbb.org\">Powered by OvBB V([\\d\\.a-z]+)<\\/a><br \\/><br \\/>",
 						},
 					},
@@ -37494,7 +37494,7 @@ var features = []*Feature{
 			{
 				Name: "Owl-Intranet-Engine",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "owl_sessid=",
 						},
@@ -37503,13 +37503,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a class=\"version2\" href=\"http:\\/\\/owl\\.sourceforge\\.net\\/\" target=\"_blank\">Owl Intranet Engine, Version Owl ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a class=\"version2\" href=\"http:\\/\\/owl\\.sourceforge\\.net\\/\" target=\"_blank\">Owl Intranet Engine, Version Owl ([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<title>[^<]+ Owl ([\\d\\.]+ [\\d]{8})<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>[^<]+ Owl ([\\d\\.]+ [\\d]{8})<\\/title>",
 						},
 					},
@@ -37518,13 +37518,13 @@ var features = []*Feature{
 			{
 				Name: "OwnServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^OwnServer",
 						},
 						{
 							Regexp: "^OwnServer([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^OwnServer([\\d\\.]+)$",
 							},
 						},
@@ -37555,7 +37555,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/pagecookery.com\\/\" target=\"_blank\">PageCookery<\\/a> Microblog ([\\d\\.]{1,5})",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/pagecookery.com\\/\" target=\"_blank\">PageCookery<\\/a> Microblog ([\\d\\.]{1,5})",
 						},
 					},
@@ -37574,7 +37574,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<HEAD><TITLE>WJ-NT104 MAIN PAGE</TITLE></HEAD>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "WJ-NT104",
 						},
 					},
@@ -37592,13 +37592,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<TITLE>Digital Disk Recorder WJ-HD220 CONTROL MAIN PAGE</TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "WJ-HD220",
 						},
 					},
 					{
 						Regexp: "<TITLE>WJ-HD200 DigitalDiskRecorder CONTROL MAIN PAGE</TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "WJ-HD200",
 						},
 					},
@@ -37618,7 +37618,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<img src=\"images\\/pandora_logo\\.png\" style=\"border:0px;\" alt=\"logo\" \\/><\\/a><br \\/>v([^<]+)<\\/td><td class=\"f9b\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"images\\/pandora_logo\\.png\" style=\"border:0px;\" alt=\"logo\" \\/><\\/a><br \\/>v([^<]+)<\\/td><td class=\"f9b\">",
 						},
 					},
@@ -37635,13 +37635,13 @@ var features = []*Feature{
 			{
 				Name: "Parallel-Crystal-Load-Balancer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Crystal2 BalancerServer",
 						},
 						{
 							Regexp: "^Crystal2 BalancerServer ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Crystal2 BalancerServer ([\\d\\.]+)$",
 							},
 						},
@@ -37656,7 +37656,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!--<script src=\"\\.\\.\\/ic1Browser\\.js\\?ver=([^\"]+)\"><\\/script>-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--<script src=\"\\.\\.\\/ic1Browser\\.js\\?ver=([^\"]+)\"><\\/script>-->",
 						},
 					},
@@ -37730,21 +37730,21 @@ var features = []*Feature{
 			{
 				Name: "Passenger",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: ".*Phusion_Passenger",
 						},
 						{
 							Regexp: "[\\s]+Phusion_Passenger\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]+Phusion_Passenger\\/([\\d\\.]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "Phusion Passenger \\(mod_rails\\/mod_rack\\) ([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Phusion Passenger \\(mod_rails\\/mod_rack\\) ([\\d\\.]+)",
 							},
 						},
@@ -37764,37 +37764,37 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "eval(\"page\" + id + \" = window.open(URL, '\" + id + \"', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=650,height=400,left = 199.5,top = 196.5');\");",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "10.x",
 						},
 					},
 					{
 						Regexp: "Pc4Uploader <font color=\"#000080\"> <b>v([\\d\\.]+)<\\/b><\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Pc4Uploader <font color=\"#000080\"> <b>v([\\d\\.]+)<\\/b><\\/font>",
 						},
 					},
 					{
 						Regexp: "Pc4Uploader <font color=\"#000080\"> <b>v([\\d\\.]+) Pro<\\/b><\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Pc4Uploader <font color=\"#000080\"> <b>v([\\d\\.]+) Pro<\\/b><\\/font>",
 						},
 					},
 					{
 						Regexp: "<p id=\"legal\" style=\"text-align: center\">Powered by Pc4Uploader v<span lang=\"en-us\">([\\d\\.]+)<\\/span><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p id=\"legal\" style=\"text-align: center\">Powered by Pc4Uploader v<span lang=\"en-us\">([\\d\\.]+)<\\/span><\\/p>",
 						},
 					},
 					{
 						Regexp: "Powered by Pc4Uploader <b>v([\\d\\.]+)<\\/b>&nbsp; Copyright <b>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by Pc4Uploader <b>v([\\d\\.]+)<\\/b>&nbsp; Copyright <b>",
 						},
 					},
 					{
 						Regexp: "Powered by Pc4Uploader <b>v([\\d\\.]+) Pro<\\/b>&nbsp; Copyright <b>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by Pc4Uploader <b>v([\\d\\.]+) Pro<\\/b>&nbsp; Copyright <b>",
 						},
 					},
@@ -37836,7 +37836,7 @@ var features = []*Feature{
 			{
 				Name: "PegaRULES",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Pega-RULES",
 						},
@@ -37854,7 +37854,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "td style=\"text-align: center;\"><span id=\"ProductVersion\" class=\"ProductVersion\">Version ([^<]+)<\\/span><\\/td",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "td style=\"text-align: center;\"><span id=\"ProductVersion\" class=\"ProductVersion\">Version ([^<]+)<\\/span><\\/td",
 						},
 					},
@@ -37891,13 +37891,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/perlfect.com\\/freescripts\\/search\\/\">Perlfect Search ([a-z\\.\\d]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/perlfect.com\\/freescripts\\/search\\/\">Perlfect Search ([a-z\\.\\d]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/perlfect.com\\/freescripts\\/search\\/\">Perlfect Search ([a-z\\.\\d]+) \\(c\\) Perlfect Solutions 1998-[\\d]{4}<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/perlfect.com\\/freescripts\\/search\\/\">Perlfect Search ([a-z\\.\\d]+) \\(c\\) Perlfect Solutions 1998-[\\d]{4}<\\/a>",
 						},
 					},
@@ -37930,7 +37930,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<img src=\"images\\/philboard_small.gif\" alt=\"powered by philboard [v]*([\\d\\.]+)\" width=\"76\" height=\"21\" border=\"0\" align=\"middle\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"images\\/philboard_small.gif\" alt=\"powered by philboard [v]*([\\d\\.]+)\" width=\"76\" height=\"21\" border=\"0\" align=\"middle\">",
 						},
 					},
@@ -37939,13 +37939,13 @@ var features = []*Feature{
 			{
 				Name: "Phion-Firewall",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Phion",
 						},
 						{
 							Regexp: "^Phion\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Phion\\/(.+)$",
 							},
 						},
@@ -37997,7 +37997,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td align=\"center\" class=\"footer\">PhotoStore Version[\\s]+<b>([^<^\\s]+)<\\/b> Installed<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"center\" class=\"footer\">PhotoStore Version[\\s]+<b>([^<^\\s]+)<\\/b> Installed<\\/td>",
 						},
 					},
@@ -38028,7 +38028,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td align=\"right\" class=\"hdr\">Powered by: <a href=\"http:\\/\\/www\\.php-csl\\.com\\/\" class=\"foot\" title=\"PHP-CSL\">PHP-CSL V([^<]+)<\\/a>&nbsp;<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"right\" class=\"hdr\">Powered by: <a href=\"http:\\/\\/www\\.php-csl\\.com\\/\" class=\"foot\" title=\"PHP-CSL\">PHP-CSL V([^<]+)<\\/a>&nbsp;<\\/td>",
 						},
 					},
@@ -38045,13 +38045,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a[^>]*href=\"http:\\/\\/www.(phpeasydata.com|freewebmaster-scripts.com\\/phpeasydata)[^>]*>PHPEasyData[\\s]*([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a[^>]*href=\"http:\\/\\/www.(phpeasydata.com|freewebmaster-scripts.com\\/phpeasydata)[^>]*>PHPEasyData[\\s]*([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "n main de pages dynamiques. \" target=\"_blank\"[\\s]*>PhpEasyData[\\s]*([^<]+)<\\/a><\\/b>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "n main de pages dynamiques. \" target=\"_blank\"[\\s]*>PhpEasyData[\\s]*([^<]+)<\\/a><\\/b>",
 						},
 					},
@@ -38062,19 +38062,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>PHP Hosting Directory ([\\d\\.]+) Powered by JnSHosts\\.com<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>PHP Hosting Directory ([\\d\\.]+) Powered by JnSHosts\\.com<\\/title>",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www.jnshosts.com\\/php-hosting-directory-([\\d\\.]+).php\"[^>]+>PHP Hosting Directory<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.jnshosts.com\\/php-hosting-directory-([\\d\\.]+).php\"[^>]+>PHP Hosting Directory<\\/a>",
 						},
 					},
 					{
 						Regexp: "<font size=\"6\"><b>PHP Hosting Directory ([\\d\\.]+)<\\/b><\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font size=\"6\"><b>PHP Hosting Directory ([\\d\\.]+)<\\/b><\\/font>",
 						},
 					},
@@ -38091,13 +38091,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- end of menu header - PHP Layers Menu ([^\\s]+) \\(C\\) [0-9]{4}-[0-9]{4} Marco Pratesi",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- end of menu header - PHP Layers Menu ([^\\s]+) \\(C\\) [0-9]{4}-[0-9]{4} Marco Pratesi",
 						},
 					},
 					{
 						Regexp: "\\/\\/ PHP Layers Menu ([^\\s]+) \\(C\\) [0-9]{4}-[0-9]{4} Marco Pratesi",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\\/\\/ PHP Layers Menu ([^\\s]+) \\(C\\) [0-9]{4}-[0-9]{4} Marco Pratesi",
 						},
 					},
@@ -38111,7 +38111,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\"[^>]*content=\"PHP Link Directory ([0-9\\.]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\"[^>]*content=\"PHP Link Directory ([0-9\\.]+)\"",
 						},
 					},
@@ -38143,7 +38143,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t<div id=\"copyright\">Powered by <a href='http:\\/\\/www.phplivesupport.com\\/\\?link' target='newwin'>PHP Live\\!<\\/a>  v([\\d\\.]+) &copy; OSI Codes Inc.<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t<div id=\"copyright\">Powered by <a href='http:\\/\\/www.phplivesupport.com\\/\\?link' target='newwin'>PHP Live\\!<\\/a>  v([\\d\\.]+) &copy; OSI Codes Inc.<\\/div>",
 						},
 					},
@@ -38214,7 +38214,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!--phpalbum ([^\\s]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--phpalbum ([^\\s]+) -->",
 						},
 					},
@@ -38253,7 +38253,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "            <div class=\"version\">Current Version:[\\r\\n]+               ([\\d\\.]{1,5})            <\\/div>[\\r\\n]+",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "            <div class=\"version\">Current Version:[\\r\\n]+               ([\\d\\.]{1,5})            <\\/div>[\\r\\n]+",
 						},
 					},
@@ -38273,7 +38273,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/phpservermon\\.sourceforge\\.net\" target=\"_blank\">PHP Server Monitor v([\\d\\.]+)<\\/a><br\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/phpservermon\\.sourceforge\\.net\" target=\"_blank\">PHP Server Monitor v([\\d\\.]+)<\\/a><br\\/>",
 						},
 					},
@@ -38284,7 +38284,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "PHPShell by [a-zA-Z0-9]+ - Version ([0-9a-z\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "PHPShell by [a-zA-Z0-9]+ - Version ([0-9a-z\\.]+)",
 						},
 					},
@@ -38295,7 +38295,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.phpsupporttickets\\.com\" target=\"_blank\" title=\"php support tickets\">PHP Support Tickets v([^\\s^<]+)<\\/a><br \\/><br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.phpsupporttickets\\.com\" target=\"_blank\" title=\"php support tickets\">PHP Support Tickets v([^\\s^<]+)<\\/a><br \\/><br \\/>",
 						},
 					},
@@ -38335,7 +38335,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"footer\">Generated using PHP-XMLRPC ([\\d\\.]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"footer\">Generated using PHP-XMLRPC ([\\d\\.]+)<\\/div>",
 						},
 					},
@@ -38352,7 +38352,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<center>Powered by <a target=\"_blank\" style=\"TEXT-DECORATION: none; COLOR: #000066; FONT-SIZE: 10px\" href=\"http:\\/\\/www.php121.com\"><U>PHP121<\\/U><\\/a> v([\\d\\.]+)<\\/center>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<center>Powered by <a target=\"_blank\" style=\"TEXT-DECORATION: none; COLOR: #000066; FONT-SIZE: 10px\" href=\"http:\\/\\/www.php121.com\"><U>PHP121<\\/U><\\/a> v([\\d\\.]+)<\\/center>",
 						},
 					},
@@ -38366,7 +38366,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id=\"phpatm\">(<br>)?<a href=\"http:\\/\\/phpatm\\.org\\/\" target=\"_blank\" title=\"Powered by PHP Advanced Transfer Manager v([^\"]+)\">Powered by phpATM<\\/a><br><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"phpatm\">(<br>)?<a href=\"http:\\/\\/phpatm\\.org\\/\" target=\"_blank\" title=\"Powered by PHP Advanced Transfer Manager v([^\"]+)\">Powered by phpATM<\\/a><br><\\/div>",
 						},
 					},
@@ -38383,7 +38383,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p><div class=\"footer\">phpBazar Ver. ([\\d\\.]+) &copy 2001\\-[\\d]{4} by <a href=\"http:\\/\\/www.smartisoft.com[\\/]?\" target=\"_blank\">SmartISoft<\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p><div class=\"footer\">phpBazar Ver. ([\\d\\.]+) &copy 2001\\-[\\d]{4} by <a href=\"http:\\/\\/www.smartisoft.com[\\/]?\" target=\"_blank\">SmartISoft<\\/a><\\/div>",
 						},
 					},
@@ -38414,13 +38414,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^<!-- Powered by PhpCollab v([\\d\\.]+) \\/\\/-->$",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^<!-- Powered by PhpCollab v([\\d\\.]+) \\/\\/-->$",
 						},
 					},
 					{
 						Regexp: "^<p id=\"footer\">PhpCollab v([\\d\\.]+)[\\s]*<\\/p>$",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^<p id=\"footer\">PhpCollab v([\\d\\.]+)[\\s]*<\\/p>$",
 						},
 					},
@@ -38462,7 +38462,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td><h6 class=\"right\">Powered by <a href=\"http:\\/\\/(phpdenora.pimpmylinux.org|denorastats.org)\\/\">phpDenora<\\/a> v([^<]+)<\\/h6><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td><h6 class=\"right\">Powered by <a href=\"http:\\/\\/(phpdenora.pimpmylinux.org|denorastats.org)\\/\">phpDenora<\\/a> v([^<]+)<\\/h6><\\/td>",
 						},
 					},
@@ -38473,7 +38473,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/www.phpdirector.co.uk\\/\">Powered by PHP Director ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.phpdirector.co.uk\\/\">Powered by PHP Director ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -38484,7 +38484,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href='http:\\/\\/phpfm.zalon.dk\\/' target='_new' class='bottom'>PHPFM<\\/a> ([\\d\\.]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href='http:\\/\\/phpfm.zalon.dk\\/' target='_new' class='bottom'>PHPFM<\\/a> ([\\d\\.]+)<\\/td>",
 						},
 					},
@@ -38495,13 +38495,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered By <a href=\"http:\\/\\/www\\.phpfox\\.com\\/\"[^>]*>phpFoX<\\/a> Version ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered By <a href=\"http:\\/\\/www\\.phpfox\\.com\\/\"[^>]*>phpFoX<\\/a> Version ([\\d\\.]+)",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.phpfox\\.com\\/\"[^>]*>Powered by phpFoX Version ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.phpfox\\.com\\/\"[^>]*>Powered by phpFoX Version ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -38512,7 +38512,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<img src=\"http:\\/\\/www.phpfreechat.net\\/pub\\/logo[2]*_80x15.gif\" alt=\"PHP FREE CHAT \\[powered by phpFreeChat-([\\d\\.\\-a-z]*)\\]\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"http:\\/\\/www.phpfreechat.net\\/pub\\/logo[2]*_80x15.gif\" alt=\"PHP FREE CHAT \\[powered by phpFreeChat-([\\d\\.\\-a-z]*)\\]\"",
 						},
 					},
@@ -38526,13 +38526,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href='http:\\/\\/phpGradeBook\\.com'>PHP_GradeBook<\\/a> ([^C^\\n]+) Created by Robert",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href='http:\\/\\/phpGradeBook\\.com'>PHP_GradeBook<\\/a> ([^C^\\n]+) Created by Robert",
 						},
 					},
 					{
 						Regexp: "<small>PHP_GradeBook ([^C^\\n]+) Created by Robert",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<small>PHP_GradeBook ([^C^\\n]+) Created by Robert",
 						},
 					},
@@ -38549,7 +38549,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "This site is using <a href=\"http:\\/\\/phpgraphy\\.sourceforge\\.net\\/\">phpGraphy<\\/a>\\n([^\\s]+) - Page generated in [\\d\\.]+s\\.<\\/div><!--\\/\\/footer-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "This site is using <a href=\"http:\\/\\/phpgraphy\\.sourceforge\\.net\\/\">phpGraphy<\\/a>\\n([^\\s]+) - Page generated in [\\d\\.]+s\\.<\\/div><!--\\/\\/footer-->",
 						},
 					},
@@ -38574,7 +38574,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td align=\"right\"><font style=\"font-face:Verdana; font-size:9; font-color:#000000;\">Powered By: <a href=\"http:\\/\\/www.phphq.net\\/\\?script=phPhotoAlbum\" target=\"_blank\"><b>phPhotoAlbum v([\\d\\.]+)<\\/b><\\/a><\\/font><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td align=\"right\"><font style=\"font-face:Verdana; font-size:9; font-color:#000000;\">Powered By: <a href=\"http:\\/\\/www.phphq.net\\/\\?script=phPhotoAlbum\" target=\"_blank\"><b>phPhotoAlbum v([\\d\\.]+)<\\/b><\\/a><\\/font><\\/td>",
 						},
 					},
@@ -38605,25 +38605,25 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<head><title>phpLDAPadmin - ([^\\s^<]+)[\\s]?<\\/title><\\/head>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<head><title>phpLDAPadmin - ([^\\s^<]+)[\\s]?<\\/title><\\/head>",
 						},
 					},
 					{
 						Regexp: "<h3 class=\"subtitle\" style=\"margin:0px\">phpLDAPadmin - ([^\\s^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h3 class=\"subtitle\" style=\"margin:0px\">phpLDAPadmin - ([^\\s^<]+)",
 						},
 					},
 					{
 						Regexp: "<title>phpLDAPadmin \\(([^\\s^\\)]+)\\) - <\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>phpLDAPadmin \\(([^\\s^\\)]+)\\) - <\\/title>",
 						},
 					},
 					{
 						Regexp: "<div id=\"ajFOOT\">([^\\s^<]+)<\\/div><a href=\"https:\\/\\/sourceforge\\.net\\/projects\\/phpldapadmin\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"ajFOOT\">([^\\s^<]+)<\\/div><a href=\"https:\\/\\/sourceforge\\.net\\/projects\\/phpldapadmin\">",
 						},
 					},
@@ -38643,13 +38643,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"Powered-By\" content=\"phplist version ([^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Powered-By\" content=\"phplist version ([^\"]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "<span class=\"urhere\">phplist powered by <\\/span><a class=\"urhere\" href=\"http:\\/\\/www\\.phplist\\.com\" target=\"_blank\">phplist<\\/a> - version ([^<]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"urhere\">phplist powered by <\\/span><a class=\"urhere\" href=\"http:\\/\\/www\\.phplist\\.com\" target=\"_blank\">phplist<\\/a> - version ([^<]+)<\\/td>",
 						},
 					},
@@ -38660,7 +38660,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div align=\"center\">Powered by <a href=\"http:\\/\\/tekreaders\\.com\\/blog\\/phpmailshare\\/\" target=\"_blank\">phpMailShare<\\/a> ([^<]+[\\d\\.\\sa-z])<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div align=\"center\">Powered by <a href=\"http:\\/\\/tekreaders\\.com\\/blog\\/phpmailshare\\/\" target=\"_blank\">phpMailShare<\\/a> ([^<]+[\\d\\.\\sa-z])<\\/div>",
 						},
 					},
@@ -38677,13 +38677,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<b>phpMoneyBooks: ([^\\s]+) - Star Host Design, LLC &copy 20[\\d]{2} <\\/b><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b>phpMoneyBooks: ([^\\s]+) - Star Host Design, LLC &copy 20[\\d]{2} <\\/b><\\/div>",
 						},
 					},
 					{
 						Regexp: "<b><a href='http:\\/\\/phpMoneyBooks\\.com'>phpMoneyBooks<\\/a>: ([^\\s]+) - <a href='http:\\/\\/StarHostDesign\\.com'>Star Host Design, LLC &copy<\\/a> 20[\\d]{2} <\\/b><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b><a href='http:\\/\\/phpMoneyBooks\\.com'>phpMoneyBooks<\\/a>: ([^\\s]+) - <a href='http:\\/\\/StarHostDesign\\.com'>Star Host Design, LLC &copy<\\/a> 20[\\d]{2} <\\/b><\\/div>",
 						},
 					},
@@ -38692,7 +38692,7 @@ var features = []*Feature{
 			{
 				Name: "phpMyBackupPro",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "[bB]asic realm=\"phpMyBackupPro\"",
 						},
@@ -38720,13 +38720,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"phpMyFAQ ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"phpMyFAQ ([\\d\\.]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "<p id=\"copyrightnote\">powered by <a href=\"http:\\/\\/www.phpmyfaq.de[\\/]*\" target=\"_blank\">phpMyFAQ<\\/a> ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p id=\"copyrightnote\">powered by <a href=\"http:\\/\\/www.phpmyfaq.de[\\/]*\" target=\"_blank\">phpMyFAQ<\\/a> ([\\d\\.]+)",
 						},
 					},
@@ -38816,7 +38816,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "      <TD ALIGN=right><NOBR><B><A HREF=\"http:\\/\\/www.chumpsoft.com\\/products\\/phpq\\/\" class=link>phpQuestionnaire<\\/A> ([\\d\\.]+) &copy [0-9]{4}-[0-9]{4}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "      <TD ALIGN=right><NOBR><B><A HREF=\"http:\\/\\/www.chumpsoft.com\\/products\\/phpq\\/\" class=link>phpQuestionnaire<\\/A> ([\\d\\.]+) &copy [0-9]{4}-[0-9]{4}",
 						},
 					},
@@ -38830,7 +38830,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Raid Management Provided by <a href=\"http:\\/\\/www.spiffyjr.com\\/\">phpRaid<\\/a> v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Raid Management Provided by <a href=\"http:\\/\\/www.spiffyjr.com\\/\">phpRaid<\\/a> v([\\d\\.]+)",
 						},
 					},
@@ -38844,13 +38844,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>phpRechnung ([^-]+) - Login<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>phpRechnung ([^-]+) - Login<\\/title>",
 						},
 					},
 					{
 						Regexp: "<title>phpInvoice ([^-]+) - Login<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>phpInvoice ([^-]+) - Login<\\/title>",
 						},
 					},
@@ -38861,7 +38861,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<font size=1 style='Font: 8pt Verdana'>phpRemoteView &copy; Dmitry Borodin \\(version ([\\d]{4}-[\\d]{2}-[\\d]{2})\\)<br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font size=1 style='Font: 8pt Verdana'>phpRemoteView &copy; Dmitry Borodin \\(version ([\\d]{4}-[\\d]{2}-[\\d]{2})\\)<br>",
 						},
 					},
@@ -38887,25 +38887,25 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p align=\"center\">[<!\\-]*<a href=\"http:\\/\\/phpscheduleit.sourceforge.net\">[\\->]*Powered By phpScheduleIt v([\\d\\.]+)[<!\\-]*<\\/a>[\\->]*<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align=\"center\">[<!\\-]*<a href=\"http:\\/\\/phpscheduleit.sourceforge.net\">[\\->]*Powered By phpScheduleIt v([\\d\\.]+)[<!\\-]*<\\/a>[\\->]*<\\/p>",
 						},
 					},
 					{
 						Regexp: "<p align=\"center\"><a href=\"http:\\/\\/phpscheduleit.sourceforge.net\">phpScheduleIt v([\\d\\.]+)<\\/a><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align=\"center\"><a href=\"http:\\/\\/phpscheduleit.sourceforge.net\">phpScheduleIt v([\\d\\.]+)<\\/a><\\/p>",
 						},
 					},
 					{
 						Regexp: "<p align=\"center\">Powered by <a href=\"http:\\/\\/phpscheduleit.sourceforge.net\">phpScheduleIt v([\\d\\.]+)<\\/a><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align=\"center\">Powered by <a href=\"http:\\/\\/phpscheduleit.sourceforge.net\">phpScheduleIt v([\\d\\.]+)<\\/a><\\/p>",
 						},
 					},
 					{
 						Regexp: "[P|p]?owered by <a href=\"http:\\/\\/phpscheduleit.sourceforge.net\"[^>]*>phpScheduleIt v([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "[P|p]?owered by <a href=\"http:\\/\\/phpscheduleit.sourceforge.net\"[^>]*>phpScheduleIt v([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -38922,7 +38922,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.phpshop.org\"[^>]*>phpShop<\\/a>[\\r\\n\\s]+([\\d\\.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.phpshop.org\"[^>]*>phpShop<\\/a>[\\r\\n\\s]+([\\d\\.]+) ",
 						},
 					},
@@ -38936,19 +38936,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Generated by[\\s&nbsp;]*<a href=\"http:\\/\\/phpsysinfo.sourceforge.net[^>]*>[\\s&nbsp;]*phpSysInfo[\\s&nbsp;]*-[\\s&nbsp;]*([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Generated by[\\s&nbsp;]*<a href=\"http:\\/\\/phpsysinfo.sourceforge.net[^>]*>[\\s&nbsp;]*phpSysInfo[\\s&nbsp;]*-[\\s&nbsp;]*([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "Created by[\\s&nbsp;]*<a href=\"http:\\/\\/phpsysinfo.sourceforge.net[^>]*>[\\s&nbsp;]*phpSysInfo[\\s&nbsp;]*-[\\s&nbsp;]*([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Created by[\\s&nbsp;]*<a href=\"http:\\/\\/phpsysinfo.sourceforge.net[^>]*>[\\s&nbsp;]*phpSysInfo[\\s&nbsp;]*-[\\s&nbsp;]*([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<span>Created by <\\/span><a href=\"http:\\/\\/phpsysinfo.sourceforge.net\\/\"><span>phpSysInfo - <\\/span><span>([^<]+)<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span>Created by <\\/span><a href=\"http:\\/\\/phpsysinfo.sourceforge.net\\/\"><span>phpSysInfo - <\\/span><span>([^<]+)<\\/span>",
 						},
 					},
@@ -38970,7 +38970,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.phpvms\\.net\\/docs\\/license\">License & About<\\/a> \\|[\\s]+Version ([^\\s]+)[\\s]+<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.phpvms\\.net\\/docs\\/license\">License & About<\\/a> \\|[\\s]+Version ([^\\s]+)[\\s]+<\\/div>",
 						},
 					},
@@ -39004,7 +39004,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id=\"footer\">\\s+Copyright &copy; 20[\\d]{2}[^\\n]+\\s+Powered by phxEventManager ([^<]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"footer\">\\s+Copyright &copy; 20[\\d]{2}[^\\n]+\\s+Powered by phxEventManager ([^<]+)<br \\/>",
 						},
 					},
@@ -39013,13 +39013,13 @@ var features = []*Feature{
 			{
 				Name: "Pi3Web",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Pi3Web",
 						},
 						{
 							Regexp: "^Pi3Web\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Pi3Web\\/([^\\s]+)$",
 							},
 						},
@@ -39034,13 +39034,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"PieCrust ([^\\s^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"PieCrust ([^\\s^\"]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "Baked with <em><a href=\"http:\\/\\/bolt80\\.com\\/piecrust\\/\">PieCrust<\\/a> ([^\\s^<]+)<\\/em>\\.<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Baked with <em><a href=\"http:\\/\\/bolt80\\.com\\/piecrust\\/\">PieCrust<\\/a> ([^\\s^<]+)<\\/em>\\.<\\/p>",
 						},
 					},
@@ -39071,7 +39071,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.pivotlog\\.net\\/\\?ver=Pivot[^\"]+\" target=\"_blank\" title=\"Pivot - ([^:]+): '[^']+'\"><img[^>]+alt=\"Pivot - [^\"]+\" \\/><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.pivotlog\\.net\\/\\?ver=Pivot[^\"]+\" target=\"_blank\" title=\"Pivot - ([^:]+): '[^']+'\"><img[^>]+alt=\"Pivot - [^\"]+\" \\/><\\/a>",
 						},
 					},
@@ -39105,7 +39105,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<em>PivotX - ([^<]+)<\\/em> &nbsp; - &nbsp; &copy; 20[\\d]{2}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<em>PivotX - ([^<]+)<\\/em> &nbsp; - &nbsp; &copy; 20[\\d]{2}",
 						},
 					},
@@ -39114,7 +39114,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"PivotX\" \\/><!-- version: PivotX - ([^\\s]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"PivotX\" \\/><!-- version: PivotX - ([^\\s]+) -->",
 						},
 					},
@@ -39123,7 +39123,7 @@ var features = []*Feature{
 			{
 				Name: "Piwik",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^_pk_",
 						},
@@ -39141,7 +39141,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\\\"generator\\\"[^>]*content=\\\"Piwik ([0-9\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\\\"generator\\\"[^>]*content=\\\"Piwik ([0-9\\.]+)",
 						},
 					},
@@ -39181,7 +39181,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<font color=#8888888 style=\"font-size:9px\">Powered by <a href=\"http:\\/\\/www.texmedia.de\" target=\"_blank\" style=\"color:#888888;font:normal;text-decoration:none\">(Million )?Pixel Script<\\/a> v?([^&]+) &copy; <a href=\"http:\\/\\/www.texmedia.de\" style=\"color:#888888;font:normal;text-decoration:none\" target=\"_blank\">texmedia.de<\\/a><\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font color=#8888888 style=\"font-size:9px\">Powered by <a href=\"http:\\/\\/www.texmedia.de\" target=\"_blank\" style=\"color:#888888;font:normal;text-decoration:none\">(Million )?Pixel Script<\\/a> v?([^&]+) &copy; <a href=\"http:\\/\\/www.texmedia.de\" style=\"color:#888888;font:normal;text-decoration:none\" target=\"_blank\">texmedia.de<\\/a><\\/font>",
 						},
 					},
@@ -39206,7 +39206,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"Pixie ([\\d\\.]+) - Copyright \\(C\\) [\\d]{4} - [\\d]{4}\\.\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Pixie ([\\d\\.]+) - Copyright \\(C\\) [\\d]{4} - [\\d]{4}\\.\" \\/>",
 						},
 					},
@@ -39226,7 +39226,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t<td align=\"left\">PJIRC Login Page Version ([\\d\\.]{1,5})<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t<td align=\"left\">PJIRC Login Page Version ([\\d\\.]{1,5})<\\/td>",
 						},
 					},
@@ -39284,7 +39284,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"pluck ([^\\s^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"pluck ([^\\s^\"]+)\" \\/>",
 						},
 					},
@@ -39298,7 +39298,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/pluxml.org\" title=\"Blog ou Cms sans base de donn&eacute;es\">Pluxml<\\/a>[\\s]+([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/pluxml.org\" title=\"Blog ou Cms sans base de donn&eacute;es\">Pluxml<\\/a>[\\s]+([\\d\\.]+)",
 						},
 					},
@@ -39325,7 +39325,7 @@ var features = []*Feature{
 			{
 				Name: "PmWiki",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "imstime=[\\d]+;",
 						},
@@ -39354,7 +39354,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<CENTER><SPAN style='font-family:arial;font-size:10px'>PNPSCADA ([^\\s]+) &copy;20[\\d]{2} SDG Technologies cc\\. All rights strictly reserved\\. Please review our <A target='_blank' style='font-family:arial;font-size:10px' href='termsandconditions\\.html'>Terms and Conditions<\\/A>\\. <\\/SPAN><\\/CENTER>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<CENTER><SPAN style='font-family:arial;font-size:10px'>PNPSCADA ([^\\s]+) &copy;20[\\d]{2} SDG Technologies cc\\. All rights strictly reserved\\. Please review our <A target='_blank' style='font-family:arial;font-size:10px' href='termsandconditions\\.html'>Terms and Conditions<\\/A>\\. <\\/SPAN><\\/CENTER>",
 						},
 					},
@@ -39365,13 +39365,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<cite>Podcast Powered by <a href=\"http:\\/\\/www.mightyseek.com\\/podpress\\/\" title=\"podPress, the dream plugin for podcasting with WordPress\"><strong>podPress \\(v([\\d\\.]+)\\)<\\/strong><\\/a><\\/cite>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<cite>Podcast Powered by <a href=\"http:\\/\\/www.mightyseek.com\\/podpress\\/\" title=\"podPress, the dream plugin for podcasting with WordPress\"><strong>podPress \\(v([\\d\\.]+)\\)<\\/strong><\\/a><\\/cite>",
 						},
 					},
 					{
 						Regexp: "<div id=\"podPress_footer\">Podcast powered by <a href=\"http:\\/\\/wordpress.org\\/extend\\/plugins\\/podpress\\/\" title=\"podPress, a plugin for podcasting with WordPress\"><strong>podPress v([\\d\\.]+)<\\/strong><\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"podPress_footer\">Podcast powered by <a href=\"http:\\/\\/wordpress.org\\/extend\\/plugins\\/podpress\\/\" title=\"podPress, a plugin for podcasting with WordPress\"><strong>podPress v([\\d\\.]+)<\\/strong><\\/a><\\/div>",
 						},
 					},
@@ -39421,7 +39421,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"footer\">[\\s]+<div class=\"floatLeft\">[\\s]+All Contents .[\\s]+Posterita 20[\\d]{2}[\\s]+<b>Version &nbsp;([^\\s^<]+)<\\/b>[\\s]+<\\/div>[\\s]+<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"footer\">[\\s]+<div class=\"floatLeft\">[\\s]+All Contents .[\\s]+Posterita 20[\\d]{2}[\\s]+<b>Version &nbsp;([^\\s^<]+)<\\/b>[\\s]+<\\/div>[\\s]+<\\/div>",
 						},
 					},
@@ -39438,7 +39438,7 @@ var features = []*Feature{
 			{
 				Name: "PowerMTA",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"PowerMTA\"$",
 						},
@@ -39453,7 +39453,7 @@ var features = []*Feature{
 			{
 				Name: "PowerSchool",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PowerSchool$",
 						},
@@ -39463,13 +39463,13 @@ var features = []*Feature{
 			{
 				Name: "PowerWeb",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PowerWeb",
 						},
 						{
 							Regexp: "^PowerWeb\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PowerWeb\\/([^\\s]+)$",
 							},
 						},
@@ -39484,13 +39484,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"pragmaMx ([^\\s]+) - by http:\\/\\/pragmaMx\\.org\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"pragmaMx ([^\\s]+) - by http:\\/\\/pragmaMx\\.org\" \\/>",
 						},
 					},
 					{
 						Regexp: "<p>Diese Webseite basiert auf pragmaMx ([^\\s]+)\\.<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p>Diese Webseite basiert auf pragmaMx ([^\\s]+)\\.<\\/p>",
 						},
 					},
@@ -39504,7 +39504,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "powered by <a href=\"http:\\/\\/sourceforge.net\\/projects\\/pragyan\" title=\"(Praygan|Probe) CMS\">Pragyan CMS v([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "powered by <a href=\"http:\\/\\/sourceforge.net\\/projects\\/pragyan\" title=\"(Praygan|Probe) CMS\">Pragyan CMS v([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -39538,7 +39538,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<small>Powered by <a target=\"_blank\" class=\"VERSION\" href=\"http:\\/\\/www\\.predictionfootball\\.com\\/\">[\\s]+Prediction Football <\\/a>([^\\s^<]+)<\\/small>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<small>Powered by <a target=\"_blank\" class=\"VERSION\" href=\"http:\\/\\/www\\.predictionfootball\\.com\\/\">[\\s]+Prediction Football <\\/a>([^\\s^<]+)<\\/small>",
 						},
 					},
@@ -39552,7 +39552,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>Drupal already installed | Pressflow</title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Install Page",
 						},
 					},
@@ -39563,19 +39563,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td height=\"10%\" valign=\"bottom\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td height=\"10%\" valign=\"bottom\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
 						},
 					},
 					{
 						Regexp: "<td height=\"19\" colspan=\"6\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td height=\"19\" colspan=\"6\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
 						},
 					},
 					{
 						Regexp: "<td height=\"70%\" valign=\"bottom\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td height=\"70%\" valign=\"bottom\" align=\"right\"><font face=\"verdana\" size=\"1\" color=\"gray\">&copy; Web Administration Panel .v([\\d\\.]+) by <a href=\"http:\\/\\/www.kaonsoftwares.com\\/\" class=\"\" target=\"_blank\">Kaon Softwares<\\/a>. All Rights Reserved.<\\/font><\\/td>",
 						},
 					},
@@ -39609,7 +39609,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<img src=\"images\\/chat.gif\" border=\"0\" alt=\"Pro Chat Rooms v([\\d\\.]+)\" title=\"Pro Chat Rooms v([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"images\\/chat.gif\" border=\"0\" alt=\"Pro Chat Rooms v([\\d\\.]+)\" title=\"Pro Chat Rooms v([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -39620,7 +39620,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div class=\"x-pm-footer-text\">\\s+ProcessMaker Ver\\. ([^\\s]+)<br\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"x-pm-footer-text\">\\s+ProcessMaker Ver\\. ([^\\s]+)<br\\/>",
 						},
 					},
@@ -39669,18 +39669,18 @@ var features = []*Feature{
 			{
 				Name: "ProScan",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ProScan",
 						},
 						{
 							Regexp: "^ProScan ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ProScan ([^\\s]+)$",
 							},
 						},
 					},
-					"Icy-notice2": &FeatureRuleItem{
+					"Icy-notice2": {
 						{
 							Regexp: "^ProScan",
 						},
@@ -39692,7 +39692,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href='http:\\/\\/www\\.proxmox\\.com' target='_blank' class=\"boxheadline\">Proxmox Virtual Environment ([^<^\\s]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href='http:\\/\\/www\\.proxmox\\.com' target='_blank' class=\"boxheadline\">Proxmox Virtual Environment ([^<^\\s]+)<\\/a>",
 						},
 					},
@@ -39704,16 +39704,16 @@ var features = []*Feature{
 			{
 				Name: "PRTG-Network-Monitor",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PRTG",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PRTG",
 							},
 						},
 						{
 							Regexp: "^PRTG\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PRTG\\/([^\\s]+)$",
 							},
 						},
@@ -39722,7 +39722,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<link rel=\"stylesheet\" type=\"text\\/css\" href=\"\\/css\\/prtgmini\\.css\\?prtgversion=([^\"]+)\" media=\"print,screen,projection\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<link rel=\"stylesheet\" type=\"text\\/css\" href=\"\\/css\\/prtgmini\\.css\\?prtgversion=([^\"]+)\" media=\"print,screen,projection\" \\/>",
 						},
 					},
@@ -39739,7 +39739,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<\\/div><div class=\"foot\">GeN4 Secur(ity|e)\\+ ([\\d\\.]{1,6})  &copy; 2009 - 20[\\d]{2} <a href=\"http:\\/\\/www.ptcpay.com\" target=\"_blank\">PTCPay.Com<\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<\\/div><div class=\"foot\">GeN4 Secur(ity|e)\\+ ([\\d\\.]{1,6})  &copy; 2009 - 20[\\d]{2} <a href=\"http:\\/\\/www.ptcpay.com\" target=\"_blank\">PTCPay.Com<\\/a><\\/div>",
 						},
 					},
@@ -39784,7 +39784,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<li class='' id='dashboard-version'>[\\s]+<a href=\"https:\\/\\/github\\.com\\/puppetlabs\\/puppet-dashboard\\/blob\\/([^\\s]+)\\/CHANGELOG\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<li class='' id='dashboard-version'>[\\s]+<a href=\"https:\\/\\/github\\.com\\/puppetlabs\\/puppet-dashboard\\/blob\\/([^\\s]+)\\/CHANGELOG\">",
 						},
 					},
@@ -39810,7 +39810,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<TITLE>Puridiom ([\\d\\.]+), Enabling Self-Service Procurement<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>Puridiom ([\\d\\.]+), Enabling Self-Service Procurement<\\/TITLE>",
 						},
 					},
@@ -39825,13 +39825,13 @@ var features = []*Feature{
 			{
 				Name: "Purveyor-Encrypt-WebServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Purveyor Encrypt",
 						},
 						{
 							Regexp: "^Purveyor Encrypt (Export|Domestic)\\/v([^\\s]+) OpenVMS$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Purveyor Encrypt (Export|Domestic)\\/v([^\\s]+) OpenVMS$",
 							},
 						},
@@ -39860,7 +39860,7 @@ var features = []*Feature{
 			{
 				Name: "PyroCMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_pyrocms_",
 						},
@@ -39872,7 +39872,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<b>PHP Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>Zend Engine Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>Qcodo Version:<\\/b> ([^\\(]+) \\([^\\(]+\\)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b>PHP Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>Zend Engine Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>Qcodo Version:<\\/b> ([^\\(]+) \\([^\\(]+\\)<br \\/>",
 						},
 					},
@@ -39883,13 +39883,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"codeVersion\">QCubed Development Framework ([^\\(]+) \\([^\\)]+\\)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"codeVersion\">QCubed Development Framework ([^\\(]+) \\([^\\)]+\\)<\\/div>",
 						},
 					},
 					{
 						Regexp: "<b>PHP Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>Zend Engine Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>QCubed Version:<\\/b> ([^\\(]+) \\([^\\(]+\\)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b>PHP Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>Zend Engine Version:<\\/b> [^;]+;&nbsp;&nbsp;<b>QCubed Version:<\\/b> ([^\\(]+) \\([^\\(]+\\)<br \\/>",
 						},
 					},
@@ -39898,7 +39898,7 @@ var features = []*Feature{
 			{
 				Name: "qdPM",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "qdpm(_extended)?=[^;]+;",
 						},
@@ -39907,7 +39907,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "qdPM ([^\\s]+) &nbsp;is redistributable under the\\s+<a class=\"footer-text\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "qdPM ([^\\s]+) &nbsp;is redistributable under the\\s+<a class=\"footer-text\"",
 						},
 					},
@@ -39985,7 +39985,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<tr><td width='100%' align='center' class='small'>QR-Code Panel<a title='V[^\\s^<]+ \\([\\d]{2}\\/[\\d]{2}\\/[\\d]{4}\\)'> V([^\\s^<]+)<\\/a><br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><td width='100%' align='center' class='small'>QR-Code Panel<a title='V[^\\s^<]+ \\([\\d]{2}\\/[\\d]{2}\\/[\\d]{4}\\)'> V([^\\s^<]+)<\\/a><br \\/>",
 						},
 					},
@@ -39997,7 +39997,7 @@ var features = []*Feature{
 			{
 				Name: "qTranslate",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "qtrans_cookie_test=[^\\+]+\\+Cookie\\+Test;",
 						},
@@ -40007,13 +40007,13 @@ var features = []*Feature{
 			{
 				Name: "Quanterra-Q330",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Q330",
 						},
 						{
 							Regexp: "^Q330 V([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Q330 V([^\\s]+)$",
 							},
 						},
@@ -40065,7 +40065,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span id=\"ctl00_ctl00_ctl00_ContentPlaceHolder_ContentPlaceHolder_ContentPlaceHolder_AboutControl_LabelVersion\">Full version number: ([^<]+)<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span id=\"ctl00_ctl00_ctl00_ContentPlaceHolder_ContentPlaceHolder_ContentPlaceHolder_AboutControl_LabelVersion\">Full version number: ([^<]+)<\\/span>",
 						},
 					},
@@ -40091,7 +40091,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "      <div id=\"version\"><a href=\"http:\\/\\/opensolution.org\\/\">Quick.Cms v([\\d\\.]+)<\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "      <div id=\"version\"><a href=\"http:\\/\\/opensolution.org\\/\">Quick.Cms v([\\d\\.]+)<\\/a><\\/div>",
 						},
 					},
@@ -40121,13 +40121,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>QuiXplorer ([^\\s]+) - the QuiX project<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>QuiXplorer ([^\\s]+) - the QuiX project<\\/title>",
 						},
 					},
 					{
 						Regexp: "<A class=\"title\" href=\"http:\\/\\/quixplorer\\.sourceforge\\.net\" target=\"_blank\">QuiXplorer ([^<]+)<\\/A> - <A href=\"http:\\/\\/quix\\.tk\" target=\"_blank\">the QuiX project<\\/A><\\/SMALL>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<A class=\"title\" href=\"http:\\/\\/quixplorer\\.sourceforge\\.net\" target=\"_blank\">QuiXplorer ([^<]+)<\\/A> - <A href=\"http:\\/\\/quix\\.tk\" target=\"_blank\">the QuiX project<\\/A><\\/SMALL>",
 						},
 					},
@@ -40139,13 +40139,13 @@ var features = []*Feature{
 			{
 				Name: "RackCorp-CDN",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[\\s]*rackcorpcdn",
 						},
 						{
 							Regexp: "^[\\s]*rackcorpcdn\\/([\\d\\.]{3,6})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*rackcorpcdn\\/([\\d\\.]{3,6})",
 							},
 						},
@@ -40155,7 +40155,7 @@ var features = []*Feature{
 			{
 				Name: "RackStar-Server-Appliance-OS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "<A HREF='http:\\/\\/www.rackstar.net\\/' TITLE='This server is powered by the RackStar Server Appliance OS'>RACKSTAR<\\/A>",
 						},
@@ -40168,10 +40168,10 @@ var features = []*Feature{
 			{
 				Name: "RaidenHTTPD",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RaidenHTTPD\\/([^\\s]+) \\([^\\)]+\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^RaidenHTTPD\\/([^\\s]+) \\([^\\)]+\\)$",
 							},
 						},
@@ -40208,7 +40208,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Welcome to Rapid Browser ([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Welcome to Rapid Browser ([\\d\\.]+)<\\/title>",
 						},
 					},
@@ -40223,7 +40223,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<link rel=\"stylesheet\" type=\"text\\/css\" href=\"styles\\/typeStyle-en.css\\?([^\"]+)\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<link rel=\"stylesheet\" type=\"text\\/css\" href=\"styles\\/typeStyle-en.css\\?([^\"]+)\">",
 						},
 					},
@@ -40243,7 +40243,7 @@ var features = []*Feature{
 			{
 				Name: "RapidSite",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Rapidsite",
 						},
@@ -40253,13 +40253,13 @@ var features = []*Feature{
 			{
 				Name: "Raptor-Firewall",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Simple, Secure Web Server",
 						},
 						{
 							Regexp: "^Simple, Secure Web Server (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Simple, Secure Web Server (.+)$",
 							},
 						},
@@ -40269,10 +40269,10 @@ var features = []*Feature{
 			{
 				Name: "RCTTools",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RCTTools \\(SecureSOHO Web configuration Tools\\) v([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^RCTTools \\(SecureSOHO Web configuration Tools\\) v([^\\s]+)$",
 							},
 						},
@@ -40301,13 +40301,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "    <a href=\"http:\\/\\/www.it747.com\\/realtor747\" target=\"_blank\"><span style=\"color: green;\">Powered by REALTOR 747 - The Property Listings Management System - Version ([\\d\\.]+)<\\/span><\\/a><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "    <a href=\"http:\\/\\/www.it747.com\\/realtor747\" target=\"_blank\"><span style=\"color: green;\">Powered by REALTOR 747 - The Property Listings Management System - Version ([\\d\\.]+)<\\/span><\\/a><br>",
 						},
 					},
 					{
 						Regexp: "<title>REALTOR 747 - The Property Listings Management System - Administration  - Version ([\\d\\.]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>REALTOR 747 - The Property Listings Management System - Administration  - Version ([\\d\\.]+)<\\/title>",
 						},
 					},
@@ -40316,13 +40316,13 @@ var features = []*Feature{
 			{
 				Name: "RealVNC",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RealVNC",
 						},
 						{
 							Regexp: "^RealVNC\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^RealVNC\\/(.+)$",
 							},
 						},
@@ -40382,13 +40382,13 @@ var features = []*Feature{
 			{
 				Name: "RemotelyAnywhere",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^RemotelyAnywhere",
 						},
 						{
 							Regexp: "^RemotelyAnywhere\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^RemotelyAnywhere\\/([\\d\\.]+)$",
 							},
 						},
@@ -40403,13 +40403,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/reos.elazos.com\">ReOS ([\\d\\.]+)<\\/a> and released under the <a href=\"http:\\/\\/www.fsf.org\\/licensing\\/licenses\\/agpl\\-3\\.0\\.html\">GNU\\/AGPLv3 License.<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/reos.elazos.com\">ReOS ([\\d\\.]+)<\\/a> and released under the <a href=\"http:\\/\\/www.fsf.org\\/licensing\\/licenses\\/agpl\\-3\\.0\\.html\">GNU\\/AGPLv3 License.<\\/a>",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/reos.elazos.com\">ReOS ([\\d\\.]+)<\\/a> and released under the <a href=\"http:\\/\\/creativecommons.org\\/licenses\\/GPL\\/2.0\\/\">GNU\\/GPL License.<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/reos.elazos.com\">ReOS ([\\d\\.]+)<\\/a> and released under the <a href=\"http:\\/\\/creativecommons.org\\/licenses\\/GPL\\/2.0\\/\">GNU\\/GPL License.<\\/a>",
 						},
 					},
@@ -40418,7 +40418,7 @@ var features = []*Feature{
 			{
 				Name: "Request-Tracker",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "RT_SID_[^\\s^=]+=[a-f\\d]{32};",
 						},
@@ -40448,13 +40448,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"titlebox-title\">[\\s]*<span class=\"left\">[\\s]*Login[\\s]*<\\/span>[\\s]*<span class=\"right\">[\\s]*([^\\s]+)[\\s]*<\\/span>[\\s]*<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"titlebox-title\">[\\s]*<span class=\"left\">[\\s]*Login[\\s]*<\\/span>[\\s]*<span class=\"right\">[\\s]*([^\\s]+)[\\s]*<\\/span>[\\s]*<\\/div>",
 						},
 					},
 					{
 						Regexp: "&#187;&#124;&#171; RT ([^\\s]+) Copyright 1996-20[\\d]{2} <a href=\"http:\\/\\/www\\.bestpractical\\.com\\?rt=([^\\s^\"^>]+)\">Best Practical Solutions, LLC<\\/a>\\.",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "&#187;&#124;&#171; RT ([^\\s]+) Copyright 1996-20[\\d]{2} <a href=\"http:\\/\\/www\\.bestpractical\\.com\\?rt=([^\\s^\"^>]+)\">Best Practical Solutions, LLC<\\/a>\\.",
 						},
 					},
@@ -40491,10 +40491,10 @@ var features = []*Feature{
 			{
 				Name: "RiOS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-rbt-optimized-by": &FeatureRuleItem{
+					"X-rbt-optimized-by": {
 						{
 							Regexp: "\\(RiOS ([^\\s]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "\\(RiOS ([^\\s]+)\\)",
 							},
 						},
@@ -40506,7 +40506,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div class=\"logo\"><a id=\"logo\" href=\"http:\\/\\/sourceforge\\.net\\/projects\\/rips-scanner\\/files\\/\" target=\"_blank\" title=\"get latest version\">([^<^\\s]+)<\\/a><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"logo\"><a id=\"logo\" href=\"http:\\/\\/sourceforge\\.net\\/projects\\/rips-scanner\\/files\\/\" target=\"_blank\" title=\"get latest version\">([^<^\\s]+)<\\/a><\\/div>",
 						},
 					},
@@ -40540,13 +40540,13 @@ var features = []*Feature{
 			{
 				Name: "Roxen",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Roxen$",
 						},
 						{
 							Regexp: "^Roxen\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Roxen\\/([^\\s]+)$",
 							},
 						},
@@ -40556,7 +40556,7 @@ var features = []*Feature{
 			{
 				Name: "Ruby-on-Rails",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^request_method",
 						},
@@ -40589,13 +40589,13 @@ var features = []*Feature{
 			{
 				Name: "Ruby",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Ruby",
 						},
 						{
 							Regexp: "Ruby\\/([^\\s^\\/^\\(]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Ruby\\/([^\\s^\\/^\\(]+)",
 							},
 						},
@@ -40604,13 +40604,13 @@ var features = []*Feature{
 						},
 						{
 							Regexp: "^(WEBrick\\/[\\d\\.]+) \\(Ruby\\/[\\d\\.]+\\/[\\d]{4}-[\\d]{2}-[\\d]{2}\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(WEBrick\\/[\\d\\.]+) \\(Ruby\\/[\\d\\.]+\\/[\\d]{4}-[\\d]{2}-[\\d]{2}\\)",
 							},
 						},
 						{
 							Regexp: "^WEBrick\\/[\\d\\.]+ \\(Ruby\\/([\\d\\.]+)\\/[\\d]{4}-[\\d]{2}-[\\d]{2}\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WEBrick\\/[\\d\\.]+ \\(Ruby\\/([\\d\\.]+)\\/[\\d]{4}-[\\d]{2}-[\\d]{2}\\)",
 							},
 						},
@@ -40659,13 +40659,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div align='center'><a href='http:\\/\\/www.runcms.org\\/' target='_blank'> Powered by  RunCms ([\\d\\.a-z]+)[^&]* &copy; [\\d]{4}-[\\d]{4} ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div align='center'><a href='http:\\/\\/www.runcms.org\\/' target='_blank'> Powered by  RunCms ([\\d\\.a-z]+)[^&]* &copy; [\\d]{4}-[\\d]{4} ",
 						},
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"[\\s^\"]*RUNCMS ([\\d\\.a-z]+)[^\"]*\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"[\\s^\"]*RUNCMS ([\\d\\.a-z]+)[^\"]*\"",
 						},
 					},
@@ -40693,7 +40693,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href='http:\\/\\/www.matteoiammarrone.com\\/public\\/s-cms' target='_blank'>S-Cms ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href='http:\\/\\/www.matteoiammarrone.com\\/public\\/s-cms' target='_blank'>S-Cms ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -40715,19 +40715,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t<p class=\"powered\">powered by: <a title=\"sabros.us\" href=\"http://sabros.us/\">sabros.us</a></p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "1.8",
 						},
 					},
 					{
 						Regexp: "\t\t<p class=\"powered\">powered by: <a title=\"sabros.us\" href=\"http://sourceforge.net/projects/sabrosus/\">sabros.us</a></p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "1.7",
 						},
 					},
 					{
 						Regexp: "\t<meta name=\"generator\" content=\"sabros.us ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t<meta name=\"generator\" content=\"sabros.us ([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -40736,23 +40736,23 @@ var features = []*Feature{
 			{
 				Name: "Safedog",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Safedog",
 						},
 						{
 							Regexp: "^Safedog\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Safedog\\/([\\d\\.]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "^WAF\\/2\\.0",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "safedog-flow-item=",
 						},
@@ -40762,7 +40762,7 @@ var features = []*Feature{
 			{
 				Name: "Sagem-Router",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"?Sagem\"?$",
 						},
@@ -40772,7 +40772,7 @@ var features = []*Feature{
 			{
 				Name: "SailsJS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^sails.sid",
 						},
@@ -40782,12 +40782,12 @@ var features = []*Feature{
 			{
 				Name: "Saman-Portal",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "sisRapid Framework",
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "SAMANPORTALSID=[^;]+;",
 						},
@@ -40799,7 +40799,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<script  type=\"text\\/javascript\" language=\"JavaScript\" src=\"\\/portlets\\/sisRapid\\/dream\\/libs\\/(V[\\d\\.]+)\\/core\\/sisValidationAPI\\.js\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<script  type=\"text\\/javascript\" language=\"JavaScript\" src=\"\\/portlets\\/sisRapid\\/dream\\/libs\\/(V[\\d\\.]+)\\/core\\/sisValidationAPI\\.js\">",
 						},
 					},
@@ -40811,13 +40811,13 @@ var features = []*Feature{
 			{
 				Name: "Sambar-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SAMBAR",
 						},
 						{
 							Regexp: "^SAMBAR ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SAMBAR ([\\d\\.]+)$",
 							},
 						},
@@ -40855,13 +40855,13 @@ var features = []*Feature{
 			{
 				Name: "SAP-NetWeaver",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SAP (Web|NetWeaver)",
 						},
 						{
 							Regexp: "^SAP J2EE Engine\\/([\\d\\.]{1,4})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SAP J2EE Engine\\/([\\d\\.]{1,4})",
 							},
 						},
@@ -40888,7 +40888,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<(div|td) class=\"info\">(Generated by|Gerado por)? <a href='http:\\/\\/sarg\\.sourceforge\\.net'>(<font class=\"info\">)?sarg-([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<(div|td) class=\"info\">(Generated by|Gerado por)? <a href='http:\\/\\/sarg\\.sourceforge\\.net'>(<font class=\"info\">)?sarg-([^\\s]+)",
 						},
 					},
@@ -40917,10 +40917,10 @@ var features = []*Feature{
 			{
 				Name: "Sawmill",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Sawmill\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Sawmill\\/([^\\s]+)",
 							},
 						},
@@ -40949,7 +40949,7 @@ var features = []*Feature{
 			{
 				Name: "SchoolWire-Centricity",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^SWSessionID",
 						},
@@ -40967,7 +40967,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a class=\"externallink\" href=\"http:\\/\\/www\\.screwturn\\.eu\" title=\"ScrewTurn Wiki\" target=\"_blank\">ScrewTurn Wiki<\\/a> version ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a class=\"externallink\" href=\"http:\\/\\/www\\.screwturn\\.eu\" title=\"ScrewTurn Wiki\" target=\"_blank\">ScrewTurn Wiki<\\/a> version ([\\d\\.]+)",
 						},
 					},
@@ -40994,7 +40994,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id='testAlertDivTitle'>Scrutinizer ([^<]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id='testAlertDivTitle'>Scrutinizer ([^<]+)<\\/div>",
 						},
 					},
@@ -41011,7 +41011,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<br>Powered By <a href=['\"]http:\\/\\/www\\.sdcms\\.cn['\"] target=['\"]_blank['\"]>SDCMS ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br>Powered By <a href=['\"]http:\\/\\/www\\.sdcms\\.cn['\"] target=['\"]_blank['\"]>SDCMS ([^<]+)<\\/a>",
 						},
 					},
@@ -41023,10 +41023,10 @@ var features = []*Feature{
 			{
 				Name: "SDL-Tridion-WCMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Product-version": &FeatureRuleItem{
+					"Product-version": {
 						{
 							Regexp: "^(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^(.+)$",
 							},
 						},
@@ -41053,7 +41053,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "    Powered by <a href=\"http:\\/\\/seagullproject.org[\\/]?\" title=\"Seagull PHP Framework\">Seagull PHP Framework<\\/a> v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "    Powered by <a href=\"http:\\/\\/seagullproject.org[\\/]?\" title=\"Seagull PHP Framework\">Seagull PHP Framework<\\/a> v([\\d\\.]+)",
 						},
 					},
@@ -41073,7 +41073,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "This Website is generated by SearchFit Shopping Cart v([^ ]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "This Website is generated by SearchFit Shopping Cart v([^ ]+)",
 						},
 					},
@@ -41146,7 +41146,7 @@ var features = []*Feature{
 			{
 				Name: "SentinelServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SentinelServer",
 						},
@@ -41181,7 +41181,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p align=\"center\">[\\r\\n]*  Powered by <b>SePortal<\\/b> ([\\d\\.]{1,5})[\\r\\n]*  <br \\/>[\\r\\n]*  Copyright &copy; 20[\\d]{2}-20[\\d]{2} <a href=\"http:\\/\\/www.seportal.org\" target=\"_blank\">SePortal.org<\\/a>[\\r\\n]*<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align=\"center\">[\\r\\n]*  Powered by <b>SePortal<\\/b> ([\\d\\.]{1,5})[\\r\\n]*  <br \\/>[\\r\\n]*  Copyright &copy; 20[\\d]{2}-20[\\d]{2} <a href=\"http:\\/\\/www.seportal.org\" target=\"_blank\">SePortal.org<\\/a>[\\r\\n]*<\\/p>",
 						},
 					},
@@ -41206,7 +41206,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.shad0wed.com\\/\"[^>]*>Shadowed Portal ([^<]+)<\\/a>.<br \\/>These script's code is Copyright &copy; 2003-20[\\d]{2} by <a href=\"http:\\/\\/www.shadowedworks.com\\/\"[^>]*>Shadowed Works<\\/a>.<br \\/>Please be sure to read the <a href=\"http:\\/\\/www.shad0wed.com\\/load.php\\?mod=pages(&|&amp;)page=Terms_and_Conditions\"[^>]*>Terms and Conditions<\\/a> required for the use of these scripts.",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.shad0wed.com\\/\"[^>]*>Shadowed Portal ([^<]+)<\\/a>.<br \\/>These script's code is Copyright &copy; 2003-20[\\d]{2} by <a href=\"http:\\/\\/www.shadowedworks.com\\/\"[^>]*>Shadowed Works<\\/a>.<br \\/>Please be sure to read the <a href=\"http:\\/\\/www.shad0wed.com\\/load.php\\?mod=pages(&|&amp;)page=Terms_and_Conditions\"[^>]*>Terms and Conditions<\\/a> required for the use of these scripts.",
 						},
 					},
@@ -41226,7 +41226,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"ShopEx ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"ShopEx ([\\d\\.]+)\" \\/>",
 						},
 					},
@@ -41288,7 +41288,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"Simbix Framework v([^\"^\\s]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Simbix Framework v([^\"^\\s]+)\" \\/>",
 						},
 					},
@@ -41342,7 +41342,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span id=\"spt\"><a href=\"http:\\/\\/www\\.sptoolkit\\.com\\/download\\/\" target=\"_blank\">v([^\\s^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span id=\"spt\"><a href=\"http:\\/\\/www\\.sptoolkit\\.com\\/download\\/\" target=\"_blank\">v([^\\s^<]+)",
 						},
 					},
@@ -41368,13 +41368,13 @@ var features = []*Feature{
 			{
 				Name: "Simplewire",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Simplewire",
 						},
 						{
 							Regexp: "^Simplewire\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Simplewire\\/([^\\s]+)$",
 							},
 						},
@@ -41386,25 +41386,25 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"SimpNews v([\\d\\.]+), \\(c\\)[\\d]{4}[\\-,]*[\\d]{4} by Boesch EDV-Consulting\"[^>]*>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"SimpNews v([\\d\\.]+), \\(c\\)[\\d]{4}[\\-,]*[\\d]{4} by Boesch EDV-Consulting\"[^>]*>",
 						},
 					},
 					{
 						Regexp: " href=\"http:\\/\\/www.boesch-it.de[\\/]*\">SimpNews<\\/a> V([\\d\\.]+) &copy;[\\d]{4}[\\-,]*[\\d]{4} B&ouml;sch EDV-Consulting<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: " href=\"http:\\/\\/www.boesch-it.de[\\/]*\">SimpNews<\\/a> V([\\d\\.]+) &copy;[\\d]{4}[\\-,]*[\\d]{4} B&ouml;sch EDV-Consulting<\\/div>",
 						},
 					},
 					{
 						Regexp: "<br>Powered by <a class=\"copyright\" target=\"_blank\" href=\"http:\\/\\/www.boesch-it.de\">SimpNews<\\/a> V([\\d\\.]+) &copy;[\\d]{4}[\\-,]*[\\d]{4} B&ouml;sch EDV-Consulting<\\/font><\\/td><\\/tr><\\/table><\\/td><\\/tr><\\/table><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br>Powered by <a class=\"copyright\" target=\"_blank\" href=\"http:\\/\\/www.boesch-it.de\">SimpNews<\\/a> V([\\d\\.]+) &copy;[\\d]{4}[\\-,]*[\\d]{4} B&ouml;sch EDV-Consulting<\\/font><\\/td><\\/tr><\\/table><\\/td><\\/tr><\\/table><\\/div>",
 						},
 					},
 					{
 						Regexp: "<br>Powered by SimpNews V([\\d\\.]+) &copy;[\\d]{4}[\\-,]*[\\d]{4} B&ouml;sch EDV-Consulting<\\/font><\\/td><\\/tr><\\/table><\\/td><\\/tr><\\/table><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br>Powered by SimpNews V([\\d\\.]+) &copy;[\\d]{4}[\\-,]*[\\d]{4} B&ouml;sch EDV-Consulting<\\/font><\\/td><\\/tr><\\/table><\\/td><\\/tr><\\/table><\\/div>",
 						},
 					},
@@ -41438,7 +41438,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<tr bgcolor=\"#d3d3d3\"><td>Software Version:<td><font color=\"darkblue\">([^<]+)<\\/font><td>Hardware Version:<td><font color=\"darkblue\">[^<]+<\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr bgcolor=\"#d3d3d3\"><td>Software Version:<td><font color=\"darkblue\">([^<]+)<\\/font><td>Hardware Version:<td><font color=\"darkblue\">[^<]+<\\/font>",
 						},
 					},
@@ -41509,7 +41509,7 @@ var features = []*Feature{
 			{
 				Name: "Sitecom-NAS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"SITECOM LOGIN Enter Password (default is sitecom)",
 						},
@@ -41519,7 +41519,7 @@ var features = []*Feature{
 			{
 				Name: "SiteCore",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^SC_ANALYTICS_",
 						},
@@ -41551,15 +41551,15 @@ var features = []*Feature{
 			{
 				Name: "SitePlayer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SitePlayer Telnet\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SitePlayer Telnet\\/([^\\s]+)$",
 							},
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"SitePlayer Telnet Configuration\"$",
 						},
@@ -41583,7 +41583,7 @@ var features = []*Feature{
 			{
 				Name: "Skillsoft-Skillport-LMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "SP[5-7]\\dFE=\\d+\\.\\d+\\.\\d+",
 						},
@@ -41592,7 +41592,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<table id=\"loginwrapper\">\\s*<tr><td width=\"10%\"><\\/td>\\s*<td width=\"80%\"  align=\"left\" class=\"v\">v ([^\\s]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<table id=\"loginwrapper\">\\s*<tr><td width=\"10%\"><\\/td>\\s*<td width=\"80%\"  align=\"left\" class=\"v\">v ([^\\s]+)<\\/td>",
 						},
 					},
@@ -41607,10 +41607,10 @@ var features = []*Feature{
 			{
 				Name: "SkyX",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SkyX HTTPS ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SkyX HTTPS ([^\\s]+)$",
 							},
 						},
@@ -41630,7 +41630,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"SLAED CMS ([^\"^>]+)\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"SLAED CMS ([^\"^>]+)\">",
 						},
 					},
@@ -41641,7 +41641,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"simple-footer\">\\s+<span>SlideShowPro Director ([^<]+)<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"simple-footer\">\\s+<span>SlideShowPro Director ([^<]+)<\\/span>",
 						},
 					},
@@ -41653,7 +41653,7 @@ var features = []*Feature{
 			{
 				Name: "SlingBox",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_sling_skey=[^;]+",
 						},
@@ -41662,7 +41662,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- Footer start -->\\s+<div id=\"footer_center\">\\s+<p>Portal Version:&nbsp;([^,]+), Plugin Version:&nbsp;",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Footer start -->\\s+<div id=\"footer_center\">\\s+<p>Portal Version:&nbsp;([^,]+), Plugin Version:&nbsp;",
 						},
 					},
@@ -41671,7 +41671,7 @@ var features = []*Feature{
 			{
 				Name: "SMA-Sunny-WebBox",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^(WebBox-20|Sunny WebBox)$",
 						},
@@ -41689,18 +41689,18 @@ var features = []*Feature{
 			{
 				Name: "SMART-SOFT-VCard-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SMART-SOFT VCard",
 						},
 						{
 							Regexp: "^SMART-SOFT VCard HTTP\\/SSL server \\(([^\\)]+)\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SMART-SOFT VCard HTTP\\/SSL server \\(([^\\)]+)\\)$",
 							},
 						},
 					},
-					"Exception": &FeatureRuleItem{
+					"Exception": {
 						{
 							Regexp: "^Directory%20browsing%20not%20allowed$",
 						},
@@ -41712,7 +41712,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>Error<\\/title><\\/head><body><h1>403 - Directory browsing not allowed<\\/h1><hr>SMART-SOFT VCard HTTP\\/SSL server \\(([^\\)]+)\\)<br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Error<\\/title><\\/head><body><h1>403 - Directory browsing not allowed<\\/h1><hr>SMART-SOFT VCard HTTP\\/SSL server \\(([^\\)]+)\\)<br>",
 						},
 					},
@@ -41721,21 +41721,21 @@ var features = []*Feature{
 			{
 				Name: "SmartCDS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^smartcds",
 						},
 						{
 							Regexp: "^smartcds\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^smartcds\\/([^\\s]+)",
 							},
 						},
 					},
-					"Smartcds": &FeatureRuleItem{
+					"Smartcds": {
 						{
 							Regexp: "^Version:([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Version:([^\\s]+)$",
 							},
 						},
@@ -41752,13 +41752,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href='http:\\/\\/www.smartertools.com\\/smartermail\\/mail-server-software.aspx' target='_blank'>SmarterMail (Enterprise|Professional|Free|FREE) ([\\d\\.]+)<\\/a>( |&nbsp;)\\|( |&nbsp;)<a href='http:\\/\\/www.smartertools.com\\/smartermail\\/mail-server-software.aspx' target='_blank'>(Windows Mail Server|Email Server Software|Mail Server Software)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href='http:\\/\\/www.smartertools.com\\/smartermail\\/mail-server-software.aspx' target='_blank'>SmarterMail (Enterprise|Professional|Free|FREE) ([\\d\\.]+)<\\/a>( |&nbsp;)\\|( |&nbsp;)<a href='http:\\/\\/www.smartertools.com\\/smartermail\\/mail-server-software.aspx' target='_blank'>(Windows Mail Server|Email Server Software|Mail Server Software)<\\/a>",
 						},
 					},
 					{
 						Regexp: "\t\t\t\t\t\t\t\t\t\t<td class=\"?bar1inner\"?>SmarterMail (Enterprise|Professional|Free|FREE) Edition ([\\d\\.]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t\t\t\t\t\t\t\t<td class=\"?bar1inner\"?>SmarterMail (Enterprise|Professional|Free|FREE) Edition ([\\d\\.]+)<\\/td>",
 						},
 					},
@@ -41772,19 +41772,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href='http:\\/\\/www.smartertools.com\\/smarterstats\\/web-analytics-seo-software.aspx' target='_blank'>SmarterStats (Enterprise|Professional|Free) ([\\d\\.]+)<\\/a>( |&nbsp;)\\|( |&nbsp;)<a href='http:\\/\\/www.smartertools.com\\/smarterstats\\/web-analytics-seo-software.aspx' target='_blank'>Web Log Analytics( & SEO Software)?<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href='http:\\/\\/www.smartertools.com\\/smarterstats\\/web-analytics-seo-software.aspx' target='_blank'>SmarterStats (Enterprise|Professional|Free) ([\\d\\.]+)<\\/a>( |&nbsp;)\\|( |&nbsp;)<a href='http:\\/\\/www.smartertools.com\\/smarterstats\\/web-analytics-seo-software.aspx' target='_blank'>Web Log Analytics( & SEO Software)?<\\/a>",
 						},
 					},
 					{
 						Regexp: "<a href='http:\\/\\/www.smartertools.com\\/Products\\/SmarterStats\\/Overview.aspx' target='_blank'>SmarterStats (Enterprise|Professional|Free) ([\\d\\.]+)<\\/a>&nbsp;\\|&nbsp;<a href='http:\\/\\/www.smartertools.com\\/' target='_blank'>Windows Web Analytics<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href='http:\\/\\/www.smartertools.com\\/Products\\/SmarterStats\\/Overview.aspx' target='_blank'>SmarterStats (Enterprise|Professional|Free) ([\\d\\.]+)<\\/a>&nbsp;\\|&nbsp;<a href='http:\\/\\/www.smartertools.com\\/' target='_blank'>Windows Web Analytics<\\/a>",
 						},
 					},
 					{
 						Regexp: "\t\t\t\t\t\t\t\t\t\t<td class=bar1inner>SmarterStats (Enterprise|Professional|Free|FREE) Edition ([\\d\\.]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t\t\t\t\t\t\t\t<td class=bar1inner>SmarterStats (Enterprise|Professional|Free|FREE) Edition ([\\d\\.]+)<\\/td>",
 						},
 					},
@@ -41826,7 +41826,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<A HREF=\"http:\\/\\/oss\\.oetiker\\.ch\\/smokeping\\/counter\\.cgi\\/([^\\s\\/\\\"]+)\"><img border=\"0\" src=\"[^\"]+\"><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<A HREF=\"http:\\/\\/oss\\.oetiker\\.ch\\/smokeping\\/counter\\.cgi\\/([^\\s\\/\\\"]+)\"><img border=\"0\" src=\"[^\"]+\"><\\/a>",
 						},
 					},
@@ -41835,13 +41835,13 @@ var features = []*Feature{
 			{
 				Name: "SmugMug",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "^SmugMug",
 						},
 						{
 							Regexp: "^SmugMug\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SmugMug\\/([\\d\\.]+)$",
 							},
 						},
@@ -41851,7 +41851,7 @@ var features = []*Feature{
 			{
 				Name: "Snap-Appliance-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Snap Appliance",
 						},
@@ -41860,13 +41860,13 @@ var features = []*Feature{
 						},
 						{
 							Regexp: "^Snap Appliances?, Inc\\.\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Snap Appliances?, Inc\\.\\/([\\d\\.]+)$",
 							},
 						},
 						{
 							Regexp: "^Quantum Corporation\\.\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Quantum Corporation\\.\\/([\\d\\.]+)$",
 							},
 						},
@@ -41887,12 +41887,12 @@ var features = []*Feature{
 			{
 				Name: "Snare",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SNARE\\/([\\d\\.]+)$",
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Digest realm=\"SNARE\"",
 						},
@@ -41901,7 +41901,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<H2><CENTER>SNARE Version ([\\d\\.]+) Status Page<\\/H2><\\/CENTER>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<H2><CENTER>SNARE Version ([\\d\\.]+) Status Page<\\/H2><\\/CENTER>",
 						},
 					},
@@ -41949,7 +41949,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<br><br><br><br>Snort Report Version ([^<]+)<br>Copyright 2000-20[\\d]{2}, <a href=\"http:\\/\\/www\\.symmetrixtech\\.com\">Symmetrix Technologies, LLC\\.<\\/a><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br><br><br><br>Snort Report Version ([^<]+)<br>Copyright 2000-20[\\d]{2}, <a href=\"http:\\/\\/www\\.symmetrixtech\\.com\">Symmetrix Technologies, LLC\\.<\\/a><\\/td>",
 						},
 					},
@@ -41966,7 +41966,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by: <a target=\"_blank\" href=\"http:\\/\\/eveforenterprise\\.com\">Groupee<\\/a><SUP>TM<\\/SUP> \\(version ([\\d\\.]+)\\) from Groupee Inc\\.",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by: <a target=\"_blank\" href=\"http:\\/\\/eveforenterprise\\.com\">Groupee<\\/a><SUP>TM<\\/SUP> \\(version ([\\d\\.]+)\\) from Groupee Inc\\.",
 						},
 					},
@@ -41977,7 +41977,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: ">Powered by SocketKB version ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: ">Powered by SocketKB version ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -41988,19 +41988,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "alert('You Are Using '+browser+' Version '+version+', a Non-Tested Browser For This Application. Currently Supported Browsers Are:\\n\\n1. Internet Explorer 6 and Above\\n2. Firefox 2 and Above\\n3. Netscape 8 and Above\\n\\nIf You Experience Any Problem, Please Change To The Supported Browser As Listed Above. Thank You.');",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "3.x",
 						},
 					},
 					{
 						Regexp: "alert('You Are Using '+browser+', a Non-Supported Browser For This Application\\nCurrently Supported Browsers Are:\\n1. Internet Explorer\\n2. Firefox (with IETab Enabled)\\n\\nSome Critical Functionalities May Not Work With '+browser);",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<= 2.x",
 						},
 					},
 					{
 						Regexp: "<td valign=\"top\" align=\"left\"><img src=login_images\\/index_01.gif><\\/td><td valign=\"bottom\" nowrap class=\"td_title\" width=\"100%\">v ([\\d\\.]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td valign=\"top\" align=\"left\"><img src=login_images\\/index_01.gif><\\/td><td valign=\"bottom\" nowrap class=\"td_title\" width=\"100%\">v ([\\d\\.]+)<\\/td>",
 						},
 					},
@@ -42009,7 +42009,7 @@ var features = []*Feature{
 			{
 				Name: "Sockso",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Sockso$",
 						},
@@ -42018,7 +42018,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p id=\"legal\">[\\s]+<strong>Sockso<\\/strong>[\\s]+v([^<]+)<br \\/>[\\s]+&copy; 20[\\d]{2}",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p id=\"legal\">[\\s]+<strong>Sockso<\\/strong>[\\s]+v([^<]+)<br \\/>[\\s]+&copy; 20[\\d]{2}",
 						},
 					},
@@ -42076,7 +42076,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<link rel=\"stylesheet\" type=\"text/css\" href=\"/SolarWinds.css\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Old",
 						},
 					},
@@ -42103,7 +42103,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div id=\"footer\">[^S]*SolarWinds Orion Network Performance Monitor ([^&]+)&copy; 1995-[0-9]{4} All Rights Reserved[^<]*<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"footer\">[^S]*SolarWinds Orion Network Performance Monitor ([^&]+)&copy; 1995-[0-9]{4} All Rights Reserved[^<]*<\\/div>",
 						},
 					},
@@ -42126,7 +42126,7 @@ var features = []*Feature{
 			{
 				Name: "SonicWALL-Firewall",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SonicWALL$",
 						},
@@ -42138,25 +42138,25 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TITLE>SonicWALL Global Management System Version ([^\\s^<])[\\s]?<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>SonicWALL Global Management System Version ([^\\s^<])[\\s]?<\\/TITLE>",
 						},
 					},
 					{
 						Regexp: "<P><B>SonicWALL Global Management System v([^\\s^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<P><B>SonicWALL Global Management System v([^\\s^<]+)",
 						},
 					},
 					{
 						Regexp: "<TITLE>SonicWALL Universal Management Suite v([^\\s^<]+)<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>SonicWALL Universal Management Suite v([^\\s^<]+)<\\/TITLE>",
 						},
 					},
 					{
 						Regexp: "<P><B>SonicWALL Universal Management Suite v([^\\s^<]+)<\\/B>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<P><B>SonicWALL Universal Management Suite v([^\\s^<]+)<\\/B>",
 						},
 					},
@@ -42168,7 +42168,7 @@ var features = []*Feature{
 			{
 				Name: "SonicWALL-SSL-VPN",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SonicWALL SSL-VPN Web Server\\.?$",
 						},
@@ -42211,7 +42211,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TITLE>SONY SNT-V304 Video Network Station</TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "SNT-V304",
 						},
 					},
@@ -42223,7 +42223,7 @@ var features = []*Feature{
 			{
 				Name: "Sophos-Email-Appliance",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Sophos Email Appliance$",
 						},
@@ -42246,7 +42246,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "\t\t<a href=\"http:\\/\\/www.sourcebans.net\" target=\"_blank\"><img src=\"images\\/sb.png\" alt=\"SourceBans\" border=\"0\" \\/><\\/a><br\\/>\\n\t\t<div id=\"footqversion\">Version ([\\d\\.]+) <\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t<a href=\"http:\\/\\/www.sourcebans.net\" target=\"_blank\"><img src=\"images\\/sb.png\" alt=\"SourceBans\" border=\"0\" \\/><\\/a><br\\/>\\n\t\t<div id=\"footqversion\">Version ([\\d\\.]+) <\\/div>",
 						},
 					},
@@ -42286,10 +42286,10 @@ var features = []*Feature{
 			{
 				Name: "Specialix-JETSTREAM",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Specialix JETSTREAM ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Specialix JETSTREAM ([\\d\\.]+)$",
 							},
 						},
@@ -42313,7 +42313,7 @@ var features = []*Feature{
 			{
 				Name: "SpeedTouch",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "(Basic|Digest) realm=\"SpeedTouch",
 						},
@@ -42365,13 +42365,13 @@ var features = []*Feature{
 			{
 				Name: "Spinnaker",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": []*FeatureRuleItem{
-						&FeatureRuleItem{
+					"Server": {
+						{
 							Regexp: "^Spinnaker",
 						},
 						{
 							Regexp: "^Spinnaker\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Spinnaker\\/([^\\s]+)",
 							},
 						},
@@ -42408,7 +42408,7 @@ var features = []*Feature{
 			{
 				Name: "Spring-Framework",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE=",
 						},
@@ -42418,15 +42418,15 @@ var features = []*Feature{
 			{
 				Name: "SpryWare-MIS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SpryWare\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SpryWare\\/([^\\s]+)$",
 							},
 						},
 					},
-					"X-deprecated-response": &FeatureRuleItem{
+					"X-deprecated-response": {
 						{
 							Regexp: "^Invalid CheckSum Received$",
 						},
@@ -42447,13 +42447,13 @@ var features = []*Feature{
 			{
 				Name: "Spyglass-MicroServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Spyglass_MicroServer",
 						},
 						{
 							Regexp: "^Spyglass_MicroServer\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Spyglass_MicroServer\\/(.+)$",
 							},
 						},
@@ -42471,7 +42471,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www.developerinabox.com\" target=\"_blank\"><img src=\"Img\\/poweredby.png\" style=\"position:absolute;right:0px;bottom:-30px;margin-top:2px;border:0px\" title=\"SQLCMS v([\\d\\.]+)\"\\/><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.developerinabox.com\" target=\"_blank\"><img src=\"Img\\/poweredby.png\" style=\"position:absolute;right:0px;bottom:-30px;margin-top:2px;border:0px\" title=\"SQLCMS v([\\d\\.]+)\"\\/><\\/a>",
 						},
 					},
@@ -42494,7 +42494,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<h2 class=\"sqlmVersion\">Welcome to <a href=\"http:\\/\\/www\\.sqlitemanager\\.org\" target=\"_blank\">SQLiteManager<\\/a> version ([^\\s^>]+)<\\/h2>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h2 class=\"sqlmVersion\">Welcome to <a href=\"http:\\/\\/www\\.sqlitemanager\\.org\" target=\"_blank\">SQLiteManager<\\/a> version ([^\\s^>]+)<\\/h2>",
 						},
 					},
@@ -42503,7 +42503,7 @@ var features = []*Feature{
 			{
 				Name: "SquareSpace",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^WebPersCookie",
 						},
@@ -42527,7 +42527,7 @@ var features = []*Feature{
 			{
 				Name: "Squirrelcart",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "SC_referer=",
 						},
@@ -42545,7 +42545,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>Squirrelcart v([^\\s]+) Control Panel<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Squirrelcart v([^\\s]+) Control Panel<\\/title>",
 						},
 					},
@@ -42570,7 +42570,7 @@ var features = []*Feature{
 			{
 				Name: "Stardot-Express",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"Express6\"",
 						},
@@ -42579,7 +42579,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Express6 Live Image( Popup)?<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "6",
 						},
 					},
@@ -42599,13 +42599,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>NetCamXL Live Image[\\ Popup]*<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "XL",
 						},
 					},
 					{
 						Regexp: "<applet code=\"CaptureClient.class\" width=\"[\\d]+\" height=\"[\\d]+\" alt=\"NetCamXL Live [Stream|Image]+\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "XL",
 						},
 					},
@@ -42616,13 +42616,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p>This site is powered by <a href=\"http:\\/\\/status\\.net\\/\">StatusNet<\\/a> version ([^\\s]+),",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p>This site is powered by <a href=\"http:\\/\\/status\\.net\\/\">StatusNet<\\/a> version ([^\\s]+),",
 						},
 					},
 					{
 						Regexp: "It runs the <a href=\"http:\\/\\/status\\.net\\/\">StatusNet<\\/a> microblogging software, version ([^\\s]+), available under the <a ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "It runs the <a href=\"http:\\/\\/status\\.net\\/\">StatusNet<\\/a> microblogging software, version ([^\\s]+), available under the <a ",
 						},
 					},
@@ -42631,13 +42631,13 @@ var features = []*Feature{
 			{
 				Name: "StorageTek-NAS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^StorageTek-HTTPD",
 						},
 						{
 							Regexp: "^StorageTek-HTTPD\\/([^\\s]+) \\([^\\s]+ NAS\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^StorageTek-HTTPD\\/([^\\s]+) \\([^\\s]+ NAS\\)$",
 							},
 						},
@@ -42672,13 +42672,13 @@ var features = []*Feature{
 			{
 				Name: "Stronghold",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Stronghold$",
 						},
 						{
 							Regexp: "^Stronghold\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Stronghold\\/([^\\s]+)",
 							},
 						},
@@ -42716,19 +42716,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t<meta name=\"generator\" content=\"Subrion CMS ([\\d\\.a-zA-Z]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t<meta name=\"generator\" content=\"Subrion CMS ([\\d\\.a-zA-Z]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "\t<title>Subrion CMS ([\\d\\.a-zA-Z]+) - Web Installer<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t<title>Subrion CMS ([\\d\\.a-zA-Z]+) - Web Installer<\\/title>",
 						},
 					},
 					{
 						Regexp: "\tPowered by <a href=\"http:\\/\\/www.subrion.com\\/\" title=\"Classifieds Software\">Subrion CMS<\\/a> Version ([\\d\\.a-zA-Z]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\tPowered by <a href=\"http:\\/\\/www.subrion.com\\/\" title=\"Classifieds Software\">Subrion CMS<\\/a> Version ([\\d\\.a-zA-Z]+)<br \\/>",
 						},
 					},
@@ -42782,25 +42782,25 @@ var features = []*Feature{
 			{
 				Name: "Sun-GlassFish",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^GlassFish",
 						},
 						{
 							Regexp: "^GlassFish v(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^GlassFish v(.+)$",
 							},
 						},
 						{
 							Regexp: "^GlassFish Server Open Source Edition (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^GlassFish Server Open Source Edition (.+)$",
 							},
 						},
 						{
 							Regexp: "Sun GlassFish Enterprise Server v(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Sun GlassFish Enterprise Server v(.+)$",
 							},
 						},
@@ -42812,7 +42812,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Sun Java\\[tm\\] System Calendar Express ([^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Sun Java\\[tm\\] System Calendar Express ([^<]+)<\\/title>",
 						},
 					},
@@ -42827,21 +42827,21 @@ var features = []*Feature{
 			{
 				Name: "Sun-Java-System-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[\\s]*Sun[\\-\\ ]{1}Java[\\-\\ ]{1}System[\\/\\ ]{1}Application[\\-\\ ]{1}Server",
 						},
 						{
 							Regexp: "^[\\s]*Sun-Java-System-Web-Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*Sun-Java-System-Web-Server\\/([\\d\\.]+)",
 							},
 						},
 					},
-					"Proxy-agent": &FeatureRuleItem{
+					"Proxy-agent": {
 						{
 							Regexp: "^[\\s]*Sun-Java-System-Web-[Proxy-]*Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[\\s]*Sun-Java-System-Web-[Proxy-]*Server\\/([\\d\\.]+)",
 							},
 						},
@@ -42856,7 +42856,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"GENERATOR\" content=\"SiT! Support Incident Tracker v([^\"]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"GENERATOR\" content=\"SiT! Support Incident Tracker v([^\"]+)\" \\/>",
 						},
 					},
@@ -42870,13 +42870,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- InstanceBegin template=rwh.dwt codeOutsideHTMLIsLocked=false --><!--Copyright &copy; 2002-2010 by Flux Services, Inc.--><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\"><title>Website Unavailable - UltraWebsiteHosting.com</title><META NAME=ROBOTS CONTENT=NOINDEX,NOFOLLOW><LINK REL=\"SHORTCUT ICON\" HREF=favicon.ico><style type=\"text/css\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "ultrawebsitehosting.com",
 						},
 					},
 					{
 						Regexp: "background-image: url(http://www.ultrawebsitehosting.com/suspended/body-bg.gif);",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "ultrawebsitehosting.com",
 						},
 					},
@@ -42885,13 +42885,13 @@ var features = []*Feature{
 			{
 				Name: "SVN",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "[^\\r^\\n]*SVN",
 						},
 						{
 							Regexp: "[^\\r^\\n]*SVN\\/([^\\r^\\n^\\s]*)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[^\\r^\\n]*SVN\\/([^\\r^\\n^\\s]*)",
 							},
 						},
@@ -42903,7 +42903,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"SweetRice ([\\d\\.]{1,5})\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"SweetRice ([\\d\\.]{1,5})\" \\/>",
 						},
 					},
@@ -42929,10 +42929,10 @@ var features = []*Feature{
 			{
 				Name: "SX-Webserver",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SX Webserver ([\\d\\.]{1,5})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SX Webserver ([\\d\\.]{1,5})",
 							},
 						},
@@ -42962,13 +42962,13 @@ var features = []*Feature{
 			{
 				Name: "Sybase-Jaguar",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Jaguar Server Version",
 						},
 						{
 							Regexp: "^Jaguar Server Version ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Jaguar Server Version ([\\d\\.]+)$",
 							},
 						},
@@ -43029,13 +43029,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a[^>]+href=\"http:\\/\\/www.symphony-cms.com[\\/]?\">Symphony CMS ([\\d\\.]{1,3})<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a[^>]+href=\"http:\\/\\/www.symphony-cms.com[\\/]?\">Symphony CMS ([\\d\\.]{1,3})<\\/a>",
 						},
 					},
 					{
 						Regexp: "Powered by <a[^>]+href=\"http:\\/\\/symphony-cms.com[\\/]?\">Symphony CMS ([\\d\\.]{1,3})<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a[^>]+href=\"http:\\/\\/symphony-cms.com[\\/]?\">Symphony CMS ([\\d\\.]{1,3})<\\/a>",
 						},
 					},
@@ -43044,13 +43044,13 @@ var features = []*Feature{
 			{
 				Name: "Synchronet-BBS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Synchronet BBS",
 						},
 						{
 							Regexp: "^Synchronet BBS for .+ Version ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Synchronet BBS for .+ Version ([^\\s]+)$",
 							},
 						},
@@ -43065,13 +43065,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<h3>Syncrify - <small>Version: ([\\d\\.]+ - build [\\d]+)<\\/small><\\/h3>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h3>Syncrify - <small>Version: ([\\d\\.]+ - build [\\d]+)<\\/small><\\/h3>",
 						},
 					},
 					{
 						Regexp: "<title>[\\s]+Syncrify - Fast incremental backup - Version: ([\\d\\.]+ - build [\\d]+) [\\s]+<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>[\\s]+Syncrify - Fast incremental backup - Version: ([\\d\\.]+ - build [\\d]+) [\\s]+<\\/title>",
 						},
 					},
@@ -43100,7 +43100,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div class=\"meta\"><center>Powered by <a href=\"http:\\/\\/www.syndeoCMS.org\\/\" target=\"_blank\">SyndeoCMS ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"meta\"><center>Powered by <a href=\"http:\\/\\/www.syndeoCMS.org\\/\" target=\"_blank\">SyndeoCMS ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -43112,7 +43112,7 @@ var features = []*Feature{
 			{
 				Name: "Synology-DiskStation",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Stauts": &FeatureRuleItem{
+					"Stauts": {
 						{
 							Regexp: "^30[12] Moved",
 						},
@@ -43155,13 +43155,13 @@ var features = []*Feature{
 			{
 				Name: "SysMaster",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^SysMaster Web Server",
 						},
 						{
 							Regexp: "^SysMaster Web Server\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^SysMaster Web Server\\/([^\\s]+)$",
 							},
 						},
@@ -43190,7 +43190,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"footer_copyright\" class=\"shade footer_copyright\">Powered by <a href=\"http:\\/\\/www\\.wolfshead-solutions\\.com\\/ws-products\\/product-1\" rel=\"wsBlank\">Tab and Link Manager<\\/a> Version ([^<^\\s]+)<br \\/>Copyright &copy; 20[\\d]{2} Wolfshead Solutions\\. All rights reserved\\.<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"footer_copyright\" class=\"shade footer_copyright\">Powered by <a href=\"http:\\/\\/www\\.wolfshead-solutions\\.com\\/ws-products\\/product-1\" rel=\"wsBlank\">Tab and Link Manager<\\/a> Version ([^<^\\s]+)<br \\/>Copyright &copy; 20[\\d]{2} Wolfshead Solutions\\. All rights reserved\\.<br \\/>",
 						},
 					},
@@ -43199,7 +43199,7 @@ var features = []*Feature{
 			{
 				Name: "TAC-Xenta-Controller",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TAC\\/Xenta",
 						},
@@ -43214,18 +43214,18 @@ var features = []*Feature{
 			{
 				Name: "TalkSwitch-Phone",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TalkSwitch",
 						},
 						{
 							Regexp: "^TalkSwitch HTTP Server\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^TalkSwitch HTTP Server\\/([\\d\\.]+)$",
 							},
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Digest realm=\"Your TalkSwitch System\"$",
 						},
@@ -43268,13 +43268,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<br>Powered by <a href=\"http:\\/\\/www.taskfreak.com\">TaskFreak <\\/a> v([\\d\\.]+) - Released on [\\d\\-]+ under GNU General Public License",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<br>Powered by <a href=\"http:\\/\\/www.taskfreak.com\">TaskFreak <\\/a> v([\\d\\.]+) - Released on [\\d\\-]+ under GNU General Public License",
 						},
 					},
 					{
 						Regexp: "    <a href=\"http:\\/\\/www.taskfreak.com\">TaskFreak! multi user<\\/a> v([\\d\\.]+) - Released on [\\d\\-]+ under GNU General Public License",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "    <a href=\"http:\\/\\/www.taskfreak.com\">TaskFreak! multi user<\\/a> v([\\d\\.]+) - Released on [\\d\\-]+ under GNU General Public License",
 						},
 					},
@@ -43291,7 +43291,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div align=center><font size=-2 color=#FFFFFF>Software Version : CeLinuX-([\\d\\.]+)<\\/font><\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div align=center><font size=-2 color=#FFFFFF>Software Version : CeLinuX-([\\d\\.]+)<\\/font><\\/div>",
 						},
 					},
@@ -43308,7 +43308,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"(http:\\/\\/)?(www\\.tbdev\\.net|bit-torrent\\.kiev\\.ua\\/)\" target=\"_blank\" style=\"cursor: help;\" title=\"[^\"]*\" class=\"copyright\">TBDev<\\/a> v([\\d\\.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"(http:\\/\\/)?(www\\.tbdev\\.net|bit-torrent\\.kiev\\.ua\\/)\" target=\"_blank\" style=\"cursor: help;\" title=\"[^\"]*\" class=\"copyright\">TBDev<\\/a> v([\\d\\.]+) ",
 						},
 					},
@@ -43337,7 +43337,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"copyright\"><a href=\"http:\\/\\/www\\.tcexam\\.(org|com)\">TCExam<\\/a> ver\\. ([^\\s]+) - Copyright &copy; 2004-20[\\d]{2} Nicola Asuni - <a href=\"http:\\/\\/www\\.tecnick\\.com\">Tecnick.com S\\.r\\.l\\.<\\/a><\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"copyright\"><a href=\"http:\\/\\/www\\.tcexam\\.(org|com)\">TCExam<\\/a> ver\\. ([^\\s]+) - Copyright &copy; 2004-20[\\d]{2} Nicola Asuni - <a href=\"http:\\/\\/www\\.tecnick\\.com\">Tecnick.com S\\.r\\.l\\.<\\/a><\\/span>",
 						},
 					},
@@ -43346,7 +43346,7 @@ var features = []*Feature{
 			{
 				Name: "TeaLeaf",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^TLTSID",
 						},
@@ -43364,19 +43364,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "[\\s]+Powered by <a target=_blank \thref=http:\\/\\/www.team5.cn><b>TEAM ([\\d\\.]+) Release<\\/b><\\/a> - <a href=Licence.asp><b style='color:#FF9900'>ACC<\\/b><\\/a> &copy; [0-9]{4} Team5 Studio All rights reserved",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "[\\s]+Powered by <a target=_blank \thref=http:\\/\\/www.team5.cn><b>TEAM ([\\d\\.]+) Release<\\/b><\\/a> - <a href=Licence.asp><b style='color:#FF9900'>ACC<\\/b><\\/a> &copy; [0-9]{4} Team5 Studio All rights reserved",
 						},
 					},
 					{
 						Regexp: "Powered by <a target=_blank[\\s]+href=http:\\/\\/www.team5.cn><b>TEAM ([\\d\\.]+)<\\/b><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a target=_blank[\\s]+href=http:\\/\\/www.team5.cn><b>TEAM ([\\d\\.]+)<\\/b><\\/a>",
 						},
 					},
 					{
 						Regexp: "[\\s]+Powered by <a target=\"_blank\" href=\"http:\\/\\/www.team5.cn\"><b>TEAM ([\\d\\.]+) Release<\\/b><\\/a> - <a href=\"Licence.asp\"><b style='color:#FF9900'>SQL<\\/b><\\/a> &copy; [0-9]{4} Team5 Studio All rights reserved",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "[\\s]+Powered by <a target=\"_blank\" href=\"http:\\/\\/www.team5.cn\"><b>TEAM ([\\d\\.]+) Release<\\/b><\\/a> - <a href=\"Licence.asp\"><b style='color:#FF9900'>SQL<\\/b><\\/a> &copy; [0-9]{4} Team5 Studio All rights reserved",
 						},
 					},
@@ -43387,7 +43387,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},ALL,Info,server,[\\s]+Server version: ([^\\r^\\n]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^[0-9]{2}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},ALL,Info,server,[\\s]+Server version: ([^\\r^\\n]+)",
 						},
 					},
@@ -43407,15 +43407,15 @@ var features = []*Feature{
 			{
 				Name: "Tektroniks",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Tektroniks\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Tektroniks\\/([^\\s]+)$",
 							},
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"Tektroniks\"",
 						},
@@ -43453,13 +43453,13 @@ var features = []*Feature{
 			{
 				Name: "TeleFinder",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TeleFinder",
 						},
 						{
 							Regexp: "^TeleFinder\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^TeleFinder\\/([\\d\\.]+)$",
 							},
 						},
@@ -43469,7 +43469,7 @@ var features = []*Feature{
 			{
 				Name: "Teleflora",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^sdt",
 						},
@@ -43479,15 +43479,15 @@ var features = []*Feature{
 			{
 				Name: "Telligent-Community-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Communityserver": &FeatureRuleItem{
+					"Communityserver": {
 						{
 							Regexp: "^([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^([\\d\\.]+)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^CommunityServer-UserCookie[\\d\\.]+",
 						},
@@ -43500,7 +43500,7 @@ var features = []*Feature{
 			{
 				Name: "Tencent-QQ",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^HTTP_ME\\/\\d\\.\\d Tencent\\/HTTP_Magic_Expression$",
 						},
@@ -43510,13 +43510,13 @@ var features = []*Feature{
 			{
 				Name: "Tengine-Web-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Tengine$",
 						},
 						{
 							Regexp: "^Tengine\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Tengine\\/([^\\s]+)",
 							},
 						},
@@ -43526,13 +43526,13 @@ var features = []*Feature{
 			{
 				Name: "Tenon-iTools",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "\\(iTools",
 						},
 						{
 							Regexp: "\\(iTools ([\\d\\.]+)[\\)]?\\/Mac OS X\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "\\(iTools ([\\d\\.]+)[\\)]?\\/Mac OS X\\)",
 							},
 						},
@@ -43547,7 +43547,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\\.png\" \\/>[\\s]*<br \\/>TestLink ([^\\s^<]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\\.png\" \\/>[\\s]*<br \\/>TestLink ([^\\s^<]+)",
 						},
 					},
@@ -43562,17 +43562,17 @@ var features = []*Feature{
 			{
 				Name: "TeveoLive-Video-Broadcast-Software",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TeveoLive HTTP Server$",
 						},
 					},
-					"Xvideowidth": &FeatureRuleItem{
+					"Xvideowidth": {
 						{
 							Regexp: "^\\d+$",
 						},
 					},
-					"Xvideoheight": &FeatureRuleItem{
+					"Xvideoheight": {
 						{
 							Regexp: "^\\d+$",
 						},
@@ -43633,7 +43633,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"TFTgallery ([\\d\\.]{1,5}) http:\\/\\/www.tftgallery.org\\/\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"TFTgallery ([\\d\\.]{1,5}) http:\\/\\/www.tftgallery.org\\/\" \\/>",
 						},
 					},
@@ -43653,7 +43653,7 @@ var features = []*Feature{
 			{
 				Name: "The-Amazing-Little-Poll",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "pollidcookie=",
 						},
@@ -43662,7 +43662,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<h1>The Amazing Little Poll Admin Center v([^<]+)<\\/h1>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1>The Amazing Little Poll Admin Center v([^<]+)<\\/h1>",
 						},
 					},
@@ -43687,7 +43687,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"footer\">Powered by <a href=\"http:\\/\\/thehostingtool.com\" target=\"_blank\">TheHostingTool<\\/a> ([\\d\\.]*)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"footer\">Powered by <a href=\"http:\\/\\/thehostingtool.com\" target=\"_blank\">TheHostingTool<\\/a> ([\\d\\.]*)<\\/div>",
 						},
 					},
@@ -43696,10 +43696,10 @@ var features = []*Feature{
 			{
 				Name: "thin",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^thin ([^\\s]+) codename (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^thin ([^\\s]+) codename (.+)$",
 							},
 						},
@@ -43731,7 +43731,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "This site runs on ThoughtConduit v([^\\s]+) by <A TARGET=new HREF=\"http:\\/\\/www\\.sensoryresearch\\.com\">Sensory Research<\\/A><\\/FONT><\\/I><\\/TD><\\/TR><\\/table><\\/body>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "This site runs on ThoughtConduit v([^\\s]+) by <A TARGET=new HREF=\"http:\\/\\/www\\.sensoryresearch\\.com\">Sensory Research<\\/A><\\/FONT><\\/I><\\/TD><\\/TR><\\/table><\\/body>",
 						},
 					},
@@ -43740,10 +43740,10 @@ var features = []*Feature{
 			{
 				Name: "thttpd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^thttpd\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^thttpd\\/([^\\s]+)",
 							},
 						},
@@ -43764,7 +43764,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<TITLE>Tickets ([^<]+)<\\/TITLE>\\s+<LINK REL=StyleSheet HREF=\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>Tickets ([^<]+)<\\/TITLE>\\s+<LINK REL=StyleSheet HREF=\"",
 						},
 					},
@@ -43776,7 +43776,7 @@ var features = []*Feature{
 			{
 				Name: "Tiger-IP-Connect",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "^network\\/index\\.php$",
 						},
@@ -43785,7 +43785,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Tiger IP Connect ([^\\s]+) -  Login<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Tiger IP Connect ([^\\s]+) -  Login<\\/title>",
 						},
 					},
@@ -43803,13 +43803,13 @@ var features = []*Feature{
 			{
 				Name: "Tiger-Netcom-Device",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TigerNetCom",
 						},
 						{
 							Regexp: "^TigerNetCom\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^TigerNetCom\\/([^\\s]+)$",
 							},
 						},
@@ -43841,7 +43841,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p>Version ([\\d\\.]+)&nbsp;&copy; 2003 - 20[\\d]{2} Time ?Link International Corp\\. All Rights Reserved\\.<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p>Version ([\\d\\.]+)&nbsp;&copy; 2003 - 20[\\d]{2} Time ?Link International Corp\\. All Rights Reserved\\.<\\/p>",
 						},
 					},
@@ -43858,7 +43858,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td style=\"width: 15%\" align=right>[\\s]+<span id=\"CtlLogin1_Login1_VersionLabel\">v ([^<^\\s]+)<\\/span><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td style=\"width: 15%\" align=right>[\\s]+<span id=\"CtlLogin1_Login1_VersionLabel\">v ([^<^\\s]+)<\\/span><\\/td>",
 						},
 					},
@@ -43909,10 +43909,10 @@ var features = []*Feature{
 			{
 				Name: "Tinyproxy",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^tinyproxy\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^tinyproxy\\/([^\\s]+)",
 							},
 						},
@@ -43922,13 +43922,13 @@ var features = []*Feature{
 			{
 				Name: "TiVo",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^tivo-httpd",
 						},
 						{
 							Regexp: "^tivo-httpd-[\\d]+:(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^tivo-httpd-[\\d]+:(.+)$",
 							},
 						},
@@ -43955,13 +43955,13 @@ var features = []*Feature{
 			{
 				Name: "TivoWebPlus",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "TivoWebPlus",
 						},
 						{
 							Regexp: "^Basic realm=['\"]TivoWebPlus - v([^'^\"]+)['\"]$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Basic realm=['\"]TivoWebPlus - v([^'^\"]+)['\"]$",
 							},
 						},
@@ -43971,26 +43971,26 @@ var features = []*Feature{
 			{
 				Name: "TMSoft-MyAuth-Gateway",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "MyAuth([0-9]{1})=[a-z0-9]{26}",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "MyAuth([0-9]{1})=[a-z0-9]{26}",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "TMSoft MyAuth Gateway ([^\\s^\\r^\\n]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "TMSoft MyAuth Gateway ([^\\s^\\r^\\n]+)",
 							},
 						},
 					},
-					"X-manager-by": &FeatureRuleItem{
+					"X-manager-by": {
 						{
 							Regexp: "MyAuth Gateway ([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "MyAuth Gateway ([^\\s]+)",
 							},
 						},
@@ -44000,7 +44000,7 @@ var features = []*Feature{
 			{
 				Name: "TMW-Imaging",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "TMWImagingSession=[^;]+",
 						},
@@ -44026,7 +44026,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t\t\t\t\t<h1>TomatoCMS Install Wizard</h1>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Install Page",
 						},
 					},
@@ -44081,7 +44081,7 @@ var features = []*Feature{
 			{
 				Name: "Toshiba-Projector",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TOSHIBA-Projector$",
 						},
@@ -44091,7 +44091,7 @@ var features = []*Feature{
 			{
 				Name: "TOTVS-SmartClient",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Totvssmartclient": &FeatureRuleItem{
+					"Totvssmartclient": {
 						{
 							Regexp: "^TotvsSmartClient$",
 						},
@@ -44100,7 +44100,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<object\\s+classid=\"clsid:[a-f\\d\\-]+\"\\s+codebase=\"TotvsSmartClientax\\.cab#version=([^\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<object\\s+classid=\"clsid:[a-f\\d\\-]+\"\\s+codebase=\"TotvsSmartClientax\\.cab#version=([^\"]+)\"",
 						},
 					},
@@ -44125,7 +44125,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.tracewatch\\.com\\/\">TraceWatch<\\/a> V?([^\\s]+) Copyright &copy;2004-20[\\d]{2} Arash Dejkam",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.tracewatch\\.com\\/\">TraceWatch<\\/a> V?([^\\s]+) Copyright &copy;2004-20[\\d]{2} Arash Dejkam",
 						},
 					},
@@ -44151,7 +44151,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>Tradingeye v([^\\s]+) :: Online Admin<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Tradingeye v([^\\s]+) :: Online Admin<\\/title>",
 						},
 					},
@@ -44163,10 +44163,10 @@ var features = []*Feature{
 			{
 				Name: "Traffic-Inspector",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Traffic [Ii]nspector HTTP\\/FTP\\/Proxy server \\(([^\\)]+)\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Traffic [Ii]nspector HTTP\\/FTP\\/Proxy server \\(([^\\)]+)\\)$",
 							},
 						},
@@ -44187,19 +44187,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p align='center' dir='ltr'>Powered by Traidnt UP Version ([\\d\\.]+)<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align='center' dir='ltr'>Powered by Traidnt UP Version ([\\d\\.]+)<\\/p>",
 						},
 					},
 					{
 						Regexp: "<div class=\"footer\">Powered by <a href=\"http:\\/\\/traidnt.net\" target=\"_blank\">TRAIDNT UP<\\/a> Version ([\\d\\.]+)[\\s]*<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"footer\">Powered by <a href=\"http:\\/\\/traidnt.net\" target=\"_blank\">TRAIDNT UP<\\/a> Version ([\\d\\.]+)[\\s]*<\\/div>",
 						},
 					},
 					{
 						Regexp: "\t\t\t<span style='text-decoration: none'><font color='#000000'>Traidnt&nbsp;UP<\\/font><\\/span><\\/a><\\/font><\\/span><\\/b>[\\r\\n]{2}\t\t\tVersion ([\\d\\.]+)<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t<span style='text-decoration: none'><font color='#000000'>Traidnt&nbsp;UP<\\/font><\\/span><\\/a><\\/font><\\/span><\\/b>[\\r\\n]{2}\t\t\tVersion ([\\d\\.]+)<\\/p>",
 						},
 					},
@@ -44216,10 +44216,10 @@ var features = []*Feature{
 			{
 				Name: "TreeNeWS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^TreeNeWS\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^TreeNeWS\\/([^\\s]+)$",
 							},
 						},
@@ -44229,13 +44229,13 @@ var features = []*Feature{
 			{
 				Name: "Trend-Micro",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Trend Micro$",
 						},
 						{
 							Regexp: "^Trend Micro ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Trend Micro ([^\\s]+)$",
 							},
 						},
@@ -44245,10 +44245,10 @@ var features = []*Feature{
 			{
 				Name: "TRENDnet-Print-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^PRINT_SERVER WEB ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^PRINT_SERVER WEB ([\\d\\.]+)$",
 							},
 						},
@@ -44268,7 +44268,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<META HTTP-EQUIV=\"Content-Type\"CONTET=\"text\\/html; cahrset=ks_c_5601-1987\">[\\s]+<TITLE>Web Client [^<]+ v([^\\s^<]+)<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<META HTTP-EQUIV=\"Content-Type\"CONTET=\"text\\/html; cahrset=ks_c_5601-1987\">[\\s]+<TITLE>Web Client [^<]+ v([^\\s^<]+)<\\/TITLE>",
 						},
 					},
@@ -44372,13 +44372,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<P ALIGN=right><FONT SIZE=\"-1\" FACE=\"Verdana\" COLOR=\"#CCCCCC\">version[\\s]+([\\d\\.]+)[\\s]?&copy;Copyright 20[\\d]{2}, <\\/FONT><A HREF=\"http:\\/\\/www\\.go-redrock\\.com\"><FONT SIZE=\"-1\" FACE=\"Verdana\" COLOR=\"#CCCCCC\">RedRock",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<P ALIGN=right><FONT SIZE=\"-1\" FACE=\"Verdana\" COLOR=\"#CCCCCC\">version[\\s]+([\\d\\.]+)[\\s]?&copy;Copyright 20[\\d]{2}, <\\/FONT><A HREF=\"http:\\/\\/www\\.go-redrock\\.com\"><FONT SIZE=\"-1\" FACE=\"Verdana\" COLOR=\"#CCCCCC\">RedRock",
 						},
 					},
 					{
 						Regexp: "<P ALIGN=right><FONT COLOR=\"#CCCCCC\">version ([\\d\\.]+)[\\s]+&copy;Copyright 2004-20[\\d]{2}<br \\/><\\/FONT><A HREF=\"http:\\/\\/www\\.go-redrock\\.com\"><FONT COLOR=\"#CCCCCC\">RedRock",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<P ALIGN=right><FONT COLOR=\"#CCCCCC\">version ([\\d\\.]+)[\\s]+&copy;Copyright 2004-20[\\d]{2}<br \\/><\\/FONT><A HREF=\"http:\\/\\/www\\.go-redrock\\.com\"><FONT COLOR=\"#CCCCCC\">RedRock",
 						},
 					},
@@ -44387,16 +44387,16 @@ var features = []*Feature{
 			{
 				Name: "TVersity",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "TVersity Media Server",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "TVersity Media Server",
 							},
 						},
 						{
 							Regexp: "TVersity Media Server\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "TVersity Media Server\\/([\\d\\.]+)",
 							},
 						},
@@ -44406,7 +44406,7 @@ var features = []*Feature{
 			{
 				Name: "TwonkyServer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "TwonkyMedia UPnP",
 						},
@@ -44430,7 +44430,7 @@ var features = []*Feature{
 			{
 				Name: "TYPO3",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^fe_typo_user",
 						},
@@ -44439,7 +44439,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"TYPO3 ([\\d\\.]+) CMS\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"TYPO3 ([\\d\\.]+) CMS\"",
 						},
 					},
@@ -44470,7 +44470,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a  href=\"http:\\/\\/u.discuz.net\" target=\"_blank\"><strong>UCenter Home<\\/strong><\\/a> <span title=\"[0-9]{8}\">([\\d\\.]+)<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a  href=\"http:\\/\\/u.discuz.net\" target=\"_blank\"><strong>UCenter Home<\\/strong><\\/a> <span title=\"[0-9]{8}\">([\\d\\.]+)<\\/span>",
 						},
 					},
@@ -44479,16 +44479,16 @@ var features = []*Feature{
 			{
 				Name: "uClinux-httpd",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^uClinux",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^uClinux",
 							},
 						},
 						{
 							Regexp: "^uClinux-httpd ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^uClinux-httpd ([\\d\\.]+)$",
 							},
 						},
@@ -44500,7 +44500,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "\t\t\t\t\t<td class=\"info\">Uebimiau Webmail v([^<]{1,15})<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t\t\t\t\t<td class=\"info\">Uebimiau Webmail v([^<]{1,15})<\\/td>",
 						},
 					},
@@ -44523,19 +44523,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"UBB\\.threads ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"UBB\\.threads ([\\d\\.]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "<center>Powered by <a target=\"_blank\" style=\"TEXT-DECORATION: none; COLOR: #000066; FONT-SIZE: 10px\" href=\"http:\\/\\/www.php121.com\"><U>PHP121<\\/U><\\/a> v([\\d\\.]+)<\\/center>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<center>Powered by <a target=\"_blank\" style=\"TEXT-DECORATION: none; COLOR: #000066; FONT-SIZE: 10px\" href=\"http:\\/\\/www.php121.com\"><U>PHP121<\\/U><\\/a> v([\\d\\.]+)<\\/center>",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www.groupee.com\\/landing\\/goto\\.php\\?a=ubb\\.classic\">Powered by UBB.classic&trade;[\\s]+([\\d\\.]+)(<!-- [\\d\\.]+ -->)?<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www.groupee.com\\/landing\\/goto\\.php\\?a=ubb\\.classic\">Powered by UBB.classic&trade;[\\s]+([\\d\\.]+)(<!-- [\\d\\.]+ -->)?<\\/a>",
 						},
 					},
@@ -44544,13 +44544,13 @@ var features = []*Feature{
 			{
 				Name: "Ultraseek",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Ultraseek",
 						},
 						{
 							Regexp: "^Ultraseek\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Ultraseek\\/([^\\s]+)$",
 							},
 						},
@@ -44574,7 +44574,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: " &nbsp;<a href=\"http:\\/\\/www.ultrastats.org[\\/]?\" target=\"_blank\">Ultrastats<\\/a> Version ([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: " &nbsp;<a href=\"http:\\/\\/www.ultrastats.org[\\/]?\" target=\"_blank\">Ultrastats<\\/a> Version ([\\d\\.]+)",
 						},
 					},
@@ -44583,7 +44583,7 @@ var features = []*Feature{
 			{
 				Name: "UnBounce",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^ubpv",
 						},
@@ -44607,7 +44607,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p style=\" font-size:24px; margin: 0px; padding-top:10px\">\\s+The Uniform Server <br \\/>\\s+([^\\s]+)\\s+<\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p style=\" font-size:24px; margin: 0px; padding-top:10px\">\\s+The Uniform Server <br \\/>\\s+([^\\s]+)\\s+<\\/p>",
 						},
 					},
@@ -44638,13 +44638,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<img[^>]*alt=\"Powered by uPortal ([\\d\\.]+)\"[^>]*>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img[^>]*alt=\"Powered by uPortal ([\\d\\.]+)\"[^>]*>",
 						},
 					},
 					{
 						Regexp: "<a target=\"_blank\" title=\"Powered by \\$\" href=\"http:\\/\\/www.uportal.org\">Powered by uPortal ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a target=\"_blank\" title=\"Powered by \\$\" href=\"http:\\/\\/www.uportal.org\">Powered by uPortal ([^<]+)<\\/a>",
 						},
 					},
@@ -44653,10 +44653,10 @@ var features = []*Feature{
 			{
 				Name: "UrlRewriter_NET",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "UrlRewriter\\.NET ([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "UrlRewriter\\.NET ([^\\s]+)",
 							},
 						},
@@ -44680,13 +44680,13 @@ var features = []*Feature{
 			{
 				Name: "UserLand-Frontier",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^UserLand Frontier",
 						},
 						{
 							Regexp: "^UserLand Frontier\\/([^-]+)-(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^UserLand Frontier\\/([^-]+)-(.+)$",
 							},
 						},
@@ -44696,7 +44696,7 @@ var features = []*Feature{
 			{
 				Name: "USP-Secure-Entry-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Secure Entry Server$",
 						},
@@ -44706,7 +44706,7 @@ var features = []*Feature{
 			{
 				Name: "USP-Secure-Login-Service",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "SLSLanguage=([a-z]{2,3});",
 						},
@@ -44738,7 +44738,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<div align=\"center\" class=\"fbox smallfont\">\\s*<!-- Copyright -->\\s*Powered By: <a href=\"about\\.php[^\"^>]*\">Utopia News Pro<\\/a> ([^<]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div align=\"center\" class=\"fbox smallfont\">\\s*<!-- Copyright -->\\s*Powered By: <a href=\"about\\.php[^\"^>]*\">Utopia News Pro<\\/a> ([^<]+)<",
 						},
 					},
@@ -44770,15 +44770,15 @@ var features = []*Feature{
 			{
 				Name: "Vanilla-Forums",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-garden-version": &FeatureRuleItem{
+					"X-garden-version": {
 						{
 							Regexp: "^Vanilla ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Vanilla ([^\\s]+)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "Vanilla=deleted; expires=",
 						},
@@ -44787,7 +44787,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"(http:\\/\\/)?getvanilla\\.com\\/?\">Vanilla ([^\\s^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"(http:\\/\\/)?getvanilla\\.com\\/?\">Vanilla ([^\\s^<]+)<\\/a>",
 						},
 					},
@@ -44807,13 +44807,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"vbPortal ([\\d\\.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"vbPortal ([\\d\\.]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "Portal By vbPortal Version ([\\d\\.]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Portal By vbPortal Version ([\\d\\.]+)<br \\/>",
 						},
 					},
@@ -44822,7 +44822,7 @@ var features = []*Feature{
 			{
 				Name: "VBulletin",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "bblastactivity",
 						},
@@ -44855,49 +44855,49 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by(:)? vBulletin(&reg;)? Version ([0-9a-z.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by(:)? vBulletin(&reg;)? Version ([0-9a-z.]+)",
 						},
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"vBulletin ([0-9a-z.]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"vBulletin ([0-9a-z.]+)\" \\/>",
 						},
 					},
 					{
 						Regexp: "\\* vBulletin ([0-9a-z.]+) CSS",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\\* vBulletin ([0-9a-z.]+) CSS",
 						},
 					},
 					{
 						Regexp: "clientscript\\/vbulletin_md5\\.js,qv=(\\d+)\\.pagespeed\\..*?js\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "clientscript\\/vbulletin_md5\\.js,qv=(\\d+)\\.pagespeed\\..*?js\">",
 						},
 					},
 					{
 						Regexp: "clientscript\\/vbulletin-core\\.js\\?v=(\\d+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "clientscript\\/vbulletin-core\\.js\\?v=(\\d+)",
 						},
 					},
 					{
 						Regexp: "\\/vbulletin\\/clientscript\\/guestforum\\.js\\?v=(\\d+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\\/vbulletin\\/clientscript\\/guestforum\\.js\\?v=(\\d+)",
 						},
 					},
 					{
 						Regexp: "clientscript\\/vbulletin_global\\.js\\?v=(\\d+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "clientscript\\/vbulletin_global\\.js\\?v=(\\d+)",
 						},
 					},
 					{
 						Regexp: "\\/vbulletin_read_marker\\.js\\?v=(\\d+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\\/vbulletin_read_marker\\.js\\?v=(\\d+)",
 						},
 					},
@@ -44917,13 +44917,13 @@ var features = []*Feature{
 			{
 				Name: "Velazquez",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Velazquez",
 						},
 						{
 							Regexp: "^Velazquez ([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Velazquez ([\\d\\.]+)$",
 							},
 						},
@@ -44935,25 +44935,25 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Veo Observer XT</title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "XT",
 						},
 					},
 					{
 						Regexp: "  <frame src=\"/en/sitemonitor.html\" name=\"sitecheck\" scrolling=\"NO\" noresize>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "XT",
 						},
 					},
 					{
 						Regexp: "\t\t<title>Veo Observer Web Client</title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "XNC",
 						},
 					},
 					{
 						Regexp: "\t\t<object classid=\"clsid:0957C19A-D854-482A-A4F9-18856C723D7D\" id=\"VeoNetCamAcx\" width=\"0\" height=\"0\" codebase=\"XNC600NetCam.cab#version",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "XNC",
 						},
 					},
@@ -44995,13 +44995,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.splitbrain\\.org\\/go\\/videodb\" class=\"splitbrain\">v\\.([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.splitbrain\\.org\\/go\\/videodb\" class=\"splitbrain\">v\\.([^<]+)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<div id=\"footerversion\">[\\s]*<a href=\"http:\\/\\/www\\.videodb\\.net\">v([^<]+)<\\/a>[\\s]*<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"footerversion\">[\\s]*<a href=\"http:\\/\\/www\\.videodb\\.net\">v([^<]+)<\\/a>[\\s]*<\\/div>",
 						},
 					},
@@ -45018,13 +45018,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- LICENSED Version  Videosmate ORGANIZER, Ver\\.([^\\s]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- LICENSED Version  Videosmate ORGANIZER, Ver\\.([^\\s]+) -->",
 						},
 					},
 					{
 						Regexp: "<a href=http:\\/\\/videosmate\\.com><font color=#ffffff>Powered&nbsp;by&nbsp;Videosmate&nbsp;Organizer&nbsp;Version&nbsp;([^\\s^&]+)&nbsp;Copyright&nbsp;&copy;&nbsp;(20[\\d]{2})<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=http:\\/\\/videosmate\\.com><font color=#ffffff>Powered&nbsp;by&nbsp;Videosmate&nbsp;Organizer&nbsp;Version&nbsp;([^\\s^&]+)&nbsp;Copyright&nbsp;&copy;&nbsp;(20[\\d]{2})<\\/a>",
 						},
 					},
@@ -45055,13 +45055,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/(viewcvs.sourceforge.net|viewvc.tigris.org)\\/\">(ViewCVS|ViewVC) ([^<]+)<\\/a><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/(viewcvs.sourceforge.net|viewvc.tigris.org)\\/\">(ViewCVS|ViewVC) ([^<]+)<\\/a><\\/td>",
 						},
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"View(VC|CVS) ([^\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"View(VC|CVS) ([^\"]+)\"",
 						},
 					},
@@ -45070,13 +45070,13 @@ var features = []*Feature{
 			{
 				Name: "Viking",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Viking",
 						},
 						{
 							Regexp: "^Viking\\/([^\\s]{1,15})",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Viking\\/([^\\s]{1,15})",
 							},
 						},
@@ -45102,7 +45102,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by <strong><a[^>]+href=\"http:\\/\\/www\\.viscacha\\.org\" target=\"_blank\">Viscacha ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <strong><a[^>]+href=\"http:\\/\\/www\\.viscacha\\.org\" target=\"_blank\">Viscacha ([^<]+)<\\/a>",
 						},
 					},
@@ -45111,10 +45111,10 @@ var features = []*Feature{
 			{
 				Name: "Visec",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^VISEC\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^VISEC\\/([^\\s]+)$",
 							},
 						},
@@ -45143,7 +45143,7 @@ var features = []*Feature{
 			{
 				Name: "VisionWEB",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^IWeb\\/([^\\s]+)",
 						},
@@ -45152,7 +45152,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "VarPageTitle=\"Proxima\\d? DVMS VisionWEB v([^\\s^\"]+)\";",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "VarPageTitle=\"Proxima\\d? DVMS VisionWEB v([^\\s^\"]+)\";",
 						},
 					},
@@ -45164,19 +45164,19 @@ var features = []*Feature{
 			{
 				Name: "VisualRoute",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^VisualRoute ",
 						},
 						{
 							Regexp: "^VisualRoute \\((tm|R)\\) ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^VisualRoute \\((tm|R)\\) ([^\\s]+)$",
 							},
 						},
 						{
 							Regexp: "^VisualRoute \\((tm|R)\\) ([\\d]{4} .+ Edition) \\(v([^\\)]+)\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^VisualRoute \\((tm|R)\\) ([\\d]{4} .+ Edition) \\(v([^\\)]+)\\)$",
 							},
 						},
@@ -45186,13 +45186,13 @@ var features = []*Feature{
 			{
 				Name: "Visualware-MyConnection-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Visualware MyConnection Server",
 						},
 						{
 							Regexp: "^Visualware MyConnection Server [^\\d]+ (\\d\\.[^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Visualware MyConnection Server [^\\d]+ (\\d\\.[^\\s]+)$",
 							},
 						},
@@ -45207,7 +45207,7 @@ var features = []*Feature{
 			{
 				Name: "Vivotek-Network-Camera",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^(Network Camera|Network Dome Camera|Network Camera with Pan\\/Tilt|Wireless Network Camera)$",
 						},
@@ -45310,10 +45310,10 @@ var features = []*Feature{
 			{
 				Name: "VPON",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^VPON Server\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^VPON Server\\/([\\d\\.]+)$",
 							},
 						},
@@ -45328,13 +45328,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "&copy; [0-9]{4} \\| Powered by VS PANEL v.([\\d\\.]+)<\\/div><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "&copy; [0-9]{4} \\| Powered by VS PANEL v.([\\d\\.]+)<\\/div><\\/td>",
 						},
 					},
 					{
 						Regexp: "&copy; [0-9]{4} \\| Powered by VS PANEL v.([\\d\\.]+)(<\\/span>)<\\/div><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "&copy; [0-9]{4} \\| Powered by VS PANEL v.([\\d\\.]+)(<\\/span>)<\\/div><\\/td>",
 						},
 					},
@@ -45357,7 +45357,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p>Powered by <abbr title=\"very simple news system\">VSNS<\\/abbr> (Lemon) ([0-9.a-z]*) by <a href=\"http:\\/\\/tachyondecay.net\\/\">Tachyon<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p>Powered by <abbr title=\"very simple news system\">VSNS<\\/abbr> (Lemon) ([0-9.a-z]*) by <a href=\"http:\\/\\/tachyondecay.net\\/\">Tachyon<\\/a>",
 						},
 					},
@@ -45380,7 +45380,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<A HREF=\"http:\\/\\/www.clanavl.com\\/vsp\\/\">vsp<\\/A> v([\\d\\.]+),",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<A HREF=\"http:\\/\\/www.clanavl.com\\/vsp\\/\">vsp<\\/A> v([\\d\\.]+),",
 						},
 					},
@@ -45394,7 +45394,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span style='color: rgb\\([\\d]{1,3}, [\\d]{1,3}, [\\d]{1,3}\\);'>vtiger CRM ([^<]*)<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span style='color: rgb\\([\\d]{1,3}, [\\d]{1,3}, [\\d]{1,3}\\);'>vtiger CRM ([^<]*)<\\/span>",
 						},
 					},
@@ -45409,21 +45409,21 @@ var features = []*Feature{
 			{
 				Name: "VTS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "VTS ",
 						},
 						{
 							Regexp: "VTS ([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "VTS ([\\d\\.]+)",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^VTS=([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^VTS=([\\d\\.]+)",
 							},
 						},
@@ -45443,7 +45443,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<META NAME=\"GENERATOR\" Content=\"w-agora version ([\\d\\.]+)\"[\\/]?>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<META NAME=\"GENERATOR\" Content=\"w-agora version ([\\d\\.]+)\"[\\/]?>",
 						},
 					},
@@ -45463,10 +45463,10 @@ var features = []*Feature{
 			{
 				Name: "W3MFC",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^W3MFC\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^W3MFC\\/([\\d\\.]+)$",
 							},
 						},
@@ -45478,7 +45478,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.NineChime\\.com\\/products\\/\" title=\"Get your own free BBS!\">Wacintaki ([^\\s^<]+)<\\/a> by Waccoon",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.NineChime\\.com\\/products\\/\" title=\"Get your own free BBS!\">Wacintaki ([^\\s^<]+)<\\/a> by Waccoon",
 						},
 					},
@@ -45495,7 +45495,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<html><body><h1>WANem v([^\\s^:]+): It works\\!<\\/h1><\\/body><\\/html>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<html><body><h1>WANem v([^\\s^:]+): It works\\!<\\/h1><\\/body><\\/html>",
 						},
 					},
@@ -45539,7 +45539,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TITLE>Web Calendar system v ([\\.\\d]+)<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>Web Calendar system v ([\\.\\d]+)<\\/TITLE>",
 						},
 					},
@@ -45550,7 +45550,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TITLE>Web Control Panel Express v([^\\s^<]+)<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>Web Control Panel Express v([^\\s^<]+)<\\/TITLE>",
 						},
 					},
@@ -45565,21 +45565,21 @@ var features = []*Feature{
 			{
 				Name: "Web-Crossing-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Web Crossing\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Web Crossing\\/([^\\s]+)$",
 							},
 						},
 						{
 							Regexp: "^Web Crossing\\(r\\) [^\\s]+-v([\\d\\.]+) built",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Web Crossing\\(r\\) [^\\s]+-v([\\d\\.]+) built",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "webxSess=[\\d]+\\.[^\\s]+;",
 						},
@@ -45602,13 +45602,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/www\\.richtexteditor\\.org\" target=\"_blank\" style=\"font-size:10px\">Web Wiz Rich Text Editor<\\/a> version ([^<]+)<\\/span><\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/www\\.richtexteditor\\.org\" target=\"_blank\" style=\"font-size:10px\">Web Wiz Rich Text Editor<\\/a> version ([^<]+)<\\/span><\\/td>",
 						},
 					},
 					{
 						Regexp: "<\\!\\-\\-\\/\\/\\s+\\/\\* [^\\s]+\\s+Software: Web Wiz Rich Text Editor\\(TM\\) ver\\. ([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<\\!\\-\\-\\/\\/\\s+\\/\\* [^\\s]+\\s+Software: Web Wiz Rich Text Editor\\(TM\\) ver\\. ([^\\s]+)",
 						},
 					},
@@ -45620,13 +45620,13 @@ var features = []*Feature{
 			{
 				Name: "Web2",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Web\\/2 ",
 						},
 						{
 							Regexp: "^Web\\/2 v([^\\r^\\n]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Web\\/2 v([^\\r^\\n]+)$",
 							},
 						},
@@ -45636,7 +45636,7 @@ var features = []*Feature{
 			{
 				Name: "web2Project",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "web2project=[^;]+;",
 						},
@@ -45651,7 +45651,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"Version\" content=\"([^\"^\\s]+)\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"Version\" content=\"([^\"^\\s]+)\" \\/>",
 						},
 					},
@@ -45662,19 +45662,19 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- Generated by The Webalizer  Ver\\. ([^\\s]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Generated by The Webalizer  Ver\\. ([^\\s]+) -->",
 						},
 					},
 					{
 						Regexp: "<!-- Webalizer Version ([^\\s]+) \\(Mod: [\\d]{1,2}-[a-zA-Z]{3}-[\\d]{4}\\) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Webalizer Version ([^\\s]+) \\(Mod: [\\d]{1,2}-[a-zA-Z]{3}-[\\d]{4}\\) -->",
 						},
 					},
 					{
 						Regexp: "<A HREF=\"http:\\/\\/www\\.webalizer\\.org\\/\"><STRONG>Webalizer Version ([^<]+)<\\/STRONG><\\/A>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<A HREF=\"http:\\/\\/www\\.webalizer\\.org\\/\"><STRONG>Webalizer Version ([^<]+)<\\/STRONG><\\/A>",
 						},
 					},
@@ -45734,7 +45734,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td valign=\"top\">[\\s]+<a href=\"[^\"]*\\/index\\.php\\?command=info&pkg=pear\\.php\\.net\\/PEAR_Frontend_Web\" class=\"blue\">PEAR_Frontend_Web<\\/a>[\\s]+<\\/td>[\\s]+<td valign=\"top\">[\\s]+([^<^\\n]+)[\\s]+<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td valign=\"top\">[\\s]+<a href=\"[^\"]*\\/index\\.php\\?command=info&pkg=pear\\.php\\.net\\/PEAR_Frontend_Web\" class=\"blue\">PEAR_Frontend_Web<\\/a>[\\s]+<\\/td>[\\s]+<td valign=\"top\">[\\s]+([^<^\\n]+)[\\s]+<\\/td>",
 						},
 					},
@@ -45745,7 +45745,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"webbler ([^\\s]+) - http:\\/\\/tincan\\.co\\.uk\\/webbler\"  \\/?>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"webbler ([^\\s]+) - http:\\/\\/tincan\\.co\\.uk\\/webbler\"  \\/?>",
 						},
 					},
@@ -45754,15 +45754,15 @@ var features = []*Feature{
 			{
 				Name: "WEBCOMpro-CMS",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "WEBCOMpro CMS (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "WEBCOMpro CMS (.+)$",
 							},
 						},
 					},
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "wcp_userid=[\\d]{10};",
 						},
@@ -45780,26 +45780,26 @@ var features = []*Feature{
 			{
 				Name: "WebDAV",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "[^\\r^\\n]*DAV\\/",
 						},
 						{
 							Regexp: "[^\\r^\\n]*DAV\\/([^\\s^\\r^\\n]*)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[^\\r^\\n]*DAV\\/([^\\s^\\r^\\n]*)",
 							},
 						},
 					},
-					"Ms-author-via": &FeatureRuleItem{
+					"Ms-author-via": {
 						{
 							Regexp: "^[\\s]*DAV",
 						},
 					},
-					"Dav": &FeatureRuleItem{
+					"Dav": {
 						{
 							Regexp: "[\\s]*1,2,<http:\\/\\/([^>]+)>",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "[\\s]*1,2,<http:\\/\\/([^>]+)>",
 							},
 						},
@@ -45809,13 +45809,13 @@ var features = []*Feature{
 			{
 				Name: "Webduino",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Webduino$",
 						},
 						{
 							Regexp: "^Webduino\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Webduino\\/([^\\s]+)",
 							},
 						},
@@ -45871,13 +45871,13 @@ var features = []*Feature{
 			{
 				Name: "webfs",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^webfs\\/",
 						},
 						{
 							Regexp: "^webfs\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^webfs\\/([^\\s]+)$",
 							},
 						},
@@ -45895,7 +45895,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<h1>webgrind<sup style=\"font-size:10px\">v([^<]+)<\\/sup><\\/h1>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1>webgrind<sup style=\"font-size:10px\">v([^<]+)<\\/sup><\\/h1>",
 						},
 					},
@@ -45924,13 +45924,13 @@ var features = []*Feature{
 			{
 				Name: "WebHare-Application-Portal",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WebHare Application Portal",
 						},
 						{
 							Regexp: "^WebHare Application Portal v([\\d\\.]+) Webserver$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebHare Application Portal v([\\d\\.]+) Webserver$",
 							},
 						},
@@ -45940,7 +45940,7 @@ var features = []*Feature{
 			{
 				Name: "WeBid",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "WEBID_ONLINE=[a-f\\d]{32};",
 						},
@@ -45952,7 +45952,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<h1>WeBid Installer v([^\\s^>]+)<\\/h1>[\\s]*<form name=\"form1\" method=\"post\" action=\"\\?step=1\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<h1>WeBid Installer v([^\\s^>]+)<\\/h1>[\\s]*<form name=\"form1\" method=\"post\" action=\"\\?step=1\">",
 						},
 					},
@@ -45963,7 +45963,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"header-right\">[\\s]+WebIssues ([^\\s]+) \\| <a href=",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"header-right\">[\\s]+WebIssues ([^\\s]+) \\| <a href=",
 						},
 					},
@@ -45980,7 +45980,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: " href=\"http:\\/\\/www.valarsoft.com\"[^>]+>Powered by: Webmatic ([^<]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: " href=\"http:\\/\\/www.valarsoft.com\"[^>]+>Powered by: Webmatic ([^<]+)<\\/a>",
 						},
 					},
@@ -45991,7 +45991,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/www.webmediaexplorer.com[^>]*>webmedia explorer ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/www.webmediaexplorer.com[^>]*>webmedia explorer ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -46019,13 +46019,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!-- Powered by YWP ([\\d\\.]+) -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Powered by YWP ([\\d\\.]+) -->",
 						},
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"YWP ([\\d\\.]+)\">",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"YWP ([\\d\\.]+)\">",
 						},
 					},
@@ -46045,7 +46045,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!--WEBSIDESTORY CODE ([^\\ ]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--WEBSIDESTORY CODE ([^\\ ]+) ",
 						},
 					},
@@ -46060,7 +46060,7 @@ var features = []*Feature{
 			{
 				Name: "WebsiteTonight",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "dps_site_id",
 						},
@@ -46070,10 +46070,10 @@ var features = []*Feature{
 			{
 				Name: "WebSitePro",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WebSitePro\\/([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WebSitePro\\/([^\\s]+)",
 							},
 						},
@@ -46083,15 +46083,15 @@ var features = []*Feature{
 			{
 				Name: "WebSocket",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Upgrade": &FeatureRuleItem{
+					"Upgrade": {
 						{
 							Regexp: "^WebSocket$",
 						},
 					},
-					"Sec-websocket-version-server": &FeatureRuleItem{
+					"Sec-websocket-version-server": {
 						{
 							Regexp: "(.+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "(.+)",
 							},
 						},
@@ -46101,7 +46101,7 @@ var features = []*Feature{
 			{
 				Name: "webSPELL",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "ws_session=[a-z\\d]+;",
 						},
@@ -46113,13 +46113,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "This site is using the <a href=\"http:\\/\\/www.webspell.org\" target=\"[^\"]+\">webSPELL (Free Content Management System|script) \\(version: ([^\\)]+)\\)[\\s]*<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "This site is using the <a href=\"http:\\/\\/www.webspell.org\" target=\"[^\"]+\">webSPELL (Free Content Management System|script) \\(version: ([^\\)]+)\\)[\\s]*<\\/a>",
 						},
 					},
 					{
 						Regexp: "Diese Seite benutzt das <a href=\"http:\\/\\/www.webspell.org\" target=\"[^\"]+\">webSPELL Script \\(Version: ([^\\)]+)\\)[\\s]*<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Diese Seite benutzt das <a href=\"http:\\/\\/www.webspell.org\" target=\"[^\"]+\">webSPELL Script \\(Version: ([^\\)]+)\\)[\\s]*<\\/a>",
 						},
 					},
@@ -46130,7 +46130,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta http-equiv=\"generator\" content=\"WebSVN ([^\"]+)\"[\\s]?\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta http-equiv=\"generator\" content=\"WebSVN ([^\"]+)\"[\\s]?\\/>",
 						},
 					},
@@ -46145,7 +46145,7 @@ var features = []*Feature{
 			{
 				Name: "WebTrends",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^WEBTRENDS_ID",
 						},
@@ -46166,10 +46166,10 @@ var features = []*Feature{
 			{
 				Name: "Werkzeug",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Werkzeug\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Werkzeug\\/([\\d\\.]+)",
 							},
 						},
@@ -46184,18 +46184,18 @@ var features = []*Feature{
 			{
 				Name: "WhatsUp",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WhatsUp",
 						},
 						{
 							Regexp: "^WhatsUp_Gold\\/([\\d\\.]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WhatsUp_Gold\\/([\\d\\.]+)",
 							},
 						},
 					},
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "^Basic realm=\"WhatsUp[\\s]?Gold\"",
 						},
@@ -46210,13 +46210,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered By WhiteBoard ([\\d\\.]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered By WhiteBoard ([\\d\\.]+)<br \\/>",
 						},
 					},
 					{
 						Regexp: "Powered By WhiteBoard <span id=\"version\">([\\d\\.]+)<\\/span><br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered By WhiteBoard <span id=\"version\">([\\d\\.]+)<\\/span><br \\/>",
 						},
 					},
@@ -46227,7 +46227,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by Whizzy CMS <big>&spades;<\\/big> <\\/a><\\/div><!-- \\[Whizzy CMS:Whizzy CMS ([^\\]]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by Whizzy CMS <big>&spades;<\\/big> <\\/a><\\/div><!-- \\[Whizzy CMS:Whizzy CMS ([^\\]]+)",
 						},
 					},
@@ -46247,7 +46247,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<tr><td bgcolor=\"#efefef\" height=\"20\" align=\"center\"><a href=\"index\\.php\">Home<\\/a> \\| <a href=\"clients\\.php\">Clients<\\/a> \\| <a href=\"supporttickets\\.php\">Tickets<\\/a> \\| <a href=\"orders\\.php\">Orders<\\/a> \\| <a href=\"activitylog\\.php\">Activity<\\/a> \\| <a href=\"logout\\.php\">Logout<\\/a><\\/td><\\/tr>[\\s]+<tr><td align=\"center\">[^,^\\s]+, [^<]+<br \\/>Version: ([^<^\\s]+)<\\/td><\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr><td bgcolor=\"#efefef\" height=\"20\" align=\"center\"><a href=\"index\\.php\">Home<\\/a> \\| <a href=\"clients\\.php\">Clients<\\/a> \\| <a href=\"supporttickets\\.php\">Tickets<\\/a> \\| <a href=\"orders\\.php\">Orders<\\/a> \\| <a href=\"activitylog\\.php\">Activity<\\/a> \\| <a href=\"logout\\.php\">Logout<\\/a><\\/td><\\/tr>[\\s]+<tr><td align=\"center\">[^,^\\s]+, [^<]+<br \\/>Version: ([^<^\\s]+)<\\/td><\\/tr>",
 						},
 					},
@@ -46292,18 +46292,18 @@ var features = []*Feature{
 			{
 				Name: "Wildcat",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^[wW]ildcat\\/v([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^[wW]ildcat\\/v([^\\s]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "Wildcat.Net v([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Wildcat.Net v([^\\s]+)",
 							},
 						},
@@ -46318,7 +46318,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<a href=\"JavaScript:about\\(\\)\">About Winamp Web Interface v([\\.\\d]+)<\\/a><\\/h6><hr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"JavaScript:about\\(\\)\">About Winamp Web Interface v([\\.\\d]+)<\\/a><\\/h6><hr>",
 						},
 					},
@@ -46327,13 +46327,13 @@ var features = []*Feature{
 			{
 				Name: "Winconnection",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Winconnection ",
 						},
 						{
 							Regexp: "^Winconnection V([^\\s]+) \\(server ([A-Z\\d]{6})\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Winconnection V([^\\s]+) \\(server ([A-Z\\d]{6})\\)$",
 							},
 						},
@@ -46362,10 +46362,10 @@ var features = []*Feature{
 			{
 				Name: "WindWeb",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^WindWeb\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WindWeb\\/([^\\s]+)$",
 							},
 						},
@@ -46375,10 +46375,10 @@ var features = []*Feature{
 			{
 				Name: "Wing-FTP-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Wing FTP Server\\/([\\d\\.]+)\\(([^\\)]*)\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Wing FTP Server\\/([\\d\\.]+)\\(([^\\)]*)\\)$",
 							},
 						},
@@ -46411,7 +46411,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<!--[\\s]+&copy 20[\\d]{2}(-[\\d]{4})? AMAX Information Technologies Inc\\. All Rights Reserved\\.[\\s]+WebMail \\| Powered by Winmail Server ([^\\s]+)[\\s]+-->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!--[\\s]+&copy 20[\\d]{2}(-[\\d]{4})? AMAX Information Technologies Inc\\. All Rights Reserved\\.[\\s]+WebMail \\| Powered by Winmail Server ([^\\s]+)[\\s]+-->",
 						},
 					},
@@ -46420,18 +46420,18 @@ var features = []*Feature{
 			{
 				Name: "Winstone",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Winstone Servlet Engine v([^\\s]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Winstone Servlet Engine v([^\\s]+)",
 							},
 						},
 					},
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "Servlet\\/[^\\s]+ \\(Winstone\\/([^\\)]+)\\)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Servlet\\/[^\\s]+ \\(Winstone\\/([^\\)]+)\\)",
 							},
 						},
@@ -46443,7 +46443,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "png\" \\/> Wolf CMS ([^<]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "png\" \\/> Wolf CMS ([^<]+)<\\/div>",
 						},
 					},
@@ -46457,7 +46457,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<meta name=\"generator\" content=\"WooFramework ([\\d\\.]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"WooFramework ([\\d\\.]+)\"",
 						},
 					},
@@ -46466,7 +46466,7 @@ var features = []*Feature{
 			{
 				Name: "WordFence",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^wfvt_",
 						},
@@ -46489,7 +46489,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<input type=\"hidden\" name=\"_wpcf([\\d\\.]+)\" value=\"1\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<input type=\"hidden\" name=\"_wpcf([\\d\\.]+)\" value=\"1\" \\/>",
 						},
 					},
@@ -46498,10 +46498,10 @@ var features = []*Feature{
 			{
 				Name: "WordPress-Mobile-Pack",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-mobilized-by": &FeatureRuleItem{
+					"X-mobilized-by": {
 						{
 							Regexp: "^WordPress Mobile Pack ([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^WordPress Mobile Pack ([^\\s]+)$",
 							},
 						},
@@ -46513,7 +46513,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<!-- Protected by \\(WP-SpamFree\\) v([\\d\\.]+) :: JS BEGIN -->",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<!-- Protected by \\(WP-SpamFree\\) v([\\d\\.]+) :: JS BEGIN -->",
 						},
 					},
@@ -46541,7 +46541,7 @@ var features = []*Feature{
 			{
 				Name: "WorldNow",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "^wn_cg",
 						},
@@ -46553,7 +46553,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Raid Management Provided by <a href=\"http:\\/\\/www.wowraidmanager.net\\/\">WoW Raid Manager<\\/a> v([\\d\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Raid Management Provided by <a href=\"http:\\/\\/www.wowraidmanager.net\\/\">WoW Raid Manager<\\/a> v([\\d\\.]+)",
 						},
 					},
@@ -46570,7 +46570,7 @@ var features = []*Feature{
 			{
 				Name: "Wowza-Media-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "realm=\"Wowza Media Systems\"",
 						},
@@ -46579,7 +46579,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<html><head><title>Wowza Media Server [\\d]+ Monthly Edition ([\\d\\.]+ build[\\d]+)<\\/title><\\/head><body>Wowza Media Server [\\d]+ Monthly Edition ([\\d\\.]+ build[\\d]+)<\\/body><\\/html>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<html><head><title>Wowza Media Server [\\d]+ Monthly Edition ([\\d\\.]+ build[\\d]+)<\\/title><\\/head><body>Wowza Media Server [\\d]+ Monthly Edition ([\\d\\.]+ build[\\d]+)<\\/body><\\/html>",
 						},
 					},
@@ -46588,7 +46588,7 @@ var features = []*Feature{
 			{
 				Name: "WP-SlimStat",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "slimstat_tracking_code=[a-f\\d]{32};",
 						},
@@ -46598,7 +46598,7 @@ var features = []*Feature{
 			{
 				Name: "WPML-Plugin",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "_icl_current_language",
 						},
@@ -46621,7 +46621,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^[0-9]+.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2} [A|B]{1} [^>]*> ([^\\ ]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^[0-9]+.[0-9]{2}.[0-9]{2} [0-9]{2}:[0-9]{2} [A|B]{1} [^>]*> ([^\\ ]+) ",
 						},
 					},
@@ -46638,13 +46638,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Classifieds ([\\d\\.]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Classifieds ([\\d\\.]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\">WSN Classifieds ([\\d\\.]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\">WSN Classifieds ([\\d\\.]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46670,13 +46670,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"(group|topbar)\" style=\"margin-left: 8px;\">WSN Directory ([\\d\\.]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(group|topbar)\" style=\"margin-left: 8px;\">WSN Directory ([\\d\\.]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"(group|topbar)\">WSN Directory ([\\d\\.]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(group|topbar)\">WSN Directory ([\\d\\.]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46702,13 +46702,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Forum ([^<]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Forum ([^<]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\">WSN Forum ([^<]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\">WSN Forum ([^<]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46734,13 +46734,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Gallery ([\\d\\.]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Gallery ([\\d\\.]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\">WSN Gallery ([\\d\\.]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\">WSN Gallery ([\\d\\.]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46766,13 +46766,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Knowledge Base ([^<]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Knowledge Base ([^<]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\">WSN Knowledge Base ([^<]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\">WSN Knowledge Base ([^<]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46795,13 +46795,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"group\" style=\"margin-left: 8px;\">WSN Links ([\\d\\.]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"group\" style=\"margin-left: 8px;\">WSN Links ([\\d\\.]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"group\">WSN Links ([\\d\\.]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"group\">WSN Links ([\\d\\.]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46827,13 +46827,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Software Directory ([\\d\\.]+) Admin Login<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\" style=\"margin-left: 8px;\">WSN Software Directory ([\\d\\.]+) Admin Login<\\/span>",
 						},
 					},
 					{
 						Regexp: "<span class=\"(topbar|group)\">WSN Software Directory ([\\d\\.]+) Admin Panel<\\/span>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<span class=\"(topbar|group)\">WSN Software Directory ([\\d\\.]+) Admin Panel<\\/span>",
 						},
 					},
@@ -46853,13 +46853,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/sourceforge\\.net\\/projects\\/wstool\" target=\"_blank\">Server Error & SQL Injection Sacnner \\(Ver ([^\\s^\\)]+)\\)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/sourceforge\\.net\\/projects\\/wstool\" target=\"_blank\">Server Error & SQL Injection Sacnner \\(Ver ([^\\s^\\)]+)\\)<\\/a>",
 						},
 					},
 					{
 						Regexp: "<title>Server Error & SQL Injection Sacnner \\(Ver ([^\\s^\\)]+)\\)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Server Error & SQL Injection Sacnner \\(Ver ([^\\s^\\)]+)\\)<\\/title>",
 						},
 					},
@@ -46921,31 +46921,31 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"publisher\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"publisher\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
 						},
 					},
 					{
 						Regexp: "<meta name=\"dc\\.rights\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"dc\\.rights\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
 						},
 					},
 					{
 						Regexp: "<meta name=\"dc\\.publisher\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"dc\\.publisher\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
 						},
 					},
 					{
 						Regexp: "<meta name=\"owner\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"owner\" content=\"x10media`s Mp3 Search Engine V\\.([\\d\\.]+)\"\\/>",
 						},
 					},
 					{
 						Regexp: "<title>x10media`s Mp3 Search Engine V\\.([\\d\\.]+)[\\ Installer]*<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>x10media`s Mp3 Search Engine V\\.([\\d\\.]+)[\\ Installer]*<\\/title>",
 						},
 					},
@@ -46976,13 +46976,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered By <a href=\"http:\\/\\/www.x7chat.com\\/\" target=\"_blank\">X7 Chat<\\/a> ([\\d\\.A-Z]+)[\\s]*[^&]*&copy; 2004 By The <a href=\"http:\\/\\/www.x7chat.com\\/\" target=\"_blank\">X7 Group<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered By <a href=\"http:\\/\\/www.x7chat.com\\/\" target=\"_blank\">X7 Chat<\\/a> ([\\d\\.A-Z]+)[\\s]*[^&]*&copy; 2004 By The <a href=\"http:\\/\\/www.x7chat.com\\/\" target=\"_blank\">X7 Group<\\/a>",
 						},
 					},
 					{
 						Regexp: "<Br><font size=\"2\">Powered By X7 Chat Version ([^<]+)<\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<Br><font size=\"2\">Powered By X7 Chat Version ([^<]+)<\\/font>",
 						},
 					},
@@ -47002,10 +47002,10 @@ var features = []*Feature{
 			{
 				Name: "Xavante",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Xavante (.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Xavante (.+)$",
 							},
 						},
@@ -47028,7 +47028,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "\t<div align=\"center\"><small>Powered by <a href=\"http:\\/\\/www.xchangeboard.de\">XchangeBoard<\\/a> ver ([\\d\\.a-z]+) - ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "\t<div align=\"center\"><small>Powered by <a href=\"http:\\/\\/www.xchangeboard.de\">XchangeBoard<\\/a> ver ([\\d\\.a-z]+) - ",
 						},
 					},
@@ -47037,10 +47037,10 @@ var features = []*Feature{
 			{
 				Name: "Xeneo-Web-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Xeneo\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Xeneo\\/([^\\s]+)$",
 							},
 						},
@@ -47076,13 +47076,13 @@ var features = []*Feature{
 			{
 				Name: "Xerver",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Xerver",
 						},
 						{
 							Regexp: "^Xerver\\/([\\d\\.]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Xerver\\/([\\d\\.]+)$",
 							},
 						},
@@ -47103,7 +47103,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<p align='center'><span id='copyright'>\\[ powered by <a href='http:\\/\\/www.x-gfx.de' target='blank' title='Script by x-gfx.de'>xGB ([\\d\\.]+)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p align='center'><span id='copyright'>\\[ powered by <a href='http:\\/\\/www.x-gfx.de' target='blank' title='Script by x-gfx.de'>xGB ([\\d\\.]+)<\\/a>",
 						},
 					},
@@ -47117,13 +47117,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"GENERATOR\" content=\"XHP - eXpandable Home Page v([\\d\\.]+)\"\\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"GENERATOR\" content=\"XHP - eXpandable Home Page v([\\d\\.]+)\"\\/>",
 						},
 					},
 					{
 						Regexp: "<a href=\"http:\\/\\/xhp.targetit.ro\\/\">Powered by XHP CMS v([\\d\\.]+)<\\/a><br\\/><a href=\"http:\\/\\/lars.targetit.ro\\/\">Site engine is copyright",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/xhp.targetit.ro\\/\">Powered by XHP CMS v([\\d\\.]+)<\\/a><br\\/><a href=\"http:\\/\\/lars.targetit.ro\\/\">Site engine is copyright",
 						},
 					},
@@ -47132,13 +47132,13 @@ var features = []*Feature{
 			{
 				Name: "Xitami",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Xitami$",
 						},
 						{
 							Regexp: "^Xitami\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Xitami\\/([^\\s]+)$",
 							},
 						},
@@ -47156,19 +47156,19 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "^Powered by XMB ([\\d\\.]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^Powered by XMB ([\\d\\.]+)<br \\/>",
 						},
 					},
 					{
 						Regexp: "<title>[^<]+- Powered by XMB ([\\d\\.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>[^<]+- Powered by XMB ([\\d\\.]+) ",
 						},
 					},
 					{
 						Regexp: "^<!-- Powered by XMB ([\\d\\.]+) ",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^<!-- Powered by XMB ([\\d\\.]+) ",
 						},
 					},
@@ -47191,13 +47191,13 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by XOOPS Cube ([^\\s^&]+)&copy; 200[01]-20[\\d]{2} (<a href=\"http:\\/\\/xoopscube\\.sourceforge\\.net\\/\" target=\"_blank\">)?XOOPS Cube Project",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by XOOPS Cube ([^\\s^&]+)&copy; 200[01]-20[\\d]{2} (<a href=\"http:\\/\\/xoopscube\\.sourceforge\\.net\\/\" target=\"_blank\">)?XOOPS Cube Project",
 						},
 					},
 					{
 						Regexp: "Powered by <a href=\"http:\\/\\/xoopscube\\.org\\/\" rel=\"external\">XOOPS Cube<\\/a> ([^\\s]+) &copy; 200[01]-20[\\d]{2} <a href=\"http:\\/\\/xoopscube\\.sourceforge\\.net\\/\" rel=\"external\">XOOPS Cube Project<\\/a><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by <a href=\"http:\\/\\/xoopscube\\.org\\/\" rel=\"external\">XOOPS Cube<\\/a> ([^\\s]+) &copy; 200[01]-20[\\d]{2} <a href=\"http:\\/\\/xoopscube\\.sourceforge\\.net\\/\" rel=\"external\">XOOPS Cube Project<\\/a><\\/p>",
 						},
 					},
@@ -47206,13 +47206,13 @@ var features = []*Feature{
 			{
 				Name: "xproxy",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^xproxy",
 						},
 						{
 							Regexp: "^xproxy\\/([^\\(]+)\\([\\d]+\\)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^xproxy\\/([^\\(]+)\\([\\d]+\\)$",
 							},
 						},
@@ -47227,7 +47227,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"\\(c\\) by xt:Commerce v([^,]{1,15}) , http:\\/\\/www.xt-commerce.com\" \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"\\(c\\) by xt:Commerce v([^,]{1,15}) , http:\\/\\/www.xt-commerce.com\" \\/>",
 						},
 					},
@@ -47259,7 +47259,7 @@ var features = []*Feature{
 			{
 				Name: "XyberShield",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Set-cookie": &FeatureRuleItem{
+					"Set-cookie": {
 						{
 							Regexp: "XyberShieldSession=[^\\s]+;",
 						},
@@ -47285,7 +47285,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<p>Copyright &copy; [\\d]{4}  All rights reserved. Powered By : <a href=\"http:\\/\\/www.yamamah.org\" title=\"Yamamah\">Yamamah Version ([\\d\\.]{1,5})<\\/a><\\/p>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<p>Copyright &copy; [\\d]{4}  All rights reserved. Powered By : <a href=\"http:\\/\\/www.yamamah.org\" title=\"Yamamah\">Yamamah Version ([\\d\\.]{1,5})<\\/a><\\/p>",
 						},
 					},
@@ -47317,7 +47317,7 @@ var features = []*Feature{
 			{
 				Name: "Zen-Load-Balancer",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Www-authenticate": &FeatureRuleItem{
+					"Www-authenticate": {
 						{
 							Regexp: "Basic realm=\"Zen Load Balancer\"",
 						},
@@ -47327,30 +47327,30 @@ var features = []*Feature{
 			{
 				Name: "Zend",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"X-powered-by": &FeatureRuleItem{
+					"X-powered-by": {
 						{
 							Regexp: "Zend Framework",
 						},
 						{
 							Regexp: "Zend Framework ([a-zA-Z0-9\\.\\/\\+\\-\\(\\)]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Zend Framework ([a-zA-Z0-9\\.\\/\\+\\-\\(\\)]+)",
 							},
 						},
 						{
 							Regexp: "Zend Core\\/([a-zA-Z0-9\\.\\/\\+\\-\\(\\)]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Zend Core\\/([a-zA-Z0-9\\.\\/\\+\\-\\(\\)]+)",
 							},
 						},
 					},
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Zend ",
 						},
 						{
 							Regexp: "Zend Core\\/([a-zA-Z0-9\\.\\/\\+\\-\\(\\)]+)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Zend Core\\/([a-zA-Z0-9\\.\\/\\+\\-\\(\\)]+)",
 							},
 						},
@@ -47362,7 +47362,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<meta name=\"generator\" content=\"Zend.com CMS ([\\d\\.]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<meta name=\"generator\" content=\"Zend.com CMS ([\\d\\.]+)\"",
 						},
 					},
@@ -47376,7 +47376,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div id=\"copyright\">[\\s]+<p>Copyright &copy; 2005-20[\\d]{2} Zenoss, Inc\\. \\| Version[\\s]+<span>([^\\s^<]+)<\\/span>[\\s]+",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div id=\"copyright\">[\\s]+<p>Copyright &copy; 2005-20[\\d]{2} Zenoss, Inc\\. \\| Version[\\s]+<span>([^\\s^<]+)<\\/span>[\\s]+",
 						},
 					},
@@ -47388,13 +47388,13 @@ var features = []*Feature{
 			{
 				Name: "Zero-One-Technology-Print-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ZOT-PS-",
 						},
 						{
 							Regexp: "^ZOT-PS-[\\d]+\\/(.+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ZOT-PS-[\\d]+\\/(.+)$",
 							},
 						},
@@ -47404,7 +47404,7 @@ var features = []*Feature{
 			{
 				Name: "Zest-Web-Engine",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Location": &FeatureRuleItem{
+					"Location": {
 						{
 							Regexp: "/cgi-bin/web.asp?title",
 						},
@@ -47413,7 +47413,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Powered by the <br \\/><img src='http:\\/\\/www.[^\\/]+\\/images\\/zestlogo\\.gif' style='border:0 ; ' alt='Zest Web Engine' \\/><br \\/>Zest web engine<br \\/>V([\\d\\.]+)<br \\/>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by the <br \\/><img src='http:\\/\\/www.[^\\/]+\\/images\\/zestlogo\\.gif' style='border:0 ; ' alt='Zest Web Engine' \\/><br \\/>Zest web engine<br \\/>V([\\d\\.]+)<br \\/>",
 						},
 					},
@@ -47422,7 +47422,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "Powered by the <a href='http:\\/\\/www.zest-leisure.com\\/'>Zest Web Engine<\\/a>[ ]+V ([0-9\\.]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Powered by the <a href='http:\\/\\/www.zest-leisure.com\\/'>Zest Web Engine<\\/a>[ ]+V ([0-9\\.]+)<",
 						},
 					},
@@ -47442,7 +47442,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<title>[\\s]+ZeusCart V([\\d\\.]+)[\\s]+<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>[\\s]+ZeusCart V([\\d\\.]+)[\\s]+<\\/title>",
 						},
 					},
@@ -47451,13 +47451,13 @@ var features = []*Feature{
 			{
 				Name: "Zeus-Web-Server",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Zeus$",
 						},
 						{
 							Regexp: "^Zeus\\/(([\\d]+)(\\.|_)([\\d]+))$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Zeus\\/(([\\d]+)(\\.|_)([\\d]+))$",
 							},
 						},
@@ -47500,7 +47500,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<script[^>]+src=\"http:\\/\\/(client\\.zimplit|www\\.zimplit|zimplit)\\.(org|com)\\/users\\/publicUser_v([\\d\\._]+)\\/(jquery|ZimgZoomer|ZZMenu)\\.js\"[^>]*><\\/script>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<script[^>]+src=\"http:\\/\\/(client\\.zimplit|www\\.zimplit|zimplit)\\.(org|com)\\/users\\/publicUser_v([\\d\\._]+)\\/(jquery|ZimgZoomer|ZZMenu)\\.js\"[^>]*><\\/script>",
 						},
 					},
@@ -47566,10 +47566,10 @@ var features = []*Feature{
 			{
 				Name: "Zope",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "Zope\\/\\(([^,]*)",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "Zope\\/\\(([^,]*)",
 							},
 						},
@@ -47590,10 +47590,10 @@ var features = []*Feature{
 			{
 				Name: "ZTE-IAD",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^Mini web server ([^\\s]+) ZTE corp 20[\\d]{2}\\.$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^Mini web server ([^\\s]+) ZTE corp 20[\\d]{2}\\.$",
 							},
 						},
@@ -47611,13 +47611,13 @@ var features = []*Feature{
 			{
 				Name: "ZyXEL-Router",
 				HeaderField: map[string][]*FeatureRuleItem{
-					"Server": &FeatureRuleItem{
+					"Server": {
 						{
 							Regexp: "^ZyXEL-RomPager",
 						},
 						{
 							Regexp: "^ZyXEL-RomPager\\/([^\\s]+)$",
-							Version: &FeatureVersion{
+							Version: {
 								Match: "^ZyXEL-RomPager\\/([^\\s]+)$",
 							},
 						},
@@ -47647,7 +47647,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<td height=\"40\" colspan=\"4\" class=\"Auth\">Prestige ([^<]+)<",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td height=\"40\" colspan=\"4\" class=\"Auth\">Prestige ([^<]+)<",
 						},
 					},
@@ -54916,7 +54916,7 @@ var features = []*Feature{
 					{
 						Regexp: "3.x",
 						Md5:    "530834f021dab3082c36592e259404e6",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "3.x",
 						},
 					},
@@ -54928,7 +54928,7 @@ var features = []*Feature{
 					{
 						Regexp: "8.x",
 						Md5:    "2e6cdce49c669ec305b2d73eead50e4c",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "8.x",
 						},
 					},
@@ -54973,7 +54973,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<img src=\"images\\/oscommerce.png\" border=\"0\" alt=\"osCommerce ([^\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"images\\/oscommerce.png\" border=\"0\" alt=\"osCommerce ([^\"]+)\"",
 						},
 					},
@@ -73282,13 +73282,13 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<tr class=\"h\"><th colspan=\"2\">PHP (\\d) Authors<\\/th><\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr class=\"h\"><th colspan=\"2\">PHP (\\d) Authors<\\/th><\\/tr>",
 						},
 					},
 					{
 						Regexp: "<tr class=\"h\"><th>PHP ([\\d\\.]+) Quality Assurance Team<\\/th><\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr class=\"h\"><th>PHP ([\\d\\.]+) Quality Assurance Team<\\/th><\\/tr>",
 						},
 					},
@@ -73305,7 +73305,7 @@ var features = []*Feature{
 					{
 						Regexp: "9.x",
 						Md5:    "596b3fc4f1a0b818979db1cf94a82220",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "9.x",
 						},
 					},
@@ -73322,7 +73322,7 @@ var features = []*Feature{
 					{
 						Regexp: "7.x",
 						Md5:    "620b2523e4680bf031ee4b1538733349",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "7.x",
 						},
 					},
@@ -73451,7 +73451,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div class=\"standard-footer\">[\\s]+This software is protected by all U\\.S\\. and international copyright law and is subject to the terms and conditions of the <a class=\"standard-footer highlight\" href=\"\\/dsview\\/[^\"]+\" target=\"dsvieweula\">Avocent DSView [\\d\\.]+ (Software )?End User License Agreement<\\/a>\\.[\\s]+<\\/div>[\\s]+Version: ([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div class=\"standard-footer\">[\\s]+This software is protected by all U\\.S\\. and international copyright law and is subject to the terms and conditions of the <a class=\"standard-footer highlight\" href=\"\\/dsview\\/[^\"]+\" target=\"dsvieweula\">Avocent DSView [\\d\\.]+ (Software )?End User License Agreement<\\/a>\\.[\\s]+<\\/div>[\\s]+Version: ([^\\s]+)",
 						},
 					},
@@ -73566,7 +73566,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "var LMVersion = '([^\\s^']+)';",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "var LMVersion = '([^\\s^']+)';",
 						},
 					},
@@ -73582,7 +73582,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<font size=\"\\+1\"><b>License Key Problems<\\/b><\\/font><br>[\\s]+<b>Inktomi Search ([^<^\\s]+)<\\/b><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font size=\"\\+1\"><b>License Key Problems<\\/b><\\/font><br>[\\s]+<b>Inktomi Search ([^<^\\s]+)<\\/b><br>",
 						},
 					},
@@ -73624,7 +73624,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<b>K1000 Systems Management Appliance<\\/b> <b>v([^\\s^<]+)<\\/b>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b>K1000 Systems Management Appliance<\\/b> <b>v([^\\s^<]+)<\\/b>",
 						},
 					},
@@ -73640,7 +73640,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<version>([^<]+)<\\/version>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<version>([^<]+)<\\/version>",
 						},
 					},
@@ -73682,7 +73682,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"https?:\\/\\/([^\\/^\"]+)(:\\d+)?\\/\"><img src=\"https?:\\/\\/([^\\/^\"]+)(:\\d+)?\\/Docs\\/docmast\\.gif\" alt=\"Caching Proxy Version ([^\"]+)\"><\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"https?:\\/\\/([^\\/^\"]+)(:\\d+)?\\/\"><img src=\"https?:\\/\\/([^\\/^\"]+)(:\\d+)?\\/Docs\\/docmast\\.gif\" alt=\"Caching Proxy Version ([^\"]+)\"><\\/a>",
 						},
 					},
@@ -73727,7 +73727,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Version ([0-9a-z\\.]+).*BugTracker.NET",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Version ([0-9a-z\\.]+).*BugTracker.NET",
 						},
 					},
@@ -73769,7 +73769,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "5",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "5",
 						},
 					},
@@ -73838,7 +73838,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<TITLE>HP StorageWorks (MSL[^\\s]+) Tape Library Webpages<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>HP StorageWorks (MSL[^\\s]+) Tape Library Webpages<\\/TITLE>",
 						},
 					},
@@ -73946,7 +73946,7 @@ var features = []*Feature{
 					{
 						Regexp: "6.x",
 						Md5:    "d9f42bd071f2f3f1dc7cdb628af4c596",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "6.x",
 						},
 					},
@@ -74030,7 +74030,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TR>[\\s]+<TD BGCOLOR=\"#C0C0C0\">Software<\\/TD>[\\s]+<TD><FONT COLOR=\"#0000FF\">V\\.(.+) IPSec from [\\d]{4}\\/[\\d]{2}\\/[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}<\\/FONT><BR><\\/TD>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TR>[\\s]+<TD BGCOLOR=\"#C0C0C0\">Software<\\/TD>[\\s]+<TD><FONT COLOR=\"#0000FF\">V\\.(.+) IPSec from [\\d]{4}\\/[\\d]{2}\\/[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}<\\/FONT><BR><\\/TD>",
 						},
 					},
@@ -74062,7 +74062,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<\\/td><\\/tr><tr><td><div class=text>Software Release:<\\/td><td><div class=text>([^<^\\s]+)<\\/td><\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<\\/td><\\/tr><tr><td><div class=text>Software Release:<\\/td><td><div class=text>([^<^\\s]+)<\\/td><\\/tr>",
 						},
 					},
@@ -74091,7 +74091,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^Version ([^ ]+).*",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^Version ([^ ]+).*",
 						},
 					},
@@ -74121,14 +74121,14 @@ var features = []*Feature{
 					{
 						Regexp: "4.x",
 						Md5:    "5a530899177854181da891894554478a",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "4.x",
 						},
 					},
 					{
 						Regexp: "5.x-6.x",
 						Md5:    "7dea9dcf92792b1bf2bddfe71549dd19",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "5.x-6.x",
 						},
 					},
@@ -74145,14 +74145,14 @@ var features = []*Feature{
 					{
 						Regexp: "4.x",
 						Md5:    "5a530899177854181da891894554478a",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "4.x",
 						},
 					},
 					{
 						Regexp: "5.x-6.x",
 						Md5:    "7dea9dcf92792b1bf2bddfe71549dd19",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "5.x-6.x",
 						},
 					},
@@ -74169,7 +74169,7 @@ var features = []*Feature{
 					{
 						Regexp: "6.x",
 						Md5:    "066ab2c653211887d01e52bcc30293ba",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "6.x",
 						},
 					},
@@ -74185,7 +74185,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<h1>Log in to EPiServer CMS 6",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "6.x",
 						},
 					},
@@ -74201,7 +74201,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>BlueNet Video Viewer Version ([^<]+)<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>BlueNet Video Viewer Version ([^<]+)<\\/title>",
 						},
 					},
@@ -74583,7 +74583,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "Apache Tomcat Version ([0-9\\.]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "Apache Tomcat Version ([0-9\\.]+)",
 						},
 					},
@@ -74626,14 +74626,14 @@ var features = []*Feature{
 					{
 						Regexp: "2.x",
 						Md5:    "36ccabeb1ad841c6af37660c3865a9c9",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "2.x",
 						},
 					},
 					{
 						Regexp: "2.2",
 						Md5:    "726dac78d3a989a360fc405452a798ee",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "2.2",
 						},
 					},
@@ -74662,7 +74662,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<BR> SW_REV: ([^\\s^<]+)<BR> MODEL: ([^\\s^<]+)  <\\/TD><\\/TR><tr vAlign=top><td width=\"170\">Product Type:<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<BR> SW_REV: ([^\\s^<]+)<BR> MODEL: ([^\\s^<]+)  <\\/TD><\\/TR><tr vAlign=top><td width=\"170\">Product Type:<\\/td>",
 						},
 					},
@@ -74678,7 +74678,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "HW_REV: [^<]+<br>[\\s]+VENDOR: Arris Interactive, L\\.L\\.C\\.<br>[\\s]+BOOTR: [^<]+<br>[\\s]+SW_REV: ([^\\s^<]+)<br>[\\s]+MODEL: ([^\\s^<]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "HW_REV: [^<]+<br>[\\s]+VENDOR: Arris Interactive, L\\.L\\.C\\.<br>[\\s]+BOOTR: [^<]+<br>[\\s]+SW_REV: ([^\\s^<]+)<br>[\\s]+MODEL: ([^\\s^<]+)<\\/td>",
 						},
 					},
@@ -74859,7 +74859,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<font face=\"arial\" size=2 color=white>([^<]+ build [^<]+)<\\/font>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font face=\"arial\" size=2 color=white>([^<]+ build [^<]+)<\\/font>",
 						},
 					},
@@ -75326,7 +75326,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "><title>Hopf ([^<]+) - System Info<\\/title",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "><title>Hopf ([^<]+) - System Info<\\/title",
 						},
 					},
@@ -75342,7 +75342,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td width='50%'>Main\\.bin Version<\\/td><td width='50%' align='center'>([^<^\\s]+)<\\/td>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td width='50%'>Main\\.bin Version<\\/td><td width='50%' align='center'>([^<^\\s]+)<\\/td>",
 						},
 					},
@@ -75358,7 +75358,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>DOCS\\d+ \\(vFabric Hyperic ([^\\)]+)\\)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>DOCS\\d+ \\(vFabric Hyperic ([^\\)]+)\\)",
 						},
 					},
@@ -75452,7 +75452,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^[\\s]+<import addon=\"xbmc.json\" version=\"([^\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^[\\s]+<import addon=\"xbmc.json\" version=\"([^\"]+)\"",
 						},
 					},
@@ -75507,7 +75507,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TITLE>Lantronix ThinWeb Manager ([\\d\\.]+): Home<\\/TITLE>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TITLE>Lantronix ThinWeb Manager ([\\d\\.]+): Home<\\/TITLE>",
 						},
 					},
@@ -75523,7 +75523,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<img src=\"logo\\.gif\" width=129 height=84 border=0 alt=\"Lantronix ThinWeb Manager ([\\d\\.]+)\"><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<img src=\"logo\\.gif\" width=129 height=84 border=0 alt=\"Lantronix ThinWeb Manager ([\\d\\.]+)\"><br>",
 						},
 					},
@@ -75625,7 +75625,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<font face=\"Verdana\" size=2>\\s+<li>Server version : ([^\\s]+)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<font face=\"Verdana\" size=2>\\s+<li>Server version : ([^\\s]+)",
 						},
 					},
@@ -75674,7 +75674,7 @@ var features = []*Feature{
 					{
 						Regexp: "4.x",
 						Md5:    "aa4beb20b354c761257271e86e9ec92b",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "4.x",
 						},
 					},
@@ -75729,7 +75729,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<title>Muster ([\\d]+) Integrated Web server login<\\/title>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<title>Muster ([\\d]+) Integrated Web server login<\\/title>",
 						},
 					},
@@ -75745,7 +75745,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<a href=\"http:\\/\\/updates.netbotz.com\\/releases\\/([\\d\\.]+)\\/install.html\" target=\"_instAV\">\\(Install Advanced View Application\\)<\\/a>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<a href=\"http:\\/\\/updates.netbotz.com\\/releases\\/([\\d\\.]+)\\/install.html\" target=\"_instAV\">\\(Install Advanced View Application\\)<\\/a>",
 						},
 					},
@@ -75842,7 +75842,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: "<TD ALIGN=RIGHT VALIGN=TOP><font color=\"#524a18\" size=-1><B>Novell NetWare ([^<]+)<\\/B>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TD ALIGN=RIGHT VALIGN=TOP><font color=\"#524a18\" size=-1><B>Novell NetWare ([^<]+)<\\/B>",
 						},
 					},
@@ -76211,7 +76211,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TR><TD> Software version<TD> ([^<]*)",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TR><TD> Software version<TD> ([^<]*)",
 						},
 					},
@@ -76227,7 +76227,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<td width=\"50%\" align=\"right\" valign=\"middle\"><div id=\"footright\">Sendio ([\\d\\.]+ \\([^\\s^\\)]+\\)) &mdash",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<td width=\"50%\" align=\"right\" valign=\"middle\"><div id=\"footright\">Sendio ([\\d\\.]+ \\([^\\s^\\)]+\\)) &mdash",
 						},
 					},
@@ -76387,7 +76387,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<UserLevels><Items><XmlItem name=\"[^\"^\\s]*\"><Items \\/><Value>User<\\/Value><\\/XmlItem><XmlItem name=\"[^\"^\\s]*\"><Items \\/><Value>Installer<\\/Value><\\/XmlItem><\\/Items><\\/UserLevels><\\/Element><\\/Content><StatusBar deviceKey=\"[^\"^\\s]*\" hideDataTransfer=\"[^\"^\\s]*\" hidePasswordSafety=\"[^\"^\\s]*\" hidePlantTime=\"[^\"^\\s]*\" hideUserLevel=\"[^\"^\\s]*\" hideUpdateState=\"[^\"^\\s]*\" noRefresh=\"[^\"^\\s]*\" serialNumber=\"[\\d]*\" version=\"([^\"^\\s]+)\" \\/><\\/Page>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<UserLevels><Items><XmlItem name=\"[^\"^\\s]*\"><Items \\/><Value>User<\\/Value><\\/XmlItem><XmlItem name=\"[^\"^\\s]*\"><Items \\/><Value>Installer<\\/Value><\\/XmlItem><\\/Items><\\/UserLevels><\\/Element><\\/Content><StatusBar deviceKey=\"[^\"^\\s]*\" hideDataTransfer=\"[^\"^\\s]*\" hidePasswordSafety=\"[^\"^\\s]*\" hidePlantTime=\"[^\"^\\s]*\" hideUserLevel=\"[^\"^\\s]*\" hideUpdateState=\"[^\"^\\s]*\" noRefresh=\"[^\"^\\s]*\" serialNumber=\"[\\d]*\" version=\"([^\"^\\s]+)\" \\/><\\/Page>",
 						},
 					},
@@ -76458,7 +76458,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^var info_other_value = \\[[\\s]+' ?([^\\s^']+)'",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^var info_other_value = \\[[\\s]+' ?([^\\s^']+)'",
 						},
 					},
@@ -76547,7 +76547,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<div style=\"font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px;\">Version ([^\\s^<]+)<\\/div>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<div style=\"font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size:11px;\">Version ([^\\s^<]+)<\\/div>",
 						},
 					},
@@ -76576,7 +76576,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<script type=\"text\\/javascript\" src=\"synodefs\\.cgi\\?v=([\\d]+)\"><\\/script>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<script type=\"text\\/javascript\" src=\"synodefs\\.cgi\\?v=([\\d]+)\"><\\/script>",
 						},
 					},
@@ -76634,7 +76634,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TD>TMW Imaging Version<\\/TD>\\s+<TD>([^\\s^<]+)<\\/TD>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TD>TMW Imaging Version<\\/TD>\\s+<TD>([^\\s^<]+)<\\/TD>",
 						},
 					},
@@ -76666,7 +76666,7 @@ var features = []*Feature{
 					},
 					{
 						Regexp: ";&nbsp;SW_REV[\\r\\n]*<FONT COLOR=\"#980040\">([^\\s^<]+)<\\/FONT>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: ";&nbsp;SW_REV[\\r\\n]*<FONT COLOR=\"#980040\">([^\\s^<]+)<\\/FONT>",
 						},
 					},
@@ -76682,7 +76682,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<TD class=\"f12w\" width=\"229\" height=\"30\"><FONT color=\"#666666\"><B>Version<\\/B><\\/FONT><\\/TD>[\\s]+<TD class=\"f12w\" valign=\"middle\" width=\"217\" height=\"30\">([^<]+)<\\/TD>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<TD class=\"f12w\" width=\"229\" height=\"30\"><FONT color=\"#666666\"><B>Version<\\/B><\\/FONT><\\/TD>[\\s]+<TD class=\"f12w\" valign=\"middle\" width=\"217\" height=\"30\">([^<]+)<\\/TD>",
 						},
 					},
@@ -76763,7 +76763,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "system_supportscriptversion=\"([^\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "system_supportscriptversion=\"([^\"]+)\"",
 						},
 					},
@@ -76792,7 +76792,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "var ID_ProductName = \"([^\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "var ID_ProductName = \"([^\"]+)\"",
 						},
 					},
@@ -76808,7 +76808,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "var ID_VC_Welcome = \"Welcome to VMware vSphere ([^\\s^\\\"]+)\";",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "var ID_VC_Welcome = \"Welcome to VMware vSphere ([^\\s^\\\"]+)\";",
 						},
 					},
@@ -76837,7 +76837,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "^var live_video_control_version =\"([^\"]+)\";",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "^var live_video_control_version =\"([^\"]+)\";",
 						},
 					},
@@ -76887,7 +76887,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<b>WANem v([^\\s^<]+)<\\/b><br>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<b>WANem v([^\\s^<]+)<\\/b><br>",
 						},
 					},
@@ -76917,7 +76917,7 @@ var features = []*Feature{
 					{
 						Regexp: "3.0",
 						Md5:    "941271289a317097d00bc72f93f8c79d",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "3.0",
 						},
 					},
@@ -77093,7 +77093,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "var _VERSION = \"<acronym title='([^']+)'><table border='0'",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "var _VERSION = \"<acronym title='([^']+)'><table border='0'",
 						},
 					},
@@ -77164,7 +77164,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<tr>[\\s]+<td width=60%>IP Core Software Version<\\/td>[\\s]+<td width=40%>([^<]+)<\\/td>[\\s]+<\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr>[\\s]+<td width=60%>IP Core Software Version<\\/td>[\\s]+<td width=40%>([^<]+)<\\/td>[\\s]+<\\/tr>",
 						},
 					},
@@ -77180,7 +77180,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "<tr>[\\s]+<td width=60%>IP Core Software Version<\\/td>[\\s]+<td width=40%>([^<]+)<\\/td>[\\s]+<\\/tr>",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "<tr>[\\s]+<td width=60%>IP Core Software Version<\\/td>[\\s]+<td width=40%>([^<]+)<\\/td>[\\s]+<\\/tr>",
 						},
 					},
@@ -77196,7 +77196,7 @@ var features = []*Feature{
 				Body: []*FeatureRuleItem{
 					{
 						Regexp: "#version ZEN\\s+\\$version=\\\"([^\\\"]+)\"",
-						Version: &FeatureVersion{
+						Version: {
 							Match: "#version ZEN\\s+\\$version=\\\"([^\\\"]+)\"",
 						},
 					},

@@ -12,29 +12,18 @@ type FeatureVersion struct {
 	Match string `json:"match"`
 }
 
+
+// finger feature
+type Feature struct {
+	Path  string         `json:"path"`
+	Rules []*FeatureRule `json:"rules"`
+}
+
 type FeatureRuleItem struct {
 	Regexp  string          `json:"regexp"`
 	regexp  *regexp.Regexp  `json:"-"`
 	Md5     string          `json:"md5"`
 	Version *FeatureVersion `json:"version"`
-}
-
-type FeatureRule struct {
-	// 指纹名
-	Name string `json:"name"`
-	// 指纹规则
-	Title       []*FeatureRuleItem            `json:"title"`
-	Header      []*FeatureRuleItem            `json:"header"`
-	Cookie      []*FeatureRuleItem            `json:"cookie"`
-	MetaTag     map[string][]*FeatureRuleItem `json:"metaTag"`
-	HeaderField map[string][]*FeatureRuleItem `json:"headerField"`
-	CookieField map[string][]*FeatureRuleItem `json:"cookieField"`
-	Body        []*FeatureRuleItem            `json:"body"`
-}
-
-type Feature struct {
-	Path  string         `json:"path"`
-	Rules []*FeatureRule `json:"rules"`
 }
 
 func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, []string) {
@@ -75,6 +64,20 @@ func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, []string) {
 
 	return matched, versions
 }
+
+type FeatureRule struct {
+	// 指纹名
+	Name string `json:"name"`
+	// 指纹规则
+	Title       []*FeatureRuleItem            `json:"title"`
+	Header      []*FeatureRuleItem            `json:"header"`
+	Cookie      []*FeatureRuleItem            `json:"cookie"`
+	MetaTag     map[string][]*FeatureRuleItem `json:"metaTag"`
+	HeaderField map[string][]*FeatureRuleItem `json:"headerField"`
+	CookieField map[string][]*FeatureRuleItem `json:"cookieField"`
+	Body        []*FeatureRuleItem            `json:"body"`
+}
+
 
 func (rule *FeatureRule) MatchResponseData(response *ResponseData) *MatchedApp {
 	var matched = false
