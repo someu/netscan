@@ -1,134 +1,216 @@
 package appscan
 
 import (
+	"fmt"
 	"log"
 	"reflect"
 	"regexp"
 	"strings"
 )
 
-type FeatureVersion struct {
-	Value string `json:"value"`
-	Match string `json:"match"`
+type FeatureRule struct {
+	Regexp       string
+	regexp       *regexp.Regexp
+	Md5          string
+	VersionStock string
+	versionStock *regexp.Regexp
+	Version      string
 }
 
+type ruleField struct {
+	Name string
+	Type string
+}
 
-// finger feature
 type Feature struct {
-	Path  string         `json:"path"`
-	Rules []*FeatureRule `json:"rules"`
+	ID uint
+	// 特征名
+	Name             string
+	Path             string
+	From             []string
+	Types            []string
+	Implies          []string
+	ManufacturerName []string
+	ManufacturerUrl  []string
+	// 特征字段
+	Title       []*FeatureRule            `ruleType:"array"`
+	Header      []*FeatureRule            `ruleType:"array"`
+	Cookie      []*FeatureRule            `ruleType:"array"`
+	MetaTag     map[string][]*FeatureRule `ruleType:"map"`
+	HeaderField map[string][]*FeatureRule `ruleType:"map"`
+	CookieField map[string][]*FeatureRule `ruleType:"map"`
+	Body        []*FeatureRule            `ruleType:"array"`
+	// 缓存反射值和类型
+	reflectType  reflect.Type
+	reflectValue reflect.Value
 }
 
-type FeatureRuleItem struct {
-	Regexp  string          `json:"regexp"`
-	regexp  *regexp.Regexp  `json:"-"`
-	Md5     string          `json:"md5"`
-	Version *FeatureVersion `json:"version"`
+type MatchedFeature struct {
+	Feature  *Feature
+	Versions []string
+	Proofs   []string
 }
 
-func (ruleItem *FeatureRuleItem) MatchContent(content string) (bool, []string) {
+func (rule *FeatureRule) getRegexp() *regexp.Regexp {
+	if rule.regexp == nil {
+		rule.regexp = regexp.MustCompile(rule.Regexp)
+	}
+	return rule.regexp
+}
+
+func (rule *FeatureRule) getVersionStock() *regexp.Regexp {
+	if rule.versionStock == nil {
+		rule.versionStock = regexp.MustCompile(rule.VersionStock)
+	}
+	return rule.versionStock
+}
+
+// 匹配内容，返回是否匹配成功和版本号
+func (rule *FeatureRule) MatchContent(content string) (bool, []string, []string) {
 	if len(content) == 0 {
-		return false, nil
+		return false, nil, nil
 	}
 	var matched bool
 	var versions []string
+	var proofs []string
 
-	var re = ruleItem.regexp
-	if re == nil {
-		return false, nil
-	}
-	matched = re.MatchString(content)
+	if len(rule.Md5) > 0 {
 
-	if matched && ruleItem.Version != nil {
-		if len(ruleItem.Version.Match) > 0 {
-			versionRe, err := regexp.Compile(ruleItem.Version.Match)
-			if err == nil {
-				for _, versionSlice := range versionRe.FindAllStringSubmatch(content, -1) {
-					if len(versionSlice) > 1 {
-						versions = append(versions, versionSlice[0])
-					} else {
-						versions = append(versions, strings.Join(versionSlice[1:], "."))
-					}
+	} else {
+		var matchRe = rule.getRegexp()
+		if matchRe == nil {
+			return false, nil, nil
+		}
+		matched = matchRe.MatchString(content)
+
+		if matched {
+			proofs = append(proofs, matchRe.FindString(content))
+		}
+
+		versionStockRe := rule.getVersionStock()
+		if matched && versionStockRe != nil && len(rule.Version) > 0 {
+			stocks := versionStockRe.FindAllStringSubmatch(content, -1)
+			for _, stock := range stocks {
+				version := rule.Version
+				for i, split := range stock {
+					version = strings.Replace(version, fmt.Sprintf("\\%d", i+1), split, -1)
 				}
-
-			}
-		} else if len(ruleItem.Version.Value) > 0 {
-			sss := re.FindAllStringSubmatch(content, -1)
-			for _, ss := range sss {
-				if len(ss) >= 2 && len(ss[1]) > 0 {
-					versions = append(versions, strings.Replace(ruleItem.Version.Value, "\\1", ss[1], -1))
-				}
+				versions = append(versions, version)
 			}
 		}
 	}
 
-	return matched, versions
+	return matched, versions, proofs
 }
 
-type FeatureRule struct {
-	// 指纹名
-	Name string `json:"name"`
-	// 指纹规则
-	Title       []*FeatureRuleItem            `json:"title"`
-	Header      []*FeatureRuleItem            `json:"header"`
-	Cookie      []*FeatureRuleItem            `json:"cookie"`
-	MetaTag     map[string][]*FeatureRuleItem `json:"metaTag"`
-	HeaderField map[string][]*FeatureRuleItem `json:"headerField"`
-	CookieField map[string][]*FeatureRuleItem `json:"cookieField"`
-	Body        []*FeatureRuleItem            `json:"body"`
+func (feature *Feature) Type() reflect.Type {
+	if feature.reflectType == nil {
+		feature.reflectType = reflect.TypeOf(*feature)
+	}
+	return feature.reflectType
 }
 
+func (feature *Feature) Value() reflect.Value {
+	if !feature.reflectValue.IsValid() {
+		feature.reflectValue = reflect.ValueOf(*feature)
+	}
+	return feature.reflectValue
+}
 
-func (rule *FeatureRule) MatchResponseData(response *ResponseData) *MatchedApp {
+func (feature *Feature) MatchResponseData(response *ResponseData) *MatchedFeature {
 	var matched = false
 	var versions []string
-	responseType := reflect.TypeOf(*response)
+	var proofs []string
+
 	responseValue := reflect.ValueOf(*response)
-	ruleType := reflect.TypeOf(*rule)
-	ruleValue := reflect.ValueOf(*rule)
-	stringType := reflect.TypeOf("")
+	featureType := feature.Type()
+	featureValue := feature.Value()
 
-	for i := 0; i < ruleType.NumField(); i++ {
-		ruleField := ruleType.Field(i)
-		ruleFieldName := ruleField.Name
-		if ruleFieldName == "Name" {
+	for i := 0; i < featureType.NumField(); i++ {
+		featureFieldValue := featureValue.Field(i)
+		if featureValue.Field(i).IsZero() {
 			continue
 		}
-		if _, find := responseType.FieldByName(ruleFieldName); find == false {
+		featureFieldType := featureType.Field(i)
+		ruleType := featureFieldType.Tag.Get("ruleType")
+		if ruleType != "array" && ruleType != "map" {
 			continue
 		}
-		ruleValue := ruleValue.Field(i).Interface()
-		responseValue := responseValue.FieldByName(ruleFieldName)
-		responseValueType := responseValue.Type()
+		responseFieldValue := responseValue.FieldByName(featureFieldType.Name)
+		if responseFieldValue.IsZero() {
+			continue
+		}
 
-		if responseValueType == stringType {
-			// handle values(Title, Header, Cookie, Body) in response which type is string
-			for _, ruleItem := range ruleValue.([]*FeatureRuleItem) {
-				currentMatched, currentVersions := ruleItem.MatchContent(responseValue.Interface().(string))
+		if ruleType == "array" {
+			for _, rule := range featureFieldValue.Interface().([]*FeatureRule) {
+				currentMatched, currentVersions, currentProofs := rule.MatchContent(responseFieldValue.Interface().(string))
 				matched = matched || currentMatched
 				if len(currentVersions) > 0 {
 					versions = append(versions, currentVersions...)
 				}
+				if len(currentProofs) > 0 {
+					proofs = append(proofs, currentProofs...)
+				}
 			}
-		} else if responseValueType == reflect.MapOf(stringType, stringType) {
-			// handle values(MetaTag, HeaderField, CookieField) in response which type is map[string]string
-			for key, ruleItems := range ruleValue.(map[string][]*FeatureRuleItem) {
-				for _, ruleItem := range ruleItems {
-					currentMatched, currentVersions := ruleItem.MatchContent(responseValue.Interface().(map[string]string)[key])
+		} else if ruleType == "map" {
+			for key, rules := range featureFieldValue.Interface().(map[string][]*FeatureRule) {
+				for _, rule := range rules {
+					currentMatched, currentVersions, currentProofs := rule.MatchContent(responseFieldValue.Interface().(map[string]string)[key])
 					matched = matched || currentMatched
 					if len(currentVersions) > 0 {
 						versions = append(versions, currentVersions...)
 					}
+					if len(currentProofs) > 0 {
+						proofs = append(proofs, currentProofs...)
+					}
 				}
 			}
-		} else {
-			log.Println("not recognized type:", responseValueType.String())
 		}
 	}
 
 	if matched {
-		return &MatchedApp{Name: rule.Name, Versions: versions}
+		return &MatchedFeature{
+			Feature:  feature,
+			Versions: versions,
+			Proofs:   proofs,
+		}
 	} else {
 		return nil
+	}
+}
+
+func init() {
+	// 初始化正则匹配表达式
+	for _, feature := range Features {
+		featureType := feature.Type()
+		featureValue := feature.Value()
+
+		for i := 0; i < featureType.NumField(); i++ {
+			featureFieldValue := featureValue.Field(i)
+			if featureValue.Field(i).IsZero() {
+				continue
+			}
+			featureFieldType := featureType.Field(i)
+			ruleType := featureFieldType.Tag.Get("ruleType")
+			if ruleType != "array" && ruleType != "map" {
+				continue
+			}
+
+			if ruleType == "array" {
+				for _, rule := range featureFieldValue.Interface().([]*FeatureRule) {
+					rule.regexp = regexp.MustCompile(rule.Regexp)
+				}
+			} else if ruleType == "map" {
+				for _, rules := range featureFieldValue.Interface().(map[string][]*FeatureRule) {
+					for _, rule := range rules {
+						rule.regexp = regexp.MustCompile(rule.Regexp)
+					}
+				}
+			}
+		}
+	}
+	err := recover()
+	if err != nil {
+		log.Panic(err)
 	}
 }

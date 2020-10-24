@@ -1,3 +1,0 @@
-type Feature struct {
-	PATH: "/"
-}

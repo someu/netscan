@@ -8,17 +8,17 @@ Langeuage:asp|headers|Set-Cookie|ASPSESSION
 Langeuage:aspx|headers|Set-Cookie|ASP.NET_SessionId
 Langeuage:aspx|headers|X-AspNet-Version|version
 Langeuage:aspx|index|index|<input[^>]+name=\"__VIEWSTATE
-Langeuage:aspx|index|index|<a[^>]*?href=('|")[^http][^>]*?\.aspx(\?|\#|\1)
-Langeuage:asp|index|index|<a[^>]*?href=('|")[^http][^>]*?\.asp(\?|\#|\1)
-Langeuage:php|index|index|<a[^>]*?href=('|")[^http][^>]*?\.php(\?|\#|\1)
-Langeuage:jsp|index|index|<a[^>]*?href=('|")[^http][^>]*?\.jsp(\?|\#|\1)
+Langeuage:aspx|index|index|<a[^>]*?href=('|")[^http][^>]*?\.aspx
+Langeuage:asp|index|index|<a[^>]*?href=('|")[^http][^>]*?\.asp
+Langeuage:php|index|index|<a[^>]*?href=('|")[^http][^>]*?\.php
+Langeuage:jsp|index|index|<a[^>]*?href=('|")[^http][^>]*?\.jsp
 
 [CMS]
 CMS:discuz|index|index|<meta name=\"generator\" content=\"Discuz!|<script src=\".*?logging\\.js
 CMS:discuz|url|/robots.txt|discuz
 CMS:discuz|url|/static/js/admincp.js|Discuz
 CMS:discuz|url|/forum.php|Powered by <strong><a href="http://www.discuz.net" target="_blank">Discuz
-phpwind|index|index|<meta name=\"generator\" content=\"(phpwind|PHPWind)|Powered by <a href="http://www.phpwind.net/" target="_blank" CMS:rel="nofollow">phpwind
+CMS:phpwind|index|index|<meta name=\"generator\" content=\"(phpwind|PHPWind)|Powered by <a href="http://www.phpwind.net/" target="_blank" CMS:rel="nofollow">phpwind
 CMS:phpwind|url|/robots.txt|phpwind
 CMS:phpmywind|url|/robots.txt|PHPMyWind
 CMS:phpmywind|url|/shoppingcart.php|PHPMyWind
@@ -47,7 +47,7 @@ CMS:74cms|url|/robots.txt|/xhtml/plus/shops_buyaction.php
 CMS:08cms|url|/robots.txt|homebz|robots.txt for 08CMS
 CMS:yidacms|index|index|Powered by YidaCms|Powered by <a href="http://yidacms.com" target="_blank">YidaCms
 CMS:aspcms|url|/Images/qq/qqkf2/kefu.js|Kefu=function
-cmseasy|index|index|<meta name="author" content="CmsEasy Team" />|Powered by <a href="http://www.cmseasy.cn" title="CmsEasy.*?" target="_blank">CMS:CmsEasy</a>
+CMS:cmseasy|index|index|<meta name="author" content="CmsEasy Team" />|Powered by <a href="http://www.cmseasy.cn" title="CmsEasy.*?" target="_blank">CMS:CmsEasy</a>
 CMS:ecshop|url|/admin/help/zh_cn/database.xml|backup
 CMS:ecshop|index|index|Powered by ECShop
 CMS:empirecms|url|/e/tool/feedback/temp/test.txt|EmpireCMS
@@ -99,16 +99,16 @@ CMS:Winmail|index|index|Powered by Winmail Server
 CMS:TurboMail|index|index|Powered by TurboMail 
 CMS:Xmail|index|index|\d{4}-\d{4}\s*webmail.idccenter.net
 CMS:outlook|headers|X-OWA-Version|.*?
-CMS:outlook|index|index|Outlook Web (Access|App)\s*(?=<\/title>)
+CMS:outlook|index|index|Outlook Web (Access|App)\s*(<\/title>)
 CMS:Anymacro|index|index|sec.anymacro.com
 CMS:ExtMail|index|index|powered by.*?Extmail
-CMS:Lotus|index|index|IBM Lotus iNotes[^>]+(?=<\/title>)|iwaredir.nsf
+CMS:Lotus|index|index|IBM Lotus iNotes[^>]+(<\/title>)|iwaredir.nsf
 CMS:SquirrelMail|index|index|SquirrelMail Project Team|SquirrelMail
 CMS:SquirrelMail|headers|Set-Cookie|SQMSESSID
 CMS:eqmail|index|index|Powered by EQMail
 CMS:TMailer|index|index|TMailer Collaboration Suite Web Client 
 CMS:zimbra|headers|Set-Cookie|ZM_TEST
-CMS:zimbra|index|index|zimbra[^>]+(?=<\/title>)|Zimbra,?\s*Inc. All rights reserved.
+CMS:zimbra|index|index|zimbra[^>]+(<\/title>)|Zimbra,?\s*Inc. All rights reserved.
 CMS:bxemail|index|index|abc@bxemail.com
 CMS:Horde|index|index|<title>[^>]+?Horde|\/themes\/graphics\/horde-power1.png
 CMS:Atmail|index|index|powered by Atmail
@@ -118,7 +118,7 @@ CMS:IlohaMail|index|index|powered by[^>]+IlohaMail
 CMS:fangmail|index|index|fangmail
 CMS:Roundcube|index|index|Roundcube
 CMS:mailbase|headers|Set-Cookie|\s*(mb_lang|mb_ui_type|mb_cus_type)
-CMS:mailbase|index|index|MailBase[^<>]+(?=<\/title>)
+CMS:mailbase|index|index|MailBase[^<>]+(<\/title>)
 CMS:KXmail|index|index|Powered By\s?<[^>]+>\s?KXmail
 CMS:tongda|index|index|href="/images/tongda\.ico"
 CMS:trs_wcm|index|index|<title[^>]+>TRS WCM[^<]+</title>|href="/wcm/console/auth/reg_newuser.jsp"

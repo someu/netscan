@@ -41,5 +41,5 @@ fs.writeFileSync(
   "./source.go",
   `package appscan
 
-var features = []*Feature${toString(formatedFeatures, "")}`
+var Features = []*Feature${toString(formatedFeatures, "")}`
 );

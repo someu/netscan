@@ -1,4 +1,4 @@
-module netscan
+module github.com/someu/netscan
 
 go 1.14
 

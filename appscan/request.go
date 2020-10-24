@@ -1,19 +1,18 @@
 package appscan
 
 import (
+	"context"
 	"crypto/tls"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"net/http"
-	"netscan/util"
 	"regexp"
 	"strings"
 	"time"
 )
 
-const TIMEOUT = 10
-const CONCURRENCY = 1000
+const DefaultTimeout = 10
 
 var TitleRe = regexp.MustCompile("<title.*>([^\"]*)</title>")
 
@@ -38,10 +37,6 @@ type ResponseData struct {
 	HeaderField map[string]string
 	CookieField map[string]string
 	Body        string
-}
-
-func (resp *Response) String() string {
-	return util.Stringify(resp)
 }
 
 var userAgents = []string{
@@ -100,7 +95,7 @@ func NewRequestClient() *RequestClient {
 	}
 	hc := &http.Client{
 		Transport: tr,
-		Timeout:   time.Second * time.Duration(TIMEOUT),
+		Timeout:   time.Second * time.Duration(DefaultTimeout),
 	}
 	rc := &RequestClient{
 		HttpClient: hc,
@@ -108,7 +103,7 @@ func NewRequestClient() *RequestClient {
 	return rc
 }
 
-func (rc *RequestClient) Request(method string, url string) (*Response, error) {
+func (rc *RequestClient) Request(method string, url string, ctx context.Context) (*Response, error) {
 	if !UrlRe.MatchString(url) {
 		url = fmt.Sprintf("http://%s", url)
 	}
@@ -121,6 +116,9 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 	ua := userAgents[rand.Intn(len(userAgents))]
 	req.Header.Add("user-agent", ua)
 	req.Header.Add("referer", url)
+
+	// cancelable
+	req = req.WithContext(ctx)
 
 	// request
 	var resp *http.Response
@@ -191,10 +189,10 @@ func (rc *RequestClient) Request(method string, url string) (*Response, error) {
 	return response, nil
 }
 
-func (rc *RequestClient) Get(url string) (*Response, error) {
-	return rc.Request("GET", url)
+func (rc *RequestClient) Get(url string, ctx context.Context) (*Response, error) {
+	return rc.Request("GET", url, ctx)
 }
 
-func (rc *RequestClient) Post(url string) (*Response, error) {
-	return rc.Request("POST", url)
+func (rc *RequestClient) Post(url string, ctx context.Context) (*Response, error) {
+	return rc.Request("POST", url, ctx)
 }

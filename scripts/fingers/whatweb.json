@@ -1621,10 +1621,6 @@
     "Apache-Archiva": {
         "matches": [
             {
-                "certainty": 25,
-                "text": "<title>Apache Archiva \\"
-            },
-            {
                 "text": "No context on this server matched or handled this request.<BR>Contexts known to this server are: <ul><li><a href=\"/archiva\">/archiva&nbsp;--->&nbsp;org.mortbay.jetty.webapp.WebAppContext"
             },
             {
@@ -9048,7 +9044,7 @@
                 "text": "<title>DirectAdmin Login</title>"
             },
             {
-                "text": "*{ FONT-SIZE: 8pt; FONT-FAMILY: verdana; } b { FONT-WEIGHT: bold; } .listtitle { BACKGROUND: #425984; COLOR: #EEEEEE; white-space: nowrap; } td.list { BACKGROUND: #EEEEEE; white-space: nowrap; } </style>"
+                "text": "\\*{ FONT-SIZE: 8pt; FONT-FAMILY: verdana; } b { FONT-WEIGHT: bold; } .listtitle { BACKGROUND: #425984; COLOR: #EEEEEE; white-space: nowrap; } td.list { BACKGROUND: #EEEEEE; white-space: nowrap; } </style>"
             },
             {
                 "text": "onload=\"document.form.username.focus();if(document.form.referer.value.indexOf('#')==-1)document.form.referer.value+=location.hash;\">"
@@ -10402,7 +10398,7 @@
                 "string": "(?i-mx:<meta name=\"copyright\" content=\"eGroupWare http:\\/\\/www.egroupware.org \\(c\\) ([\\d\\.]+)\" \\/>)"
             },
             {
-                "text": "<!-- we don't need body tags anymore, do we?) we do!!! onload!! LK -->",
+                "text": "<!-- we don't need body tags anymore, do we?\\) we do!!! onload!! LK -->",
                 "version": "1.3 - 1.6"
             },
             {

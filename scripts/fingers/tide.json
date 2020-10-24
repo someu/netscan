@@ -7635,7 +7635,7 @@
     "finger_id": 961,
     "cms_name": "able_g2s",
     "path": "/G2S/js/opendiv/login.js",
-    "match_pattern": "LoginForm.aspx?&KeepThis=true&TB_iframe=true&height=150&width=300', false);",
+    "match_pattern": "LoginForm.aspx?&KeepThis=true&TB_iframe=true&height=150&width=300",
     "options": "keyword",
     "hit": 2
   },

@@ -5,7 +5,6 @@ const dayu = require("./fingers/dayu.json");
 const whatweb = require("./fingers/whatweb.json");
 const gwhatweb = require("./fingers/gwhatweb.json");
 const fs = require("fs");
-const _ = require("loadsh");
 
 // 特征
 class FeatureGroup {
@@ -31,16 +30,15 @@ class Feature {
 }
 
 class FeatureRule {
-  Regexp = "";
-  Md5 = "";
-  Version = "";
+  Regexp = ""; // 用于匹配特征的正则
+  Md5 = ""; // 用于匹配的md5
+  VersionStock = ""; // 用于匹配版本号的正则，默认为Regexp
+  Version = ""; // 用于生成版本号的规则
   constructor(reg, md5) {
-    this.Regexp = reg;
-    this.Md5 = md5;
+    this.Regexp = reg || "";
+    this.Md5 = md5 || "";
   }
 }
-
-
 
 function parseGWhatweb() {
   return gwhatweb.map(({ url, re, name, md5 }) => {
@@ -61,13 +59,13 @@ function parseGWhatweb() {
 }
 
 function parseDayu() {
-  return dayu.map((item) => {
+  return dayu.map(item => {
     const {
       program_name: name,
       url,
       manufacturerName,
       manufacturerUrl,
-      recognition_content: md5,
+      recognition_content: md5
     } = item;
     const feature = new Feature();
     feature.Types = ["CMS"];
@@ -82,7 +80,7 @@ function parseDayu() {
 }
 
 function parseTide() {
-  return tide.map((item) => {
+  return tide.map(item => {
     const { cms_name: name, path: url, options, match_pattern } = item;
     const feature = new Feature();
     feature.From = "tide";
@@ -93,7 +91,7 @@ function parseTide() {
     if (options === "md5") {
       feature.Body.push(new FeatureRule("", match_pattern));
     } else if (options === "keyword") {
-      feature.Body.push(new FeatureRule(match_pattern, ""));
+      feature.Body.push(new FeatureRule(match_pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), ""));
     }
 
     return feature;
@@ -109,7 +107,7 @@ function parseFofa() {
 
     const keyItems = keys.split(/\|\|/g);
 
-    keyItems.forEach((key) => {
+    keyItems.forEach(key => {
       if (/(^\(.*\)$)/.test(key)) {
         key = key.replace(/(^\(|\)$)/g, "");
       }
@@ -128,15 +126,15 @@ function parseFofa() {
           .replace(/(^"|"$)/g, "")
           .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         if (pre === "title") {
-          feature.Title.push(new FeatureRule(post, ""));
+          feature.Title.push(new FeatureRule(post));
         } else if (pre === "header") {
-          feature.Header.push(new FeatureRule(post, ""));
+          feature.Header.push(new FeatureRule(post));
         } else if (pre === "cookie") {
-          feature.Cookie.push(new FeatureRule(post, ""));
+          feature.Cookie.push(new FeatureRule(post));
         } else if (pre === "body") {
-          feature.Body.push(new Feature(post, ""));
+          feature.Body.push(new FeatureRule(post));
         } else if (pre === "server") {
-          feature.HeaderField["server"].push(new FeatureRule(post, ""));
+          feature.HeaderField["server"] = [new FeatureRule(post)];
         } else {
           console.log(`错误的格式: ${key}: ${keys}: ${name}`);
         }
@@ -158,14 +156,15 @@ function parseWappalayzer() {
   function parseRule(rulestr) {
     rulestr = rulestr.replace(/\\;confidence:\d+$/, "");
     const versionExec = /\\;version:(.+)$/g.exec(rulestr);
-    let version
+    let version;
     if (versionExec != null) {
-      version = versionExec[0];
+      version = versionExec[1];
       rulestr = rulestr.replace(/\\;version:.+$/g, "");
     }
-    const rule = new FeatureRule(Re, "");
+    const rule = new FeatureRule(rulestr, "");
     if (version) {
-      rule.Version = version
+      rule.VersionStock = rulestr;
+      rule.Version = version;
     }
     return rule;
   }
@@ -178,31 +177,281 @@ function parseWappalayzer() {
       script = [],
       cookies,
       implies = [],
-      meta,
+      meta
     } = apps[name];
     const feature = new Feature();
     feature.Name = name;
     feature.From = "wappalayzer";
-    feature.Types = cats.map((cat) => categories[cat].name);
-    feature.Implies = implies;
+    feature.Types = cats.map(cat => categories[cat].name);
+    feature.Implies = []
+      .concat(implies)
+      .map(i => i.replace(/\\;confidence:.*$/, ""));
 
     for (let field in cookies) {
-      feature.Cookie[field] = parseRule(cookies[field]);
+      feature.CookieField[field] = [parseRule(cookies[field])];
     }
     for (let field in headers) {
-      feature.Header[field] = parseRule(headers[field]);
+      feature.HeaderField[field] = [parseRule(headers[field])];
     }
     for (let item of [].concat(html)) {
-      feature.Body.push(parseRule(item))
+      feature.Body.push(parseRule(item));
     }
     for (let field in meta) {
-      feature.MetaTag[field] = parseRule(meta[field]);
+      feature.MetaTag[field] = [parseRule(meta[field])];
     }
     for (let item of [].concat(script)) {
       feature.Body.push(parseRule(item.replace(/^\^/, "")));
     }
-    features.push(feature)
+    features.push(feature);
   }
 
   return features;
 }
+
+function parseWhatweb() {
+  const features = [];
+  for (let name in whatweb) {
+    for (let m of whatweb[name].matches) {
+      const feature = new Feature();
+      feature.Name = name;
+      feature.From = "whatweb";
+      feature.Path = m.url || "/";
+      if ([m.regexp, m.text, m.md5].filter(Boolean).length > 1) {
+        console.log(">>>>> more 1", m.regexp, m.md5, m.text);
+      }
+
+      const parseRegexp = str => {
+        if (/^\(\?-mix:(.*)\)$/.test(str)) {
+          return /^\(\?-mix:(.*)\)$/.exec(str)[1];
+        } else if (/\(\?m-ix:(.*)\)$/.test(str)) {
+          return /\(\?m-ix:(.*)\)$/.exec(str)[1];
+        } else if (/\(\?i-mx:(.*)\)$/.test(str)) {
+          return /\(\?i-mx:(.*)\)$/.exec(str)[1];
+        }else if(/\(\?mi-x:(.*)\)$/.test(str)){
+          return /\(\?mi-x:(.*)\)$/.exec(str)[1];
+        } else {
+          return str;
+        }
+      };
+      if (m.regexp) {
+        m.regexp = parseRegexp(m.regexp);
+      }
+      if (m.version) {
+        m.version = parseRegexp(m.version);
+      }
+      if(m.text){
+        m.text = m.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      }
+
+      const rule = new FeatureRule(m.regexp || m.text || m.version, m.md5);
+
+      if (m.version) {
+        rule.VersionStock = m.version;
+        rule.Version = "\\1";
+      }
+
+      if (!m.search || m.search === "body") {
+        feature.Body.push(rule);
+      } else if (m.search === "headers") {
+        feature.Header.push(rule);
+      } else if (/headers\[(.+)\]/.test(m.search)) {
+        const key = /headers\[(.+)\]/.exec(m.search)[1];
+        feature.HeaderField[key] = [rule];
+      }
+      features.push(feature);
+    }
+  }
+
+  return features;
+}
+
+function parseWebeye() {
+  const origin = fs.readFileSync("./fingers/webeye.txt").toString();
+  const lines = origin.split("\n").filter(i => /^[^;\[\s]/.test(i));
+  const features = [];
+  for (line of lines) {
+    const re = /^(\w+?):(.+?)\|(.+?)\|(.+?)\|(.+)$/g;
+    if (line.match(re)) {
+      const splits = re.exec(line);
+      // splits[4]=splits[4].replace(/\\/g, "\\$&")
+      const feature = new Feature();
+      feature.Name = splits[2];
+      feature.From = "webeye";
+      feature.Types = [splits[1]];
+      if (splits[3] === "url") {
+        feature.Path = splits[4];
+      } else {
+        feature.Path = "/";
+      }
+      if (splits[3] === "headers") {
+        feature.HeaderField[splits[4]] = [new FeatureRule(splits[5])];
+      } else {
+        feature.Body.push(new FeatureRule(splits[5]));
+      }
+      features.push(feature);
+    } else {
+      console.log(`解析webeye错误: ${line}`);
+    }
+  }
+  return features;
+}
+
+function uniqArray(arr) {
+  return Array.from(new Set(arr.reduce((t, c) => t.concat(c), []))).filter(
+    Boolean
+  );
+}
+
+function uniqRules(rules, clear = true) {
+  const ruleMap = {};
+  uniqArray(rules).forEach(rule => {
+    const key = [rule.Regexp, rule.Md5, rule.VersionStock, rule.Version]
+      .map(i => {
+        return (i || "").toString().toLowerCase();
+      })
+      .join("");
+    if (!key.trim() && clear) {
+      return;
+    }
+    ruleMap[key] = rule;
+  });
+  return Object.values(ruleMap);
+}
+
+function uniq(features) {
+  const featureMap = {};
+  for (let feature of features) {
+    const key = `${feature.Name.toLowerCase()}_${feature.Path}`;
+    if (!featureMap[key]) {
+      featureMap[key] = [];
+    }
+    featureMap[key].push(feature);
+  }
+  for (let key in featureMap) {
+    const gfs = featureMap[key];
+    const feature = new Feature();
+    feature.Name = gfs[0].Name;
+    feature.Path = gfs[0].Path;
+    feature.From = uniqArray(gfs.map(i => i.From));
+    feature.Types = uniqArray(gfs.map(i => i.Types));
+    feature.Implies = uniqArray(gfs.map(i => i.Implies));
+    feature.ManufacturerName = uniqArray(gfs.map(i => i.ManufacturerName));
+    feature.ManufacturerUrl = uniqArray(gfs.map(i => i.ManufacturerUrl));
+    feature.Title = uniqRules(gfs.map(i => i.Title));
+    feature.Header = uniqRules(gfs.map(i => i.Header));
+    feature.Cookie = uniqRules(gfs.map(i => i.Cookie));
+    feature.Body = uniqRules(gfs.map(i => i.Body));
+
+    let tmpKeys;
+    tmpKeys = uniqArray(gfs.map(f => Object.keys(f.MetaTag)));
+    for (let rkey of tmpKeys) {
+      feature.MetaTag[rkey] = uniqRules(
+        gfs.map(i => i.MetaTag[rkey] || []),
+        false
+      );
+    }
+    tmpKeys = uniqArray(gfs.map(f => Object.keys(f.HeaderField)), false);
+    for (let rkey of tmpKeys) {
+      feature.HeaderField[rkey] = uniqRules(
+        gfs.map(i => i.HeaderField[rkey] || [])
+      );
+    }
+    tmpKeys = uniqArray(gfs.map(f => Object.keys(f.CookieField)));
+    for (let rkey of tmpKeys) {
+      feature.CookieField[rkey] = uniqRules(
+        gfs.map(i => i.CookieField[rkey] || []),
+        false
+      );
+    }
+    featureMap[key] = feature;
+  }
+
+  return Object.values(featureMap);
+}
+
+function transformRule(rule) {
+  const lines = Object.keys(rule)
+    .filter(key => key === "Regexp" || rule[key])
+    .map(key => `${key}: ${JSON.stringify(rule[key].toString())}`);
+  return `&FeatureRule{\n${lines.join(",\n")},\n}`;
+}
+
+function transformRuleArray(rules) {
+  const lines = rules.map(transformRule);
+  const tail = lines.length > 0 ? "," : "";
+  return `[]*FeatureRule{\n${lines.join(",\n")}${tail}\n}`;
+}
+
+function transformRuleMap(ruleMap) {
+  return `map[string][]*FeatureRule{\n${Object.keys(ruleMap)
+    .map(key => `"${key}": ${transformRuleArray(ruleMap[key])}`)
+    .join(",\n")},\n}`;
+}
+
+function transformFeature(feature, id) {
+  try {
+    const lines = [`ID:${id}`];
+    for (let key in feature) {
+      if (["Name", "Path"].includes(key)) {
+        lines.push(`${key}: "${feature[key]}"`);
+      } else if (
+        [
+          "From",
+          "Types",
+          "Implies",
+          "ManufacturerName",
+          "ManufacturerUrl"
+        ].includes(key)
+      ) {
+        if (feature[key].length > 0) {
+          lines.push(
+            `${key}: []string{\n${feature[key]
+              .map(i => JSON.stringify(i))
+              .join(",\n")},\n}`
+          );
+        }
+      } else if (
+        ["Title", "Header", "Cookie", "Body", "ManufacturerUrl"].includes(key)
+      ) {
+        if (feature[key].length > 0) {
+          lines.push(`${key}: ${transformRuleArray(feature[key])}`);
+        }
+      } else if (["MetaTag", "HeaderField", "CookieField"].includes(key)) {
+        if (Object.keys(feature[key]).length > 0) {
+          lines.push(`${key}: ${transformRuleMap(feature[key])}`);
+        }
+      }
+    }
+    return `&Feature{\n${lines.join(",\n")},\n}`;
+  } catch (err) {
+    console.log(feature);
+    console.log(err);
+    process.exit();
+  }
+}
+
+function transformFeatureArray(features) {
+  return `[]*Feature{\n${features.map(transformFeature).join(",\n")},\n}`;
+}
+
+function main() {
+  let features = [];
+  features.push(
+    ...parseGWhatweb(),
+    ...parseDayu(),
+    ...parseTide(),
+    ...parseFofa(),
+    ...parseWappalayzer(),
+    ...parseWhatweb(),
+    ...parseWebeye()
+  );
+  features = uniq(features);
+  console.log(`features count: ${features.length}`);
+  fs.writeFileSync("./features.json", JSON.stringify(features, null, 2));
+  fs.writeFileSync(
+    "../appscan/source.go",
+    `package appscan\n\nvar Features = ${transformFeatureArray(features)}`
+  );
+}
+
+main();

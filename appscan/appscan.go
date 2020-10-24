@@ -1,203 +1,132 @@
 package appscan
 
 import (
-	"encoding/json"
-	"fmt"
-	"github.com/gobuffalo/packr/v2"
+	"context"
 	"github.com/panjf2000/ants/v2"
-	"log"
-	"netscan/util"
-	"reflect"
-	"regexp"
-	"strings"
 	"sync"
 	"time"
 )
 
 const Version = "0.0.1"
+const DefaultConcurrent = 100
+const DefaultAppScanTimeoutPerUrl = time.Duration(15) * time.Second
 
-type Scanner struct {
-	FeatureCollection []*Feature
-	RequestClient     *RequestClient
-	Level             int
-	MasscanPath       string
-	MasscanRate       int
-	Concurrent        int
-	pool              *ants.Pool
+type AppScanner struct {
+	Features      []*Feature
+	RequestClient *RequestClient
+	pool          *ants.Pool
 }
 
-type MatchedApp struct {
-	Name     string
-	Versions []string
-}
-
-type MatchedResult struct {
-	Url     string
+type AppScan struct {
+	ctx     context.Context
+	Scanner *AppScanner
 	StartAt time.Time
 	EndAt   time.Time
-	Apps    []*MatchedApp
+	Results []*AppScanResult
+	Wait    func()
+	Cancel  func()
+	Config  *AppScanConfig
 }
 
-func NewScanner() *Scanner {
-	scanner := &Scanner{
-		Level:         1,
-		MasscanPath:   "masscan",
-		MasscanRate:   1000,
-		Concurrent:    100,
-		RequestClient: NewRequestClient(),
-	}
-	var err error
-	if scanner.pool, err = ants.NewPool(scanner.Concurrent); err != nil {
-		log.Fatalf("Init goroutine pool failed, %s", err.Error())
-	}
-	scanner.LoadFeatures()
-	return scanner
+type AppScanResult struct {
+	Url             string
+	MatchedFeatures []*MatchedFeature
 }
 
-func (scanner *Scanner) LoadFeatures() {
-	sources := packr.New(`sources`, `../sources`)
+type AppScanConfig struct {
+	Urls     []string
+	Features []*Feature
+	Callback func(v interface{})
+	Timeout  time.Duration
+}
 
-	featureBytes, err := sources.Find(`features.json`)
+func NewAppScanner() (*AppScanner, error) {
+	pool, err := ants.NewPool(DefaultConcurrent)
 	if err != nil {
-		log.Panic("load features failed!")
-	} else {
-		json.Unmarshal(featureBytes, &scanner.FeatureCollection)
-		featureRuleItemSliceType := reflect.TypeOf([]*FeatureRuleItem{})
-		featureRuleItemMapType := reflect.TypeOf(make(map[string][]*FeatureRuleItem))
-		for _, feature := range scanner.FeatureCollection {
-			for _, rule := range feature.Rules {
-				ruleValue := reflect.ValueOf(*rule)
-				for i := 0; i < ruleValue.NumField(); i++ {
-					ruleFieldValue := ruleValue.Field(i)
-					ruleFieldValueType := ruleFieldValue.Type()
-
-					if ruleFieldValueType == featureRuleItemSliceType {
-						for _, ruleItem := range ruleFieldValue.Interface().([]*FeatureRuleItem) {
-							if len(ruleItem.Regexp) > 0 {
-								ruleItem.regexp, err = regexp.Compile(fmt.Sprintf("(?i)%s", ruleItem.Regexp))
-								if err != nil {
-									fmt.Println(ruleItem.Regexp)
-									recover()
-								}
-							}
-						}
-					} else if ruleFieldValueType == featureRuleItemMapType {
-						for _, ruleItems := range ruleFieldValue.Interface().(map[string][]*FeatureRuleItem) {
-							for _, ruleItem := range ruleItems {
-								if len(ruleItem.Regexp) > 0 {
-									ruleItem.regexp, err = regexp.Compile(fmt.Sprintf("(?i)%s", ruleItem.Regexp))
-									if err != nil {
-										fmt.Println(ruleItem.Regexp)
-										recover()
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		return nil, err
 	}
-}
-
-func (scanner *Scanner) SetTimeout(timeout int) {
-	scanner.RequestClient.HttpClient.Timeout = time.Second * time.Duration(timeout)
-}
-
-func (scanner *Scanner) SetConcurrent(concurrent int) int {
-	scanner.Concurrent = concurrent
-	scanner.pool.Tune(scanner.Concurrent)
-	return scanner.Concurrent
-}
-
-func (scanner *Scanner) ScanUrl(url string) *MatchedResult {
-	var result = &MatchedResult{Url: url, StartAt: time.Now()}
-	for _, feature := range scanner.FeatureCollection[:scanner.Level] {
-		var (
-			target   = url + feature.Path
-			response *Response
-			err      error
-		)
-		if response, err = scanner.RequestClient.Get(target); err != nil {
-			continue
-		}
-
-		for _, rule := range feature.Rules {
-			app := rule.MatchResponseData(response.Data)
-			if app != nil {
-				result.Apps = append(result.Apps, app)
-			}
-		}
+	scanner := &AppScanner{
+		RequestClient: NewRequestClient(),
+		pool:          pool,
+		Features:      Features,
 	}
-	result.EndAt = time.Now()
-	return result
+	return scanner, nil
 }
 
-// async scan a list of url, return a waitgroup
-func (scanner *Scanner) scanUrls(urls []string, callback func(*MatchedResult), wg *sync.WaitGroup) {
-	var lock sync.Mutex
-	for _, url := range urls {
-		wg.Add(1)
+func (scanner *AppScanner) SetRequestTimeout(timeout time.Duration) {
+	scanner.RequestClient.HttpClient.Timeout = timeout
+}
+
+func (scanner *AppScanner) SetConcurrent(concurrent int) {
+	scanner.pool.Tune(concurrent)
+}
+
+func (scanner *AppScanner) CreateScan(config *AppScanConfig) *AppScan {
+	timeout := time.Duration(len(config.Urls)) * DefaultAppScanTimeoutPerUrl
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	var locker sync.Mutex
+	scan := &AppScan{
+		ctx:     ctx,
+		Scanner: scanner,
+		StartAt: time.Now(),
+		Config:  config,
+		Cancel:  cancel,
+	}
+
+	wg := sync.WaitGroup{}
+	for _, url := range config.Urls {
 		func(url string) {
+			wg.Add(1)
 			scanner.pool.Submit(func() {
 				defer wg.Done()
-				result := scanner.ScanUrl(url)
-				lock.Lock()
-				defer lock.Unlock()
-				callback(result)
+				select {
+				case <-ctx.Done():
+					return
+				default:
+					result := scan.ScanUrl(url)
+					locker.Lock()
+					defer locker.Unlock()
+					scan.Results = append(scan.Results, result)
+					if config.Callback != nil {
+						config.Callback(result)
+					}
+				}
 			})
 		}(url)
 	}
-}
 
-func (scanner *Scanner) masscan(targets string, ports string) []string {
-	var urls []string
-	if len(targets) == 0 || len(ports) == 0 {
-		return urls
+	scan.Wait = func() {
+		wg.Wait()
 	}
 
-	log.Printf("Start masscan %s %s", targets, ports)
-	masscan := NewMasscan(targets, ports)
-	masscan.SetRate(scanner.MasscanRate)
-	masscan.SetProgramPath(scanner.MasscanPath)
-	var err error
-	if urls, err = masscan.Scan(); err != nil {
-		log.Printf("Masscan failed: %s", err.Error())
-	} else {
-		log.Printf("Masscan finished, find %d urls", len(urls))
-	}
-	return urls
+	return scan
 }
 
-func (scanner *Scanner) Scan(targets []string, ports []string, callback func(*MatchedResult)) *sync.WaitGroup {
-	wg := &sync.WaitGroup{}
-	go func() {
-		var urls []string
-		var cidrs []string
-		for _, target := range targets {
-			if util.IsIP(target) || util.IsCIDR(target) {
-				cidrs = append(cidrs, target)
-			} else {
-				urls = append(urls, target)
+func (scan *AppScan) ScanUrl(url string) *AppScanResult {
+	var results []*MatchedFeature
+	var featuresMap = make(map[string][]*Feature)
+	for _, feature := range scan.Config.Features {
+		featuresMap[feature.Path] = append(featuresMap[feature.Path], feature)
+	}
+	for path, features := range featuresMap {
+		target := url
+		if path != "/" {
+			target += path
+		}
+		response, err := scan.Scanner.RequestClient.Get(target, scan.ctx)
+		if err != nil {
+			continue
+		}
+		for _, feature := range features {
+			result := feature.MatchResponseData(response.Data)
+			if result != nil {
+				results = append(results, result)
 			}
 		}
-		u := scanner.masscan(strings.Join(cidrs, ","), strings.Join(ports, ","))
-		urls = append(u, urls...)
-		scanner.scanUrls(urls, callback, wg)
-	}()
-	return wg
+	}
 
-}
-
-func (scanner *Scanner) ScanSync(targets []string, ports []string) []*MatchedResult {
-	var results []*MatchedResult
-	wg := scanner.Scan(targets, ports, func(result *MatchedResult) {
-		results = append(results, result)
-	})
-	wg.Wait()
-	return results
-}
-
-func (result *MatchedResult) String() string {
-	return util.Stringify(result)
+	return &AppScanResult{
+		Url:             url,
+		MatchedFeatures: results,
+	}
 }

@@ -11,7 +11,7 @@ type ScanConfig struct {
 	PacketPerSecond uint
 }
 
-type Scan struct {
+type PortScan struct {
 	Scanner *PortScanner
 	Target  *TargetRange
 	Config  *ScanConfig
@@ -42,7 +42,7 @@ func NewPortScanner() (*PortScanner, error) {
 	}, nil
 }
 
-func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) *Scan {
+func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) *PortScan {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	go func() {
@@ -81,7 +81,7 @@ func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) 
 		<-ctx.Done()
 	}
 
-	return &Scan{
+	return &PortScan{
 		Scanner: scanner,
 		Target:  target,
 		Config:  config,
