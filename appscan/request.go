@@ -12,8 +12,6 @@ import (
 	"time"
 )
 
-const DefaultTimeout = 10
-
 var TitleRe = regexp.MustCompile("<title.*>([^\"]*)</title>")
 
 var MetaRes = []*regexp.Regexp{
@@ -85,9 +83,14 @@ var userAgents = []string{
 
 type RequestClient struct {
 	HttpClient *http.Client
+	config     *RequestClientConfig
 }
 
-func NewRequestClient() *RequestClient {
+type RequestClientConfig struct {
+	Timeout time.Duration
+}
+
+func NewRequestClient(config *RequestClientConfig) *RequestClient {
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true,
@@ -95,10 +98,11 @@ func NewRequestClient() *RequestClient {
 	}
 	hc := &http.Client{
 		Transport: tr,
-		Timeout:   time.Second * time.Duration(DefaultTimeout),
+		Timeout:   config.Timeout,
 	}
 	rc := &RequestClient{
 		HttpClient: hc,
+		config:     config,
 	}
 	return rc
 }
@@ -107,6 +111,7 @@ func (rc *RequestClient) Request(method string, url string, ctx context.Context)
 	if !UrlRe.MatchString(url) {
 		url = fmt.Sprintf("http://%s", url)
 	}
+
 	// create request
 	var req *http.Request
 	var err error

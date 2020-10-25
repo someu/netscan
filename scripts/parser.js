@@ -154,7 +154,7 @@ function parseWappalayzer() {
   const { apps, categories } = wappalyzer;
 
   function parseRule(rulestr) {
-    rulestr = rulestr.replace(/\\;confidence:\d+$/, "");
+    rulestr = rulestr.replace(/\\;confidence:\d{0,3}/g, "");
     const versionExec = /\\;version:(.+)$/g.exec(rulestr);
     let version;
     if (versionExec != null) {
@@ -321,6 +321,13 @@ function uniqRules(rules, clear = true) {
 function uniq(features) {
   const featureMap = {};
   for (let feature of features) {
+    feature.Name = feature.Name.trim()
+    if (!feature.Name){
+      continue
+    }
+    if(!/^\//.test(feature.Path)){
+      feature.Path = "/"+feature.Path
+    }
     const key = `${feature.Name.toLowerCase()}_${feature.Path}`;
     if (!featureMap[key]) {
       featureMap[key] = [];
@@ -332,6 +339,7 @@ function uniq(features) {
     const feature = new Feature();
     feature.Name = gfs[0].Name;
     feature.Path = gfs[0].Path;
+
     feature.From = uniqArray(gfs.map(i => i.From));
     feature.Types = uniqArray(gfs.map(i => i.Types));
     feature.Implies = uniqArray(gfs.map(i => i.Implies));
@@ -366,7 +374,22 @@ function uniq(features) {
     featureMap[key] = feature;
   }
 
-  return Object.values(featureMap);
+  return Object.values(featureMap).sort(function (a, b) {
+    if( a.Name.toLowerCase() > b.Name.toLowerCase()){
+      return 1
+    }else if(a.Name.toLowerCase()<b.Name.toLowerCase()){
+      return -1
+    }else {
+      if( a.Path.toLowerCase() > b.Path.toLowerCase()){
+        return 1
+      }else if(a.Path.toLowerCase()<b.Path.toLowerCase()){
+        return -1
+      }else {
+        console.log("error path", a.Name, a.Path)
+        return  0
+      }
+    }
+  });
 }
 
 function transformRule(rule) {
@@ -447,7 +470,7 @@ function main() {
   );
   features = uniq(features);
   console.log(`features count: ${features.length}`);
-  fs.writeFileSync("./features.json", JSON.stringify(features, null, 2));
+
   fs.writeFileSync(
     "../appscan/source.go",
     `package appscan\n\nvar Features = ${transformFeatureArray(features)}`

@@ -6,15 +6,34 @@ import (
 )
 
 func main() {
+	features := []*appscan.Feature{}
+	for _, feature := range appscan.Features {
+		if feature.Path == "/" {
+			features = append(features, feature)
+		}
+	}
 	scanner, err := appscan.NewAppScanner()
 	if err != nil {
 		log.Panic(err)
 	}
 	scanConf := &appscan.AppScanConfig{
-		Urls:     []string{"https://www.baidu.com"},
-		Features: appscan.Features,
+		Urls:     []string{"http://127.0.0.1:8080/", "https://be.scanv.com", "https://bigteds.ru/"},
+		Features: features,
 	}
-	scan := scanner.CreateScan(scanConf)
+	scan, err := scanner.CreateScan(scanConf)
+	if err != nil {
+		log.Panic(err)
+	}
 	scan.Wait()
-	log.Println(scan.Results)
+	for _, result := range scan.Results {
+		log.Println(result.Url)
+		for _, mr := range result.MatchedFeatures {
+			log.Println(mr.Feature.Name, mr.Versions, mr.Proofs)
+		}
+
+	}
+	for _, err := range scan.Errors() {
+		log.Println(err)
+	}
+
 }

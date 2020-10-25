@@ -7155,7 +7155,7 @@
       "js": {
         "requirejs.version": "^(.+)$\\;version:\\1"
       },
-      "script": "require.*\\.js",
+      "script": "require[\\w\\.-]*?\\.js",
       "website": "http://requirejs.org"
     },
     "Resin": {
