@@ -18,22 +18,28 @@ func init() {
 	arpCache = make(map[string]net.HardwareAddr)
 }
 
-type Sender struct {
-	router routing.Router
+type SenderConfig struct {
+	arpTimeout time.Duration
 }
 
-func NewSender() (*Sender, error) {
+type Sender struct {
+	router routing.Router
+	config *SenderConfig
+}
+
+func NewSender(config *SenderConfig) (*Sender, error) {
 	router, err := routing.New()
 	if err != nil {
 		return nil, err
 	}
 	return &Sender{
 		router: router,
+		config: config,
 	}, nil
 }
 
-func (r *Sender) send(dstIp net.IP, dstPort uint16) (*TargetRoute, error) {
-	iface, gateway, srcIp, err := r.router.Route(dstIp)
+func (sender *Sender) send(dstIp net.IP, dstPort uint16) (*TargetRoute, error) {
+	iface, gateway, srcIp, err := sender.router.Route(dstIp)
 	if err != nil {
 		return nil, err
 	}
@@ -48,7 +54,7 @@ func (r *Sender) send(dstIp net.IP, dstPort uint16) (*TargetRoute, error) {
 		return nil, err
 	}
 
-	// fix lo interface
+	// TODO lo network scan
 	if iface.HardwareAddr == nil {
 		iface.HardwareAddr = net.HardwareAddr{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
 	}
@@ -64,7 +70,7 @@ func (r *Sender) send(dstIp net.IP, dstPort uint16) (*TargetRoute, error) {
 		handle:  handle,
 	}
 
-	if err := route.arpMac(); err != nil {
+	if err := route.arpMac(sender.config.arpTimeout); err != nil {
 		return nil, err
 	}
 
@@ -88,7 +94,7 @@ type TargetRoute struct {
 	handle     *pcap.Handle
 }
 
-func (route *TargetRoute) arpMac() error {
+func (route *TargetRoute) arpMac(timeout time.Duration) error {
 	// fix lo interface
 	if route.iface.HardwareAddr.String() == "00:00:00:00:00:00" {
 		route.dstMac = net.HardwareAddr{0x00, 0x00, 0x00, 0x00, 0x00, 0x00}
@@ -117,7 +123,7 @@ func (route *TargetRoute) arpMac() error {
 	// wait arp packet
 	start := time.Now()
 	for {
-		if time.Since(start) > time.Second*10 {
+		if time.Since(start) > timeout {
 			break
 		}
 		data, _, err := route.handle.ReadPacketData()

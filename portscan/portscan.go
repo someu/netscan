@@ -2,34 +2,55 @@ package portscan
 
 import (
 	"context"
-	"log"
+	"net"
 	"time"
 )
 
-type ScanConfig struct {
+const DefaultArpTimeout = time.Second * 10
+
+type PortScanConfig struct {
 	Timeout         time.Duration
 	PacketPerSecond uint
 }
 
+type PortScanResult struct {
+	IP   net.IP
+	Port uint8
+}
+
 type PortScan struct {
-	Scanner *PortScanner
-	Target  *TargetRange
-	Config  *ScanConfig
-	Cancel  context.CancelFunc
-	Wait    func()
+	ctx               context.Context
+	cancel            context.CancelFunc
+	perPacketInterval time.Duration
+	Scanner           *PortScanner
+	Target            *TargetRange
+	Config            *PortScanConfig
+	StartAt           time.Time
+	EndAt             time.Time
+	Results           []*PortScanResult
+	Errors            []error
+}
+
+type PortScannerConfig struct {
+	ArpTimeout      time.Duration
+	PacketPerSecond uint
 }
 
 type PortScanner struct {
-	ctx            context.Context
-	cancel         context.CancelFunc
-	sender         *Sender
-	receiver       *Receiver
-	arpTimeout     time.Duration
-	sessionTimeout time.Duration
+	ctx      context.Context
+	cancel   context.CancelFunc
+	sender   *Sender
+	receiver *Receiver
+	config   *PortScannerConfig
 }
 
-func NewPortScanner() (*PortScanner, error) {
-	sender, err := NewSender()
+func NewPortScanner(config *PortScannerConfig) (*PortScanner, error) {
+	if config.ArpTimeout == 0 {
+		config.ArpTimeout = DefaultArpTimeout
+	}
+	sender, err := NewSender(&SenderConfig{
+		arpTimeout: config.ArpTimeout,
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -39,19 +60,30 @@ func NewPortScanner() (*PortScanner, error) {
 		cancel:   cancel,
 		sender:   sender,
 		receiver: NewReceiver(ctx),
+		config:   config,
 	}, nil
 }
 
-func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) *PortScan {
+func (scanner *PortScanner) CreatePortScan(target *TargetRange, config *PortScanConfig) *PortScan {
 	ctx, cancel := context.WithCancel(context.Background())
+
+	// send packet interval
+	nsPerPacket := 1000000000 / config.PacketPerSecond
+	if nsPerPacket == 0 {
+		nsPerPacket = 1
+	}
+
+	scan := &PortScan{
+		Scanner:           scanner,
+		Target:            target,
+		Config:            config,
+		ctx:               ctx,
+		cancel:            cancel,
+		perPacketInterval: time.Duration(nsPerPacket) * time.Nanosecond,
+	}
 
 	go func() {
 		defer cancel()
-		// send a packet spend time, Nanosecond
-		nsPerPacket := 1000000000 / config.PacketPerSecond
-		if nsPerPacket == 0 {
-			nsPerPacket = 1
-		}
 
 		var i uint = 1
 		for ; ; i++ {
@@ -60,32 +92,31 @@ func (scanner *PortScanner) CreateScan(target *TargetRange, config *ScanConfig) 
 			}
 			ip, port, err := target.nextTarget()
 			if err != nil {
-				log.Printf("get %d ip port error %s\n", i, err)
+				scan.Errors = append(scan.Errors, err)
 				continue
 			}
 			route, err := scanner.sender.send(ip, port)
 			if err != nil {
-				log.Printf("send packet to %s:%d error %s\n", ip, port, err)
+				scan.Errors = append(scan.Errors, err)
+				continue
 			}
 
 			scanner.receiver.startReceive(route.iface.Name, route.handle, ctx)
-			time.Sleep(time.Duration(nsPerPacket) * time.Nanosecond)
+			time.Sleep(scan.perPacketInterval)
 		}
-		log.Println("send all packet", i)
-		// time out
+
+		// wait for timeout after send all packet
 		timeout, _ := context.WithTimeout(ctx, config.Timeout)
 		<-timeout.Done()
 	}()
 
-	wait := func() {
-		<-ctx.Done()
-	}
+	return scan
+}
 
-	return &PortScan{
-		Scanner: scanner,
-		Target:  target,
-		Config:  config,
-		Cancel:  cancel,
-		Wait:    wait,
-	}
+func (scanner *PortScanner) Wait() {
+	<-scanner.ctx.Done()
+}
+
+func (scanner *PortScanner) Cancel() {
+	scanner.cancel()
 }

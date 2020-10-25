@@ -6,7 +6,6 @@ import (
 	"github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
 	"io"
-	"log"
 )
 
 type Receiver struct {
@@ -37,7 +36,6 @@ func (receiver *Receiver) startReceive(name string, handle *pcap.Handle, ctx con
 		for {
 			select {
 			case <-ctx.Done():
-				log.Println("receive exit")
 				return
 			default:
 				break
@@ -45,9 +43,10 @@ func (receiver *Receiver) startReceive(name string, handle *pcap.Handle, ctx con
 
 			data, _, err := handle.ReadPacketData()
 			if err == pcap.NextErrorTimeoutExpired || err == io.EOF {
+				// TODO reopen handle ?
 				break
 			} else if err != nil {
-				log.Println("Read packet error", err.Error())
+				// TODO write error to scan
 				continue
 			}
 			decodes := []gopacket.LayerType{}
@@ -59,7 +58,7 @@ func (receiver *Receiver) startReceive(name string, handle *pcap.Handle, ctx con
 					cookie := generateCookie(ipv4.DstIP, uint16(tcp.DstPort), ipv4.SrcIP, uint16(tcp.SrcPort))
 					if cookie == tcp.Ack-1 {
 						if tcp.SYN && tcp.ACK {
-							log.Printf("%d %s:%d is open", count, ipv4.SrcIP, tcp.SrcPort)
+							// TODO port is open
 							count++
 						}
 					}
