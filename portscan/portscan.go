@@ -3,6 +3,7 @@ package portscan
 import (
 	"context"
 	"net"
+	"sync"
 	"time"
 )
 
@@ -37,11 +38,15 @@ type PortScannerConfig struct {
 }
 
 type PortScanner struct {
-	ctx      context.Context
-	cancel   context.CancelFunc
-	sender   *Sender
-	receiver *Receiver
-	config   *PortScannerConfig
+	ctx          context.Context
+	cancel       context.CancelFunc
+	locker       sync.Mutex
+	sender       *Sender
+	receiver     *Receiver
+	config       *PortScannerConfig
+	runningScan  *PortScan
+	waitingScans []*PortScan
+	scaning      bool
 }
 
 func NewPortScanner(config *PortScannerConfig) (*PortScanner, error) {
@@ -59,8 +64,10 @@ func NewPortScanner(config *PortScannerConfig) (*PortScanner, error) {
 		ctx:      ctx,
 		cancel:   cancel,
 		sender:   sender,
+		locker:   sync.Mutex{},
 		receiver: NewReceiver(ctx),
 		config:   config,
+		scaning:  false,
 	}, nil
 }
 
@@ -82,11 +89,20 @@ func (scanner *PortScanner) CreatePortScan(target *TargetRange, config *PortScan
 		perPacketInterval: time.Duration(nsPerPacket) * time.Nanosecond,
 	}
 
+	// add scan
+	scanner.locker.Lock()
+	if scanner.runningScan != nil {
+		scanner.waitingScans = append(scanner.waitingScans, scan)
+	} else {
+		scanner.runningScan = scan
+		scanner.run()
+	}
+	scanner.locker.Unlock()
+
 	go func() {
 		defer cancel()
 
-		var i uint = 1
-		for ; ; i++ {
+		for {
 			if !target.hasNext() {
 				break
 			}
@@ -113,10 +129,49 @@ func (scanner *PortScanner) CreatePortScan(target *TargetRange, config *PortScan
 	return scan
 }
 
-func (scanner *PortScanner) Wait() {
-	<-scanner.ctx.Done()
+func (scanner *PortScanner) run() {
+	go func() {
+		if scanner.runningScan == nil {
+			return
+		}
+		scan := scanner.runningScan
+
+		for {
+			if !scan.Target.hasNext() {
+				break
+			}
+			ip, port, err := scan.Target.nextTarget()
+			if err != nil {
+				scan.Errors = append(scan.Errors, err)
+				continue
+			}
+			route, err := scanner.sender.send(ip, port)
+			if err != nil {
+				scan.Errors = append(scan.Errors, err)
+				continue
+			}
+
+			scanner.receiver.startReceive(route.iface.Name, route.handle, scan.ctx)
+			time.Sleep(scan.perPacketInterval)
+		}
+
+		// triger next scan
+		scanner.locker.Lock()
+		if len(scanner.waitingScans) > 0 {
+			scanner.runningScan = scanner.waitingScans[0]
+			scanner.waitingScans = scanner.waitingScans[1:]
+			scanner.run()
+		} else {
+			scanner.runningScan = nil
+		}
+		scanner.locker.Unlock()
+	}()
 }
 
-func (scanner *PortScanner) Cancel() {
-	scanner.cancel()
+func (scan *PortScan) Wait() {
+	<-scan.ctx.Done()
+}
+
+func (scan *PortScan) Cancel() {
+	scan.cancel()
 }

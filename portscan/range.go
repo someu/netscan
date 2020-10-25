@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 )
 
 var (
@@ -71,6 +72,7 @@ func (segs Segments) get(i uint) (uint, error) {
 type TargetRange struct {
 	ipSegments     Segments
 	portSegments   Segments
+	locker         sync.Mutex
 	ipCount        uint
 	portCount      uint
 	totalCount     uint
@@ -104,6 +106,7 @@ func NewTargetRange(ipSegments Segments, portSegments Segments) *TargetRange {
 	targetRange := &TargetRange{
 		ipSegments:   ipSegments,
 		portSegments: portSegments,
+		locker:       sync.Mutex{},
 		ipCount:      ipCount,
 		portCount:    portCount,
 		totalCount:   totalCount,
@@ -139,6 +142,8 @@ func (r TargetRange) hasNext() bool {
 }
 
 func (r *TargetRange) nextTarget() (net.IP, uint16, error) {
+	r.locker.Lock()
+	defer r.locker.Unlock()
 	if r.currentIndex >= r.totalCount {
 		return nil, 0, errors.New("Index is out of range in target range\n")
 	}
