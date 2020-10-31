@@ -3,6 +3,7 @@ package util
 import (
 	"bufio"
 	"bytes"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -73,4 +74,15 @@ func CIDRToIpList(cidr string) ([]string, error) {
 		ips = append(ips, ip)
 	}
 	return ips, nil
+}
+
+func longToIP(ipLong uint32) net.IP {
+	ipByte := make([]byte, 4)
+	binary.BigEndian.PutUint32(ipByte, ipLong)
+	return ipByte
+}
+
+func ipToLong(ip net.IP) uint32 {
+	ip = ip.To4()
+	return binary.BigEndian.Uint32(ip)
 }

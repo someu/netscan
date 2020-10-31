@@ -12,6 +12,8 @@ require (
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.1
+	github.com/vishvananda/netlink v1.1.0
 	go.artemisc.eu/godium v0.0.0-20181226182112-40423dac717d
 	go.mongodb.org/mongo-driver v1.4.1
+	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
 )

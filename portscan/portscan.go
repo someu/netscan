@@ -2,176 +2,154 @@ package portscan
 
 import (
 	"context"
+	"errors"
+	"log"
 	"net"
 	"sync"
 	"time"
 )
 
-const DefaultArpTimeout = time.Second * 10
-
 type PortScanConfig struct {
+	IPSegments      Segments
+	PortSegments    Segments
 	Timeout         time.Duration
 	PacketPerSecond uint
 }
 
 type PortScanResult struct {
 	IP   net.IP
-	Port uint8
+	Port uint16
 }
 
 type PortScan struct {
-	ctx               context.Context
-	cancel            context.CancelFunc
-	perPacketInterval time.Duration
-	Scanner           *PortScanner
-	Target            *TargetRange
-	Config            *PortScanConfig
-	StartAt           time.Time
-	EndAt             time.Time
-	Results           []*PortScanResult
-	Errors            []error
+	ctx                context.Context
+	cancel             context.CancelFunc
+	packetSendInterval time.Duration
+	target             *TargetRange
+	statusLocker       sync.Mutex
+	pushResultLocker   sync.Mutex
+	Config             *PortScanConfig
+	Status             int
+	CreatAt            time.Time
+	StartAt            time.Time
+	EndAt              time.Time
+	Results            []*PortScanResult
+	Errors             []error
 }
 
-type PortScannerConfig struct {
-	ArpTimeout      time.Duration
-	PacketPerSecond uint
-}
+const (
+	STATUS_WAITING = iota
+	STATUS_RUNNING
+	STATUS_FINISHED
+)
 
-type PortScanner struct {
-	ctx          context.Context
-	cancel       context.CancelFunc
-	locker       sync.Mutex
-	sender       *Sender
-	receiver     *Receiver
-	config       *PortScannerConfig
-	runningScan  *PortScan
-	waitingScans []*PortScan
-	scaning      bool
-}
+const DefaultPortScanTimeout = time.Second * 10
 
-func NewPortScanner(config *PortScannerConfig) (*PortScanner, error) {
-	if config.ArpTimeout == 0 {
-		config.ArpTimeout = DefaultArpTimeout
+func CreatePortScan(config *PortScanConfig) (*PortScan, error) {
+	if len(config.IPSegments) == 0 || len(config.PortSegments) == 0 {
+		return nil, errors.New("invalid IPSegments or PortSegments\n")
 	}
-	sender, err := NewSender(&SenderConfig{
-		arpTimeout: config.ArpTimeout,
-	})
-	if err != nil {
-		return nil, err
-	}
-	ctx, cancel := context.WithCancel(context.Background())
-	return &PortScanner{
-		ctx:      ctx,
-		cancel:   cancel,
-		sender:   sender,
-		locker:   sync.Mutex{},
-		receiver: NewReceiver(ctx),
-		config:   config,
-		scaning:  false,
-	}, nil
-}
 
-func (scanner *PortScanner) CreatePortScan(target *TargetRange, config *PortScanConfig) *PortScan {
+	if config.Timeout == 0 {
+		config.Timeout = DefaultPortScanTimeout
+	}
+
 	ctx, cancel := context.WithCancel(context.Background())
 
-	// send packet interval
-	nsPerPacket := 1000000000 / config.PacketPerSecond
-	if nsPerPacket == 0 {
-		nsPerPacket = 1
+	// calc packet send interval
+	packetSendInterval := 1000000000 / config.PacketPerSecond
+	if packetSendInterval == 0 {
+		packetSendInterval = 1
 	}
 
 	scan := &PortScan{
-		Scanner:           scanner,
-		Target:            target,
-		Config:            config,
-		ctx:               ctx,
-		cancel:            cancel,
-		perPacketInterval: time.Duration(nsPerPacket) * time.Nanosecond,
+		ctx:                ctx,
+		cancel:             cancel,
+		packetSendInterval: time.Duration(packetSendInterval) * time.Nanosecond,
+		statusLocker:       sync.Mutex{},
+		pushResultLocker:   sync.Mutex{},
+		target:             NewTargetRange(config.IPSegments, config.PortSegments),
+		Status:             STATUS_WAITING,
+		Config:             config,
+		CreatAt:            time.Now(),
 	}
 
-	// add scan
-	scanner.locker.Lock()
-	if scanner.runningScan != nil {
-		scanner.waitingScans = append(scanner.waitingScans, scan)
-	} else {
-		scanner.runningScan = scan
-		scanner.run()
+	addPortScan(scan)
+	scheduleNext()
+
+	return scan, nil
+}
+
+func (scan *PortScan) Run() {
+	scan.statusLocker.Lock()
+	defer scan.statusLocker.Unlock()
+
+	if scan.Status != STATUS_WAITING {
+		scan.Errors = append(scan.Errors, errors.New("current scan not in waiting"))
+		scan.Stop()
+		return
 	}
-	scanner.locker.Unlock()
+	if scan.target == nil {
+		scan.Errors = append(scan.Errors, errors.New("scan's target is nil"))
+		scan.Stop()
+		return
+	}
+	scan.Status = STATUS_RUNNING
+	scan.StartAt = time.Now()
+
+	updateCookieKey()
 
 	go func() {
-		defer cancel()
-
+		defer scan.Stop()
+		target := scan.target
 		for {
+			select {
+			case <-scan.ctx.Done():
+				return
+			default:
+				break
+			}
 			if !target.hasNext() {
 				break
 			}
 			ip, port, err := target.nextTarget()
 			if err != nil {
+				log.Println(err)
 				scan.Errors = append(scan.Errors, err)
 				continue
 			}
-			route, err := scanner.sender.send(ip, port)
-			if err != nil {
+			if err := send(ip, port); err != nil {
 				scan.Errors = append(scan.Errors, err)
+				log.Println(err)
 				continue
 			}
-
-			scanner.receiver.startReceive(route.iface.Name, route.handle, ctx)
-			time.Sleep(scan.perPacketInterval)
+			time.Sleep(scan.packetSendInterval)
 		}
-
+		log.Println("send all packet")
 		// wait for timeout after send all packet
-		timeout, _ := context.WithTimeout(ctx, config.Timeout)
+		timeout, _ := context.WithTimeout(scan.ctx, scan.Config.Timeout)
 		<-timeout.Done()
 	}()
-
-	return scan
 }
 
-func (scanner *PortScanner) run() {
-	go func() {
-		if scanner.runningScan == nil {
-			return
-		}
-		scan := scanner.runningScan
+func (scan *PortScan) pushResult(ip net.IP, port uint16) {
+	scan.pushResultLocker.Lock()
+	defer scan.pushResultLocker.Unlock()
+	scan.Results = append(scan.Results, &PortScanResult{
+		IP:   ip,
+		Port: port,
+	})
+}
 
-		for {
-			if !scan.Target.hasNext() {
-				break
-			}
-			ip, port, err := scan.Target.nextTarget()
-			if err != nil {
-				scan.Errors = append(scan.Errors, err)
-				continue
-			}
-			route, err := scanner.sender.send(ip, port)
-			if err != nil {
-				scan.Errors = append(scan.Errors, err)
-				continue
-			}
-
-			scanner.receiver.startReceive(route.iface.Name, route.handle, scan.ctx)
-			time.Sleep(scan.perPacketInterval)
-		}
-
-		// triger next scan
-		scanner.locker.Lock()
-		if len(scanner.waitingScans) > 0 {
-			scanner.runningScan = scanner.waitingScans[0]
-			scanner.waitingScans = scanner.waitingScans[1:]
-			scanner.run()
-		} else {
-			scanner.runningScan = nil
-		}
-		scanner.locker.Unlock()
-	}()
+func (scan *PortScan) Stop() {
+	scan.statusLocker.Lock()
+	defer scan.statusLocker.Unlock()
+	defer scheduleNext()
+	scan.cancel()
+	scan.Status = STATUS_FINISHED
+	scan.EndAt = time.Now()
 }
 
 func (scan *PortScan) Wait() {
 	<-scan.ctx.Done()
-}
-
-func (scan *PortScan) Cancel() {
-	scan.cancel()
 }
