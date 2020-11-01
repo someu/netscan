@@ -9813,11 +9813,6 @@
     "DUgallery": {
         "matches": [
             {
-                "ghdb": "ext:asp inurl:DUgallery intitle:\"3.0\"",
-                "version": "3.0",
-                "certainty": 75
-            },
-            {
                 "regexp": "(?-mix:<title>DUgallery[^<]*<\\/title>)"
             },
             {
@@ -37735,11 +37730,6 @@
             {
                 "text": "<link rel='https://api.w.org/'",
                 "name": "REST API link"
-            },
-            {
-                "regexp": "(?-mix:\"[^\"]+\\/wp-content\\/[^\"]+\")",
-                "name": "wp-content",
-                "certainty": 75
             },
             {
                 "version": "(?-mix:<meta name=\"generator\" content=\"WordPress ([0-9\\.]+)\")"

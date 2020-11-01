@@ -1,22 +1,22 @@
 package main
 
 import (
-	"github.com/vishvananda/netlink"
-	"log"
+	"fmt"
 )
+
+func uniq(arr []string) []string {
+	valueMap := make(map[string]bool)
+	for _, v := range arr {
+		valueMap[v] = true
+	}
+	var newArr []string
+	for value, _ := range valueMap {
+		newArr = append(newArr, value)
+	}
+	return newArr
+}
 
 func main() {
 
-	ll, err := netlink.LinkList()
-	if err != nil {
-		log.Panic(err)
-	}
-	for _, l := range ll {
-		rs, _ := netlink.RouteList(l, netlink.FAMILY_ALL)
-		log.Print(rs)
-		log.Print(l.Type(), l.Attrs())
-	}
-	rs, _ := netlink.RouteList(nil, netlink.FAMILY_ALL)
-	log.Print(rs)
-
+	fmt.Println(uniq([]string{"3.3.4", "3.3.4", "3.3.4"}))
 }

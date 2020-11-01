@@ -14,6 +14,7 @@ type PortScanConfig struct {
 	PortSegments    Segments
 	Timeout         time.Duration
 	PacketPerSecond uint
+	Callback        func(result PortScanResult)
 }
 
 type PortScanResult struct {
@@ -33,7 +34,7 @@ type PortScan struct {
 	CreatAt            time.Time
 	StartAt            time.Time
 	EndAt              time.Time
-	Results            []*PortScanResult
+	Results            []PortScanResult
 	Errors             []error
 }
 
@@ -103,6 +104,7 @@ func (scan *PortScan) Run() {
 		defer scan.Stop()
 		target := scan.target
 		for {
+			start := time.Now().UnixNano()
 			select {
 			case <-scan.ctx.Done():
 				return
@@ -123,7 +125,10 @@ func (scan *PortScan) Run() {
 				log.Println(err)
 				continue
 			}
-			time.Sleep(scan.packetSendInterval)
+			sleep := scan.packetSendInterval.Nanoseconds() - (time.Now().UnixNano() - start)
+			if sleep > 0 {
+				time.Sleep(time.Duration(sleep) * time.Nanosecond)
+			}
 		}
 		log.Println("send all packet")
 		// wait for timeout after send all packet
@@ -135,10 +140,14 @@ func (scan *PortScan) Run() {
 func (scan *PortScan) pushResult(ip net.IP, port uint16) {
 	scan.pushResultLocker.Lock()
 	defer scan.pushResultLocker.Unlock()
-	scan.Results = append(scan.Results, &PortScanResult{
+	result := PortScanResult{
 		IP:   ip,
 		Port: port,
-	})
+	}
+	scan.Results = append(scan.Results, result)
+	if scan.Config.Callback != nil {
+		scan.Config.Callback(result)
+	}
 }
 
 func (scan *PortScan) Stop() {
