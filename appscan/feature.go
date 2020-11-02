@@ -95,7 +95,10 @@ func (rule *FeatureRule) MatchContent(content string) (bool, []string, []string)
 				for i, split := range stock[1:] {
 					version = strings.Replace(version, fmt.Sprintf("\\%d", i+1), split, -1)
 				}
-				versions = append(versions, strings.TrimSpace(version))
+
+				if len(version) > 0 {
+					versions = append(versions, strings.TrimSpace(version))
+				}
 			}
 		}
 	}

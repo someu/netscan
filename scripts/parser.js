@@ -6,37 +6,32 @@ const whatweb = require("./fingers/whatweb.json");
 const gwhatweb = require("./fingers/gwhatweb.json");
 const fs = require("fs");
 
-// 特征
-class FeatureGroup {
-  Path = "";
-  Features = [];
-}
 
 class Feature {
-  Name = "";
-  From = "";
-  Path = "";
-  Types = [];
-  Implies = [];
-  ManufacturerName = "";
-  ManufacturerUrl = "";
-  Title = [];
-  Header = [];
-  Cookie = [];
-  Body = [];
-  MetaTag = {};
-  HeaderField = {};
-  CookieField = {};
+  constructor(){
+    this.Name = "";
+    this.From = "";
+    this.Path = "";
+    this.Types = [];
+    this.Implies = [];
+    this.ManufacturerName = "";
+    this.ManufacturerUrl = "";
+    this.Title = [];
+    this.Header = [];
+    this.Cookie = [];
+    this.Body = [];
+    this.MetaTag = {};
+    this.HeaderField = {};
+    this.CookieField = {};
+  }
 }
 
 class FeatureRule {
-  Regexp = ""; // 用于匹配特征的正则
-  Md5 = ""; // 用于匹配的md5
-  VersionStock = ""; // 用于匹配版本号的正则，默认为Regexp
-  Version = ""; // 用于生成版本号的规则
   constructor(reg, md5) {
-    this.Regexp = reg || "";
-    this.Md5 = md5 || "";
+    this.Regexp = reg || ""; // 用于匹配特征的正则
+    this.Md5 = md5 || ""; // 用于匹配的md5
+    this.VersionStock = ""; // 用于匹配版本号的正则，默认为Regexp
+    this.Version = ""; // 用于生成版本号的规则
   }
 }
 
@@ -328,7 +323,10 @@ function uniq(features) {
     if(!/^\//.test(feature.Path)){
       feature.Path = "/"+feature.Path
     }
-    const key = `${feature.Name.toLowerCase()}_${feature.Path}`;
+    const key = `${feature.Name.replace(
+      /[^0-9a-zA-Z\u4e00-\u9fa5]/g,
+      ""
+    ).toLowerCase()}_${feature.Path}`;
     if (!featureMap[key]) {
       featureMap[key] = [];
     }
@@ -457,6 +455,26 @@ function transformFeatureArray(features) {
   return `[]*Feature{\n${features.map(transformFeature).join(",\n")},\n}`;
 }
 
+function checkMostLike(features){
+  const namePathMap = {}
+  for(let feature of features){
+    const trimed = `${feature.Name
+      .replace(/[^0-9a-zA-Z\u4e00-\u9fa5]/g, "")
+      .toLowerCase()}_${feature.Path}`;
+    if(!namePathMap[trimed]){
+      namePathMap[trimed] = []
+    }
+    namePathMap[trimed].push(feature.Name)
+  } 
+  let count= 1
+  for(let key in namePathMap){
+    if(namePathMap[key].length > 1){
+      console.log(`${count}: ${key}: ${JSON.stringify(namePathMap[key])}`)
+      count++;
+    }
+  }
+}
+
 function main() {
   let features = [];
   features.push(
@@ -470,7 +488,7 @@ function main() {
   );
   features = uniq(features);
   console.log(`features count: ${features.length}`);
-
+  checkMostLike(features)
   fs.writeFileSync(
     "../appscan/source.go",
     `package appscan\n\nvar Features = ${transformFeatureArray(features)}`
