@@ -100,7 +100,7 @@ func init() {
 	rootCmd.Flags().StringVarP(&portStr, "port", "p", "80,443", "port, split by ', eg: 80,80-8080")
 	rootCmd.Flags().UintVarP(&packetPerSecond, "pps", "", 100, "packet per second")
 	rootCmd.Flags().UintVarP(&timeout, "timeout", "", 10, "timeout, unit second")
-	rootCmd.Flags().StringArrayVarP(&urls, "url", "u", []string{"http://140.143.0.76/"}, "url")
+	rootCmd.Flags().StringArrayVarP(&urls, "url", "u", nil, "url")
 }
 
 func main() {
