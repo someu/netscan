@@ -84,7 +84,7 @@ func (rule *FeatureRule) MatchContent(content string) (bool, []string, []string)
 		matched = matchRe.MatchString(content)
 
 		if matched {
-			proofs = append(proofs, matchRe.FindString(content))
+			proofs = append(proofs, fmt.Sprintf(":rule: %s :match: %s", rule.Regexp, matchRe.FindString(content)))
 		}
 
 		versionStockRe := rule.getVersionStock()
@@ -92,15 +92,27 @@ func (rule *FeatureRule) MatchContent(content string) (bool, []string, []string)
 			stocks := versionStockRe.FindAllStringSubmatch(content, -1)
 			for _, stock := range stocks {
 				version := rule.Version
-				for i, split := range stock {
+				for i, split := range stock[1:] {
 					version = strings.Replace(version, fmt.Sprintf("\\%d", i+1), split, -1)
 				}
-				versions = append(versions, version)
+				versions = append(versions, strings.TrimSpace(version))
 			}
 		}
 	}
 
 	return matched, versions, proofs
+}
+
+func uniq(arr []string) []string {
+	valueMap := make(map[string]bool)
+	for _, v := range arr {
+		valueMap[v] = true
+	}
+	var newArr []string
+	for value, _ := range valueMap {
+		newArr = append(newArr, value)
+	}
+	return newArr
 }
 
 func (feature *Feature) Type() reflect.Type {
@@ -171,8 +183,8 @@ func (feature *Feature) MatchResponseData(response *ResponseData) *MatchedFeatur
 	if matched {
 		return &MatchedFeature{
 			Feature:  feature,
-			Versions: versions,
-			Proofs:   proofs,
+			Versions: uniq(versions),
+			Proofs:   uniq(proofs),
 		}
 	} else {
 		return nil

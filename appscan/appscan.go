@@ -2,8 +2,11 @@ package appscan
 
 import (
 	"context"
+	"fmt"
 	"github.com/panjf2000/ants/v2"
+	"log"
 	"regexp"
+	"strings"
 	"sync"
 	"time"
 )
@@ -12,24 +15,23 @@ const Version = "0.0.1"
 const DefaultConcurrent = 100
 const DefaultRequestTimeout = 30 * time.Second
 
-type AppScanner struct {
-	Features    []*Feature
-	Config      *AppScannerConfig
-	requestPool *ants.Pool
-}
+var requestPool *ants.Pool
 
-type AppScannerConfig struct {
-	Concurrent int
+func init() {
+	var err error
+	requestPool, err = ants.NewPool(DefaultConcurrent)
+	if err != nil {
+		log.Panic(err)
+	}
 }
 
 type AppScan struct {
 	ctx      context.Context
 	wg       sync.WaitGroup
 	locker   sync.Mutex
-	scanPoop *ants.PoolWithFunc
+	scanPool *ants.PoolWithFunc
 	errors   []error
 	client   *RequestClient
-	Scanner  *AppScanner
 	StartAt  time.Time
 	EndAt    time.Time
 	Results  []*AppScanResult
@@ -39,38 +41,43 @@ type AppScan struct {
 
 type AppScanResult struct {
 	Url             string
+	ResponseData    *ResponseData
 	MatchedFeatures []*MatchedFeature
 }
 
 type AppScanConfig struct {
 	Urls           []string
 	Features       []*Feature
-	Callback       func(v interface{})
+	Callback       func(result *AppScanResult)
 	ScanTimeout    time.Duration
 	RequestTimeout time.Duration
 }
 
-func NewAppScanner(config *AppScannerConfig) (*AppScanner, error) {
-	if config.Concurrent <= 0 {
-		config.Concurrent = DefaultConcurrent
-	}
-	pool, err := ants.NewPool(DefaultConcurrent)
-	if err != nil {
-		return nil, err
-	}
-	scanner := &AppScanner{
-		requestPool: pool,
-		Features:    Features,
-		Config:      config,
-	}
-	return scanner, nil
+func SetConcurrent(concurrent int) {
+	requestPool.Tune(concurrent)
 }
 
-func (scanner *AppScanner) SetConcurrent(concurrent int) {
-	scanner.requestPool.Tune(concurrent)
+func (res AppScanResult) String() string {
+	var featureStrs []string
+	for _, feature := range res.MatchedFeatures {
+		featureStr := feature.Feature.Name
+		if len(feature.Versions) > 0 {
+			featureStr += fmt.Sprintf("[versions: %s]", strings.Join(feature.Versions, ", "))
+		}
+
+		//if len(feature.Proofs) > 0 {
+		//	featureStr += fmt.Sprintf("(proofs: %s)", strings.Join(feature.Proofs, ", "))
+		//}
+		featureStrs = append(featureStrs, featureStr)
+		if len(feature.Feature.Implies) > 0 {
+			featureStrs = append(featureStrs, feature.Feature.Implies...)
+		}
+	}
+
+	return fmt.Sprintf("%s: %s", res.Url, strings.Join(featureStrs, ", "))
 }
 
-func (scanner *AppScanner) CreateScan(config *AppScanConfig) (*AppScan, error) {
+func CreateScan(config *AppScanConfig) (*AppScan, error) {
 	// calc requests per url
 	existFlag := make(map[string]bool)
 	requestCountPerUrl := 0
@@ -99,7 +106,6 @@ func (scanner *AppScanner) CreateScan(config *AppScanConfig) (*AppScan, error) {
 		ctx:     ctx,
 		wg:      sync.WaitGroup{},
 		locker:  sync.Mutex{},
-		Scanner: scanner,
 		StartAt: time.Now(),
 		Config:  config,
 		cancel:  cancel,
@@ -115,16 +121,19 @@ func (scanner *AppScanner) CreateScan(config *AppScanConfig) (*AppScan, error) {
 		scan.locker.Lock()
 		defer scan.locker.Unlock()
 		scan.Results = append(scan.Results, result)
+		if scan.Config.Callback != nil {
+			scan.Config.Callback(result)
+		}
 	}
 	var err error
-	scan.scanPoop, err = ants.NewPoolWithFunc(DefaultConcurrent, scanFunc)
+	scan.scanPool, err = ants.NewPoolWithFunc(DefaultConcurrent, scanFunc)
 	if err != nil {
 		return nil, err
 	}
 
 	for _, url := range config.Urls {
 		scan.wg.Add(1)
-		scan.scanPoop.Invoke(url)
+		scan.scanPool.Invoke(url)
 	}
 
 	return scan, nil
@@ -147,24 +156,25 @@ func (scan *AppScan) ScanUrl(url string) *AppScanResult {
 		}
 		func(target string) {
 			wg.Add(1)
-			scan.Scanner.requestPool.Submit(func() {
+			requestPool.Submit(func() {
 				defer wg.Done()
 				select {
 				case <-scan.ctx.Done():
 					return
 				default:
-					response, err := scan.client.Get(target, scan.ctx)
-					if err != nil {
-						scan.errors = append(scan.errors, err)
-						return
-					}
-					for _, feature := range features {
-						result := feature.MatchResponseData(response.Data)
-						if result != nil {
-							locker.Lock()
-							results = append(results, result)
-							locker.Unlock()
-						}
+					break
+				}
+				response, err := scan.client.Get(target, scan.ctx)
+				if err != nil {
+					scan.errors = append(scan.errors, err)
+					return
+				}
+				for _, feature := range features {
+					result := feature.MatchResponseData(response.Data)
+					if result != nil {
+						locker.Lock()
+						results = append(results, result)
+						locker.Unlock()
 					}
 				}
 			})
@@ -175,18 +185,19 @@ func (scan *AppScan) ScanUrl(url string) *AppScanResult {
 		Url:             url,
 		MatchedFeatures: results,
 	}
+
 	return result
 }
 
 func (scan *AppScan) Wait() {
 	scan.wg.Wait()
-	scan.scanPoop.Release()
-	scan.EndAt = time.Now()
+	scan.Stop()
 }
 
-func (scan *AppScan) Cancel() {
+func (scan *AppScan) Stop() {
 	scan.cancel()
-	scan.Wait()
+	scan.scanPool.Release()
+	scan.EndAt = time.Now()
 }
 
 func (scan AppScan) Errors() []error {

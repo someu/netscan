@@ -25,7 +25,6 @@ CMS:phpmywind|url|/shoppingcart.php|PHPMyWind
 CMS:wordpress|url|/robots.txt|/wp-\*/
 CMS:wordpress|headers|WP-Super-Cache|Served supercache file from PHP
 ;CMS:wordpress|url|/license.txt|WordPress
-CMS:wordpress|index|index|<meta name=\"generator\" content=\"WordPress|\"[^\"]+/wp-content/[^\"]+\"
 CMS:wordpress|url|/wp-includes/css/buttons.css|wordpress
 CMS:z-blog|index|index|<link rel=\"stylesheet\" rev=\"stylesheet\" href=\".*zb_users
 CMS:z-blog|url|/script/common.js|Z-Blog

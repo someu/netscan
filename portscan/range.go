@@ -203,7 +203,7 @@ func ParsePortSegment(portStr string) (*Segment, error) {
 	var end int
 	if i >= 0 {
 		start, _ = strconv.Atoi(portStr[0:i])
-		end, _ = strconv.Atoi(portStr[i+1 : 0])
+		end, _ = strconv.Atoi(portStr[i+1:])
 	} else {
 		start, _ = strconv.Atoi(portStr)
 		end = start

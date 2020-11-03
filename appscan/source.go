@@ -28946,11 +28946,6 @@ var Features = []*Feature{
 				Regexp: "DUgallery",
 			},
 			&FeatureRule{
-				Regexp:       "3.0",
-				VersionStock: "3.0",
-				Version:      "\\1",
-			},
-			&FeatureRule{
 				Regexp: "<title>DUgallery[^<]*<\\/title>",
 			},
 			&FeatureRule{
@@ -117275,15 +117270,9 @@ var Features = []*Feature{
 				Regexp: "<link rel='https://api\\.w\\.org/'",
 			},
 			&FeatureRule{
-				Regexp: "\"[^\"]+\\/wp-content\\/[^\"]+\"",
-			},
-			&FeatureRule{
 				Regexp:       "<meta name=\"generator\" content=\"WordPress ([0-9\\.]+)\"",
 				VersionStock: "<meta name=\"generator\" content=\"WordPress ([0-9\\.]+)\"",
 				Version:      "\\1",
-			},
-			&FeatureRule{
-				Regexp: "<meta name=\\\"generator\\\" content=\\\"WordPress|\\\"[^\\\"]+/wp-content/[^\\\"]+\\\"",
 			},
 		},
 		MetaTag: map[string][]*FeatureRule{
