@@ -1,5 +1,11 @@
 #!/bin/bash
 
+pushd scripts
+node parser.js
+popd
+
+gofmt -w appscan/source.go
+
 rm -rf build/*
 
 CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o build/netscan cli/*.go

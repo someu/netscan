@@ -111226,8 +111226,23 @@ var Features = []*Feature{
 		Name: "Vigor-Router",
 		From: []string{
 			"whatweb",
+			"custom",
 		},
 		Path: "/",
+		Types: []string{
+			"Router",
+		},
+		ManufacturerName: []string{
+			"Vigor",
+		},
+		ManufacturerUrl: []string{
+			"https://vigor.net/",
+		},
+		Title: []*FeatureRule{
+			&FeatureRule{
+				Regexp: "Vigor Login Page",
+			},
+		},
 		HeaderField: map[string][]*FeatureRule{
 			"server":           []*FeatureRule{},
 			"www-authenticate": []*FeatureRule{},

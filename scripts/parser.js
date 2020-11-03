@@ -4,6 +4,7 @@ const fofa = require("./fingers/fofa.json");
 const dayu = require("./fingers/dayu.json");
 const whatweb = require("./fingers/whatweb.json");
 const gwhatweb = require("./fingers/gwhatweb.json");
+const custom = require("./fingers/custom.json")
 const fs = require("fs");
 
 
@@ -484,7 +485,8 @@ function main() {
     ...parseFofa(),
     ...parseWappalayzer(),
     ...parseWhatweb(),
-    ...parseWebeye()
+    ...parseWebeye(),
+    ...custom
   );
   features = uniq(features);
   console.log(`features count: ${features.length}`);

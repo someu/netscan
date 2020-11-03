@@ -1,0 +1,25 @@
+[
+  {
+    "Name": "Vigor-Router",
+    "From": "custom",
+    "Path": "/",
+    "Types": ["Router"],
+    "Implies": [],
+    "ManufacturerName": "Vigor",
+    "ManufacturerUrl": "https://vigor.net/",
+    "Title": [
+      {
+        "Regexp": "Vigor Login Page",
+        "Md5": "",
+        "VersionStock": "",
+        "Version": ""
+      }
+    ],
+    "Header": [],
+    "Cookie": [],
+    "Body": [],
+    "MetaTag": {},
+    "HeaderField": {},
+    "CookieField": {}
+  }
+]
