@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/panjf2000/ants/v2"
-	"log"
 	"regexp"
 	"strings"
 	"sync"
@@ -12,21 +11,14 @@ import (
 )
 
 const Version = "0.0.1"
-const DefaultConcurrent = 100
+const ScanConcurrent = 100
+const DefaultRequestConcurrent = 100
 const DefaultRequestTimeout = 30 * time.Second
 
 var (
 	requestPool   *ants.Pool
 	appScanInited = false
 )
-
-func init() {
-	var err error
-	requestPool, err = ants.NewPool(DefaultConcurrent)
-	if err != nil {
-		log.Panic(err)
-	}
-}
 
 type AppScan struct {
 	ctx      context.Context
@@ -56,7 +48,7 @@ type AppScanConfig struct {
 	RequestTimeout time.Duration
 }
 
-func SetConcurrent(concurrent int) {
+func SetRequestConcurrent(concurrent int) {
 	requestPool.Tune(concurrent)
 }
 
@@ -99,7 +91,7 @@ func CreateScan(config *AppScanConfig) (*AppScan, error) {
 	scanTimeout := config.ScanTimeout
 	if scanTimeout == 0 {
 		requestCount := len(config.Urls) * requestCountPerUrl
-		scanTimeout = time.Duration(requestCount)*DefaultRequestTimeout + time.Duration(requestCount)*time.Second
+		scanTimeout = time.Duration(requestCount)*DefaultRequestTimeout + 5*time.Second
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), scanTimeout)
@@ -129,7 +121,7 @@ func CreateScan(config *AppScanConfig) (*AppScan, error) {
 		}
 	}
 	var err error
-	scan.scanPool, err = ants.NewPoolWithFunc(DefaultConcurrent, scanFunc)
+	scan.scanPool, err = ants.NewPoolWithFunc(ScanConcurrent, scanFunc)
 	if err != nil {
 		return nil, err
 	}
@@ -151,24 +143,26 @@ func (scan *AppScan) ScanUrl(url string) *AppScanResult {
 	tailRe := regexp.MustCompile("\\/$")
 	tailTrimedUrl := tailRe.ReplaceAllString(url, "")
 	locker := sync.Mutex{}
-	wg := sync.WaitGroup{}
+	currentScanWg := sync.WaitGroup{}
 	for path, features := range featuresMap {
 		target := tailTrimedUrl
 		if path != "/" {
 			target += path
 		}
 		func(target string) {
-			wg.Add(1)
+			currentScanWg.Add(1)
 			requestPool.Submit(func() {
-				defer wg.Done()
+				defer currentScanWg.Done()
 				select {
 				case <-scan.ctx.Done():
+					fmt.Printf("scan task has been finished, reason: %s\n", scan.ctx.Err())
 					return
 				default:
 					break
 				}
 				response, err := scan.client.Get(target, scan.ctx)
 				if err != nil {
+					fmt.Printf("get %s error %s\n", target, err)
 					scan.errors = append(scan.errors, err)
 					return
 				}
@@ -183,7 +177,7 @@ func (scan *AppScan) ScanUrl(url string) *AppScanResult {
 			})
 		}(target)
 	}
-	wg.Wait()
+	currentScanWg.Wait()
 	result := &AppScanResult{
 		Url:             url,
 		MatchedFeatures: results,
@@ -207,8 +201,17 @@ func (scan AppScan) Errors() []error {
 	return scan.errors
 }
 
+func initRequestPool() error {
+	var err error
+	requestPool, err = ants.NewPool(DefaultRequestConcurrent)
+	return err
+}
+
 func InitAppScan() error {
 	if appScanInited == false {
+		if err := initRequestPool(); err != nil {
+			return err
+		}
 		if err := initFeatureRegexps(); err != nil {
 			return err
 		}
