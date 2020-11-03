@@ -6,7 +6,6 @@ import (
 	"github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
 	"io"
-	"log"
 	"net"
 )
 
@@ -17,24 +16,20 @@ type Control struct {
 	Cancel context.CancelFunc
 }
 
-func init() {
-	initInterfaces()
-}
-
 // 初始化接口，每个接口开启一个收包 goroutine
-func initInterfaces() {
+func initRecvInterfaces() error {
 	ifaces, err := net.Interfaces()
 	if err != nil {
-		log.Println(err)
-		return
+		return err
 	}
 	for _, iface := range ifaces {
 		if ctx, err := recv(iface.Name); err == nil {
 			recvControl[iface.Name] = ctx
 		} else {
-			log.Println(err)
+			return err
 		}
 	}
+	return nil
 }
 
 // 开启接口的收包 goroutine

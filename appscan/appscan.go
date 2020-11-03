@@ -15,7 +15,10 @@ const Version = "0.0.1"
 const DefaultConcurrent = 100
 const DefaultRequestTimeout = 30 * time.Second
 
-var requestPool *ants.Pool
+var (
+	requestPool   *ants.Pool
+	appScanInited = false
+)
 
 func init() {
 	var err error
@@ -202,4 +205,15 @@ func (scan *AppScan) Stop() {
 
 func (scan AppScan) Errors() []error {
 	return scan.errors
+}
+
+func InitAppScan() error {
+	if appScanInited == false {
+		if err := initFeatureRegexps(); err != nil {
+			return err
+		}
+		appScanInited = true
+	}
+
+	return nil
 }
