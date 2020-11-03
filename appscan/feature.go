@@ -2,7 +2,6 @@ package appscan
 
 import (
 	"fmt"
-	"log"
 	"reflect"
 	"regexp"
 	"strings"
@@ -194,7 +193,8 @@ func (feature *Feature) MatchResponseData(response *ResponseData) *MatchedFeatur
 	}
 }
 
-func init() {
+func initFeatureRegexps() error {
+	var err error
 	// 初始化正则匹配表达式
 	for _, feature := range Features {
 		featureType := feature.Type()
@@ -213,19 +213,20 @@ func init() {
 
 			if ruleType == "array" {
 				for _, rule := range featureFieldValue.Interface().([]*FeatureRule) {
-					rule.regexp = regexp.MustCompile(rule.Regexp)
+					if rule.regexp, err = regexp.Compile(rule.Regexp); err != nil {
+						return err
+					}
 				}
 			} else if ruleType == "map" {
 				for _, rules := range featureFieldValue.Interface().(map[string][]*FeatureRule) {
 					for _, rule := range rules {
-						rule.regexp = regexp.MustCompile(rule.Regexp)
+						if rule.regexp, err = regexp.Compile(rule.Regexp); err != nil {
+							return err
+						}
 					}
 				}
 			}
 		}
 	}
-	err := recover()
-	if err != nil {
-		log.Panic(err)
-	}
+	return nil
 }
