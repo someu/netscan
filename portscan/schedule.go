@@ -8,6 +8,8 @@ var (
 	scheduleLocker = sync.Mutex{}
 )
 
+var interfaceInited = false
+
 func scheduleNext() {
 	scheduleLocker.Lock()
 	defer scheduleLocker.Unlock()
@@ -30,6 +32,15 @@ func scheduleNext() {
 func addPortScan(scan *PortScan) {
 	scheduleLocker.Lock()
 	defer scheduleLocker.Unlock()
+
+	if interfaceInited == false {
+		if err := initRecvInterfaces(); err != nil {
+			return
+		} else {
+			interfaceInited = true
+		}
+	}
+
 	if runningScan != nil {
 		waitingScans = append(waitingScans, scan)
 	} else {

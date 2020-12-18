@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/zmap/zgrab2"
 	"log"
 	"os"
 	"time"
@@ -30,6 +31,14 @@ func ioExample() {
 		os.Exit(0)
 	}()
 	time.Sleep(time.Second * 3)
+}
+
+func grabExample() {
+	mod := zgrab2.GetModule("http")
+	s := mod.NewScanner()
+	s.Init(nil)
+	zgrab2.RegisterScan("http", s)
+
 }
 
 func main() {

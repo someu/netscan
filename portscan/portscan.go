@@ -46,8 +46,6 @@ const (
 
 const DefaultPortScanTimeout = time.Second * 10
 
-var portScanInited = false
-
 func CreatePortScan(config *PortScanConfig) (*PortScan, error) {
 	if len(config.IPSegments) == 0 || len(config.PortSegments) == 0 {
 		return nil, errors.New("invalid IPSegments or PortSegments\n")
@@ -163,15 +161,4 @@ func (scan *PortScan) Stop() {
 
 func (scan *PortScan) Wait() {
 	<-scan.ctx.Done()
-}
-
-func InitPortScan() error {
-	if portScanInited == false {
-		if err := initRecvInterfaces(); err != nil {
-			return err
-		}
-		portScanInited = true
-	}
-
-	return nil
 }

@@ -489,7 +489,7 @@ function main() {
     ...custom
   );
   features = uniq(features);
-  console.log(`features count: ${features.length}`);
+  console.log(`features count: ${new Set(features.map(i=>i.Name)).size}`);
   checkMostLike(features)
   fs.writeFileSync(
     "../appscan/source.go",

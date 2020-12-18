@@ -1,33 +1,33 @@
-package main
+package cmd
 
 import (
 	"bufio"
 	"fmt"
-	"os"
-	"strings"
-	"time"
-
 	"github.com/someu/netscan/appscan"
 	"github.com/someu/netscan/portscan"
 	"github.com/spf13/cobra"
+	"os"
+	"strings"
+	"time"
 )
 
 var (
-	packetPerSecond   uint
-	appScanConcurrent uint
-	timeout           uint
-	ipStr             string
-	portStr           string
-	urls              []string
-	input             string
-	output            string
-	outputTarget      string
+	packetPerSecond   uint     // --pps
+	appScanConcurrent uint     // --thread
+	timeout           uint     // --timeout
+	ipStr             string   // -i, --ip
+	portStr           string   // -p, --port
+	urls              []string // -u, --url
+	input             string   // --file
+	outputListFile    string   // --output-list
+	outputJSONFile    string   // --output-json
 )
 
-var rootCmd = &cobra.Command{
-	Use:   "netscan",
-	Short: "use netscan to find the technology stack of any website",
+var taskCmd = &cobra.Command{
+	Use:   "task",
+	Short: "task mode",
 	Run: func(cmd *cobra.Command, args []string) {
+
 		if (len(ipStr) == 0 || len(portStr) == 0) && len(urls) == 0 && len(input) == 0 {
 			cmd.Help()
 			os.Exit(1)
@@ -37,22 +37,22 @@ var rootCmd = &cobra.Command{
 		var outputFile *os.File
 		var outputTargetFile *os.File
 
-		if len(output) > 0 {
-			outputFile, err = os.OpenFile(output, os.O_CREATE|os.O_WRONLY, 0666)
-			if err != nil {
-				fmt.Println(err)
-				os.Exit(1)
-			}
-			defer outputFile.Close()
-		}
-		if len(outputTarget) > 0 {
-			outputTargetFile, err = os.OpenFile(outputTarget, os.O_CREATE|os.O_WRONLY, 0666)
-			if err != nil {
-				fmt.Println(err)
-				os.Exit(1)
-			}
-			defer outputTargetFile.Close()
-		}
+		//if len(output) > 0 {
+		//	outputFile, err = os.OpenFile(output, os.O_CREATE|os.O_WRONLY, 0666)
+		//	if err != nil {
+		//		fmt.Println(err)
+		//		os.Exit(1)
+		//	}
+		//	defer outputFile.Close()
+		//}
+		//if len(outputTarget) > 0 {
+		//	outputTargetFile, err = os.OpenFile(outputTarget, os.O_CREATE|os.O_WRONLY, 0666)
+		//	if err != nil {
+		//		fmt.Println(err)
+		//		os.Exit(1)
+		//	}
+		//	defer outputTargetFile.Close()
+		//}
 
 		if len(input) > 0 {
 			file, err := os.OpenFile(input, os.O_RDONLY, 0666)
@@ -83,10 +83,6 @@ var rootCmd = &cobra.Command{
 
 		// port scan
 		if len(ipStr) > 0 && len(portStr) > 0 {
-			if err := portscan.InitPortScan(); err != nil {
-				fmt.Println(err)
-				os.Exit(1)
-			}
 			ips := strings.Split(ipStr, ",")
 			ports := strings.Split(portStr, ",")
 			var ipSegs portscan.Segments
@@ -173,19 +169,14 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.Flags().StringVarP(&ipStr, "ip", "i", "", "ip, split by ',', eg: 10.0.8.1,10.0.8.1/24. This parameter should be used in root permission")
-	rootCmd.Flags().StringVarP(&portStr, "port", "p", "80,443", "port, split by ', eg: 80,80-8080")
-	rootCmd.Flags().UintVarP(&packetPerSecond, "pps", "", 100, "packet per second send when use \"--ip\" or \"-i\" parameter")
-	rootCmd.Flags().UintVarP(&timeout, "timeout", "", 10, "timeout, unit second")
-	rootCmd.Flags().UintVarP(&appScanConcurrent, "request-concurrent", "", 100, "request concurrent")
-	rootCmd.Flags().StringArrayVarP(&urls, "url", "u", nil, "url")
-	rootCmd.Flags().StringVarP(&input, "input-file", "", "", "get target from a file")
-	rootCmd.Flags().StringVarP(&outputTarget, "output-target-file", "", "", "output scan targets to a file")
-	rootCmd.Flags().StringVarP(&output, "output-file", "", "", "output scan results to  a file")
-}
-
-func main() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-	}
+	taskCmd.Flags().UintVarP(&packetPerSecond, "pps", "", 100, "packet per second send in syn port scan stage")
+	taskCmd.Flags().UintVarP(&appScanConcurrent, "thread", "", 100, "request thread in grab stage")
+	taskCmd.Flags().UintVarP(&timeout, "timeout", "", 10, "request timeout")
+	taskCmd.Flags().StringVarP(&ipStr, "ip", "i", "", "ip")
+	taskCmd.Flags().StringVarP(&portStr, "port", "p", "", "port")
+	taskCmd.Flags().StringArrayVarP(&urls, "url", "u", nil, "urls")
+	taskCmd.Flags().StringVarP(&input, "input", "", "", "input file")
+	taskCmd.Flags().StringVarP(&outputListFile, "output-list", "", "", "output list")
+	taskCmd.Flags().StringVarP(&outputJSONFile, "output-json", "", "", "output json")
+	RootCmd.AddCommand(taskCmd)
 }
