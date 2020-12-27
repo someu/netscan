@@ -4,10 +4,11 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
+	"time"
 
 	log "github.com/sirupsen/logrus"
-	"grab"
 	"gopkg.in/mgo.v2/bson"
+	"grab"
 )
 
 const DefaultPort = 27017
@@ -234,6 +235,7 @@ func (mle *Module) NewFlags() interface{} {
 	flags := new(Flags)
 	flags.BaseFlags.Port = DefaultPort
 	flags.BaseFlags.Name = Name
+	flags.BaseFlags.Timeout = time.Second * 10
 	return flags
 }
 

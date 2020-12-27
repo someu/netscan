@@ -139,6 +139,8 @@ type Flags struct {
 
 // Module is the implementation of the grab.Module interface.
 type Module struct {
+	Name        string
+	DefaultPort int
 }
 
 // Scanner is the implementation of the grab.Scanner interface.
@@ -146,12 +148,10 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule is called by modules/mysql.go to register the scanner.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("mysql", "MySQL", module.Description(), 3306, &module)
-	if err != nil {
-		log.Fatal(err)
+func NewModule() *Module {
+	return &Module{
+		Name:        "mysql",
+		DefaultPort: 3306,
 	}
 }
 
