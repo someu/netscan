@@ -1,15 +1,13 @@
-package modules
+package ssh
 
 import (
 	"github.com/mcuadros/go-defaults"
+	log "github.com/sirupsen/logrus"
+	"grab"
+	"grab/lib/ssh"
 	"net"
 	"strconv"
 	"strings"
-
-	"grab/lib/ssh"
-
-	log "github.com/sirupsen/logrus"
-	"grab"
 )
 
 type SSHFlags struct {
@@ -41,9 +39,9 @@ func (m *SSHModule) NewFlags() interface{} {
 	flags.BaseFlags.Port = 22
 	flags.BaseFlags.Name = "ssh"
 	flags.HostKeyAlgorithms = strings.Join(s.HostKeyAlgorithms, ",")
-	flags.HostKeyAlgorithms = strings.Join(s.KeyExchanges, ",")
+	flags.KexAlgorithms = strings.Join(s.KeyExchanges, ",")
 	flags.Ciphers = strings.Join(s.Ciphers, ",")
-	return new(SSHFlags)
+	return flags
 }
 
 func (m *SSHModule) NewScanner() grab.Scanner {

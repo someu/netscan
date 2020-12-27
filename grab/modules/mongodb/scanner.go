@@ -4,8 +4,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"fmt"
-	"time"
-
+	"github.com/mcuadros/go-defaults"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/mgo.v2/bson"
 	"grab"
@@ -233,9 +232,9 @@ func (flags *Flags) Help() string {
 // NewFlags provides an empty instance of the flags that will be filled in by the framework
 func (mle *Module) NewFlags() interface{} {
 	flags := new(Flags)
+	defaults.SetDefaults(flags)
 	flags.BaseFlags.Port = DefaultPort
 	flags.BaseFlags.Name = Name
-	flags.BaseFlags.Timeout = time.Second * 10
 	return flags
 }
 

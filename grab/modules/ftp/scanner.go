@@ -12,6 +12,7 @@ package ftp
 
 import (
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"net"
 	"regexp"
 	"strings"
@@ -86,7 +87,9 @@ func RegisterModule() {
 // NewFlags returns the default flags object to be filled in with the
 // command-line arguments.
 func (m *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.

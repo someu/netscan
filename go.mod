@@ -7,6 +7,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/gobuffalo/packr/v2 v2.8.0 // indirect
 	github.com/google/gopacket v1.1.18
+	github.com/mcuadros/go-defaults v1.2.0 // indirect
 	github.com/mostlygeek/arp v0.0.0-20170424181311-541a2129847a
 	github.com/panjf2000/ants/v2 v2.4.2
 	github.com/phayes/freeport v0.0.0-20180830031419-95f893ade6f2
