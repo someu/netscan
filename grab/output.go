@@ -1,9 +1,7 @@
 package grab
 
 import (
-	"bufio"
 	"fmt"
-	"io"
 )
 
 // FlagMap is a function that maps a single-bit bitmask (i.e. a number of the
@@ -65,17 +63,6 @@ func GetFlagMapFromList(bits []string) FlagMap {
 	return GetFlagMapFromMap(mapping)
 }
 
-// FlagsToSet converts an integer flags variable to a set of string labels
-// corresponding to each bit, in the format described by the wiki (see
-// https://github.com/zmap/zgrab2/wiki/Scanner-details).
-// The mapping maps the bit mask value (i.e. a number of the form (1 << x)) to
-// the label for that bit.
-// Flags not present in mapping are appended to the unknown list.
-func FlagsToSet(flags uint64, mapping map[uint64]string) (map[string]bool, []uint64) {
-	mapper := GetFlagMapFromMap(mapping)
-	return MapFlagsToSet(flags, mapper)
-}
-
 // ListFlagsToSet converts an integer flags variable to a set of string labels
 // corresponding to each bit, in the format described by the wiki (see
 // https://github.com/zmap/zgrab2/wiki/Scanner-details).
@@ -85,74 +72,4 @@ func FlagsToSet(flags uint64, mapping map[uint64]string) (map[string]bool, []uin
 func ListFlagsToSet(flags uint64, labels []string) (map[string]bool, []uint64) {
 	mapper := GetFlagMapFromList(labels)
 	return MapFlagsToSet(flags, mapper)
-}
-
-// WidenMapKeys8 copies a map with uint8 keys into an equivalent map with uint64
-// keys for use in the FlagsToSet function.
-func WidenMapKeys8(input map[uint8]string) map[uint64]string {
-	ret := make(map[uint64]string, len(input))
-	for k, v := range input {
-		ret[uint64(k)] = v
-	}
-	return ret
-}
-
-// WidenMapKeys16 copies a map with uint8 keys into an equivalent map with
-// uint64 keys for use in the FlagsToSet function.
-func WidenMapKeys16(input map[uint16]string) map[uint64]string {
-	ret := make(map[uint64]string, len(input))
-	for k, v := range input {
-		ret[uint64(k)] = v
-	}
-	return ret
-}
-
-// WidenMapKeys32 copies a map with uint8 keys into an equivalent map with
-// uint64 keys for use in the FlagsToSet function.
-func WidenMapKeys32(input map[uint32]string) map[uint64]string {
-	ret := make(map[uint64]string, len(input))
-	for k, v := range input {
-		ret[uint64(k)] = v
-	}
-	return ret
-}
-
-// WidenMapKeys copies a map with int keys into an equivalent map with uint64
-// keys for use in the FlagsToSet function.
-func WidenMapKeys(input map[int]string) map[uint64]string {
-	ret := make(map[uint64]string, len(input))
-	for k, v := range input {
-		ret[uint64(k)] = v
-	}
-	return ret
-}
-
-// OutputResultsFunc is a function type for result output functions.
-//
-// A function of this type receives results on the provided channel
-// and outputs them somehow.  It returns nil if there are no further
-// results or error.
-type OutputResultsFunc func(results <-chan []byte) error
-
-// OutputResultsWriterFunc returns an OutputResultsFunc that wraps an io.Writer
-// in a buffered writer, and uses OutputResults.
-func OutputResultsWriterFunc(w io.Writer) OutputResultsFunc {
-	buf := bufio.NewWriter(w)
-	return func(result <-chan []byte) error {
-		defer buf.Flush()
-		return OutputResults(buf, result)
-	}
-}
-
-// OutputResults writes results to a buffered Writer from a channel.
-func OutputResults(w *bufio.Writer, results <-chan []byte) error {
-	for result := range results {
-		if _, err := w.Write(result); err != nil {
-			return err
-		}
-		if err := w.WriteByte('\n'); err != nil {
-			return err
-		}
-	}
-	return nil
 }

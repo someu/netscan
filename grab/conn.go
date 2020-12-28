@@ -3,11 +3,12 @@ package grab
 import (
 	"context"
 	"errors"
+	"github.com/sirupsen/logrus"
 	"io"
 	"net"
 	"time"
-	"github.com/sirupsen/logrus"
 )
+
 // ReadLimitExceededAction describes how the connection reacts to an attempt to read more data than permitted.
 type ReadLimitExceededAction string
 
@@ -299,7 +300,7 @@ func (d *Dialer) DialContext(ctx context.Context, network, address string) (net.
 
 	// Copy over the source IP if set, or nil
 	// TODO ? fix localAddr is always nil
-	d.Dialer.LocalAddr = localAddr
+	d.Dialer.LocalAddr = nil
 
 	dialContext, cancelDial := context.WithTimeout(ctx, d.Dialer.Timeout)
 	defer cancelDial()

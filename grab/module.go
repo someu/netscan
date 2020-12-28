@@ -85,14 +85,18 @@ func (b *BaseFlags) GetName() string {
 	return b.Name
 }
 
-// GetModule returns the registered module that corresponds to the given name
-// or nil otherwise
-func GetModule(name string) ScanModule {
-	return modules[name]
+type ModuleSet map[string]ScanModule
+
+func (s ModuleSet) AddModule(name string, m ScanModule) {
+	s[name] = m
 }
 
-var modules map[string]ScanModule
+func (s ModuleSet) RemoveModule(name string) {
+	delete(s, name)
+}
 
-func init() {
-	modules = make(map[string]ScanModule)
+func (s ModuleSet) CopyInto(destination ModuleSet) {
+	for name, m := range s {
+		destination[name] = m
+	}
 }
