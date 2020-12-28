@@ -5,6 +5,7 @@
 package bacnet
 
 import (
+	"github.com/mcuadros/go-defaults"
 	"grab"
 )
 
@@ -28,19 +29,18 @@ type Scanner struct {
 	config *Flags
 }
 
-const DefaultPort = 47808
-const Name = "bacnet"
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	flag := new(Flags)
-	flag.BaseFlags.Port = DefaultPort
-	flag.BaseFlags.Name = Name
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Port = 47808
+	flags.BaseFlags.Name = "bacnet"
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.
-func (module *Module) NewScanner() grab.Scanner {	return new(Scanner)
+func (module *Module) NewScanner() grab.Scanner {
+	return new(Scanner)
 }
 
 // Description returns text uses in the help for this module.

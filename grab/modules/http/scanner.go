@@ -14,6 +14,7 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"io"
 	"net"
 	"net/url"
@@ -22,9 +23,9 @@ import (
 
 	log "github.com/sirupsen/logrus"
 	"github.com/zmap/zcrypto/tls"
+	"golang.org/x/net/html/charset"
 	"grab"
 	"grab/lib/http"
-	"golang.org/x/net/html/charset"
 )
 
 var (
@@ -108,7 +109,11 @@ type scan struct {
 
 // NewFlags returns an empty Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "http"
+	flags.BaseFlags.Port = 80
+	return flags
 }
 
 // NewScanner returns a new instance Scanner instance.
@@ -480,15 +485,4 @@ func (scanner *Scanner) Scan(t grab.ScanTarget) (grab.ScanStatus, interface{}, e
 		return err.Unpack(&scan.results)
 	}
 	return grab.SCAN_SUCCESS, &scan.results, nil
-}
-
-// RegisterModule is called by modules/http.go to register this module with the
-// grab framework.
-func RegisterModule() {
-	var module Module
-
-	_, err := grab.AddCommand("http", "HTTP Banner Grab", module.Description(), 80, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
 }

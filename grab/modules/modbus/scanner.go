@@ -22,6 +22,7 @@ package modbus
 import (
 	"encoding/hex"
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"net"
 
 	log "github.com/sirupsen/logrus"
@@ -49,18 +50,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("modbus", "modbus", module.Description(), 502, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "modbus"
+	flags.BaseFlags.Port = 502
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.

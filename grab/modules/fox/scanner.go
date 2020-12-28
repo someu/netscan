@@ -6,7 +6,7 @@
 package fox
 
 import (
-	log "github.com/sirupsen/logrus"
+	"github.com/mcuadros/go-defaults"
 	"grab"
 )
 
@@ -27,18 +27,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("fox", "fox", module.Description(), 1911, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "fox"
+	flags.BaseFlags.Port = 1911
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.

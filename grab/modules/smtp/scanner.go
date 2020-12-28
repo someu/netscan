@@ -28,13 +28,11 @@ package smtp
 import (
 	"errors"
 	"fmt"
-	"strconv"
-	"strings"
-
-	"grab"
-
+	"github.com/mcuadros/go-defaults"
 	log "github.com/sirupsen/logrus"
 	"grab"
+	"strconv"
+	"strings"
 )
 
 // ErrInvalidResponse is returned when the server returns an invalid or unexpected response.
@@ -111,18 +109,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("smtp", "smtp", module.Description(), 25, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "smtp"
+	flags.BaseFlags.Port = 25
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.

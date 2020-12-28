@@ -23,8 +23,9 @@
 package imap
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
+	"github.com/mcuadros/go-defaults"
 
 	"strings"
 
@@ -75,18 +76,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("imap", "imap", module.Description(), 143, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "imap"
+	flags.BaseFlags.Port = 143
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.
@@ -154,18 +150,18 @@ func VerifyIMAPContents(banner string) grab.ScanStatus {
 	lowerBanner := strings.ToLower(banner)
 	switch {
 	case strings.HasPrefix(banner, "* NO"),
-	     strings.HasPrefix(banner, "* BAD"):
+		strings.HasPrefix(banner, "* BAD"):
 		return grab.SCAN_APPLICATION_ERROR
 	case strings.HasPrefix(banner, "* OK"),
-	     strings.HasPrefix(banner, "* PREAUTH"),
-	     strings.HasPrefix(banner, "* BYE"),
-	     strings.HasPrefix(banner, "* OKAY"),
-	     strings.Contains(banner, "IMAP"),
-	     strings.Contains(lowerBanner, "blacklist"),
-	     strings.Contains(lowerBanner, "abuse"),
-	     strings.Contains(lowerBanner, "rbl"),
-	     strings.Contains(lowerBanner, "spamhaus"),
-	     strings.Contains(lowerBanner, "relay"):
+		strings.HasPrefix(banner, "* PREAUTH"),
+		strings.HasPrefix(banner, "* BYE"),
+		strings.HasPrefix(banner, "* OKAY"),
+		strings.Contains(banner, "IMAP"),
+		strings.Contains(lowerBanner, "blacklist"),
+		strings.Contains(lowerBanner, "abuse"),
+		strings.Contains(lowerBanner, "rbl"),
+		strings.Contains(lowerBanner, "spamhaus"),
+		strings.Contains(lowerBanner, "relay"):
 		return grab.SCAN_SUCCESS
 	default:
 		return grab.SCAN_PROTOCOL_ERROR

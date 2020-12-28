@@ -17,6 +17,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"io"
 	"net"
 
@@ -812,18 +813,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the module with grab
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("ntp", "NTP", module.Description(), 123, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a flags instant to be populated with the command line args
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "ntp"
+	flags.BaseFlags.Port = 123
+	return flags
 }
 
 // NewScanner returns a new NTP scanner instance

@@ -6,8 +6,8 @@ package banner
 import (
 	"errors"
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"io"
-	"log"
 	"net"
 	"regexp"
 	"strconv"
@@ -39,18 +39,13 @@ type Results struct {
 	Length int    `json:"length,omitempty"`
 }
 
-// RegisterModule is called by modules/banner.go to register the scanner.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("banner", "Banner", module.Description(), 80, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a new default flags object.
 func (m *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "banner"
+	flags.BaseFlags.Port = 80
+	return flags
 }
 
 // GetName returns the Scanner name defined in the Flags.

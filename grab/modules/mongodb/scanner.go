@@ -10,9 +10,6 @@ import (
 	"grab"
 )
 
-const DefaultPort = 27017
-const Name = "mongodb"
-
 // Module implements the grab.Module interface
 type Module struct {
 }
@@ -233,8 +230,8 @@ func (flags *Flags) Help() string {
 func (mle *Module) NewFlags() interface{} {
 	flags := new(Flags)
 	defaults.SetDefaults(flags)
-	flags.BaseFlags.Port = DefaultPort
-	flags.BaseFlags.Name = Name
+	flags.BaseFlags.Port = 27017
+	flags.BaseFlags.Name = "mongodb"
 	return flags
 }
 

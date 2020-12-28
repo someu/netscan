@@ -12,6 +12,7 @@ package postgres
 import (
 	"encoding/binary"
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"net"
 	"strings"
 
@@ -272,7 +273,11 @@ func (results *Results) decodeServerResponse(packets []*ServerPacket) {
 
 // NewFlags returns a default Flags instance.
 func (m *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "postgres"
+	flags.BaseFlags.Port = 5432
+	return flags
 }
 
 // NewScanner returns the module's grab.Scanner implementation.
@@ -533,14 +538,4 @@ func (s *Scanner) Scan(t grab.ScanTarget) (status grab.ScanStatus, result interf
 		}
 	}
 	return grab.SCAN_SUCCESS, &results, thrown
-}
-
-// RegisterModule is called by modules/postgres.go's init(), to register
-// the postgres module with the grab framework.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("postgres", "Postgres", module.Description(), 5432, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
 }

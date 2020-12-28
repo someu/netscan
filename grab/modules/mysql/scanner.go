@@ -5,6 +5,7 @@
 package mysql
 
 import (
+	"github.com/mcuadros/go-defaults"
 	"reflect"
 
 	log "github.com/sirupsen/logrus"
@@ -139,8 +140,6 @@ type Flags struct {
 
 // Module is the implementation of the grab.Module interface.
 type Module struct {
-	Name        string
-	DefaultPort int
 }
 
 // Scanner is the implementation of the grab.Scanner interface.
@@ -148,16 +147,13 @@ type Scanner struct {
 	config *Flags
 }
 
-func NewModule() *Module {
-	return &Module{
-		Name:        "mysql",
-		DefaultPort: 3306,
-	}
-}
-
 // NewFlags returns a new default flags object.
 func (m *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "mysql"
+	flags.BaseFlags.Port = 3306
+	return flags
 }
 
 // NewScanner returns a new Scanner object.

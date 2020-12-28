@@ -7,6 +7,7 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"errors"
+	"github.com/mcuadros/go-defaults"
 
 	//"fmt"
 	"io"
@@ -115,18 +116,13 @@ type Scanner struct {
 	// TODO: Add scan state if any is necessary
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("ipp", "ipp", module.Description(), 631, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "ipp"
+	flags.BaseFlags.Port = 631
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.

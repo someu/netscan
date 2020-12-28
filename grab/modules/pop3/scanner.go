@@ -26,8 +26,9 @@
 package pop3
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -89,18 +90,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("pop3", "pop3", module.Description(), 110, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "pop3"
+	flags.BaseFlags.Port = 110
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.
@@ -170,14 +166,14 @@ func VerifyPOP3Contents(banner string) grab.ScanStatus {
 	case strings.HasPrefix(banner, "-ERR "):
 		return grab.SCAN_APPLICATION_ERROR
 	case strings.HasPrefix(banner, "+OK "),
-	     strings.Contains(banner, "POP3"),
-	     // These are rare for POP3 if they happen at all,
-	     // But it won't hurt to check just in case as a backup
-	     strings.Contains(lowerBanner, "blacklist"),
-	     strings.Contains(lowerBanner, "abuse"),
-	     strings.Contains(lowerBanner, "rbl"),
-	     strings.Contains(lowerBanner, "spamhaus"),
-	     strings.Contains(lowerBanner, "relay"):
+		strings.Contains(banner, "POP3"),
+		// These are rare for POP3 if they happen at all,
+		// But it won't hurt to check just in case as a backup
+		strings.Contains(lowerBanner, "blacklist"),
+		strings.Contains(lowerBanner, "abuse"),
+		strings.Contains(lowerBanner, "rbl"),
+		strings.Contains(lowerBanner, "spamhaus"),
+		strings.Contains(lowerBanner, "relay"):
 		return grab.SCAN_SUCCESS
 	default:
 		return grab.SCAN_PROTOCOL_ERROR

@@ -2,8 +2,8 @@ package grab
 
 import (
 	"fmt"
-	"net"
 	log "github.com/sirupsen/logrus"
+	"net"
 )
 
 // ScanTarget is the host that will be scanned

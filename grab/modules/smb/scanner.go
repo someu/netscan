@@ -3,7 +3,7 @@
 package smb
 
 import (
-	log "github.com/sirupsen/logrus"
+	"github.com/mcuadros/go-defaults"
 	"grab"
 	"grab/lib/smb/smb"
 )
@@ -29,18 +29,13 @@ type Scanner struct {
 	config *Flags
 }
 
-// RegisterModule registers the grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("smb", "smb", module.Description(), 445, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags returns a default Flags object.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "smb"
+	flags.BaseFlags.Port = 445
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.

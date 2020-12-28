@@ -24,8 +24,6 @@ import (
 	"io"
 	"time"
 
-	"grab"
-
 	log "github.com/sirupsen/logrus"
 )
 

@@ -12,6 +12,7 @@
 package mssql
 
 import (
+	"github.com/mcuadros/go-defaults"
 	"strings"
 
 	log "github.com/sirupsen/logrus"
@@ -61,7 +62,11 @@ type Scanner struct {
 // NewFlags returns a default Flags instance to be populated by the command
 // line flags.
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "mssql"
+	flags.BaseFlags.Port = 1433
+	return flags
 }
 
 // NewScanner returns a new Scanner instance.
@@ -173,13 +178,4 @@ func (scanner *Scanner) Scan(target grab.ScanTarget) (grab.ScanStatus, interface
 		}
 	}
 	return grab.SCAN_SUCCESS, result, nil
-}
-
-// RegisterModule is called by modules/mssql.go's init()
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("mssql", "MSSQL", module.Description(), 1433, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
 }

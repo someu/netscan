@@ -1,7 +1,7 @@
-package modules
+package tls
 
 import (
-	log "github.com/sirupsen/logrus"
+	"github.com/mcuadros/go-defaults"
 	"grab"
 )
 
@@ -10,31 +10,27 @@ type TLSFlags struct {
 	grab.TLSFlags
 }
 
-type TLSModule struct {
+type Module struct {
 }
 
 type TLSScanner struct {
 	config *TLSFlags
 }
 
-func init() {
-	var tlsModule TLSModule
-	_, err := grab.AddCommand("tls", "TLS Banner Grab", tlsModule.Description(), 443, &tlsModule)
-	if err != nil {
-		log.Fatal(err)
-	}
+func (m *Module) NewFlags() interface{} {
+	flags := new(TLSFlags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "tls"
+	flags.BaseFlags.Port = 443
+	return flags
 }
 
-func (m *TLSModule) NewFlags() interface{} {
-	return new(TLSFlags)
-}
-
-func (m *TLSModule) NewScanner() grab.Scanner {
+func (m *Module) NewScanner() grab.Scanner {
 	return new(TLSScanner)
 }
 
 // Description returns an overview of this module.
-func (m *TLSModule) Description() string {
+func (m *Module) Description() string {
 	return "Perform a TLS handshake"
 }
 

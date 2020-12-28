@@ -24,14 +24,14 @@ type SSHFlags struct {
 	Verbose           bool   `long:"verbose" description:"Output additional information, including SSH client properties from the SSH handshake."`
 }
 
-type SSHModule struct {
+type Module struct {
 }
 
 type SSHScanner struct {
 	config *SSHFlags
 }
 
-func (m *SSHModule) NewFlags() interface{} {
+func (m *Module) NewFlags() interface{} {
 	flags := new(SSHFlags)
 	s := ssh.MakeSSHConfig()
 
@@ -44,12 +44,12 @@ func (m *SSHModule) NewFlags() interface{} {
 	return flags
 }
 
-func (m *SSHModule) NewScanner() grab.Scanner {
+func (m *Module) NewScanner() grab.Scanner {
 	return new(SSHScanner)
 }
 
 // Description returns an overview of this module.
-func (m *SSHModule) Description() string {
+func (m *Module) Description() string {
 	return "Fetch an SSH server banner and collect key exchange information"
 }
 

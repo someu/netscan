@@ -17,7 +17,6 @@ import (
 	"regexp"
 	"strings"
 
-	log "github.com/sirupsen/logrus"
 	"grab"
 )
 
@@ -75,20 +74,12 @@ type Connection struct {
 	conn    net.Conn
 }
 
-// RegisterModule registers the ftp grab module.
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("ftp", "FTP", module.Description(), 21, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-// NewFlags returns the default flags object to be filled in with the
-// command-line arguments.
+// NewFlags returns the default flags object to be filled
 func (m *Module) NewFlags() interface{} {
 	flags := new(Flags)
 	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "ftp"
+	flags.BaseFlags.Port = 21
 	return flags
 }
 

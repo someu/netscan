@@ -15,6 +15,7 @@ package redis
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/mcuadros/go-defaults"
 	"io"
 	"io/ioutil"
 	"os"
@@ -23,8 +24,8 @@ import (
 	"strings"
 
 	log "github.com/sirupsen/logrus"
-	"grab"
 	"gopkg.in/yaml.v2"
+	"grab"
 )
 
 // Flags contains redis-specific command-line flags.
@@ -156,18 +157,13 @@ type Result struct {
 	QuitResponse string `json:"quit_response,omitempty"`
 }
 
-// RegisterModule registers the grab module
-func RegisterModule() {
-	var module Module
-	_, err := grab.AddCommand("redis", "redis", module.Description(), 6379, &module)
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
 // NewFlags provides an empty instance of the flags that will be filled in by the framework
 func (module *Module) NewFlags() interface{} {
-	return new(Flags)
+	flags := new(Flags)
+	defaults.SetDefaults(flags)
+	flags.BaseFlags.Name = "redis"
+	flags.BaseFlags.Port = 6379
+	return flags
 }
 
 // NewScanner provides a new scanner instance

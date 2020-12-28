@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"grab"
-	"grab/modules/ssh"
+	modules2 "grab/modules"
 	"log"
 	"net"
 	"reflect"
@@ -72,7 +72,8 @@ func FillDefaultValue(flag interface{}) error {
 }
 
 func main() {
-	module := ssh.SSHModule{}
+	modules := modules2.NewModuleSetWithDefaults()
+	module := modules["tls"]
 	scanner := module.NewScanner()
 	flags := module.NewFlags()
 	scanner.Init(flags.(grab.ScanFlags))
